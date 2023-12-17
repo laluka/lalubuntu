@@ -1,0 +1,17 @@
+- name: Set the default editor alternative to vim for root
+  shell: update-alternatives --set editor /usr/bin/vim.basic
+  become: true
+
+- name: Set the default editor alternative to vim current user
+  shell: update-alternatives --set editor /usr/bin/vim.basic
+
+- name: Ensure /etc/vim/vimrc.local exists with specific content
+  ansible.builtin.copy:
+    dest: /etc/vim/vimrc.local
+    content: |
+      set mouse=""
+      set number
+      set paste
+      syntax on
+    mode: '0644'
+  become: true

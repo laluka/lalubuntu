@@ -1,0 +1,14 @@
+- name: Create /DATA directory (if it doesn't exist)
+  file:
+    path: /DATA
+    state: directory
+    mode: '0755'
+  become: true
+
+- name: 'Set ownership of /DATA directory to {{ ansible_user_id }}'
+  file:
+    path: /DATA
+    owner: '{{ ansible_user_id }}'
+    group: '{{ ansible_user_id }}'
+    recurse: 'yes'
+  become: true

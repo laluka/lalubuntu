@@ -1,0 +1,20 @@
+- name: Add google APT repository
+  become: true
+  ansible.builtin.deb822_repository:
+    name: google
+    types: [deb]
+    uris:
+      - "http://dl.google.com/linux/chrome/deb"
+    signed_by: "https://dl.google.com/linux/linux_signing_key.pub"
+    suites: [stable]
+    components: [main]
+    state: present
+    enabled: yes
+
+- name: Install Google Chrome
+  package:
+    update_cache: yes
+    name:
+      - google-chrome-stable
+    state: latest
+  become: true

@@ -1,0 +1,78 @@
+- name: Install zsh and oh-my-zsh
+  apt:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - zsh
+    - powerline
+    - fonts-powerline
+  become: true
+
+- name: Change the default shell to zsh
+  user:
+    name: '{{ ansible_user_id }}'
+    shell: /bin/zsh
+  become: true
+  
+- name: Clone oh-my-zsh repository
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: ~/.oh-my-zsh
+
+- name: Check if ~/.zshrc exists
+  ansible.builtin.stat:
+    path: ~/.zshrc
+  register: zshrc_stat
+
+- name: Copy zshrc.zsh-template to ~/.zshrc if not existing
+  ansible.builtin.copy:
+    src: ~/.oh-my-zsh/templates/zshrc.zsh-template
+    dest: ~/.zshrc
+  when: not zshrc_stat.stat.exists
+
+- name: Set the zsh theme to af-magic
+  replace:
+    path: ~/.zshrc
+    regexp: robbyrussell
+    replace: af-magic
+
+- name: Disable SLOW AF zsh line-paste for long lines
+  lineinfile:
+    path: ~/.zshrc
+    insertbefore: 'source.*oh-my-zsh.sh'
+    line: 'DISABLE_MAGIC_FUNCTIONS=true'
+
+- name: Clone zsh plugins as git repositories
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - { repo: 'https://github.com/zsh-users/zsh-completions', dest: '~/.oh-my-zsh/plugins/zsh-completions' }
+    - { repo: 'https://github.com/zsh-users/zsh-autosuggestions', dest: '~/.oh-my-zsh/plugins/zsh-autosuggestions' }
+    - { repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git', dest: '~/.oh-my-zsh/plugins/zsh-syntax-highlighting' }
+
+- name: Clone fzf repository
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    dest: ~/.fzf
+    depth: 1
+
+- name: Run fzf installation script
+  command: zsh -c '~/.fzf/install --all'
+
+- name: Add line to shell configuration files
+  lineinfile:
+    path: "{{ item }}"
+    line: "source /opt/lalubuntu/aliases"
+    insertafter: EOF
+  loop:
+    - ~/.zshrc
+    - ~/.bashrc
+
+- blockinfile:
+    path: ~/.tmux.conf
+    block: |
+      set-option -g mouse off
+      set-option -g history-limit 5000
+      set-option -g status-bg colour231
+    create: yes

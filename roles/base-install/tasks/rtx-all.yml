@@ -1,0 +1,48 @@
+---
+- name: Install rtx only if /usr/bin/rtx does not exist
+  ansible.builtin.stat:
+    path: /usr/bin/rtx
+  register: file_check
+
+- name: Install RTX following their doc
+  shell: |
+    install -dm 755 /etc/apt/keyrings
+    wget -qO - https://rtx.pub/gpg-key.pub | gpg --dearmor > /etc/apt/keyrings/rtx-archive-keyring.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/rtx-archive-keyring.gpg arch=amd64] https://rtx.pub/deb stable main" > /etc/apt/sources.list.d/rtx.list
+    apt-get update
+    apt-get install -y rtx
+  become: true
+  when: not file_check.stat.exists
+
+- name: Add RTX activation to shell configuration files
+  ansible.builtin.lineinfile:
+    path: "~/.{{ item }}rc"
+    line: 'eval "$(/usr/bin/rtx activate {{ item }})"'
+    create: yes
+  loop:
+    - bash
+    - zsh
+
+# Need to use shell because RTX in ansible doesn't exist (for the moment)
+- name: Define rtx tools
+  set_fact:
+    tools:
+      - awscli
+      - golang
+      - java
+      - jless
+      - maven
+      - nodejs
+      - pdm
+      - php
+      - python
+      - rust
+      - helm
+      - k9s
+      - kubectl
+      - terraform
+
+# No bash -i as it allows cargo to run jobs in the background in a weird way that breaks ansible
+- name: Install and rtx-based tools (this will take lot of time to install)
+  shell: zsh -c 'source ~/.zshrc && rtx install {{ item }}@latest -y && rtx global {{ item }}@latest'
+  with_items: '{{ tools }}'

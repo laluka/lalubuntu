@@ -1,0 +1,49 @@
+---
+- name: Update apt repo/cache
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+  become: true
+
+- name: Upgrade all packages
+  apt: upgrade=yes force_apt_get=yes
+  become: true
+
+- name: Set wireshark install non-interactive
+  shell: echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections
+  become: true
+
+- name: Add multiple PPAs
+  apt_repository:
+    repo: "{{ item }}"
+    update_cache: no
+  become: true
+  loop:
+    - ppa:obsproject/obs-studio
+    - ppa:unit193/encryption
+    - ppa:libreoffice/ppa
+
+- name: Install Packages
+  package:
+    update_cache: yes
+    name:
+          - apt-transport-https
+          - arandr
+          - bless
+          - cheese
+          - filezilla
+          - flameshot
+          - gparted
+          - kompare
+          - libreoffice
+          - mplayer
+          - obs-studio
+          - qbittorrent
+          - qemu
+          - torbrowser-launcher
+          - usb-creator-gtk
+          - veracrypt
+          - vlc
+          - wireshark
+    state: latest
+  become: true
+  environment:
+    DEBIAN_FRONTEND: noninteractive

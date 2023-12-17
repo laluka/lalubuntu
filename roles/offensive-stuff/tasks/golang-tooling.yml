@@ -1,0 +1,19 @@
+---
+- name: Install various Go packages
+  shell: rtx exec -- go install "{{ item }}@latest"
+  with_items:
+    - github.com/tomnomnom/gron
+    - github.com/ffuf/ffuf
+    - github.com/jesseduffield/lazygit
+    - github.com/lc/gau/v2/cmd/gau
+    - github.com/wader/fq
+    - github.com/antonmedv/fx
+    - github.com/xm1k3/cent
+    - github.com/ropnop/kerbrute
+    - github.com/projectdiscovery/pdtm/cmd/pdtm
+
+- name: Run pdtm and install all tools
+  shell: zsh -c 'rtx exec -- pdtm -install-all'
+
+- name: Run pdtm path config
+  shell: zsh -c 'rtx exec -- pdtm -install-path'

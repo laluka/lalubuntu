@@ -1,0 +1,17 @@
+# Relies on cargo without ansible-cargo as it's installed with rtx
+- name: Define tools
+  set_fact:
+    tools:
+      - bottom
+      - du-dust
+      - exa
+      - git-delta
+      - htmlq
+      - spacer
+      - viu
+      - xsv
+
+# No bash -i as it allows cargo to run jobs in the background in a weird way that breaks ansible
+- name: Install and cargo-based tools (this will take lot of time to install)
+  shell: rtx exec -- cargo install '{{ item }}'
+  with_items: '{{ tools }}'

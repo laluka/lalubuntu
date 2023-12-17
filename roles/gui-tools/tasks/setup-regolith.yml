@@ -1,0 +1,66 @@
+---
+- name: Install Regolith Certificates only if /etc/apt/sources.list.d/regolith.list does not exist
+  ansible.builtin.stat:
+    path: /etc/apt/sources.list.d/regolith.list
+  register: file_check
+
+- name: Install Regolith Certs
+  shell: |
+    wget -qO - https://regolith-desktop.org/regolith.key | gpg --dearmor > /usr/share/keyrings/regolith-archive-keyring.gpg
+    echo deb "[arch=amd64 signed-by=/usr/share/keyrings/regolith-archive-keyring.gpg] https://regolith-desktop.org/release-3_0-ubuntu-jammy-amd64 jammy main" > /etc/apt/sources.list.d/regolith.list
+  become: true
+  when: not file_check.stat.exists
+
+- name: Install Regolith following their doc
+  shell: |
+    echo "lightdm shared/default-x-display-manager select lightdm" | debconf-set-selections
+    apt-get update
+    apt-get install -y regolith-desktop regolith-look-nord regolith-session-flashback regolith-system-ubuntu
+  become: true
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+
+- name: Install i3 packages
+  package:
+    name:
+      - i3xrocks-battery
+      - i3xrocks-bluetooth
+      - i3xrocks-cpu-usage
+      - i3xrocks-disk-capacity
+      - i3xrocks-focused-window-name
+      - i3xrocks-info
+      - i3xrocks-memory
+      - i3xrocks-microphone
+      - i3xrocks-net-traffic
+      - i3xrocks-rofication
+      - i3xrocks-temp
+      - i3xrocks-time
+      - i3xrocks-updates
+      - i3xrocks-volume
+      - i3xrocks-wifi
+      # - i3xrocks-app-launcher
+      # - i3xrocks-key-indicator
+      # - i3xrocks-keyboard-layout
+      # - i3xrocks-media-player
+      # - i3xrocks-next-workspace
+      # - i3xrocks-nm-vpn
+      # - i3xrocks-openvpn
+      # - i3xrocks-tailscale
+      # - i3xrocks-weather
+    state: latest
+  become: true
+
+- name: Ensure the ~/.config/regolith3/i3/config.d/ directory exists
+  file:
+    path: ~/.config/regolith3/i3/config.d/
+    state: directory
+
+- name: Append lines to the i3 config file
+  blockinfile:
+    path: ~/.config/regolith3/i3/config.d/config
+    block: |
+      bindsym $mod+p exec flameshot gui
+      bindsym $mod+Ctrl+p exec flameshot full -p /tmp/
+      bindsym $mod+m exec xrandr --output $(xrandr | grep ' connected ' -m 1 | awk '{ print $1 }') --off
+      bindsym $mod+Shift+m exec xrandr --output $(xrandr | grep ' connected ' -m 1 | awk '{ print $1 }') --auto
+    create: yes

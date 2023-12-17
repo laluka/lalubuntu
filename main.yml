@@ -1,0 +1,10 @@
+---
+- name: Welcome to LaluBuntu! ^.^
+  hosts: localhost
+  connection: local
+  roles:
+    - role: roles/base-install
+    - role: roles/offensive-stuff
+    - role: roles/gui-tools
+      users:
+        - username: "{{ ansible_user_id }}"
