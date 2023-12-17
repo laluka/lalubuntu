@@ -6,8 +6,9 @@
 
 - name: Install VeraCrypt following their doc
   shell: |
-    VERA_DEB=$(curl -sS https://veracrypt.fr/en/Downloads.html | grep -vF console | grep -ioP 'https://.*22.04-amd64.deb' | sort -uV | sed 's/&#43;/+/g')
-    wget -qO /tmp/veracrypt_amd64.deb "$VERA_DEB"
+    VERA_SETUP=$(curl -sS https://veracrypt.fr/en/Downloads.html | grep -vF legacy | grep -ioP 'https://.*?veracrypt-.*?-setup.tar.bz2' | sort -uV | sed 's/&#43;/+/g')
+    wget -qO /tmp/veracrypt-setup.tar.bz2 "$VERA_SETUP"
     dpkg -i /tmp/veracrypt_amd64.deb
+    # MEH, needs interactive install process meeh.
   become: true
   # when: not file_check.stat.exists
