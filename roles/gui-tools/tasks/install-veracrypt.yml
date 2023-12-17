@@ -1,0 +1,13 @@
+---
+- name: Install Google Chrome only if /usr/bin/google-chrome does not exist
+  ansible.builtin.stat:
+    path: /usr/bin/google-chrome
+  register: file_check
+
+- name: Install Google Chrome following their doc
+  shell: |
+    VERA_DEB=$(curl -sS https://veracrypt.fr/en/Downloads.html | grep -vF console | grep -ioP 'https://.*22.04-amd64.deb' | sort -uV | sed 's/&#43;/+/g')
+    wget -qO /tmp/veracrypt_amd64.deb "$VERA_DEB"
+    dpkg -i /tmp/veracrypt_amd64.deb
+  become: true
+  when: not file_check.stat.exists

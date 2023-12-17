@@ -4,16 +4,14 @@
     path: /usr/bin/google-chrome
   register: file_check
 
-- name: Install RTX following their doc
+- name: Install Google Chrome following their doc
   shell: |
     echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-    wget -O- https://dl-ssl.google.com/linux/linux_signing_key.pub > /etc/apt/trusted.gpg.d/linux_signing_key.pub
+    wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub > /etc/apt/trusted.gpg.d/linux_signing_key.pub
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 78BD65473CB3BD13
     apt-key export D38B4796 | gpg --dearmour -o /etc/apt/trusted.gpg.d/chrome.gpg
   become: true
   when: not file_check.stat.exists
-
-# apt-get update
 
 - name: Install Google Chrome
   package:

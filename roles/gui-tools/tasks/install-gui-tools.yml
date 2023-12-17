@@ -13,13 +13,9 @@
 
 - name: Add multiple PPAs
   apt_repository:
-    repo: "{{ item }}"
+    repo: ppa:libreoffice/ppa
     update_cache: no
   become: true
-  loop:
-    - ppa:obsproject/obs-studio
-    - ppa:unit193/encryption
-    - ppa:libreoffice/ppa
 
 - name: Install Packages
   package:
@@ -40,7 +36,6 @@
           - qemu
           - torbrowser-launcher
           - usb-creator-gtk
-          - veracrypt
           - vlc
           - wireshark
     state: latest
