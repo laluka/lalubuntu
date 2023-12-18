@@ -8,6 +8,6 @@
   shell: |
     VERA_URL=$(curl -sS https://www.veracrypt.fr/en/Downloads.html | grep -oP 'https://.*?veracrypt-[0-9]+\.[0-9]+\.[0-9]+-Ubuntu-22\.04-amd64\.deb' | uniq | sed 's/&#43;/+/g')
     wget -qO /tmp/veracrypt-setup.deb "$VERA_URL"
-    apt-get install /tmp/veracrypt-setup.deb -y
+    apt-get install -y /tmp/veracrypt-setup.deb
   become: true
   # when: not file_check.stat.exists

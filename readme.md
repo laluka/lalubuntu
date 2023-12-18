@@ -2,9 +2,9 @@
 
 > This ansible playbook will make your machine lovely to use.
 
-**This playbook is only only intended to be run in Ubuntu 22.04**
+**This playbook is only only intended to be run in `Ubuntu 22.04`**
 
-This is my (**@TheLaluka**) own config, shared with the help & motivation of **@Fransosiche** !
+This is my - **@TheLaluka** - own config, shared with the help & motivation of **@Fransosiche** !
 
 - Welcome to my world, `Lower The Friction` between you and your machine!
 - See this brief extract of what these scripts will allow you to do
@@ -22,7 +22,13 @@ The ansible playbook `main.yml` applies 3 ansible roles which are:
 ## Pre-Setup & Install
 
 ```bash
-./00-pre-setup.sh
+# If you ARE A DEV and PLAN TO CONTRIBUTE
+# git clone git@gitlab.com:TheLaluka/lalubuntu.git
+sudo apt install -y curl wget git vim tmux # Basics
+git clone https://gitlab.com/TheLaluka/lalubuntu
+sudo mv lalubuntu /opt/lalubuntu
+/opt/lalubuntu
+bash -x 00-pre-setup.sh
 source ~/.bashrc && ansible-playbook -vvv -i inventory.ini --ask-become main.yml
 ```
 
