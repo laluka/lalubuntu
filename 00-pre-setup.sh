@@ -10,4 +10,4 @@ pipx ensurepath
 
 echo -e "\nNow, run the following command:"
 echo -e "source ~/.bashrc && ansible-playbook -vvv -i inventory.ini --ask-become main.yml"
-echo -e "And grab yourself a coffee, this will run for A WHILE. :)"
+echo -e "And grab yourself a coffee, this will run for A WHILE. :D"
