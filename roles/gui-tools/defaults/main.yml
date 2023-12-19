@@ -1,2 +1,28 @@
 ---
 # defaults file for gui-tools
+gui_tools_to_install:
+  - apt-transport-https
+  - arandr
+  - bless
+  - cheese
+  - filezilla
+  - flameshot
+  - gparted
+  - kompare
+  - libreoffice
+  - mplayer
+  - obs-studio
+  - qbittorrent
+  - qemu
+  - torbrowser-launcher
+  - usb-creator-gtk
+  - vlc
+  - wireshark
+
+chrome_deb_url: "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main"
+chrome_gpg_key_id: "78BD65473CB3BD13"
+chrome_key_server: "keyserver.ubuntu.com"
+chrome_pub_key_url: "https://dl-ssl.google.com/linux/linux_signing_key.pub"
+chrome_export_key_id: "D38B4796"
+
+veracrypt_download_url: "https://www.veracrypt.fr/en/Downloads.html"

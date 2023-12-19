@@ -1,5 +1,5 @@
-# - include_tasks: install-gui-tools.yml # Installing various GUI tools
-- include_tasks: install-google-chrome.yml # Installing Google Chrome browser
+#- include_tasks: install-gui-tools.yml # Installing various GUI tools
+#- include_tasks: install-google-chrome.yml # Installing Google Chrome browser
 - include_tasks: install-veracrypt.yml # Installing VeraCrypt utility
 # - include_tasks: install-vscode.yml # Installing Visual Studio Code
 # - include_tasks: install-signal.yml # Installing Signal messaging app

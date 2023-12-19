@@ -2,7 +2,7 @@
 
 > This ansible playbook will make your machine lovely to use.
 
-**This playbook is only only intended to be run in `Ubuntu 22.04`**
+**This playbook is only intended to be run in `Ubuntu 22.04`**
 
 This is my - **@TheLaluka** - own config, shared with the help & motivation of **@Fransosiche** !
 

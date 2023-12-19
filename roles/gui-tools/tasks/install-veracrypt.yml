@@ -1,13 +1,22 @@
 ---
-# - name: Install VeraCrypt only if /usr/bin/google-chrome does not exist
-#   ansible.builtin.stat:
-#     path: /usr/bin/google-chrome
-#   register: file_check
+- name: Get Veracrypt URL
+  ansible.builtin.uri:
+    url: '{{ veracrypt_download_url }}'
+    return_content: yes
+  register: veracrypt_page
 
-- name: Install VeraCrypt following their doc
-  shell: |
-    VERA_URL=$(curl -sS https://www.veracrypt.fr/en/Downloads.html | grep -oP 'https://.*?veracrypt-[0-9]+\.[0-9]+\.[0-9]+-Ubuntu-22\.04-amd64\.deb' | uniq | sed 's/&#43;/+/g')
-    wget -qO /tmp/veracrypt-setup.deb "$VERA_URL"
-    apt-get install -y /tmp/veracrypt-setup.deb
+- name: Extract Veracrypt URL
+  ansible.builtin.set_fact:
+    vera_url: "{{ veracrypt_page.content | regex_findall('https://.*?veracrypt-[0-9]+\\.[0-9]+\\.[0-9]+-Ubuntu-22\\.04-amd64\\.deb') | unique | first |  regex_replace('&#43;', '+')}}"
+  when: vera_url is not defined
+
+- name: Download Veracrypt
+  ansible.builtin.get_url:
+    url: "{{ vera_url }}"
+    dest: /tmp/veracrypt-setup.deb
+
+- name: Install Veracrypt
+  ansible.builtin.apt:
+    deb: /tmp/veracrypt-setup.deb
+    state: present
   become: true
-  # when: not file_check.stat.exists

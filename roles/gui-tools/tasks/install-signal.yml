@@ -1,13 +1,13 @@
 ---
-- name: Install Signal only if /usr/bin/signal-desktop does not exist
+- name: Check if Signal is already installed
   ansible.builtin.stat:
     path: /usr/bin/signal-desktop
-  register: file_check
+  register: signal_installed
 
 - name: Install Signal following their doc
-  shell: |
+  ansible.builtin.shell: >
     wget -qO- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > /usr/share/keyrings/signal-desktop-keyring.gpg
     echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' > /etc/apt/sources.list.d/signal-xenial.list
     apt-get update && apt-get install signal-desktop -y
   become: true
-  when: not file_check.stat.exists
+  when: not signal_installed.stat.exists
