@@ -1,2 +1,156 @@
 ---
-# defaults file for base-install
+# defaults file for gui-tools
+default_packages:
+  - apt-transport-https
+  - autoconf
+  - bat
+  - binwalk
+  - bison
+  - build-essential
+  - ca-certificates
+  - cloc
+  - cmake
+  - cmake-curses-gui
+  - curl
+  - dos2unix
+  - expect
+  - ffmpeg
+  - foremost
+  - fswebcam
+  - gcc
+  - gdb
+  - git
+  - gnupg
+  - hashid
+  - hexyl
+  - hwinfo
+  - imagemagick
+  - inotify-tools
+  - jq
+  - libbz2-dev
+  - libcurl4-openssl-dev
+  - libffi-dev
+  - libgd-dev
+  - libimage-exiftool-perl
+  - libleptonica-dev
+  - liblzma-dev
+  - libncursesw5-dev
+  - libonig-dev
+  - libpcap-dev
+  - libpq-dev
+  - libreadline-dev
+  - libsqlite3-dev
+  - libssl-dev
+  - libtesseract-dev
+  - libxml2-dev
+  - libxml2-utils
+  - libxmlsec1-dev
+  - libyaml-dev
+  - libzip-dev
+  - linux-tools-common
+  - linux-tools-generic
+  - llvm
+  - locate
+  - lsb-release
+  - lsof
+  - ltrace
+  - make
+  - net-tools
+  - ngrep
+  - nmap
+  - parallel
+  - python3-dev
+  - python3-pip
+  - python3-venv
+  - re2c
+  - ripgrep
+  - rlwrap
+  - socat
+  - sshpass
+  - tk-dev
+  - tmux
+  - tor
+  - trash-cli
+  - tree
+  - unzip
+  - vbindiff
+  - vim
+  - wget
+  - wl-clipboard
+  - xclip
+  - xz-utils
+  - zip
+  - zlib1g-dev
+  - software-properties-common
+  - zsh
+  - powerline
+  - fonts-powerline
+  - duf
+
+zsh_git_url: "https://github.com/robbyrussell/oh-my-zsh.git"
+zsh_completion_git_url: "https://github.com/zsh-users/zsh-completions"
+zsh_autosuggestion_git_url: "https://github.com/zsh-users/zsh-autosuggestions"
+zsh_syntax_git_url: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+fzf_git_url: "https://github.com/junegunn/fzf.git"
+tmux_conf: |
+      set-option -g mouse off
+      set-option -g history-limit 5000
+      set-option -g status-bg colour231
+
+rtx_pub_url: "https://rtx.pub/gpg-key.pub"
+rtx_deb_url: "deb [signed-by=/etc/apt/keyrings/rtx-archive-keyring.gpg arch=amd64] https://rtx.pub/deb stable main"
+rtx_tools:
+  - awscli
+  - golang
+  - java
+  - jless
+  - maven
+  - nodejs
+  - pdm
+  - php
+  - python
+  - rust
+  - helm
+  - k9s
+  - kubectl
+  - terraform
+
+zsh_plugins:
+  - zsh-completions
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+  - colored-man-pages
+  - extract
+  - tmux
+  - ssh-agent
+  - npm
+  - aws
+  - fzf
+  - rtx
+
+default_directory: "DATA"
+
+vimrc_content: |
+  set mouse=""
+  set number
+  set paste
+  syntax 
+
+cargo_tools:
+  - bottom
+  - du-dust
+  - exa
+  - git-delta
+  - htmlq
+  - spacer
+  - viu
+  - xsv
+
+docker_key_url: "https://download.docker.com/linux/ubuntu/gpg"
+docker_deb_url: "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu jammy stable"
+docker_components: 
+  - docker-ce
+  - docker-ce-cli 
+  - containerd.io 
+  - docker-buildx-plugin 
+  - docker-compose-plugin

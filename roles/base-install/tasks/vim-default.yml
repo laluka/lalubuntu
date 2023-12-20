@@ -8,10 +8,7 @@
 - name: Ensure /etc/vim/vimrc.local exists with specific content
   ansible.builtin.copy:
     dest: /etc/vim/vimrc.local
-    content: |
-      set mouse=""
-      set number
-      set paste
-      syntax on
+    content: "{{ vimrc_content }}"
     mode: '0644'
   become: true
+  check_mode: no

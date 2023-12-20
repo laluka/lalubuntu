@@ -1,7 +1,7 @@
 ---
-- name: Create /DATA directory (if it doesn't exist)
+- name: Create /{{ default_directory }} directory (if it doesn't exist)
   ansible.builtin.file:
-    path: /DATA
+    path: /{{ default_directory }}
     state: directory
     mode: '0755'
   become: true

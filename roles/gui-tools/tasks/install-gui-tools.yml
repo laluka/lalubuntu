@@ -20,7 +20,7 @@
     value: true
   become: true
 
-- name: Install Packages
+- name: Install GUI Packages
   ansible.builtin.package:
     update_cache: yes
     name: "{{ item }}"
