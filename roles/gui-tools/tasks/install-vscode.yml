@@ -4,36 +4,21 @@
     path: /usr/bin/code
   register: vscode_installed
 
-- name: Getting asc key for VsCode
+- name: Download VsCode
   ansible.builtin.get_url:
-    url: https://packages.microsoft.com/keys/microsoft.asc
-    dest: /etc/apt/keyrings/packages.microsoft.gpg
-  become: true
-  when: not vscode_installed.stat.exists
-
-- name: Add VsCode repository
-  ansible.builtin.lineinfile:
-    path: /etc/apt/sources.list.d/vscode.list
-    line: 'deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main'
-  become: true
-  when: not vscode_installed.stat.exists
-
-- name: Update apt cache
-  ansible.builtin.apt:
-    update_cache: yes
-  become: true
+    url: "{{ vscode_deb_url }}"
+    dest: /tmp/vscode-setup.deb
   when: not vscode_installed.stat.exists
 
 - name: Install VsCode
   ansible.builtin.apt:
-    name: code
+    deb: /tmp/vscode-setup.deb
     state: present
   become: true
   when: not vscode_installed.stat.exists
 
-- name: Clean up GPG key
+- name: Delete file /tmp/vscode-setup.deb
   ansible.builtin.file:
-    path: /etc/apt/keyrings/packages.microsoft.gpg
+    path: /tmp/vscode-setup.deb
     state: absent
-  become: true
   when: not vscode_installed.stat.exists

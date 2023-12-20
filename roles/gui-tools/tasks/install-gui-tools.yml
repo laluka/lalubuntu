@@ -27,5 +27,5 @@
     state: latest
   environment:
     DEBIAN_FRONTEND: noninteractive
-  loop: "{{ GUI_tools_to_install }}"
+  loop: "{{ gui_tools_to_install }}"
   become: true

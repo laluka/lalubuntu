@@ -26,3 +26,49 @@ chrome_pub_key_url: "https://dl-ssl.google.com/linux/linux_signing_key.pub"
 chrome_export_key_id: "D38B4796"
 
 veracrypt_download_url: "https://www.veracrypt.fr/en/Downloads.html"
+
+discord_download_url: "https://discord.com/api/download?platform=linux&format=deb"
+
+vscode_deb_url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+
+signal_repo_url: "deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main"
+signal_key_url: "https://updates.signal.org/desktop/apt/keys.asc "
+
+regolith_key_url: "https://regolith-desktop.org/regolith.key"
+regolith_repo_url: "deb [arch=amd64 signed-by=/usr/share/keyrings/regolith-archive-keyring.gpg] https://regolith-desktop.org/release-3_0-ubuntu-jammy-amd64 jammy main"
+regolith_packages:
+  - regolith-desktop
+  - regolith-look-nord
+  - regolith-session-flashback
+  - regolith-system-ubuntu
+i3_packages:
+  - i3xrocks-battery
+  - i3xrocks-bluetooth
+  - i3xrocks-cpu-usage
+  - i3xrocks-disk-capacity
+  - i3xrocks-focused-window-name
+  - i3xrocks-info
+  - i3xrocks-memory
+  - i3xrocks-microphone
+  - i3xrocks-net-traffic
+  - i3xrocks-rofication
+  - i3xrocks-temp
+  - i3xrocks-time
+  - i3xrocks-updates
+  - i3xrocks-volume
+  - i3xrocks-wifi
+  # - i3xrocks-app-launcher
+  # - i3xrocks-key-indicator
+  # - i3xrocks-keyboard-layout
+  # - i3xrocks-media-player
+  # - i3xrocks-next-workspace
+  # - i3xrocks-nm-vpn
+  # - i3xrocks-openvpn
+  # - i3xrocks-tailscale
+  # - i3xrocks-weather
+
+i3_config_block: |
+    bindsym $mod+p exec flameshot gui
+    bindsym $mod+Ctrl+p exec flameshot full -p /tmp/
+    bindsym $mod+m exec xrandr --output $(xrandr | grep ' connected ' -m 1 | awk '{ print $1 }') --off
+    bindsym $mod+Shift+m exec xrandr --output $(xrandr | grep ' connected ' -m 1 | awk '{ print $1 }') --auto
