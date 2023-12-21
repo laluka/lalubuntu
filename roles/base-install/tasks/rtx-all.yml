@@ -8,18 +8,24 @@
   ansible.builtin.file:
     path: /etc/apt/keyrings
     state: directory
-    mode: '0755'
+    mode: "0755"
   when: not rtx_installed.stat.exists
 
-- name: Add RTX key
-  ansible.builtin.shell: "wget -qO - {{ rtx_pub_url }} | gpg --dearmor > /etc/apt/keyrings/rtx-archive-keyring.gpg"
+- name: Download RTX key
+  ansible.builtin.get_url:
+    url : "{{ rtx_pub_url }}"
+    dest: /tmp/rtx_gpg
+  when: not rtx_installed.stat.exists
+
+- name: De-Armor RTX GPG key
+  ansible.builtin.shell: "gpg --dearmor < /tmp/rtx_gpg > {{ rtx_gpg_dest }} && rm /tmp/rtx_gpg"
   become: true
   when: not rtx_installed.stat.exists
 
 - name: Add RTX repository
   ansible.builtin.lineinfile:
     path: /etc/apt/sources.list.d/rtx.list
-    line: '{{ rtx_deb_url }}'
+    line: "{{ rtx_deb_url }}"
     create: yes
   become: true
   when: not rtx_installed.stat.exists
@@ -44,5 +50,6 @@
 
 - name: Install and rtx-based tools (this will take lot of time to install)
   ansible.builtin.shell: zsh -c 'source {{ ansible_env.HOME }}/.zshrc && rtx install {{ item }}@latest -y && rtx global {{ item }}@latest'
-  with_items: '{{ rtx_tools }}'
+  with_items: "{{ rtx_tools }}"
   when: not rtx_installed.stat.exists
+

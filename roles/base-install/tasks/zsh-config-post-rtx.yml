@@ -1,3 +1,3 @@
 - name: Enable zsh plugins
   ansible.builtin.shell: zsh -c 'source {{ ansible_env.HOME }}/.zshrc && omz plugin enable {{ item }} || true'
-  with_items: '{{ zsh_plugins }}'
+  with_items: "{{ zsh_plugins }}"

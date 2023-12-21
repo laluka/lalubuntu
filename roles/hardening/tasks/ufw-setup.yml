@@ -1,0 +1,46 @@
+- name: Disable password authentication for root
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    regexp: "^#?PermitRootLogin"
+    line: "PermitRootLogin prohibit-password"
+  become: true
+
+- name: Set default policies
+  community.general.ufw:
+    rule: deny
+    direction: in
+  become: true
+
+- name: Allow outgoing traffic
+  community.general.ufw:
+    rule: allow
+    direction: out
+  become: true
+
+- name: Allow SSH connections
+  community.general.ufw:
+    rule: allow
+    direction: in
+    port: ssh
+  become: true
+
+- name: Allow custom SSH port 2222
+  community.general.ufw:
+    rule: allow
+    direction: in
+    port: 2222
+  become: true
+
+- name: Allow other connections (HTTP, HTTPS)
+  community.general.ufw:
+    rule: allow
+    direction: in
+    port: "{{ item }}"
+  loop: "{{ ufw_open_ports }}"
+  become: true
+
+- name: Enable UFW
+  community.general.ufw:
+    state: enabled
+  become: true

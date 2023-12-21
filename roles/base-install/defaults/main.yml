@@ -86,6 +86,9 @@ default_packages:
   - powerline
   - fonts-powerline
   - duf
+  - ufw
+  - openssh-server
+  - supertuxkart
 
 zsh_git_url: "https://github.com/robbyrussell/oh-my-zsh.git"
 zsh_completion_git_url: "https://github.com/zsh-users/zsh-completions"
@@ -97,8 +100,9 @@ tmux_conf: |
       set-option -g history-limit 5000
       set-option -g status-bg colour231
 
+rtx_gpg_dest: "/etc/apt/keyrings/rtx-archive-keyring.gpg"
 rtx_pub_url: "https://rtx.pub/gpg-key.pub"
-rtx_deb_url: "deb [signed-by=/etc/apt/keyrings/rtx-archive-keyring.gpg arch=amd64] https://rtx.pub/deb stable main"
+rtx_deb_url: "deb [signed-by={{ rtx_gpg_dest }} arch=amd64] https://rtx.pub/deb stable main"
 rtx_tools:
   - awscli
   - golang
@@ -146,8 +150,9 @@ cargo_tools:
   - viu
   - xsv
 
+docker_gpg_dest: "/usr/share/keyrings/docker-archive-keyring.gpg"
 docker_key_url: "https://download.docker.com/linux/ubuntu/gpg"
-docker_deb_url: "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu jammy stable"
+docker_deb_url: "deb [arch=amd64 signed-by={{ docker_gpg_dest }}] https://download.docker.com/linux/ubuntu jammy stable"
 docker_components: 
   - docker-ce
   - docker-ce-cli 

@@ -4,15 +4,21 @@
     path: /etc/apt/sources.list.d/regolith.list
   register: regolith_installed
 
-- name: Install Regolith Certs
-  ansible.builtin.shell: "wget -qO- {{ regolith_key_url }} | gpg --dearmor > /usr/share/keyrings/regolith-archive-keyring.gpg"
+- name: Download Regolith key
+  ansible.builtin.get_url:
+    url : "{{ regolith_key_url }}"
+    dest: /tmp/rego_gpg
+  when: not regolith_installed.stat.exists
+
+- name: De-Armor RTX GPG key
+  ansible.builtin.shell: "gpg --dearmor < /tmp/rego_gpg > {{ regolith_gpg_dest }} && rm /tmp/rego_gpg"
   become: true
   when: not regolith_installed.stat.exists
 
 - name: Add Regolith repository
   ansible.builtin.lineinfile:
     path: /etc/apt/sources.list.d/regolith.list
-    line: '{{ regolith_repo_url }}'
+    line: "{{ regolith_repo_url }}"
     create: yes
   become: true
   when: not regolith_installed.stat.exists

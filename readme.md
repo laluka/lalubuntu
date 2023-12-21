@@ -29,6 +29,7 @@ git clone https://github.com/laluka/lalubuntu
 sudo mv lalubuntu /opt/lalubuntu
 /opt/lalubuntu
 bash -x 00-pre-setup.sh
+source ~/.bashrc && ansible-galaxy collection install community.general
 source ~/.bashrc && ansible-playbook -vvv -i inventory.ini --ask-become main.yml
 ```
 

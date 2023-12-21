@@ -1,2 +1,6 @@
 ---
 # tasks file for hardening
+- include_tasks: ufw-setup.yml # 
+- include_tasks: disable-service.yml
+- include_tasks: install-secu-packages.yml
+- include_tasks: cleanup.yml # Cleaning up the system after installations

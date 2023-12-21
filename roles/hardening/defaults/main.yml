@@ -1,2 +1,14 @@
 ---
 # defaults file for hardening
+services_to_disable:
+  - avahi-daemon
+  - cups
+
+secure_services_to_install:
+  - usbguard
+  - apparmor
+
+ufw_open_ports:
+  - 80
+  - 8080
+  - 443

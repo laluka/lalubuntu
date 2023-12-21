@@ -1,0 +1,14 @@
+- name: Remove useless packages from the cache
+  ansible.builtin.apt:
+    autoclean: yes
+  become: true
+
+- name: Remove dependencies that are no longer required
+  ansible.builtin.apt:
+    autoremove: yes
+  become: true
+
+- name: Purging dependencies
+  ansible.builtin.apt:
+    purge: yes
+  become: true

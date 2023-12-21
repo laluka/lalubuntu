@@ -1,0 +1,11 @@
+# disable_services/tasks/main.yml
+---
+- name: Stop and disable services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: no
+    state: stopped
+  loop: "{{ services_to_disable }}"
+  loop_control:
+    loop_var: item
+  become: true

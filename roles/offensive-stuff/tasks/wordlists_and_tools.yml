@@ -19,9 +19,9 @@
 - name: Create a lists directory
   ansible.builtin.file:
     path: /opt/lists
-    owner: '{{ ansible_user_id }}'
-    group: '{{ ansible_user_id }}'
-    recurse: 'yes'
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    recurse: "yes"
   become: true
 
 - name: Clone wordlists from Git

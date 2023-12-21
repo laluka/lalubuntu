@@ -1,38 +1,38 @@
 - name: Change the default shell to zsh
   ansible.builtin.user:
-    name: '{{ ansible_user_id }}'
+    name: "{{ ansible_user_id }}"
     shell: /bin/zsh
   become: true
   
 - name: Clone Oh My Zsh repository
   ansible.builtin.git:
-    repo: '{{ zsh_git_url }}'
-    dest: '{{ ansible_env.HOME }}/.oh-my-zsh'
-  become_user: '{{ ansible_user_id }}'
+    repo: "{{ zsh_git_url }}"
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
+  become_user: "{{ ansible_user_id }}"
 
 - name: Check if ~/.zshrc exists
   ansible.builtin.stat:
-    path: '{{ ansible_env.HOME }}/.zshrc'
+    path: "{{ ansible_env.HOME }}/.zshrc"
   register: zshrc_stat
 
 - name: Copy zshrc.zsh-template to ~/.zshrc if not existing
   ansible.builtin.copy:
-    src: '{{ ansible_env.HOME }}/.oh-my-zsh/templates/zshrc.zsh-template'
-    dest: '{{ ansible_env.HOME }}/.zshrc'
+    src: "{{ ansible_env.HOME }}/.oh-my-zsh/templates/zshrc.zsh-template"
+    dest: "{{ ansible_env.HOME }}/.zshrc"
   when: not zshrc_stat.stat.exists
 
 - name: Set the zsh theme to af-magic
   ansible.builtin.replace:
-    path: '{{ ansible_env.HOME }}/.zshrc'
-    regexp: 'robbyrussell'
-    replace: 'af-magic'
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    regexp: "robbyrussell"
+    replace: "af-magic"
   when: zshrc_stat.stat.exists
 
 - name: Disable SLOW AF zsh line-paste for long lines
   ansible.builtin.lineinfile:
-    path: '{{ ansible_env.HOME }}/.zshrc'
-    insertbefore: 'source.*oh-my-zsh.sh'
-    line: 'DISABLE_MAGIC_FUNCTIONS=true'
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    insertbefore: "source.*oh-my-zsh.sh"
+    line: "DISABLE_MAGIC_FUNCTIONS=true"
     state: present
 
 - name: Clone zsh plugins as git repositories
@@ -40,15 +40,15 @@
     repo: "{{ item.repo }}"
     dest: "{{ item.dest }}"
   loop:
-    - { repo: '{{ zsh_completion_git_url }}', dest: '{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-completions' }
-    - { repo: '{{ zsh_autosuggestion_git_url }}', dest: '{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-autosuggestions' }
-    - { repo: '{{ zsh_syntax_git_url }}', dest: '{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-syntax-highlighting' }
+    - { repo: "{{ zsh_completion_git_url }}", dest: "{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-completions" }
+    - { repo: "{{ zsh_autosuggestion_git_url }}", dest: "{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-autosuggestions" }
+    - { repo: "{{ zsh_syntax_git_url }}", dest: "{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-syntax-highlighting" }
   when: not item.dest is exists
 
 - name: Clone fzf repository
   ansible.builtin.git:
-    repo: '{{ fzf_git_url }}'
-    dest: '{{ ansible_env.HOME }}/.fzf'
+    repo: "{{ fzf_git_url }}"
+    dest: "{{ ansible_env.HOME }}/.fzf"
     depth: 1
 
 - name: Run fzf installation script
@@ -65,6 +65,6 @@
 
 - name: Tmux configuration
   ansible.builtin.blockinfile:
-    path: '{{ ansible_env.HOME }}/.tmux.conf'
-    block: '{{ tmux_conf }}'
+    path: "{{ ansible_env.HOME }}/.tmux.conf"
+    block: "{{ tmux_conf }}"
     create: yes

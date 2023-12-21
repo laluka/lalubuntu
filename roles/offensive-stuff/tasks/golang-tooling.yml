@@ -1,6 +1,6 @@
 ---
 - name: Install various Go packages
-  ansible.builtin.shell: rtx exec -- go install "{{ item }}@latest"
+  ansible.builtin.shell: rtx exec -- go install '{{ item }}@latest'
   loop: "{{ go_packages }}"
 
 - name: Run pdtm and install all tools

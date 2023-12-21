@@ -7,14 +7,14 @@
 
 - name: Get Veracrypt URL
   ansible.builtin.uri:
-    url: '{{ veracrypt_download_url }}'
+    url: "{{ veracrypt_download_url }}"
     return_content: yes
   register: veracrypt_page
   when: not veracrypt_installed.stat.exists
 
 - name: Extract Veracrypt URL
   ansible.builtin.set_fact:
-    vera_url: "{{ veracrypt_page.content | regex_findall('https://.*?veracrypt-[0-9]+\\.[0-9]+\\.[0-9]+-Ubuntu-22\\.04-amd64\\.deb') | unique | first |  regex_replace('&#43;', '+')}}"
+    vera_url: "{{ veracrypt_page.content | regex_findall('https://.*?veracrypt-[0-9]+\\.[0-9]+\\.[0-9]+-Ubuntu-22\\.04-amd64\\.deb') | unique | first | regex_replace('&#43;', '+') }}"
   when: 
    - vera_url is not defined
    - not veracrypt_installed.stat.exists
