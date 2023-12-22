@@ -3,6 +3,7 @@
 services_to_disable:
   - avahi-daemon
   - cups
+  - ssh
 
 secure_services_to_install:
   - usbguard
