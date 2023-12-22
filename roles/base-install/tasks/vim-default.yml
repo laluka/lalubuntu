@@ -1,18 +1,18 @@
 - name: Set the default editor alternative to vim
   ansible.builtin.alternatives:
     name: editor
-    path: /usr/bin/vim.basic
+    path: '/usr/bin/vim.basic'
   become: true
 
 - name: Set the default editor alternative to vim for the current user
   ansible.builtin.alternatives:
     name: editor
-    path: /usr/bin/vim.basic
+    path: '/usr/bin/vim.basic'
 
 - name: Ensure /etc/vim/vimrc.local exists with specific content
   ansible.builtin.copy:
-    dest: /etc/vim/vimrc.local
-    content: "{{ vimrc_content }}"
-    mode: "0644"
+    dest: '/etc/vim/vimrc.local'
+    content: '{{ vimrc_content }}'
+    mode: '0644'
   become: true
   check_mode: no

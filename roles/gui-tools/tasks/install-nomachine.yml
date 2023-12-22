@@ -1,13 +1,13 @@
 ---
 - name: Check if NoMachine is already installed
   ansible.builtin.stat:
-    path: /usr/bin/nomachine
+    path: '/usr/bin/nomachine'
   register: nomachine_installed
   become: true
 
 - name: Get NoMachine URL
   ansible.builtin.uri:
-    url: "{{ nomachine_download_url }}"
+    url: '{{ nomachine_download_url }}'
     return_content: yes
   register: nomachine_page
   when: not nomachine_installed.stat.exists
@@ -21,19 +21,19 @@
 
 - name: Download nomachine
   ansible.builtin.get_url:
-    url: "{{ nomachine_url }}"
-    dest: /tmp/nomachine-setup.deb
+    url: '{{ nomachine_url }}'
+    dest: '/tmp/nomachine-setup.deb'
   when: not nomachine_installed.stat.exists
 
 - name: Install nomachine
   ansible.builtin.apt:
-    deb: /tmp/nomachine-setup.deb
+    deb: '/tmp/nomachine-setup.deb'
     state: present
   become: true
   when: not nomachine_installed.stat.exists
 
 - name: Delete file /tmp/nomachine-setup.deb
   ansible.builtin.file:
-    path: /tmp/nomachine-setup.deb
+    path: '/tmp/nomachine-setup.deb'
     state: absent
   when: not nomachine_installed.stat.exists

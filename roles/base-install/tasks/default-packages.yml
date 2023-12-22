@@ -14,7 +14,7 @@
   
 - name: Install Packages
   ansible.builtin.package:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: latest
-  loop: "{{ default_packages }}"
+  loop: '{{ default_packages }}'
   become: true

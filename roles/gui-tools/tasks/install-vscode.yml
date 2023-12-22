@@ -1,24 +1,24 @@
 ---
 - name: Check if VsCode is already installed
   ansible.builtin.stat:
-    path: /usr/bin/code
+    path: '/usr/bin/code'
   register: vscode_installed
 
 - name: Download VsCode
   ansible.builtin.get_url:
-    url: "{{ vscode_deb_url }}"
-    dest: /tmp/vscode-setup.deb
+    url: '{{ vscode_deb_url }}'
+    dest: '/tmp/vscode-setup.deb'
   when: not vscode_installed.stat.exists
 
 - name: Install VsCode
   ansible.builtin.apt:
-    deb: /tmp/vscode-setup.deb
+    deb: '/tmp/vscode-setup.deb'
     state: present
   become: true
   when: not vscode_installed.stat.exists
 
 - name: Delete file /tmp/vscode-setup.deb
   ansible.builtin.file:
-    path: /tmp/vscode-setup.deb
+    path: '/tmp/vscode-setup.deb'
     state: absent
   when: not vscode_installed.stat.exists

@@ -11,6 +11,8 @@ This is my - **@TheLaluka** - own config, shared with the help & motivation of *
 
 [![Lower The Friction](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://www.youtube.com/watch?v=xxOVNKNs24s)
 
+**Around 30GB of free space is needed**
+
 ## Sum-Up
 
 The ansible playbook `main.yml` applies 3 ansible roles which are:

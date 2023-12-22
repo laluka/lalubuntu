@@ -8,4 +8,4 @@
     - role: roles/gui-tools
     - role: roles/hardening
       users:
-        - username: "{{ ansible_user_id }}"
+        - username: '{{ ansible_user_id }}'

@@ -15,7 +15,7 @@
 - name: Set Wireshark to install non-interactively
   ansible.builtin.debconf:
     name: wireshark-common
-    question: "wireshark-common/install-setuid"
+    question: 'wireshark-common/install-setuid'
     vtype: boolean
     value: true
   become: true
@@ -23,9 +23,9 @@
 - name: Install GUI Packages
   ansible.builtin.package:
     update_cache: yes
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: latest
   environment:
     DEBIAN_FRONTEND: noninteractive
-  loop: "{{ gui_tools_to_install }}"
+  loop: '{{ gui_tools_to_install }}'
   become: true

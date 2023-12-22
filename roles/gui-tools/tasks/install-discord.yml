@@ -1,25 +1,25 @@
 ---
 - name: Check if Discord is already installed
   ansible.builtin.stat:
-    path: /usr/bin/discord
+    path: '/usr/bin/discord'
   register: discord_installed
   become: true
 
 - name: Download Discord
   ansible.builtin.get_url:
-    url: "{{ discord_download_url }}"
-    dest: /tmp/discord-setup.deb
+    url: '{{ discord_download_url }}'
+    dest: '/tmp/discord-setup.deb'
   when: not discord_installed.stat.exists
 
 - name: Install Discord
   ansible.builtin.apt:
-    deb: /tmp/discord-setup.deb
+    deb: '/tmp/discord-setup.deb'
     state: present
   become: true
   when: not discord_installed.stat.exists
 
 - name: Delete file /tmp/discord-setup.deb
   ansible.builtin.file:
-    path: /tmp/discord-setup.deb
+    path: '/tmp/discord-setup.deb'
     state: absent
   when: not discord_installed.stat.exists

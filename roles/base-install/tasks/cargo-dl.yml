@@ -1,4 +1,4 @@
 # No bash -i as it allows cargo to run jobs in the background in a weird way that breaks ansible
 - name: Install cargo-based tools (this will take lot of time to install)
-  ansible.builtin.shell: rtx exec -- cargo install "{{ item }}"
-  with_items: "{{ cargo_tools }}"
+  ansible.builtin.shell: rtx exec -- cargo install '{{ item }}'
+  with_items: '{{ cargo_tools }}'

@@ -1,24 +1,24 @@
 ---
 - name: Check if Signal is already installed
   ansible.builtin.stat:
-    path: /usr/bin/signal-desktop
+    path: '/usr/bin/signal-desktop'
   register: signal_installed
 
 - name: Download Signal GPG key
   ansible.builtin.get_url:
-    url : "{{ signal_key_url }}"
-    dest: /tmp/signal_gpg
+    url : '{{ signal_key_url }}'
+    dest: '/tmp/signal_gpg'
   when: not signal_installed.stat.exists
 
 - name: De-Armor Signal GPG key
-  ansible.builtin.shell: "gpg --dearmor < /tmp/signal_gpg > {{ signal_gpg_dest }} && rm /tmp/signal_gpg"
+  ansible.builtin.shell: 'gpg --dearmor < /tmp/signal_gpg > {{ signal_gpg_dest }} && rm /tmp/signal_gpg'
   become: true
   when: not signal_installed.stat.exists
 
 - name: Add Signal repository line to sources.list.d
   ansible.builtin.lineinfile:
-    path: /etc/apt/sources.list.d/signal-xenial.list
-    line: "{{ signal_repo_url }}"
+    path: '/etc/apt/sources.list.d/signal-xenial.list'
+    line: '{{ signal_repo_url }}'
     create: yes
   become: true
   when: not signal_installed.stat.exists

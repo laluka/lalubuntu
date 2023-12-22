@@ -6,6 +6,7 @@ default_packages:
   - bat
   - binwalk
   - bison
+  - dos2unix
   - build-essential
   - ca-certificates
   - cloc
@@ -90,19 +91,19 @@ default_packages:
   - openssh-server
   - supertuxkart
 
-zsh_git_url: "https://github.com/robbyrussell/oh-my-zsh.git"
-zsh_completion_git_url: "https://github.com/zsh-users/zsh-completions"
-zsh_autosuggestion_git_url: "https://github.com/zsh-users/zsh-autosuggestions"
-zsh_syntax_git_url: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-fzf_git_url: "https://github.com/junegunn/fzf.git"
+zsh_git_url: 'https://github.com/robbyrussell/oh-my-zsh.git'
+zsh_completion_git_url: 'https://github.com/zsh-users/zsh-completions'
+zsh_autosuggestion_git_url: 'https://github.com/zsh-users/zsh-autosuggestions'
+zsh_syntax_git_url: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
+fzf_git_url: 'https://github.com/junegunn/fzf.git'
 tmux_conf: |
       set-option -g mouse off
       set-option -g history-limit 5000
       set-option -g status-bg colour231
 
-rtx_gpg_dest: "/etc/apt/keyrings/rtx-archive-keyring.gpg"
-rtx_pub_url: "https://rtx.pub/gpg-key.pub"
-rtx_deb_url: "deb [signed-by={{ rtx_gpg_dest }} arch=amd64] https://rtx.pub/deb stable main"
+rtx_gpg_dest: '/etc/apt/keyrings/rtx-archive-keyring.gpg'
+rtx_pub_url: 'https://rtx.pub/gpg-key.pub'
+rtx_deb_url: 'deb [signed-by={{ rtx_gpg_dest }} arch=amd64] https://rtx.pub/deb stable main'
 rtx_tools:
   - awscli
   - golang
@@ -111,13 +112,13 @@ rtx_tools:
   - maven
   - nodejs
   - pdm
-  - php
   - python
   - rust
   - helm
   - k9s
   - kubectl
   - terraform
+  - php
 
 zsh_plugins:
   - zsh-completions
@@ -132,10 +133,10 @@ zsh_plugins:
   - fzf
   - rtx
 
-default_directory: "DATA"
+default_directory: 'DATA'
 
 vimrc_content: |
-  set mouse=""
+  set mouse=''
   set number
   set paste
   syntax 
@@ -150,9 +151,9 @@ cargo_tools:
   - viu
   - xsv
 
-docker_gpg_dest: "/usr/share/keyrings/docker-archive-keyring.gpg"
-docker_key_url: "https://download.docker.com/linux/ubuntu/gpg"
-docker_deb_url: "deb [arch=amd64 signed-by={{ docker_gpg_dest }}] https://download.docker.com/linux/ubuntu jammy stable"
+docker_gpg_dest: '/usr/share/keyrings/docker-archive-keyring.gpg'
+docker_key_url: 'https://download.docker.com/linux/ubuntu/gpg'
+docker_deb_url: 'deb [arch=amd64 signed-by={{ docker_gpg_dest }}] https://download.docker.com/linux/ubuntu jammy stable'
 docker_components: 
   - docker-ce
   - docker-ce-cli 
