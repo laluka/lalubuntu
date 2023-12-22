@@ -8,20 +8,21 @@
 - name: Get Veracrypt URL
   ansible.builtin.uri:
     url: '{{ veracrypt_download_url }}'
-    return_content: yes
-  register: veracrypt_page
+    return_content: true
+  register: veracrypt_release
   when: not veracrypt_installed.stat.exists
 
-- name: Extract Veracrypt URL
-  ansible.builtin.set_fact:
-    vera_url: "{{ veracrypt_page.content | regex_findall('https://.*?veracrypt-[0-9]+\\.[0-9]+\\.[0-9]+-Ubuntu-22\\.04-amd64\\.deb') | unique | first | regex_replace('&#43;', '+') }}"
-  when: 
-   - vera_url is not defined
-   - not veracrypt_installed.stat.exists
+- name: Set the filename and download url
+  set_fact:
+    filename: '{{ asset_file.name }}'
+    download_url: '{{ asset_file.browser_download_url }}'
+  vars:
+    asset_file: "{{ veracrypt_release.json.assets | selectattr('name', 'match', '.*Ubuntu-22.04-amd64.deb(?!\\.sig).*') | rejectattr('name', 'search', 'veracrypt-console') | join() }}"
+  when: not veracrypt_installed.stat.exists
 
 - name: Download Veracrypt
   ansible.builtin.get_url:
-    url: '{{ vera_url }}'
+    url: '{{ download_url }}'
     dest: '/tmp/veracrypt-setup.deb'
   when: not veracrypt_installed.stat.exists
 
