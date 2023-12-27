@@ -2,7 +2,7 @@
 - name: Copy wallpaper image file
   ansible.builtin.copy:
     src: "files/wallpaper.png"
-    dest: "{{ ansible_env.HOME }}/Pictures/wallpaper.png"
+    dest: "{{ ansible_env.HOME }}/.wallpaper.png"
 
 - name: Set wallpaper on GNOME
-  ansible.builtin.command: "gsettings set org.gnome.desktop.background picture-uri 'file:///{{ ansible_env.HOME }}/Pictures/wallpaper.png'"
+  ansible.builtin.command: "gsettings set org.gnome.desktop.background picture-uri 'file:///{{ ansible_env.HOME }}/.wallpaper.png'"
