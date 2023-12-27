@@ -13,8 +13,8 @@ pipx ensurepath
 
 echo "[*] Installing Ansible Galaxy Collections"
 source ~/.bashrc
-pipx run ansible-galaxy collection install community.general
+ansible-galaxy collection install community.general
 echo "[*] Installing LaluBuntu. Go grab yourself a coffee, this will run for A WHILE. :D"
-pipx run ansible-playbook -vvv -i inventory.ini --ask-become main.yml
+ansible-playbook -vvv -i inventory.ini --ask-become main.yml
 echo "[*] Done! Logout, then you MUST pick Regolith/X11 (bottom right of sessions screen) and Login!"
 echo "[🌹] Enjoy your new LaluBuntu distro!"
