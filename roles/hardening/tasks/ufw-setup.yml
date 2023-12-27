@@ -20,7 +20,7 @@
 
 - name: Enable ufw
   community.general.ufw: 
-    state: enabled
+    state: disabled
   become: true
 
 - name: Restart ufw
