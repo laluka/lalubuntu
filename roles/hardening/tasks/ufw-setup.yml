@@ -1,0 +1,29 @@
+- name: Disable password authentication for root
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    regexp: '^#?PermitRootLogin'
+    line: 'PermitRootLogin prohibit-password'
+  become: true
+
+- name: Configure ufw defaults
+  community.general.ufw: direction={{ item.direction }} policy={{ item.policy }}
+  with_items:
+    - { direction: 'incoming', policy: 'deny' }
+    - { direction: 'outgoing', policy: 'allow' }
+  become: true
+
+- name: Enable ufw logging
+  community.general.ufw: 
+    logging: on
+  become: true
+
+- name: Enable ufw
+  community.general.ufw: 
+    state: disabled
+  become: true
+
+- name: Restart ufw
+  community.general.ufw: 
+    state: reloaded
+  become: true

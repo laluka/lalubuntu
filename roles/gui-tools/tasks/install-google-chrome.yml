@@ -1,20 +1,40 @@
-- name: Add google APT repository
+---
+- name: Check if Google Chrome is already installed
+  ansible.builtin.stat:
+    path: /usr/bin/google-chrome
+  register: chrome_installed
   become: true
-  ansible.builtin.deb822_repository:
-    name: google
-    types: [deb]
-    uris:
-      - "http://dl.google.com/linux/chrome/deb"
-    signed_by: "https://dl.google.com/linux/linux_signing_key.pub"
-    suites: [stable]
-    components: [main]
-    state: present
-    enabled: yes
+
+- name: Add Google Chrome repository
+  ansible.builtin.lineinfile:
+    path: /etc/apt/sources.list.d/google-chrome.list
+    line: '{{ chrome_deb_url }}'
+    create: yes
+  become: true
+  when: not chrome_installed.stat.exists
+
+- name: Download Google Chrome signing key
+  ansible.builtin.get_url:
+    url: '{{ chrome_pub_key_url }}'
+    dest: '/etc/apt/trusted.gpg.d/linux_signing_key.pub'
+  become: true
+  when: not chrome_installed.stat.exists
+
+- name: Import Google Chrome signing key
+  ansible.builtin.command: 'apt-key adv --keyserver {{ chrome_key_server }} --recv-keys {{ chrome_gpg_key_id }}'
+  become: true
+  when: not chrome_installed.stat.exists
+
+- name: Export Google Chrome signing key to GPG
+  ansible.builtin.shell: 'apt-key export {{ chrome_export_key_id }} | gpg --dearmour -o {{ chrome_gpg_dest }}'
+  become: true
+  when: not chrome_installed.stat.exists
 
 - name: Install Google Chrome
-  package:
+  ansible.builtin.package:
     update_cache: yes
     name:
       - google-chrome-stable
     state: latest
   become: true
+  when: not chrome_installed.stat.exists

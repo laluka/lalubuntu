@@ -1,16 +1,24 @@
 ---
-- name: Install VsCode only if /usr/bin/code does not exist
+- name: Check if VsCode is already installed
   ansible.builtin.stat:
-    path: /usr/bin/code
-  register: file_check
+    path: '/usr/bin/code'
+  register: vscode_installed
 
-- name: Install VsCode following their doc
-  shell: |
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-    install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
-    sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-    rm -f packages.microsoft.gpg
-    apt-get update
-    apt-get install -y code
+- name: Download VsCode
+  ansible.builtin.get_url:
+    url: '{{ vscode_deb_url }}'
+    dest: '/tmp/vscode-setup.deb'
+  when: not vscode_installed.stat.exists
+
+- name: Install VsCode
+  ansible.builtin.apt:
+    deb: '/tmp/vscode-setup.deb'
+    state: present
   become: true
-  when: not file_check.stat.exists
+  when: not vscode_installed.stat.exists
+
+- name: Delete file /tmp/vscode-setup.deb
+  ansible.builtin.file:
+    path: '/tmp/vscode-setup.deb'
+    state: absent
+  when: not vscode_installed.stat.exists

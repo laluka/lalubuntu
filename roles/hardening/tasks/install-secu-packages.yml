@@ -1,0 +1,9 @@
+---
+- name: Install Secu Packages
+  ansible.builtin.package:
+    name: '{{ item }}'
+    state: latest
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+  loop: '{{ secure_services_to_install }}'
+  become: true

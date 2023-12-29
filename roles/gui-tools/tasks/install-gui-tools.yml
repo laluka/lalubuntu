@@ -1,49 +1,31 @@
 ---
 - name: Update apt repo/cache
-  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+  ansible.builtin.apt:
+    update_cache: yes
+    force_apt_get: yes
+    cache_valid_time: 3600
   become: true
 
 - name: Upgrade all packages
-  apt: upgrade=yes force_apt_get=yes
+  ansible.builtin.apt:
+    upgrade: yes
+    force_apt_get: yes
   become: true
 
-- name: Set wireshark install non-interactive
-  shell: echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections
+- name: Set Wireshark to install non-interactively
+  ansible.builtin.debconf:
+    name: wireshark-common
+    question: 'wireshark-common/install-setuid'
+    vtype: boolean
+    value: true
   become: true
 
-- name: Add multiple PPAs
-  apt_repository:
-    repo: "{{ item }}"
-    update_cache: no
-  become: true
-  loop:
-    - ppa:obsproject/obs-studio
-    - ppa:unit193/encryption
-    - ppa:libreoffice/ppa
-
-- name: Install Packages
-  package:
+- name: Install GUI Packages
+  ansible.builtin.package:
     update_cache: yes
-    name:
-          - apt-transport-https
-          - arandr
-          - bless
-          - cheese
-          - filezilla
-          - flameshot
-          - gparted
-          - kompare
-          - libreoffice
-          - mplayer
-          - obs-studio
-          - qbittorrent
-          - qemu
-          - torbrowser-launcher
-          - usb-creator-gtk
-          - veracrypt
-          - vlc
-          - wireshark
+    name: '{{ item }}'
     state: latest
-  become: true
   environment:
     DEBIAN_FRONTEND: noninteractive
+  loop: '{{ gui_tools_to_install }}'
+  become: true

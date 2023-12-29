@@ -1,0 +1,20 @@
+---
+- name: Update apt repo/cache
+  ansible.builtin.apt:
+    update_cache: yes
+    force_apt_get: yes
+    cache_valid_time: 3600
+  become: true
+
+- name: Upgrade all packages
+  ansible.builtin.apt:
+    upgrade: yes
+    force_apt_get: yes
+  become: true
+
+- name: Install Packages
+  ansible.builtin.package:
+    name: '{{ item }}'
+    state: latest
+  loop: '{{ default_packages }}'
+  become: true

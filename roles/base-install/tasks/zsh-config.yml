@@ -1,78 +1,82 @@
-- name: Install zsh and oh-my-zsh
-  apt:
-    name: '{{ item }}'
-    state: present
-  loop:
-    - zsh
-    - powerline
-    - fonts-powerline
-  become: true
-
 - name: Change the default shell to zsh
-  user:
+  ansible.builtin.user:
     name: '{{ ansible_user_id }}'
     shell: /bin/zsh
   become: true
-  
-- name: Clone oh-my-zsh repository
-  git:
-    repo: https://github.com/robbyrussell/oh-my-zsh.git
-    dest: ~/.oh-my-zsh
+
+- name: Clone Oh My Zsh repository
+  ansible.builtin.git:
+    repo: '{{ zsh_git_url }}'
+    dest: '{{ ansible_env.HOME }}/.oh-my-zsh'
+  become_user: '{{ ansible_user_id }}'
 
 - name: Check if ~/.zshrc exists
   ansible.builtin.stat:
-    path: ~/.zshrc
+    path: '{{ ansible_env.HOME }}/.zshrc'
   register: zshrc_stat
 
 - name: Copy zshrc.zsh-template to ~/.zshrc if not existing
   ansible.builtin.copy:
-    src: ~/.oh-my-zsh/templates/zshrc.zsh-template
-    dest: ~/.zshrc
+    src: '{{ ansible_env.HOME }}/.oh-my-zsh/templates/zshrc.zsh-template'
+    dest: '{{ ansible_env.HOME }}/.zshrc'
   when: not zshrc_stat.stat.exists
 
 - name: Set the zsh theme to af-magic
-  replace:
-    path: ~/.zshrc
-    regexp: robbyrussell
-    replace: af-magic
+  ansible.builtin.replace:
+    path: '{{ ansible_env.HOME }}/.zshrc'
+    regexp: '^ZSH_THEME=.*$'
+    replace: 'ZSH_THEME="af-magic"'
+  when: zshrc_stat.stat.exists
 
-- name: Disable SLOW AF zsh line-paste for long lines
-  lineinfile:
-    path: ~/.zshrc
+- name: Adding configs lines to zsh
+  ansible.builtin.lineinfile:
+    path: '{{ ansible_env.HOME }}/.zshrc'
     insertbefore: 'source.*oh-my-zsh.sh'
-    line: 'DISABLE_MAGIC_FUNCTIONS=true'
+    line: '{{ item }}'
+    state: present
+  with_items: '{{ zsh_config_lines }}'
 
 - name: Clone zsh plugins as git repositories
-  git:
-    repo: "{{ item.repo }}"
-    dest: "{{ item.dest }}"
+  ansible.builtin.git:
+    repo: '{{ item.repo }}'
+    dest: '{{ item.dest }}'
   loop:
-    - { repo: 'https://github.com/zsh-users/zsh-completions', dest: '~/.oh-my-zsh/plugins/zsh-completions' }
-    - { repo: 'https://github.com/zsh-users/zsh-autosuggestions', dest: '~/.oh-my-zsh/plugins/zsh-autosuggestions' }
-    - { repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git', dest: '~/.oh-my-zsh/plugins/zsh-syntax-highlighting' }
+    - { repo: '{{ zsh_completion_git_url }}', dest: '{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-completions' }
+    - { repo: '{{ zsh_autosuggestion_git_url }}', dest: '{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-autosuggestions' }
+    - { repo: '{{ zsh_syntax_git_url }}', dest: '{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-syntax-highlighting' }
+  when: not item.dest is exists
 
 - name: Clone fzf repository
-  git:
-    repo: https://github.com/junegunn/fzf.git
-    dest: ~/.fzf
+  ansible.builtin.git:
+    repo: '{{ fzf_git_url }}'
+    dest: '{{ ansible_env.HOME }}/.fzf'
     depth: 1
 
 - name: Run fzf installation script
-  command: zsh -c '~/.fzf/install --all'
+  ansible.builtin.shell: "zsh -c '{{ ansible_env.HOME }}/.fzf/install --all'"
+
+- name: Copy wallpaper image file
+  ansible.builtin.copy:
+    src: 'aliases'
+    dest: '/opt/lalubuntu/aliases'
+
+- name: Replace user_to_replace in the aliases
+  ansible.builtin.replace:
+    path: '/opt/lalubuntu/aliases'
+    regexp: 'user_to_replace'
+    replace: '{{ ansible_user_id }}'
 
 - name: Add line to shell configuration files
-  lineinfile:
-    path: "{{ item }}"
-    line: "source /opt/lalubuntu/aliases"
+  ansible.builtin.lineinfile:
+    path: '{{ item }}'
+    line: 'source /opt/lalubuntu/aliases'
     insertafter: EOF
-  loop:
+  with_items:
     - ~/.zshrc
     - ~/.bashrc
 
-- blockinfile:
-    path: ~/.tmux.conf
-    block: |
-      set-option -g mouse off
-      set-option -g history-limit 5000
-      set-option -g status-bg colour231
+- name: Tmux configuration
+  ansible.builtin.blockinfile:
+    path: '{{ ansible_env.HOME }}/.tmux.conf'
+    block: '{{ tmux_conf }}'
     create: yes

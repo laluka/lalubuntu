@@ -1,13 +1,33 @@
 ---
-- name: Install Signal only if /usr/bin/signal-desktop does not exist
+- name: Check if Signal is already installed
   ansible.builtin.stat:
-    path: /usr/bin/signal-desktop
-  register: file_check
+    path: '/usr/bin/signal-desktop'
+  register: signal_installed
 
-- name: Install Signal following their doc
-  shell: |
-    wget -qO- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > /usr/share/keyrings/signal-desktop-keyring.gpg
-    echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' > /etc/apt/sources.list.d/signal-xenial.list
-    apt-get update && apt-get install signal-desktop -y
+- name: Download Signal GPG key
+  ansible.builtin.get_url:
+    url : '{{ signal_key_url }}'
+    dest: '/tmp/signal_gpg'
+  when: not signal_installed.stat.exists
+
+- name: De-Armor Signal GPG key
+  ansible.builtin.shell: 'gpg --dearmor < /tmp/signal_gpg > {{ signal_gpg_dest }} && rm /tmp/signal_gpg'
   become: true
-  when: not file_check.stat.exists
+  when: not signal_installed.stat.exists
+
+- name: Add Signal repository line to sources.list.d
+  ansible.builtin.lineinfile:
+    path: '/etc/apt/sources.list.d/signal-xenial.list'
+    line: '{{ signal_repo_url }}'
+    create: yes
+  become: true
+  when: not signal_installed.stat.exists
+
+- name: Install Signal
+  ansible.builtin.package:
+    update_cache: yes
+    name:
+      - signal-desktop
+    state: latest
+  become: true
+  when: not signal_installed.stat.exists

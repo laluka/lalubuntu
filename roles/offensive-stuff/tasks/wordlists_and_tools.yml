@@ -1,32 +1,32 @@
 ---
 - name: Clone tools from Git
-  become: true
-  git:
-    repo: "{{ item.repo }}"
-    dest: "/opt/{{ item.dest }}"
+  ansible.builtin.git:
+    repo: '{{ item.repo }}'
+    dest: '/opt/{{ item.dest }}'
     update: yes
-  loop: "{{ git_repositories }}"
+  loop: '{{ git_repositories }}'
+  become: true
 
 - name: Change ownership of the directory
-  become: true
-  file:
-    path: "/opt/{{ item.dest }}"
-    owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_id }}"
+  ansible.builtin.file:
+    path: '/opt/{{ item.dest }}'
+    owner: '{{ ansible_user_id }}'
+    group: '{{ ansible_user_id }}'
     recurse: yes
-  loop: "{{ git_repositories }}"
+  loop: '{{ git_repositories }}'
+  become: true
 
 - name: Create a lists directory
-  become: true
-  file:
+  ansible.builtin.file:
     path: /opt/lists
     owner: '{{ ansible_user_id }}'
     group: '{{ ansible_user_id }}'
     recurse: 'yes'
+  become: true
 
 - name: Clone wordlists from Git
-  git:
-    repo: "{{ item.repo }}"
-    dest: "/opt/lists/{{ item.dest }}"
+  ansible.builtin.git:
+    repo: '{{ item.repo }}'
+    dest: '/opt/lists/{{ item.dest }}'
     update: yes
-  loop: "{{ git_wordlists }}"
+  loop: '{{ git_wordlists }}'

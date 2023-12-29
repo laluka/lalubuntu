@@ -1,14 +1,22 @@
-- name: Create /DATA directory (if it doesn't exist)
-  file:
-    path: /DATA
+---
+- name: Create /{{ default_directory }} directory (if it doesn't exist)
+  ansible.builtin.file:
+    path: '/{{ default_directory }}'
     state: directory
     mode: '0755'
   become: true
 
-- name: 'Set ownership of /DATA directory to {{ ansible_user_id }}'
-  file:
-    path: /DATA
+- name: Set ownership of /{{ default_directory }} directory to {{ ansible_user_id }}
+  ansible.builtin.file:
+    path: '/{{ default_directory }}'
     owner: '{{ ansible_user_id }}'
     group: '{{ ansible_user_id }}'
-    recurse: 'yes'
+    recurse: yes
   become: true
+
+- name: Create {{ ansible_env.HOME }}/.ssh directory (if it doesn't exist)
+  ansible.builtin.file:
+    path: '{{ ansible_env.HOME }}/.ssh'
+    state: directory
+    mode: '0755'
+

@@ -1,0 +1,6 @@
+---
+# tasks file for hardening
+- include_tasks: ufw-setup.yml # Setting up UFW firewall
+- include_tasks: disable-service.yml # Disabling unnecessary services
+- include_tasks: install-secu-packages.yml # Installing security packages
+- include_tasks: cleanup.yml # Cleaning up the system after installations

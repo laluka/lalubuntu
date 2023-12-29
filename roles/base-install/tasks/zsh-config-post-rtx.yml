@@ -1,18 +1,3 @@
-- name: Define zsh plugins
-  set_fact:
-    zsh_plugins:
-      - zsh-completions
-      - zsh-autosuggestions
-      - zsh-syntax-highlighting
-      - colored-man-pages
-      - extract
-      - tmux
-      - ssh-agent
-      - npm
-      - aws
-      - fzf
-      - rtx
-
 - name: Enable zsh plugins
-  shell: zsh -c 'source ~/.zshrc && omz plugin enable {{ item }} || true'
+  ansible.builtin.shell: "zsh -c 'source {{ ansible_env.HOME }}/.zshrc && omz plugin enable {{ item }} || true'"
   with_items: '{{ zsh_plugins }}'

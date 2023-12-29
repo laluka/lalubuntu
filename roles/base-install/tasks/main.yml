@@ -1,4 +1,4 @@
-- include_tasks: apt-stuff.yml # Installing apt packages and configuring apt
+- include_tasks: default-packages.yml # Installing apt packages and configuring apt
 - include_tasks: zsh-config.yml # Configuring Zsh
 - include_tasks: rtx-all.yml # Installing all RTX components
 - include_tasks: zsh-config-post-rtx.yml # Configuring Zsh

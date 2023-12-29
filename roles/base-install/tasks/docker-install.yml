@@ -1,17 +1,32 @@
 - name: Install docker only if /usr/bin/docker does not exist
   ansible.builtin.stat:
-    path: /usr/bin/docker
-  register: file_check
+    path: '/usr/bin/docker'
+  register: docker_installed
 
-- name: Install docker following their doc
-  shell: |
-    apt-get update
-    apt-get install ca-certificates curl gnupg
-    install -m 0755 -d /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor > /etc/apt/keyrings/docker.gpg
-    chmod a+r /etc/apt/keyrings/docker.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" > /etc/apt/sources.list.d/docker.list > /dev/null
-    apt-get update
-    apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+- name: Download Docker GPG key
+  ansible.builtin.get_url:
+    url : '{{ docker_key_url }}'
+    dest: '/tmp/docker_gpg'
+  when: not docker_installed.stat.exists
+
+- name: De-Armor Docker GPG key
+  ansible.builtin.shell: 'gpg --dearmor < /tmp/docker_gpg > {{ docker_gpg_dest }} && rm /tmp/docker_gpg'
   become: true
-  when: file_check.stat.exists
+  when: not docker_installed.stat.exists
+
+- name: Add Docker repository
+  ansible.builtin.lineinfile:
+    path: '/etc/apt/sources.list.d/docker.list'
+    line: '{{ docker_deb_url }}'
+    create: yes
+  become: true
+  when: not docker_installed.stat.exists
+
+- name: Install Dockers components
+  ansible.builtin.package:
+    update_cache: yes
+    name: '{{ item }}'
+    state: latest
+  loop: '{{ docker_components }}'
+  become: true
+  when: not docker_installed.stat.exists
