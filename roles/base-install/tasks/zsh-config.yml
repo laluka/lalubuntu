@@ -75,6 +75,15 @@
     - ~/.zshrc
     - ~/.bashrc
 
+- name: Source lalubuntu update script in shell configuration files
+  ansible.builtin.lineinfile:
+    path: '{{ item }}'
+    line: 'source /opt/lalubuntu/update.sh'
+    insertafter: EOF
+  with_items:
+    - ~/.zshrc
+    - ~/.bashrc
+
 - name: Tmux configuration
   ansible.builtin.blockinfile:
     path: '{{ ansible_env.HOME }}/.tmux.conf'
