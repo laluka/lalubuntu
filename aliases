@@ -1,14 +1,12 @@
 # Utils
 ## Directories
-alias dl='cd /home/lalu/Downloads'
+alias dl='cd ~/Downloads'
 alias da="cd /DATA"
 alias tn="tmux new"
 alias ta="tmux attach"
 alias c="code ."
 alias life='cd /opt/lalulife'
-alias sulf='cd /opt/sulfateuse'
-alias crwl='cd /opt/lalulife/web/crawlz/'
-alias brwl='cd /opt/lalulife/web/brawler/'
+alias lbt='cd /opt/lalubun'
 
 # Tools Sysadmin
 alias t='f(){ exa -Tll "$@";  unset -f f; }; f'
@@ -141,7 +139,8 @@ alias acunetix='docker run --rm -it -p 3443:3443 -d ogranc/awvs_scanner:14.6.211
 alias htcap-crawl='f(){ OUT=$(echo "$1" | tr "/" "_"); dockit htcap htcap crawl -m aggressive -s domain -U "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/83.0.4103.106 Chrome/83.0.4103.106 Safari/537.36" "$1" "/host/$OUT.db" ; dockit htcap htcap scan native "/host/$OUT.db"; dockit htcap htcap util report "/host/$OUT.db" "/host/$OUT.html" ; unset -f f; }; f'
 alias rustscan='dockit rustscan/rustscan'
 alias oneforall='dockit tardis07/oneforall'
-alias getfuzz='f(){ echo "<lalu1>\"lalu2'"'"'lalu3\`%}})lalu4\${{lalu5\\";  unset -f f; }; f'
+alias getfuzz='f(){ echo "<fuzz1>\"fuzz2'"'"'fuzz3\`%}})fuzz4\${{fuzz5\\";  unset -f f; }; f'
+
 ## Compliance
 alias ssh-audit="dockit positronsecurity/ssh-audit"
 alias ssh-scan="dockit mozilla/ssh_scan /app/bin/ssh_scan"

@@ -55,17 +55,6 @@
 - name: Run fzf installation script
   ansible.builtin.shell: "zsh -c '{{ ansible_env.HOME }}/.fzf/install --all'"
 
-- name: Copy wallpaper image file
-  ansible.builtin.copy:
-    src: 'aliases'
-    dest: '/opt/lalubuntu/aliases'
-
-- name: Replace user_to_replace in the aliases
-  ansible.builtin.replace:
-    path: '/opt/lalubuntu/aliases'
-    regexp: 'user_to_replace'
-    replace: '{{ ansible_user_id }}'
-
 - name: Add line to shell configuration files
   ansible.builtin.lineinfile:
     path: '{{ item }}'
