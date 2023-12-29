@@ -11,7 +11,7 @@ This is my - **@TheLaluka** - own config, shared with the help & motivation of *
 
 [![Lower The Friction](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://www.youtube.com/watch?v=xxOVNKNs24s)
 
-**Around 30GB of free space is needed**
+**Around 40GB of free space is needed for a full setup**
 
 ## Sum-Up
 
@@ -70,9 +70,12 @@ To finish the script, some GUI software such as vscode or office
 4. After, it will install and setup regolith because regolith is GOAT (`setup-regolith`)
 5. To finish, some cleanup ! (`cleanup`)
 
+## Gotchas
 
-## TODO before release
+- One can switch between Regolith and Gnome by logging out and picking the desired UI
+  - In Gnome: Top-Right corner, then logout
+  - In Regolith: CMD+SPACE, then logout
 
-* Refacto
-* Perf https://blog.stephane-robert.info/docs/infra-as-code/gestion-de-configuration/ansible/ansible-increase-performance/
-
+![demo-switch-gnome-regolith](screens/demo-switch-gnome-regolith.png)
+![demo-gnome](screens/demo-gnome.png)
+![demo-regolith](screens/demo-regolith.png)
