@@ -24,8 +24,8 @@
 - name: Set the zsh theme to af-magic
   ansible.builtin.replace:
     path: '{{ ansible_env.HOME }}/.zshrc'
-    regexp: '^(\s*)ZSH_THEME=.*$'
-    replace: 'ZSH_THEME="magic"' 
+    regexp: '^ZSH_THEME=.*$'
+    replace: 'ZSH_THEME="af-magic"'
   when: zshrc_stat.stat.exists
 
 - name: Adding configs lines to zsh
@@ -58,18 +58,18 @@
 - name: Copy wallpaper image file
   ansible.builtin.copy:
     src: 'aliases'
-    dest: '{{ ansible_env.HOME }}/aliases'
+    dest: '/opt/lalubuntu/aliases'
 
 - name: Replace user_to_replace in the aliases
   ansible.builtin.replace:
-    path: '{{ ansible_env.HOME }}/aliases'
+    path: '/opt/lalubuntu/aliases'
     regexp: 'user_to_replace'
     replace: '{{ ansible_user_id }}'
 
 - name: Add line to shell configuration files
   ansible.builtin.lineinfile:
     path: '{{ item }}'
-    line: 'source {{ ansible_env.HOME }}/aliases'
+    line: 'source /opt/lalubuntu/aliases'
     insertafter: EOF
   with_items:
     - ~/.zshrc
