@@ -1,7 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 IFS=$'\n\t'
-export PATH="$PATH:$HOME/.local/bin"
 # http://redsymbol.net/articles/unofficial-bash-strict-mode/
 
 echo "[*] Installing linux basics"
@@ -11,6 +10,7 @@ sudo apt-get install -y pipx curl vim git wget
 echo "[*] Installing Pipx & Ansible"
 pipx install ansible-core --force
 pipx ensurepath
+export PATH="$PATH:$HOME/.local/bin"
 
 echo "[*] Installing Ansible Galaxy Collections"
 source ~/.bashrc
