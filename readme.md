@@ -30,6 +30,7 @@ sudo apt install -y curl wget git vim tmux # Basics
 git clone https://github.com/laluka/lalubuntu
 sudo mv lalubuntu /opt/lalubuntu
 cd /opt/lalubuntu
+bash -x pre-install.sh
 bash -x install.sh
 source ~/.bashrc && ansible-galaxy collection install community.general
 source ~/.bashrc && ansible-playbook -vvv -i inventory.ini --ask-become main.yml
