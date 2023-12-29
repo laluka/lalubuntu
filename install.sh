@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 IFS=$'\n\t'
+export PATH="$PATH:$HOME/.local/bin"
 # http://redsymbol.net/articles/unofficial-bash-strict-mode/
 
 echo "[*] Installing linux basics"

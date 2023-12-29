@@ -133,6 +133,11 @@ zsh_plugins:
   - fzf
   - rtx
 
+zsh_config_lines:
+  - DISABLE_AUTO_UPDATE=false
+  - DISABLE_UPDATE_PROMPT=false
+  - DISABLE_MAGIC_FUNCTIONS=true
+
 default_directory: 'DATA'
 
 vimrc_content: |

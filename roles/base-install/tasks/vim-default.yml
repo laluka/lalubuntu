@@ -9,10 +9,10 @@
     name: editor
     path: '/usr/bin/vim.basic'
 
-- name: Ensure /etc/vim/vimrc.local exists with specific content
-  ansible.builtin.copy:
-    dest: '/etc/vim/vimrc.local'
-    content: '{{ vimrc_content }}'
+- name: /etc/vim/vimrc.local configuration
+  ansible.builtin.blockinfile:
+    path: '/etc/vim/vimrc.local'
+    block: '{{ vimrc_content }}'
     mode: '0644'
+    create: yes
   become: true
-  check_mode: no

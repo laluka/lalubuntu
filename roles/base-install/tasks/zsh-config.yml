@@ -24,16 +24,17 @@
 - name: Set the zsh theme to af-magic
   ansible.builtin.replace:
     path: '{{ ansible_env.HOME }}/.zshrc'
-    regexp: 'robbyrussell'
-    replace: 'af-magic'
+    regexp: '^(\s*)ZSH_THEME=.*$'
+    replace: 'ZSH_THEME="magic"' 
   when: zshrc_stat.stat.exists
 
-- name: Disable SLOW AF zsh line-paste for long lines
+- name: Adding configs lines to zsh
   ansible.builtin.lineinfile:
     path: '{{ ansible_env.HOME }}/.zshrc'
     insertbefore: 'source.*oh-my-zsh.sh'
-    line: 'DISABLE_MAGIC_FUNCTIONS=true'
+    line: '{{ item }}'
     state: present
+  with_items: '{{ zsh_config_lines }}'
 
 - name: Clone zsh plugins as git repositories
   ansible.builtin.git:
@@ -54,10 +55,21 @@
 - name: Run fzf installation script
   ansible.builtin.shell: "zsh -c '{{ ansible_env.HOME }}/.fzf/install --all'"
 
+- name: Copy wallpaper image file
+  ansible.builtin.copy:
+    src: 'aliases'
+    dest: '{{ ansible_env.HOME }}/aliases'
+
+- name: Replace user_to_replace in the aliases
+  ansible.builtin.replace:
+    path: '{{ ansible_env.HOME }}/aliases'
+    regexp: 'user_to_replace'
+    replace: '{{ ansible_user_id }}'
+
 - name: Add line to shell configuration files
   ansible.builtin.lineinfile:
     path: '{{ item }}'
-    line: 'source /opt/lalubuntu/aliases'
+    line: 'source {{ ansible_env.HOME }}/aliases'
     insertafter: EOF
   with_items:
     - ~/.zshrc
