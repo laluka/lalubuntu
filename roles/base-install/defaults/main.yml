@@ -142,7 +142,7 @@ vimrc_content: |
   set mouse=''
   set number
   set paste
-  syntax 
+  syntax
 
 cargo_tools:
   - bottom
@@ -159,7 +159,7 @@ docker_key_url: 'https://download.docker.com/linux/ubuntu/gpg'
 docker_deb_url: 'deb [arch=amd64 signed-by={{ docker_gpg_dest }}] https://download.docker.com/linux/ubuntu jammy stable'
 docker_components: 
   - docker-ce
-  - docker-ce-cli 
-  - containerd.io 
-  - docker-buildx-plugin 
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
   - docker-compose-plugin

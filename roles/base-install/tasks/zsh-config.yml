@@ -3,7 +3,7 @@
     name: '{{ ansible_user_id }}'
     shell: /bin/zsh
   become: true
-  
+
 - name: Clone Oh My Zsh repository
   ansible.builtin.git:
     repo: '{{ zsh_git_url }}'

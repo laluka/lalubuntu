@@ -11,7 +11,7 @@
     upgrade: yes
     force_apt_get: yes
   become: true
-  
+
 - name: Install Packages
   ansible.builtin.package:
     name: '{{ item }}'
