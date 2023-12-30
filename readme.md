@@ -30,7 +30,7 @@ The ansible playbook `main.yml` applies 3 ansible roles which are:
 
 ```bash
 # If you ARE A DEV and PLAN TO CONTRIBUTE
-# git clone git@gitlab.com:TheLaluka/lalubuntu.git
+# git clone git@github.com:laluka/lalubuntu.git
 sudo apt install -y curl wget git vim tmux # Basics
 git clone https://github.com/laluka/lalubuntu
 sudo mv lalubuntu /opt/lalubuntu
