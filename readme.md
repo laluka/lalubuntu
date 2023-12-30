@@ -20,13 +20,14 @@ screens/logo-lalubuntu.png
 
 ## Sum-Up
 
-The ansible playbook `main.yml` applies 3 ansible roles which are:
+The ansible playbook `main.yml` applies 4 ansible roles which are:
 
-- base-install
-- gui-tools
-- offensive-stuff
+- roles/base-install
+- roles/offensive-stuff
+- roles/gui-tools
+- roles/hardening
 
-## Pre-Setup & Install
+## Pre-Install, Install, Update
 
 ```bash
 # If you ARE A DEV and PLAN TO CONTRIBUTE
@@ -37,8 +38,6 @@ sudo mv lalubuntu /opt/lalubuntu
 cd /opt/lalubuntu
 bash -x pre-install.sh
 bash -x install.sh
-source ~/.bashrc && ansible-galaxy collection install community.general
-source ~/.bashrc && ansible-playbook -vvv -i inventory.ini --ask-become main.yml
 # Update with
 lalupdate
 ```
