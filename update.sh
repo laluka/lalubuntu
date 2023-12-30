@@ -34,4 +34,6 @@ if [ "$LOCAL" != "$REMOTE" ]; then
                 ;;
         esac
     done
+else
+    echo "Already up-to-date 🌹"
 fi
