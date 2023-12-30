@@ -13,6 +13,7 @@
   ansible.builtin.blockinfile:
     path: '/etc/vim/vimrc.local'
     block: '{{ vimrc_content }}'
+    marker: '"'
     mode: '0644'
     create: yes
   become: true

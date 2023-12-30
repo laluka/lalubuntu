@@ -7,6 +7,7 @@ alias ta="tmux attach"
 alias c="code ."
 alias life='cd /opt/lalulife'
 alias lbt='cd /opt/lalubun'
+alias lalupdate='bash /opt/lalubuntu/update.sh'
 
 # Tools Sysadmin
 alias t='f(){ exa -Tll "$@";  unset -f f; }; f'

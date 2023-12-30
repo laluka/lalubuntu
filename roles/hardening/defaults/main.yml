@@ -3,7 +3,6 @@
 services_to_disable:
   - cups
   - tor
-  # - avahi-daemon
   # - ssh
 
 secure_services_to_install:

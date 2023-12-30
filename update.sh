@@ -1,10 +1,10 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
 IFS=$'\n\t'
 # http://redsymbol.net/articles/unofficial-bash-strict-mode/
 
 # Navigate to the repository directory
-cd /opt/Lalubuntu
+cd /opt/lalubuntu
 
 # Check for updates
 git fetch
@@ -14,22 +14,22 @@ LOCAL=$(git rev-parse HEAD)
 REMOTE=$(git rev-parse @{u})
 
 # If updates are available, prompt the user
-if [ $LOCAL != $REMOTE ]; then
+if [ "$LOCAL" != "$REMOTE" ]; then
     echo "Update available for Lalubuntu."
     while true; do
         read -p "Would you like to update? [Y/n] " response
         case $response in
-            [Yy]* ) 
+            [Yy]* | "" )
                 git pull
                 bash -x install.sh
                 echo "Lalubuntu has been updated."
                 break
                 ;;
-            [Nn]* ) 
+            [Nn]* )
                 echo "Update canceled."
                 exit
                 ;;
-            * ) 
+            * )
                 echo "Please answer Y or n."
                 ;;
         esac
