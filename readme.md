@@ -1,5 +1,9 @@
 # LaluBuntu
 
+> Prompt: Create a logo with an Evoli-like pokemon for a linux distro named LaluBuntu, make it cute !
+
+<img src='screens/logo-lalubuntu.png' width='250'>
+
 > This ansible playbook will make your machine lovely to use.
 
 **This playbook is only intended to be run in `Ubuntu 22.04`**
@@ -8,7 +12,7 @@ This is my - **@TheLaluka** - own config, shared with the help & motivation of *
 
 - Welcome to my world, `Lower The Friction` between you and your machine!
 - See this brief extract of what these scripts will allow you to do
-
+screens/logo-lalubuntu.png
 [![Lower The Friction](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://www.youtube.com/watch?v=xxOVNKNs24s)
 
 **Around 40GB of free space is needed for a full setup**
