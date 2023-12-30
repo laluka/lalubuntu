@@ -13,6 +13,7 @@ This is my - **@TheLaluka** - own config, shared with the help & motivation of *
 - Welcome to my world, `Lower The Friction` between you and your machine!
 - See this brief extract of what these scripts will allow you to do
 screens/logo-lalubuntu.png
+
 [![Lower The Friction](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://www.youtube.com/watch?v=xxOVNKNs24s)
 
 **Around 40GB of free space is needed for a full setup**
@@ -38,6 +39,8 @@ bash -x pre-install.sh
 bash -x install.sh
 source ~/.bashrc && ansible-galaxy collection install community.general
 source ~/.bashrc && ansible-playbook -vvv -i inventory.ini --ask-become main.yml
+# Update with
+lalupdate
 ```
 
 ## Base install
@@ -74,12 +77,16 @@ To finish the script, some GUI software such as vscode or office
 4. After, it will install and setup regolith because regolith is GOAT (`setup-regolith`)
 5. To finish, some cleanup ! (`cleanup`)
 
+---
+
 ## Gotchas
 
 - One can switch between Regolith and Gnome by logging out and picking the desired UI
   - In Gnome: Top-Right corner, then logout
   - In Regolith: CMD+SPACE, then logout
 
-![demo-switch-gnome-regolith](screens/demo-switch-gnome-regolith.png)
-![demo-gnome](screens/demo-gnome.png)
-![demo-regolith](screens/demo-regolith.png)
+<img src='screens/demo-switch-gnome-regolith.png' width='500'>
+
+<img src='screens/demo-gnome.png' width='500'>
+
+<img src='screens/demo-regolith.png' width='500'>
