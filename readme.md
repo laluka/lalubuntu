@@ -6,7 +6,7 @@
 
 > This ansible playbook will make your machine lovely to use.
 
-**This playbook is only intended to be run in `Ubuntu 22.04`**
+## This playbook is only intended to be run in `Ubuntu 22.04`
 
 This is my - **@TheLaluka** - own config, shared with the help & motivation of **@Fransosiche** !
 
@@ -16,7 +16,14 @@ screens/logo-lalubuntu.png
 
 [![Lower The Friction](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://www.youtube.com/watch?v=xxOVNKNs24s)
 
-**Around 40GB of free space is needed for a full setup**
+## This video is a quick how-to
+
+Note that:
+
+- Around 40GB of free space is needed for a full setup
+- The install time will be SIGNIFICANTLY longer for a first run
+
+[![LaluBuntu Setup](https://img.youtube.com/vi/59T4gQICirU/0.jpg)](https://www.youtube.com/watch?v=59T4gQICirU)
 
 ## Sum-Up
 
