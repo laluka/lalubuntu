@@ -139,10 +139,10 @@ zsh_config_lines:
 default_directory: 'DATA'
 
 vimrc_content: |
-  set mouse=''
+  set mouse=""
   set number
   set paste
-  syntax
+  syntax on
 
 cargo_tools:
   - bottom
