@@ -62,3 +62,8 @@
     block: '{{ i3_config_block }}'
     create: yes
 
+- name: Append lines to the i3 Xresources file
+  ansible.builtin.blockinfile:
+    path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'
+    block: '{{ i3_xresources_block }}'
+    create: yes

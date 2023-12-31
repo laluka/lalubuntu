@@ -77,3 +77,6 @@ i3_config_block: |
     bindsym $mod+Ctrl+p exec flameshot full -p /tmp/
     bindsym $mod+m exec xrandr --output $(xrandr | grep ' connected ' -m 1 | awk '{ print $1 }') --off
     bindsym $mod+Shift+m exec xrandr --output $(xrandr | grep ' connected ' -m 1 | awk '{ print $1 }') --auto
+
+i3_xresources_block: |
+    gtk.font_name: Nerd Font Mono 10
