@@ -96,3 +96,7 @@ To finish the script, some GUI software such as vscode or office
 <img src='screens/demo-gnome.png' width='500'>
 
 <img src='screens/demo-regolith.png' width='500'>
+
+## Improvements & Contributions Ideas
+
+- [] Dragon | https://github.com/mwh/dragon
