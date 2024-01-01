@@ -34,7 +34,7 @@
   git:
     repo: 'https://github.com/mwh/dragon.git'
     dest: "/opt/dragon"
-  become: yes
+  become: true
 
 - name: Change ownership of /opt/dragon
   file:
@@ -42,16 +42,14 @@
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_id }}"
     recurse: yes
-  become: yes
+  become: true
 
 - name: Compile dragon
   command:
     cmd: make
     chdir: "/opt/dragon"
-  become: no
 
 - name: Install dragon
   command:
     cmd: make install
     chdir: "/opt/dragon"
-  become: yes
