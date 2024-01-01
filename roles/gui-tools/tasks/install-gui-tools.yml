@@ -29,3 +29,29 @@
     DEBIAN_FRONTEND: noninteractive
   loop: '{{ gui_tools_to_install }}'
   become: true
+
+- name: Clone dragon repository
+  git:
+    repo: 'https://github.com/mwh/dragon.git'
+    dest: "/opt/dragon"
+  become: yes
+
+- name: Change ownership of /opt/dragon
+  file:
+    path: "/opt/dragon"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    recurse: yes
+  become: yes
+
+- name: Compile dragon
+  command:
+    cmd: make
+    chdir: "/opt/dragon"
+  become: no
+
+- name: Install dragon
+  command:
+    cmd: make install
+    chdir: "/opt/dragon"
+  become: yes

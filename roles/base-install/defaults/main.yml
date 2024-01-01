@@ -127,11 +127,11 @@ zsh_plugins:
   - colored-man-pages
   - extract
   - tmux
-  - ssh-agent
   - npm
   - aws
   - fzf
   - rtx
+  # - ssh-agent
 
 zsh_config_lines:
   - DISABLE_MAGIC_FUNCTIONS=true

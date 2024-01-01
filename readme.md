@@ -83,6 +83,8 @@ To finish the script, some GUI software such as vscode or office
 4. After, it will install and setup regolith because regolith is GOAT (`setup-regolith`)
 5. To finish, some cleanup ! (`cleanup`)
 
+> I rely on chrome for everything I can. I strongly recommend installing the extensions from `chrome-extensions.lst`
+
 ---
 
 ## Gotchas
@@ -96,7 +98,3 @@ To finish the script, some GUI software such as vscode or office
 <img src='screens/demo-gnome.png' width='500'>
 
 <img src='screens/demo-regolith.png' width='500'>
-
-## Improvements & Contributions Ideas
-
-- [] Dragon | https://github.com/mwh/dragon
