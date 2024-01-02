@@ -62,6 +62,12 @@
     block: '{{ i3_config_block }}'
     create: yes
 
+- name: Getting wallpaper image
+  ansible.builtin.get_url:
+    url: '{{ wallpaper_dl_url }}'
+    dest: '/usr/share/backgrounds/cust_wallpaper.jpg'
+  become: true
+
 - name: Append lines to the i3 Xresources file
   ansible.builtin.blockinfile:
     path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'

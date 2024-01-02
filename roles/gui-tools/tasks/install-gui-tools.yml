@@ -31,13 +31,13 @@
   become: true
 
 - name: Clone dragon repository
-  git:
+  ansible.builtin.git:
     repo: 'https://github.com/mwh/dragon.git'
     dest: "/opt/dragon"
   become: true
 
 - name: Change ownership of /opt/dragon
-  file:
+  ansible.builtin.file:
     path: "/opt/dragon"
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_id }}"
@@ -45,11 +45,11 @@
   become: true
 
 - name: Compile dragon
-  command:
+  ansible.builtin.command:
     cmd: make
     chdir: "/opt/dragon"
 
 - name: Install dragon
-  command:
+  ansible.builtin.command:
     cmd: make install
     chdir: "/opt/dragon"
