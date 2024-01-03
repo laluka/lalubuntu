@@ -79,8 +79,6 @@ i3_config_block: |
     bindsym $mod+m exec xrandr --output $(xrandr | grep ' connected ' -m 1 | awk '{ print $1 }') --off
     bindsym $mod+Shift+m exec xrandr --output $(xrandr | grep ' connected ' -m 1 | awk '{ print $1 }') --auto
 
-wallpaper_dl_url: https://i.postimg.cc/YSX66PDS/wallpaper.jpg
-
 i3_xresources_block: |
     gtk.font_name: Nerd Font Mono 10
-    regolith.wallpaper.file: /usr/share/backgrounds/cust_wallpaper.jpg
+    regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png
