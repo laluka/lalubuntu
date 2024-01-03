@@ -6,5 +6,5 @@ services_to_disable:
   # - ssh
 
 secure_services_to_install:
-  - usbguard
   - apparmor
+  # - usbguard

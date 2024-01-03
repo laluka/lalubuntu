@@ -119,6 +119,7 @@ rtx_tools:
   - kubectl
   - terraform
   - php
+  - glow
 
 zsh_plugins:
   - zsh-completions
@@ -130,7 +131,7 @@ zsh_plugins:
   - npm
   - aws
   - fzf
-  - rtx
+  - mise # former rtx https://github.com/jdx/mise
   # - ssh-agent
 
 zsh_config_lines:
