@@ -24,6 +24,9 @@
     recurse: 'yes'
   become: true
 
+- name: Set Git core.autocrlf to false globally, otherwise a few wordlists repos break
+  ansible.builtin.shell: git config --global core.autocrlf false
+
 - name: Clone wordlists from Git
   ansible.builtin.git:
     repo: '{{ item.repo }}'
