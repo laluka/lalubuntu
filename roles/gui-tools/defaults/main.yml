@@ -83,5 +83,4 @@ i3_xresources_block: |
     gtk.font_name: Nerd Font Mono 10
     regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png
     regolith.wallpaper.options: stretched
-    # Poc
     

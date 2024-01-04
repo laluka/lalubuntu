@@ -32,4 +32,5 @@
     repo: '{{ item.repo }}'
     dest: '/opt/lists/{{ item.dest }}'
     update: yes
+    force: yes
   loop: '{{ git_wordlists }}'
