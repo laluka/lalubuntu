@@ -121,7 +121,7 @@ rtx_tools:
   - php
   - glow
 
-zsh_plugins:
+zsh_plugins_to_enable:
   - zsh-completions
   - zsh-autosuggestions
   - zsh-syntax-highlighting
@@ -131,8 +131,11 @@ zsh_plugins:
   - npm
   - aws
   - fzf
-  - mise # former rtx https://github.com/jdx/mise
-  # - ssh-agent
+  - mise # mv rtx https://github.com/jdx/mise
+
+zsh_plugins_to_disable:
+  - rtx
+  - ssh-agent
 
 zsh_config_lines:
   - DISABLE_MAGIC_FUNCTIONS=true
