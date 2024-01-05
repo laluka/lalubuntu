@@ -100,6 +100,7 @@ Some quick hardening will be done :
 
 ## Gotchas
 
+- If you are lost, use `Mod+Shift+?` to open the bindings help panel!
 - One can switch between Regolith and Gnome by logging out and picking the desired UI
   - In Gnome: Top-Right corner, then logout
   - In Regolith: CMD+SPACE, then logout
