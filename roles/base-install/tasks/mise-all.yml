@@ -1,7 +1,7 @@
 ---
-- name: Install mise only if /usr/bin/mise does not exist
+- name: Install mise only if /home/{{ ansible_env.HOME }}/.local/bin/mise does not exist
   ansible.builtin.stat:
-    path: '/usr/bin/mise'
+    path: '/home/{{ ansible_env.HOME }}/.local/bin/mise'
   register: mise_installed
 
 - name: Create directory /etc/apt/keyrings

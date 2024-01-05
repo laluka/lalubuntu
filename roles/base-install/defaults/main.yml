@@ -101,9 +101,6 @@ tmux_conf: |
       set-option -g history-limit 5000
       set-option -g status-bg colour231
 
-# rtx_gpg_dest: '/etc/apt/keyrings/rtx-archive-keyring.gpg'
-# rtx_pub_url: 'https://rtx.pub/gpg-key.pub'
-# rtx_deb_url: 'deb [signed-by={{ rtx_gpg_dest }} arch=amd64] https://rtx.pub/deb stable main'
 mise_tools:
   - awscli
   - golang
