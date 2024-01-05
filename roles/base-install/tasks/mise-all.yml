@@ -24,7 +24,7 @@
   ansible.builtin.lineinfile:
     path: '{{ ansible_env.HOME }}/.{{ item }}rc'
     state: absent
-    regexp: 'eval .*rtx activate {{ item }}"$'
+    regexp: 'eval .*rtx activate {{ item }}'
     backrefs: yes
   loop:
     - bash
