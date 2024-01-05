@@ -10,7 +10,7 @@
     dest: '/tmp/rego_gpg'
   when: not regolith_installed.stat.exists
 
-- name: De-Armor RTX GPG key
+- name: De-Armor Regolith GPG key
   ansible.builtin.shell: 'gpg --dearmor < /tmp/rego_gpg > {{ regolith_gpg_dest }} && rm /tmp/rego_gpg'
   become: true
   when: not regolith_installed.stat.exists

@@ -101,10 +101,10 @@ tmux_conf: |
       set-option -g history-limit 5000
       set-option -g status-bg colour231
 
-rtx_gpg_dest: '/etc/apt/keyrings/rtx-archive-keyring.gpg'
-rtx_pub_url: 'https://rtx.pub/gpg-key.pub'
-rtx_deb_url: 'deb [signed-by={{ rtx_gpg_dest }} arch=amd64] https://rtx.pub/deb stable main'
-rtx_tools:
+# rtx_gpg_dest: '/etc/apt/keyrings/rtx-archive-keyring.gpg'
+# rtx_pub_url: 'https://rtx.pub/gpg-key.pub'
+# rtx_deb_url: 'deb [signed-by={{ rtx_gpg_dest }} arch=amd64] https://rtx.pub/deb stable main'
+mise_tools:
   - awscli
   - golang
   - java
@@ -131,7 +131,7 @@ zsh_plugins_to_enable:
   - npm
   - aws
   - fzf
-  - mise # mv rtx https://github.com/jdx/mise
+  - mise # former rtx https://github.com/jdx/mise
 
 zsh_plugins_to_disable:
   - rtx

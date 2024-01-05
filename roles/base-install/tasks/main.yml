@@ -1,7 +1,7 @@
 - include_tasks: default-packages.yml # Installing apt packages and configuring apt
 - include_tasks: zsh-config.yml # Configuring Zsh
-- include_tasks: rtx-all.yml # Installing all RTX components
-- include_tasks: zsh-config-post-rtx.yml # Configuring Zsh
+- include_tasks: mise-all.yml # Installing all mise-en-place components
+- include_tasks: zsh-config-post-mise.yml # Configuring Zsh
 - include_tasks: setup-dir.yml # Setting up DATA dir
 - include_tasks: vim-default.yml # Configuring Vim as the default text editor
 - include_tasks: docker-install.yml # Installing Docker
