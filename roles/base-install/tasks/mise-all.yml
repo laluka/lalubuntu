@@ -19,20 +19,17 @@
 
 - name: Execute the installation script
   ansible.builtin.shell: /tmp/install.sh
-  # args:
-    # executable: /bin/bash
 
-# Now done by install.sh
-# - name: Add mise activation to shell configuration files
-#   ansible.builtin.lineinfile:
-#     path: '{{ ansible_env.HOME }}/.{{ item }}rc'
-#     line: 'eval "$(~/.local/bin/mise activate {{ item }})"'
-#     create: yes
-#   loop:
-#     - bash
-#     - zsh
+- name: Remove old rtx config from shell configuration files
+  ansible.builtin.lineinfile:
+    path: '{{ ansible_env.HOME }}/.{{ item }}rc'
+    state: absent
+    regexp: 'eval .*rtx activate {{ item }}"$'
+    backrefs: yes
+  loop:
+    - bash
+    - zsh
 
-# ansible.builtin.shell: zsh -c 'source {{ ansible_env.HOME }}/.zshrc && mise install {{ item }}@latest -y && mise global {{ item }}@latest'
 - name: Install and mise-based tools (this will take lot of time to install)
   ansible.builtin.shell: zsh -c 'mise install {{ item }}@latest -y && mise global {{ item }}@latest'
   with_items: '{{ mise_tools }}'
