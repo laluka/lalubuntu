@@ -110,3 +110,9 @@ Some quick hardening will be done :
 <img src='screens/demo-gnome.png' width='500'>
 
 <img src='screens/demo-regolith.png' width='500'>
+
+## Gotchas
+
+- 2024/01/06
+  - Migrate rtx to its new name mise-en-place
+  - Add changelog
