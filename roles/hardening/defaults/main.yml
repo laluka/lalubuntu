@@ -3,8 +3,8 @@
 services_to_disable:
   - cups
   - tor
+  - nxserver
   # - ssh
 
 secure_services_to_install:
   - apparmor
-  # - usbguard

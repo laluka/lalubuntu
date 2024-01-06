@@ -1,0 +1,36 @@
+---
+- name: Install mise only if /home/{{ ansible_env.HOME }}/.local/bin/mise does not exist
+  ansible.builtin.stat:
+    path: '/home/{{ ansible_env.HOME }}/.local/bin/mise'
+  register: mise_installed
+
+- name: Create directory /etc/apt/keyrings
+  ansible.builtin.file:
+    path: '/etc/apt/keyrings'
+    state: directory
+    mode: '0755'
+  when: not mise_installed.stat.exists
+
+- name: Download installation script from https://mise.jdx.dev
+  ansible.builtin.get_url:
+    url: https://mise.jdx.dev/install.sh
+    dest: /tmp/install.sh
+    mode: '0755'
+
+- name: Execute the installation script
+  ansible.builtin.shell: /tmp/install.sh
+
+- name: Remove old rtx config from shell configuration files
+  ansible.builtin.lineinfile:
+    path: '{{ ansible_env.HOME }}/.{{ item }}rc'
+    state: absent
+    regexp: 'eval .*rtx activate {{ item }}'
+    backrefs: yes
+  loop:
+    - bash
+    - zsh
+
+- name: Install and mise-based tools (this will take lot of time to install)
+  ansible.builtin.shell: zsh -c 'mise install {{ item }}@latest -y && mise global {{ item }}@latest'
+  with_items: '{{ mise_tools }}'
+  when: not mise_installed.stat.exists

@@ -55,8 +55,8 @@ Base-installs scripts will install all the needed sofware and packages.
 
 - This ansible script will first update and install a lot of needed packages. You can view all the packages in `default_packages` variable in `roles/base-install/defaults/main.yml` file
 - Then, it will install and configure zsh (file is `zsh-config`)
-- Then, the script will install rtx and rtx packages (`rtx-all`)
-- After, finishing the configuration of zsh with RTX(file is `zsh-config-post-rtx`)
+- Then, the script will install mise (former RTX) and mise packages (`mise-all`)
+- After, finishing the configuration of zsh with mise-en-place (file is `zsh-config-post-mise`)
 - After that, it will setup a directory named DATA (`setup-dir`)(I used it as my work dir)
 - Then, some configuration of vim will be done (`vim-default`)
 - Docker and docker compose will be installed (`docker-install`)
@@ -100,6 +100,7 @@ Some quick hardening will be done :
 
 ## Gotchas
 
+- If you are lost, use `Mod+Shift+?` to open the bindings help panel!
 - One can switch between Regolith and Gnome by logging out and picking the desired UI
   - In Gnome: Top-Right corner, then logout
   - In Regolith: CMD+SPACE, then logout
