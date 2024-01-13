@@ -30,6 +30,16 @@
     - bash
     - zsh
 
+- name: Enable mise in shell configuration files
+  ansible.builtin.lineinfile:
+    path: '{{ ansible_env.HOME }}/.{{ item }}rc'
+    line: 'eval "$(~/.local/bin/mise activate {{ item }})"'
+    state: present
+    insertafter: EOF
+  loop:
+    - bash
+    - zsh
+
 - name: Install and mise-based tools (this will take lot of time to install)
   ansible.builtin.shell: zsh -c 'mise install {{ item }}@latest -y && mise global {{ item }}@latest'
   with_items: '{{ mise_tools }}'

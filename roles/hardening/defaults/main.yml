@@ -1,9 +1,9 @@
 ---
 # defaults file for hardening
 services_to_disable:
-  - cups
   - tor
   - nxserver
+  # - cups
   # - ssh
 
 secure_services_to_install:
