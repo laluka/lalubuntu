@@ -6,7 +6,7 @@ alias tn="tmux new"
 alias ta="tmux attach"
 alias c="code ."
 alias life='cd /opt/lalulife' # Might be released some day :)
-alias lbt='cd /opt/lalubun'
+alias lbt='cd /opt/lalubuntu'
 alias lalupdate='bash /opt/lalubuntu/update.sh'
 
 # Tools Sysadmin

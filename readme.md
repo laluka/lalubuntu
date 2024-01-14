@@ -37,15 +37,20 @@ The ansible playbook `main.yml` applies 4 ansible roles which are:
 ## Pre-Install, Install, Update
 
 ```bash
-# If you ARE A DEV and PLAN TO CONTRIBUTE
-# git clone git@github.com:laluka/lalubuntu.git
+# Pre-install
 sudo apt install -y curl wget git vim tmux # Basics
 git clone https://github.com/laluka/lalubuntu
+# If you plan to contribute, use: git@github.com:laluka/lalubuntu.git
 sudo mv lalubuntu /opt/lalubuntu
 cd /opt/lalubuntu
 bash -x pre-install.sh
+
+# Main Install
 bash -x install.sh
-# Update with
+# If anything fails, the install won't be complete (ansible StopOnFail intended behavior)
+# So you'll have to fix (or commment) the failing task and re-run install.sh!
+
+# Stay Up-To-Date
 lalupdate
 ```
 

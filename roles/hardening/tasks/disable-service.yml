@@ -9,3 +9,4 @@
   loop_control:
     loop_var: item
   become: true
+  ignore_errors: true
