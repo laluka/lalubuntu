@@ -33,6 +33,14 @@ git_repositories:
     dest: brutespray
   - repo: https://gitlab.com/exploit-database/exploitdb
     dest: exploitdb
+  - repo: https://github.com/laluka/pty4all
+    dest: pty4all
+  - repo: https://github.com/laluka/broneypote
+    dest: broneypote
+  - repo: https://github.com/laluka/pypotomux
+    dest: pypotomux
+  - repo: https://github.com/laluka/bypass-url-parser
+    dest: bypass-url-parser
 
 git_wordlists:
   - repo: https://github.com/swisskyrepo/PayloadsAllTheThings

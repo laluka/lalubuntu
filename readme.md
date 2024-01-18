@@ -116,8 +116,22 @@ Some quick hardening will be done :
 
 <img src='screens/demo-regolith.png' width='500'>
 
-## Gotchas
+## Changelog
 
 - 2024/01/06
-  - Migrate rtx to its new name mise-en-place
-  - Add changelog
+  - Renamed `rtx` to `mise-en-place`
+  - Added a changelog section to `readme.md`
+- 2024/01/12
+  - Added a new alias: `yt-dlp`
+  - Updated `readme.md` with `TODO` section
+  - Created `vscode-extensions.lst` for VS Code extensions
+  - Added auto completion for a few kube/terraform related tools
+  - Added gnome-tweaks, blueman, obs-studio from the official ppa
+  - Added lalutools pty4all, pypotomux, broneypote, bypass-url-parser
+  - Added bindsym for sound settings
+
+## TODO
+
+```bash
+# None for now :)
+```
