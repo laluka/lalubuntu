@@ -103,32 +103,38 @@ tmux_conf: |
 
 mise_tools:
   - awscli
+  - glow
   - golang
+  - helm
   - java
   - jless
+  - k9s
+  - kubectl
+  - kubectx
   - maven
   - nodejs
   - pdm
+  - php
   - python
   - rust
+  - terraform
+
+zsh_plugins_to_enable:
+  - aws
+  - colored-man-pages
+  - extract
+  - fzf
   - helm
   - k9s
   - kubectl
-  - terraform
-  - php
-  - glow
-
-zsh_plugins_to_enable:
-  - zsh-completions
-  - zsh-autosuggestions
-  - zsh-syntax-highlighting
-  - colored-man-pages
-  - extract
-  - tmux
-  - npm
-  - aws
-  - fzf
+  - kubectx
   - mise # former rtx https://github.com/jdx/mise
+  - npm
+  - terraform
+  - tmux
+  - zsh-autosuggestions
+  - zsh-completions
+  - zsh-syntax-highlighting
 
 zsh_plugins_to_disable:
   - rtx
