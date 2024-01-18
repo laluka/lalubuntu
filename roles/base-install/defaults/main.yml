@@ -125,7 +125,6 @@ zsh_plugins_to_enable:
   - extract
   - fzf
   - helm
-  - k9s
   - kubectl
   - kubectx
   - mise # former rtx https://github.com/jdx/mise
