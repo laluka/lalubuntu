@@ -20,6 +20,12 @@
     value: true
   become: true
 
+- name: Add OBS Studio PPA repository
+  ansible.builtin.apt_repository:
+    repo: ppa:obsproject/obs-studio
+    state: present
+  become: true
+
 - name: Install GUI Packages
   ansible.builtin.package:
     update_cache: yes

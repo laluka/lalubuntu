@@ -125,14 +125,5 @@ Some quick hardening will be done :
 ## TODOs
 
 ```bash
-# Graphical tweaks
-gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-
-# OBS from default packages miss browser-source, MUST use their ppa
-sudo add-apt-repository ppa:obsproject/obs-studio
-sudo apt install obs-studio
-
-# i3 binding to open gnome sound settings with Mod+s
-
-# Update Changelog
+# None for now :)
 ```

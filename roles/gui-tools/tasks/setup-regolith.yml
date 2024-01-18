@@ -67,3 +67,6 @@
     path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'
     block: '{{ i3_xresources_block }}'
     create: yes
+
+- name: Set GNOME interface to prefer dark color scheme
+  ansible.builtin.shell: "gsettings set org.gnome.desktop.interface color-scheme prefer-dark"
