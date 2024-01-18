@@ -1,0 +1,9 @@
+ext install bibhasdn.unique-lines
+ext install DavidAnson.vscode-markdownlint
+ext install esbenp.prettier-vscode
+ext install mechatroner.rainbow-csv
+ext install mitchdenny.ecdc
+ext install ms-vscode-remote.remote-ssh
+ext install ms-vscode.remote-explorer
+ext install mushan.vscode-paste-image
+ext install usernamehw.errorlens
