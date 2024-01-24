@@ -133,17 +133,5 @@ Some quick hardening will be done :
 ## TODO
 
 ```bash
-# cameractrls (improve shitty install)
-sudo apt install git libsdl2-2.0-0 libturbojpeg
-git clone https://github.com/soyersoyer/cameractrls.git
-sudo mv cameractrls /opt
-cd /opt/cameractrls/
-desktop-file-install --dir="$HOME/.local/share/applications" \\n--set-key=Exec --set-value="$PWD/cameractrlsgtk.py" \\n--set-key=Path --set-value="$PWD" \\n--set-key=Icon --set-value="$PWD/pkg/hu.irl.cameractrls.svg" \\npkg/hu.irl.cameractrls.desktop
-
-# Introduct pipx in ansible
-pipx install trash-cli # remove from pacakges state=absent
-pipx install pre-commit
-pipx install yt-dlp # And improve alias yt-dlp
-
-# Add rockyou.txt (small one, pas 2021)
+# None for now :)
 ```
