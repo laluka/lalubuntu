@@ -6,7 +6,6 @@ default_packages:
   - bat
   - binwalk
   - bison
-  - dos2unix
   - build-essential
   - ca-certificates
   - cloc
@@ -14,8 +13,10 @@ default_packages:
   - cmake-curses-gui
   - curl
   - dos2unix
+  - duf
   - expect
   - ffmpeg
+  - fonts-powerline
   - foremost
   - fswebcam
   - gcc
@@ -24,10 +25,13 @@ default_packages:
   - gnupg
   - hashid
   - hexyl
+  - htop
   - hwinfo
   - imagemagick
   - inotify-tools
+  - iproute2
   - jq
+  - kdenlive
   - libbz2-dev
   - libcurl4-openssl-dev
   - libffi-dev
@@ -59,7 +63,9 @@ default_packages:
   - net-tools
   - ngrep
   - nmap
+  - openssh-server
   - parallel
+  - powerline
   - python3-dev
   - python3-pip
   - python3-venv
@@ -67,12 +73,14 @@ default_packages:
   - ripgrep
   - rlwrap
   - socat
+  - software-properties-common
   - sshpass
   - tk-dev
   - tmux
   - tor
-  - trash-cli
+  - traceroute
   - tree
+  - ufw
   - unzip
   - vbindiff
   - vim
@@ -82,14 +90,7 @@ default_packages:
   - xz-utils
   - zip
   - zlib1g-dev
-  - software-properties-common
   - zsh
-  - powerline
-  - fonts-powerline
-  - duf
-  - ufw
-  - openssh-server
-  - supertuxkart
 
 zsh_git_url: 'https://github.com/robbyrussell/oh-my-zsh.git'
 zsh_completion_git_url: 'https://github.com/zsh-users/zsh-completions'
@@ -103,6 +104,7 @@ tmux_conf: |
 
 mise_tools:
   - awscli
+  - direnv
   - glow
   - golang
   - helm
@@ -112,6 +114,7 @@ mise_tools:
   - kubectl
   - kubectx
   - maven
+  - minikube
   - nodejs
   - pdm
   - php
@@ -119,14 +122,18 @@ mise_tools:
   - rust
   - terraform
 
-zsh_plugins_to_enable:
+omz_plugins_to_enable:
   - aws
   - colored-man-pages
+  - direnv
+  - docker
   - extract
   - fzf
   - helm
+  - k9s
   - kubectl
   - kubectx
+  - minikube
   - mise # former rtx https://github.com/jdx/mise
   - npm
   - terraform

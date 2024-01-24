@@ -7,3 +7,4 @@ ext install ms-vscode-remote.remote-ssh
 ext install ms-vscode.remote-explorer
 ext install mushan.vscode-paste-image
 ext install usernamehw.errorlens
+ext install bibhasdn.unique-lines
