@@ -32,7 +32,7 @@ chrome_export_key_id: 'D38B4796'
 
 veracrypt_download_url: 'https://api.github.com/repos/veracrypt/veracrypt/releases/latest'
 
-nomachine_download_url: 'https://downloads.nomachine.com/download/?id=5'
+nomachine_download_url: 'https://downloads.nomachine.com/download/?id=1'
 
 discord_download_url: 'https://discord.com/api/download?platform=linux&format=deb'
 
