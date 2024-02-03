@@ -146,4 +146,13 @@ pipx install pre-commit
 pipx install yt-dlp # And improve alias yt-dlp
 
 # Add rockyou.txt (small one, pas 2021)
+
+# Add nicer intro https://www.youtube.com/watch?v=sZQ6FVncuNA
+
+# Add daily runs github ci + packer ?
+# Investigate zsh wrong theme used on first run
+# Fix obs broken gpg key (legacy store)
+# Fix k9s enabled but not yet cloned
+# Fix trash-cli as pipx and no package + package state absent
 ```
+
