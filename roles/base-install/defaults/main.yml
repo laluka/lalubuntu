@@ -14,7 +14,6 @@ default_packages:
   - cmake-curses-gui
   - curl
   - dos2unix
-  - duf
   - expect
   - ffmpeg
   - fonts-powerline
@@ -122,6 +121,7 @@ mise_tools:
   - python
   - rust
   - terraform
+  - duf
 
 omz_plugins_to_enable:
   - aws
