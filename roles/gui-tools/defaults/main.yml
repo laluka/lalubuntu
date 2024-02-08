@@ -32,7 +32,7 @@ chrome_export_key_id: 'D38B4796'
 
 veracrypt_download_url: 'https://api.github.com/repos/veracrypt/veracrypt/releases/latest'
 
-nomachine_download_url: 'https://downloads.nomachine.com/download/?id=5'
+nomachine_download_url: 'https://downloads.nomachine.com/download/?id=1'
 
 discord_download_url: 'https://discord.com/api/download?platform=linux&format=deb'
 
@@ -41,6 +41,12 @@ vscode_deb_url: 'https://code.visualstudio.com/sha/download?build=stable&os=linu
 signal_key_url: 'https://updates.signal.org/desktop/apt/keys.asc'
 signal_gpg_dest: '/usr/share/keyrings/signal-desktop-keyring.gpg'
 signal_repo_url: 'deb [arch=amd64 signed-by={{ signal_gpg_dest }}] https://updates.signal.org/desktop/apt xenial main'
+
+cameractrls_dependencies:
+  - libsdl2-2.0-0
+  - libturbojpeg
+cameractrls_git_repo: https://github.com/soyersoyer/cameractrls.git
+install_cameractrls_block: "desktop-file-install --dir='{{ ansible_env.HOME }}/.local/share/applications' --set-key=Exec --set-value='/opt/cameractrls/cameractrlsgtk.py' --set-key=Path --set-value='/opt/cameractrls' --set-key=Icon --set-value='/opt/cameractrls/pkg/hu.irl.cameractrls.svg' /opt/cameractrls/pkg/hu.irl.cameractrls.desktop"
 
 regolith_key_url: 'https://regolith-desktop.org/regolith.key'
 regolith_gpg_dest: '/usr/share/keyrings/regolith-archive-keyring.gpg'
@@ -82,6 +88,7 @@ i3_config_block: |
     bindsym $mod+s exec gnome-control-center sound
     bindsym $mod+m exec xrandr --output $(xrandr | grep ' connected ' -m 1 | awk '{ print $1 }') --off
     bindsym $mod+Shift+m exec xrandr --output $(xrandr | grep ' connected ' -m 1 | awk '{ print $1 }') --auto
+    bindsym $mod+Shift+w exec cameractrlsgtk
 
 i3_xresources_block: |
     gtk.font_name: Nerd Font Mono 10

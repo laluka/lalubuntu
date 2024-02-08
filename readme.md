@@ -14,6 +14,10 @@ This is my - **@TheLaluka** - own config, shared with the help & motivation of *
 - See this brief extract of what these scripts will allow you to do
 screens/logo-lalubuntu.png
 
+[![Global Presentation](https://img.youtube.com/vi/sZQ6FVncuNA/0.jpg)](https://www.youtube.com/watch?v=sZQ6FVncuNA)
+
+You can watch a demonstration of what is offering labuntu by clicking the picture below :
+
 [![Lower The Friction](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://www.youtube.com/watch?v=xxOVNKNs24s)
 
 ## This video is a quick how-to
@@ -133,26 +137,7 @@ Some quick hardening will be done :
 ## TODO
 
 ```bash
-# cameractrls (improve shitty install)
-sudo apt install git libsdl2-2.0-0 libturbojpeg
-git clone https://github.com/soyersoyer/cameractrls.git
-sudo mv cameractrls /opt
-cd /opt/cameractrls/
-desktop-file-install --dir="$HOME/.local/share/applications" \\n--set-key=Exec --set-value="$PWD/cameractrlsgtk.py" \\n--set-key=Path --set-value="$PWD" \\n--set-key=Icon --set-value="$PWD/pkg/hu.irl.cameractrls.svg" \\npkg/hu.irl.cameractrls.desktop
-
-# Introduct pipx in ansible
-pipx install trash-cli # remove from pacakges state=absent
-pipx install pre-commit
-pipx install yt-dlp # And improve alias yt-dlp
-
-# Add rockyou.txt (small one, pas 2021)
-
-# Add nicer intro https://www.youtube.com/watch?v=sZQ6FVncuNA
-
 # Add daily runs github ci + packer ?
 # Investigate zsh wrong theme used on first run
-# Fix obs broken gpg key (legacy store)
 # Fix k9s enabled but not yet cloned
-# Fix trash-cli as pipx and no package + package state absent
 ```
-
