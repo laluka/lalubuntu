@@ -137,7 +137,5 @@ Some quick hardening will be done :
 ## TODO
 
 ```bash
-# Add daily runs github ci + packer ?
-# Investigate zsh wrong theme used on first run
-# Fix k9s enabled but not yet cloned
+# Add daily runs github ci + packer
 ```
