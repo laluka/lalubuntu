@@ -26,7 +26,6 @@
     path: '{{ ansible_env.HOME }}/.zshrc'
     regexp: '^ZSH_THEME=.*$'
     replace: 'ZSH_THEME="af-magic"'
-  when: zshrc_stat.stat.exists
 
 - name: Adding configs lines to zsh
   ansible.builtin.lineinfile:

@@ -67,3 +67,5 @@ git_wordlists:
     dest: richelieu
   - repo: https://github.com/xsuperbug/payloads
     dest: payloads
+
+rockyou_dl_url: https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt

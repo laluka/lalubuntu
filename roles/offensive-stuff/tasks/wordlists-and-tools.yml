@@ -34,3 +34,8 @@
     update: yes
     force: yes
   loop: '{{ git_wordlists }}'
+
+- name: Download rockyou wordlist
+  ansible.builtin.get_url:
+    url: '{{ rockyou_dl_url }}'
+    dest: '/opt/lists/rockyou.txt'

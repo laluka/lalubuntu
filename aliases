@@ -28,6 +28,7 @@ alias record-screen='f(){ ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab 
 alias maxfullscreen='f(){ window_title=$(i3-msg -t get_tree | gron | grep -F "title = " | grep -ioP "\".*\"" | fzf); i3-msg "[title=$window_title] focus ; floating enable ; resize set 3842px 1082px; move position -1px -1px" ;  unset -f f; }; f'
 alias flameshotz='while true; do flameshot full -p /tmp/; sleep 1; done'
 alias rm='trash-put'
+alias update-and-clean='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt purge -y'
 alias show-disk-io='watch -cd -- iostat -h'
 alias show-open-ports="sudo ss -latepun | grep -i listen"
 alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'

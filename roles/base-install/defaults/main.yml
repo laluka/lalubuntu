@@ -131,7 +131,7 @@ omz_plugins_to_enable:
   - extract
   - fzf
   - helm
-  - k9s
+#  - k9s
   - kubectl
   - kubectx
   - minikube
@@ -157,6 +157,11 @@ vimrc_content: |
   set number
   set paste
   syntax on
+
+pipx_tools:
+  - pre-commit
+  - trash-cli
+  - yt-dlp
 
 cargo_tools:
   - bottom
