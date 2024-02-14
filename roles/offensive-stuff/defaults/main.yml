@@ -9,6 +9,7 @@ go_packages:
   - github.com/xm1k3/cent
   - github.com/ropnop/kerbrute
   - github.com/projectdiscovery/pdtm/cmd/pdtm
+  - github.com/x90skysn3k/brutesprayx
 
 git_repositories:
   - repo: http://github.com/jpillora/chisel

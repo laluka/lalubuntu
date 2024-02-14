@@ -51,18 +51,6 @@
   become: true
   when: not regolith_installed.stat.exists
 
-- name: Ensure the /etc/X11/xorg.conf.d directory exists
-  ansible.builtin.file:
-    path: '/etc/X11/xorg.conf.d'
-    state: directory
-  become: true
-
-- name: Append lines to the touchpad.conf file
-  ansible.builtin.blockinfile:
-    path: '/etc/X11/xorg.conf.d/90-touchpad.conf'
-    block: '{{ i3_touchpad_block }}'
-    create: yes
-  become: true
 
 - name: Ensure the ~/.config/regolith3/i3/config.d/ directory exists
   ansible.builtin.file:
@@ -83,3 +71,6 @@
 
 - name: Set GNOME interface to prefer dark color scheme
   ansible.builtin.shell: "gsettings set org.gnome.desktop.interface color-scheme prefer-dark"
+
+- name: Set click on touchpad enable
+  ansible.builtin.shell: "gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true"

@@ -71,6 +71,15 @@ i3_packages:
   - i3xrocks-updates
   - i3xrocks-volume
   - i3xrocks-wifi
+  # - i3xrocks-app-launcher
+  # - i3xrocks-key-indicator
+  # - i3xrocks-keyboard-layout
+  # - i3xrocks-media-player
+  # - i3xrocks-next-workspace
+  # - i3xrocks-nm-vpn
+  # - i3xrocks-openvpn
+  # - i3xrocks-tailscale
+  # - i3xrocks-weather
 
 i3_config_block: |
     bindsym $mod+p exec flameshot gui
@@ -84,12 +93,3 @@ i3_xresources_block: |
     gtk.font_name: Nerd Font Mono 10
     regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png
     regolith.wallpaper.options: stretched
-
-i3_touchpad_block: |
-    Section "InputClass"
-        Identifier "touchpad"
-        Driver "libinput"
-        MatchIsTouchpad "on"
-        Option "Tapping" "on"
-        Option "TappingButtonMap" "lmr"
-    EndSection
