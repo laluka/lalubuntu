@@ -2,19 +2,18 @@
   ansible.builtin.stat:
     path: '/usr/bin/obs'
   register: obs_installed
-  become: true
 
 - name: Add OBS Studio PPA repository
   ansible.builtin.apt_repository:
     repo: ppa:obsproject/obs-studio
     state: present
   become: true
-  when: not obs_installed_again.stat.exists
+  when: not obs_installed.stat.exists
 
 - name: Install GUI Packages
   ansible.builtin.package:
     update_cache: yes
     name: 'obs-studio'
     state: latest
-  when: not obs_installed_again.stat.exists
+  when: not obs_installed.stat.exists
   become: true
