@@ -51,6 +51,7 @@
   become: true
   when: not regolith_installed.stat.exists
 
+
 - name: Ensure the ~/.config/regolith3/i3/config.d/ directory exists
   ansible.builtin.file:
     path: '{{ ansible_env.HOME }}/.config/regolith3/i3/config.d/'
@@ -70,3 +71,6 @@
 
 - name: Set GNOME interface to prefer dark color scheme
   ansible.builtin.shell: "gsettings set org.gnome.desktop.interface color-scheme prefer-dark"
+
+- name: Set click on touchpad enable
+  ansible.builtin.shell: "gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true"
