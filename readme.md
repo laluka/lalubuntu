@@ -143,4 +143,5 @@ https://github.com/vi/websocat
 Disble ubuntu pro spammy messages
 https://github.com/tmate-io/tmate
 https://github.com/x90skysn3k/brutesprayx
+https://github.com/GNOME/meld + remove kompare
 ```
