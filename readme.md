@@ -138,4 +138,9 @@ Some quick hardening will be done :
 
 ```bash
 # Add daily runs github ci + packer
+https://github.com/adamritter/fastgron
+https://github.com/vi/websocat
+Disble ubuntu pro spammy messages
+https://github.com/tmate-io/tmate
+https://github.com/x90skysn3k/brutesprayx
 ```
