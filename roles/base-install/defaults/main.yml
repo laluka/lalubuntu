@@ -117,7 +117,7 @@ mise_tools:
   - minikube
   - nodejs
   - pdm
-  # - php # LALLU
+  # - php # LALU
   - python
   - rust
   - terraform

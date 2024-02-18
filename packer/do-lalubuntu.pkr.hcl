@@ -1,9 +1,9 @@
 packer {
   required_plugins {
-    // digitalocean = {
-    //   version = ">= 1.3.0"
-    //   source  = "github.com/digitalocean/digitalocean"
-    // }
+    digitalocean = {
+      version = ">= 1.3.0"
+      source  = "github.com/digitalocean/digitalocean"
+    }
     docker = {
       source  = "github.com/hashicorp/docker"
       version = ">= 1.0.9"
@@ -11,7 +11,7 @@ packer {
   }
 }
 
-source "digitalocean" "lalubuntu" {
+source "digitalocean" "src" {
   image         = "ubuntu-22-04-x64"
   region        = "ams3"
   size          = "c2-4vcpu-8gb"
@@ -19,7 +19,7 @@ source "digitalocean" "lalubuntu" {
   snapshot_name = "lalubuntu-22.04"
 }
 
-source "docker" "lalubuntu" {
+source "docker" "src" {
   image = "ubuntu:22.04"
   // export_path = "lalubuntu.tar"
   commit = true
@@ -28,46 +28,39 @@ source "docker" "lalubuntu" {
     "ONBUILD date",
     "USER hacker",
     "WORKDIR /home/hacker",
-    "ENTRYPOINT /usr/bin/zsh -l",
+    // "CMD /usr/bin/zsh -l",
+    // "ENTRYPOINT /usr/bin/zsh -l",
   ]
 }
 
 build {
   name = "lbt"
 
-  source "source.docker.lalubuntu" {
-    name = "docker.lalubuntu"
+  source "source.docker.src" {
+    name = "lalubuntu"
   }
-  source "source.digitalocean.lalubuntu" {
-    name = "digitalocean.lalubuntu"
+  source "source.digitalocean.src" {
+    name = "lalubuntu"
   }
 
-  provisioner "shell" {
-    only = ["*digitalocean*"]
-    inline = [
-      "cloud-init status --wait",
-    ]
-  }
   provisioner "shell" {
     environment_vars = [
       "DEBIAN_FRONTEND=noninteractive",
       "TZ=Etc/UTC",
     ]
-    // except = ["*digitalocean*"] # Provisioner option to dodge a task
     inline = [
-      "id",
-      // "if command -v cloud-init; then systemctl stop cloud-init.service; fi",
-      // "alias waitaptget='while pgrep apt-get; do echo \"Waiting for apt-get to release lock\"; sleep 1; done'",
-      // "if command -v cloud-init; then systemctl stop cloud-init.service; fi"
-      // "if command -v cloud-init; then cloud-init status --wait; fi",
-      // "cloud-init status --wait || true",
-      // "waitaptget",
-      "apt-get update",
-      // "waitaptget",
-      "apt-get upgrade -y",
-      // "waitaptget",
-      "apt-get install -y curl wget git vim tmux sudo tzdata",
-      // "waitaptget",
+      "if command -v cloud-init; then cloud-init status --wait; fi",
+      "(id;date) | tee /.provisionned_by_packer",
+      // "apt-get clean -y"
+      // "apt-get -f install",
+      "echo 00; while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
+      "echo 01; rm -rf /var/lib/apt/lists/*",
+      "echo 02; apt-get update && sleep 3",
+      "echo 03; while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
+      "echo 04; apt-get upgrade -y",
+      "echo 05; while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
+      "echo 06; apt-get install -y curl wget git vim tmux sudo tzdata",
+      "echo 07; while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
     ]
   }
   provisioner "file" {
@@ -85,8 +78,9 @@ build {
       "cd /opt/lalubuntu",
       "bash -x packer/create-user.sh",
       "sudo -u hacker -- bash -x pre-install.sh",
-      "rm -rf /var/lib/apt/lists/*",
+      "while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
       "apt-get update",
+      "while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
       "sudo -u hacker -- bash -l -c \"ansible-playbook -vvv -i inventory.ini main.yml --tags base-install\"",
       // "ansible-playbook -vvv -i inventory.ini main.yml --tags offensive-stuff",
       "sed -i \"/TMPHACK_INSTALL_ONLY/d\" /etc/sudoers", # Remove tmp hack for user rights

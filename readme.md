@@ -58,6 +58,22 @@ bash -x install.sh
 lalupdate
 ```
 
+## Packer
+
+```bash
+# Assuming packer installed with mise
+cd /opt/lalubuntu/packer
+packer init do-lalubuntu.pkr.hcl
+packer --version # Packer v1.10.1
+
+# Build Docker
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/packer-ocean-$(date +%s).log" packer build -only="*ocean*" -on-error=ask do-lalubuntu.pkr.hcl
+sudo docker run --rm -it --net=host --entrypoint zsh YOUR_BUILD_SHA -il
+# Build Digital Ocean
+export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/packer-docker-$(date +%s).log" packer build -only="*docker*" -on-error=ask do-lalubuntu.pkr.hcl
+```
+
 ## Base install
 
 Base-installs scripts will install all the needed sofware and packages.
@@ -148,4 +164,6 @@ https://github.com/LazyVim/LazyVim
 https://github.com/glitchedgitz/cook
 Fix half working poc cameractrlsgtk
 Disble ubuntu pro spammy messages
+Fix then strip LALU tag for php & apt-transport-https
+Lock hacker account, give one liner to set remote password
 ```

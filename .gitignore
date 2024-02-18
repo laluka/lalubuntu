@@ -1,3 +1,4 @@
 lalubuntu.tar
 *.log
 *.pem
+.env
