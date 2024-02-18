@@ -140,9 +140,12 @@ Some quick hardening will be done :
 # Add daily runs github ci + packer
 https://github.com/adamritter/fastgron
 https://github.com/vi/websocat
-Disble ubuntu pro spammy messages
 https://github.com/tmate-io/tmate
 https://github.com/x90skysn3k/brutesprayx
-https://github.com/GNOME/meld + remove kompare
+https://github.com/GNOME/meld
 https://github.com/dynobo/normcap
+https://github.com/LazyVim/LazyVim
+https://github.com/glitchedgitz/cook
+Fix half working poc cameractrlsgtk
+Disble ubuntu pro spammy messages
 ```

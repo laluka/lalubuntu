@@ -24,7 +24,7 @@ fi
 if ! getent passwd "$username" > /dev/null 2>&1; then
     echo "Creating user: $username"
     useradd -m -g "$groupname" "$username"
-    echo dummy:hacker | chpasswd # Tweak password/ssh_key here if needed
+    echo hacker:hacker | chpasswd # Tweak password/ssh_key here if needed
 else
     echo "User $username already exists"
 fi
