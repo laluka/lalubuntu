@@ -30,13 +30,5 @@ else
 fi
 
 # Add user to sudoers file
-sudoers_file="/etc/sudoers.d/$username"
-if [ ! -f "$sudoers_file" ]; then
-    echo "Adding $username to sudoers"
-    echo "$username ALL=(ALL) NOPASSWD: ALL" > "$sudoers_file"
-    chmod 0440 "$sudoers_file"
-else
-    echo "User $username already has sudo privileges"
-fi
-
+echo "$username ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY" | tee -a /etc/sudoers
 echo "User $username successfully created"

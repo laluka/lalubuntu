@@ -1,7 +1,7 @@
 ---
 # defaults file for gui-tools
 default_packages:
-  - apt-transport-https
+  # - apt-transport-https # LALU
   - trash-cli
   - autoconf
   - bat
@@ -117,7 +117,7 @@ mise_tools:
   - minikube
   - nodejs
   - pdm
-  - php
+  # - php # LALLU
   - python
   - rust
   - terraform
@@ -131,7 +131,6 @@ omz_plugins_to_enable:
   - extract
   - fzf
   - helm
-#  - k9s
   - kubectl
   - kubectx
   - minikube
