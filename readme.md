@@ -153,6 +153,15 @@ Some quick hardening will be done :
   - Added gnome-tweaks, blueman, obs-studio from the official ppa
   - Added lalutools pty4all, pypotomux, broneypote, bypass-url-parser
   - Added bindsym for sound settings
+- 2024/02/24
+  - Created `.gitignore` with patterns for `lalubuntu.tar`, `*.log`, `*.pem`, `.env`
+  - Added `clean-crash` alias to remove files from `/var/crash`
+  - Refactored roles in `main.yml` with tags for organization (`base-install`, `offensive-stuff`, `gui-tools`, `hardening`)
+  - Added user creation script `create-user.sh` for user `hacker` with temp sudo privileges for install time
+  - Implemented Packer configuration `do-lalubuntu.pkr.hcl` for Docker Imge and DigitalOcean snapshot creation
+  - Updated `readme.md` with TODOs, Packer instructions, and additional tools to install
+  - Fixed mise sometimes not being loaded & removed xrandr unused aliases
+  - Implemented security measures and cleanup in Packer build process
 
 ## TODO
 
