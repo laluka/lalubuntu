@@ -1,15 +1,16 @@
 ---
 go_packages:
-  - github.com/tomnomnom/gron
+  - github.com/antonmedv/fx
   - github.com/ffuf/ffuf
+  - github.com/glitchedgitz/cook/v2/cmd/cook
   - github.com/jesseduffield/lazygit
   - github.com/lc/gau/v2/cmd/gau
-  - github.com/wader/fq
-  - github.com/antonmedv/fx
-  - github.com/xm1k3/cent
-  - github.com/ropnop/kerbrute
   - github.com/projectdiscovery/pdtm/cmd/pdtm
+  - github.com/ropnop/kerbrute
+  - github.com/tomnomnom/gron
+  - github.com/wader/fq
   - github.com/x90skysn3k/brutesprayx
+  - github.com/xm1k3/cent
 
 git_repositories:
   - repo: http://github.com/jpillora/chisel
@@ -68,3 +69,5 @@ git_wordlists:
     dest: payloads
 
 rockyou_dl_url: https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
+
+fastgron_url: https://github.com/adamritter/fastgron/releases/download/v0.7.7/fastgron-ubuntu

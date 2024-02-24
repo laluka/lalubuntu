@@ -25,3 +25,15 @@
     state: latest
   loop: '{{ default_packages }}'
   become: true
+
+- name: Download fastgron
+  ansible.builtin.get_url:
+    url: '{{ fastgron_url }}'
+    dest: '/usr/local/bin/fastgron'
+  become: true
+
+- name: Make fastgron executable
+  ansible.builtin.file:
+    path: '/usr/local/bin/fastgron'
+    mode: '0755'
+  become: true

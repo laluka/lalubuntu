@@ -44,3 +44,17 @@
   ansible.builtin.shell: zsh -c 'mise install {{ item }}@latest -y && mise global {{ item }}@latest'
   with_items: '{{ mise_tools }}'
   when: not mise_installed.stat.exists
+
+- name: Install neovim only if ~/.config/nvim does not exist
+  ansible.builtin.stat:
+    path: '/home/{{ ansible_user_id }}/.config/nvim'
+  register: neovim_installed
+
+- name: Clone wordlists from Git
+  ansible.builtin.git:
+    repo: https://github.com/LazyVim/starter
+    dest: '/home/{{ ansible_user_id }}/.config/nvim'
+    update: yes
+    force: yes
+  loop: '{{ git_wordlists }}'
+  when: neovim_installed.stat.exists == False

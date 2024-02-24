@@ -60,13 +60,17 @@ lalupdate
 
 ## Install Specific Roles Only
 
-Remember that `offensive-stuff` and `gui-tools` require `base-install`
+Remember that `offensive-stuff` and `gui-tools` require `base-install`.
 
 ```bash
-ansible-playbook -vvv -i inventory.ini --ask-become main.yml --module-name include_role --args name=base-install
-ansible-playbook -vvv -i inventory.ini --ask-become main.yml --module-name include_role --args name=offensive-stuff
-ansible-playbook -vvv -i inventory.ini --ask-become main.yml --module-name include_role --args name=gui-tools
-ansible-playbook -vvv -i inventory.ini --ask-become main.yml --module-name include_role --args name=hardening
+# Only shell goodies
+ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install
+# Offensive work, on a headless server
+ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install,offensive-stuff
+# Smooth term & GUI for non-offensive folks
+ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install,gui-tools
+# Do the security thingy
+ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags hardening
 ```
 
 ## Packer - DRAFT WORK - NO SUPPORT FOR NOW
@@ -177,15 +181,7 @@ Some quick hardening will be done :
 ## TODO
 
 ```bash
-https://github.com/adamritter/fastgron
-https://github.com/vi/websocat
-https://github.com/tmate-io/tmate
-https://github.com/x90skysn3k/brutesprayx
-https://github.com/GNOME/meld
-https://github.com/dynobo/normcap
-https://github.com/LazyVim/LazyVim
-https://github.com/glitchedgitz/cook
-Fix half working poc cameractrlsgtk
+Fix half working poc cameractrlsgtk, try vbox
 packer: hacker account nologin
 packer: one liner to set remote password
 packer: add github actions
