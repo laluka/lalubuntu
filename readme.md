@@ -58,6 +58,26 @@ bash -x install.sh
 lalupdate
 ```
 
+## Packer - DRAFT WORK - NO SUPPORT FOR NOW
+
+```bash
+# Assuming packer installed with mise
+cd /opt/lalubuntu/packer
+packer init do-lalubuntu.pkr.hcl
+packer --version # Packer v1.10.1
+
+# Build Docker
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocean-$(date).log" packer build -only="*ocean*" -on-error=ask do-lalubuntu.pkr.hcl
+sudo docker run --rm -it --net=host --entrypoint zsh YOUR_BUILD_SHA -il
+# Build Digital Ocean
+export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="*docker*" -on-error=ask do-lalubuntu.pkr.hcl
+
+# Cheat Sheet for lalu, dont mind me, early work :)
+/opt/lalubuntu/packer && . /opt/precious/secret.rc && PACKER_LOG=1 PACKER_LOG_PATH="pocean-$(date).log" packer build -only="*ocean*" -on-error=ask do-lalubuntu.pkr.hcl
+/opt/lalubuntu/packer && . /opt/precious/secret.rc && PACKER_LOG=1 PACKER_LOG_PATH="pocker-$(date).log" packer build -only="*docker*" -on-error=ask do-lalubuntu.pkr.hcl
+```
+
 ## Base install
 
 Base-installs scripts will install all the needed sofware and packages.
@@ -133,9 +153,29 @@ Some quick hardening will be done :
   - Added gnome-tweaks, blueman, obs-studio from the official ppa
   - Added lalutools pty4all, pypotomux, broneypote, bypass-url-parser
   - Added bindsym for sound settings
+- 2024/02/24
+  - Created `.gitignore` with patterns for `lalubuntu.tar`, `*.log`, `*.pem`, `.env`
+  - Added `clean-crash` alias to remove files from `/var/crash`
+  - Refactored roles in `main.yml` with tags for organization (`base-install`, `offensive-stuff`, `gui-tools`, `hardening`)
+  - Added user creation script `create-user.sh` for user `hacker` with temp sudo privileges for install time
+  - Implemented Packer configuration `do-lalubuntu.pkr.hcl` for Docker Imge and DigitalOcean snapshot creation
+  - Updated `readme.md` with TODOs, Packer instructions, and additional tools to install
+  - Fixed mise sometimes not being loaded & removed xrandr unused aliases
+  - Implemented security measures and cleanup in Packer build process
 
 ## TODO
 
 ```bash
 # Add daily runs github ci + packer
+https://github.com/adamritter/fastgron
+https://github.com/vi/websocat
+https://github.com/tmate-io/tmate
+https://github.com/x90skysn3k/brutesprayx
+https://github.com/GNOME/meld
+https://github.com/dynobo/normcap
+https://github.com/LazyVim/LazyVim
+https://github.com/glitchedgitz/cook
+Fix half working poc cameractrlsgtk
+Disble ubuntu pro spammy messages
+Lock hacker account, give one liner to set remote password
 ```

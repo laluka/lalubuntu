@@ -85,8 +85,6 @@ i3_config_block: |
     bindsym $mod+p exec flameshot gui
     bindsym $mod+Ctrl+p exec flameshot full -p /tmp/
     bindsym $mod+s exec gnome-control-center sound
-    bindsym $mod+m exec xrandr --output $(xrandr | grep ' connected ' -m 1 | awk '{ print $1 }') --off
-    bindsym $mod+Shift+m exec xrandr --output $(xrandr | grep ' connected ' -m 1 | awk '{ print $1 }') --auto
     bindsym $mod+Shift+w exec cameractrlsgtk
 
 i3_xresources_block: |

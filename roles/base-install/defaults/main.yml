@@ -131,7 +131,6 @@ omz_plugins_to_enable:
   - extract
   - fzf
   - helm
-#  - k9s
   - kubectl
   - kubectx
   - minikube

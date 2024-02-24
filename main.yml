@@ -3,9 +3,13 @@
   hosts: localhost
   connection: local
   roles:
-    - role: roles/base-install
-    - role: roles/offensive-stuff
-    - role: roles/gui-tools
-    - role: roles/hardening
+    - role: 'roles/base-install'
+      tags: 'base-install'
+    - role: 'roles/offensive-stuff'
+      tags: 'offensive-stuff'
+    - role: 'roles/gui-tools'
+      tags: 'gui-tools'
+    - role: 'roles/hardening'
+      tags: 'hardening'
       users:
         - username: '{{ ansible_user_id }}'
