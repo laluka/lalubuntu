@@ -58,7 +58,7 @@ bash -x install.sh
 lalupdate
 ```
 
-## Packer
+## Packer - DRAFT WORK - NO SUPPORT FOR NOW
 
 ```bash
 # Assuming packer installed with mise
@@ -67,11 +67,11 @@ packer init do-lalubuntu.pkr.hcl
 packer --version # Packer v1.10.1
 
 # Build Docker
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/packer-ocean-$(date +%s).log" packer build -only="*ocean*" -on-error=ask do-lalubuntu.pkr.hcl
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocean-$(date).log" packer build -only="*ocean*" -on-error=ask do-lalubuntu.pkr.hcl
 sudo docker run --rm -it --net=host --entrypoint zsh YOUR_BUILD_SHA -il
 # Build Digital Ocean
 export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/packer-docker-$(date +%s).log" packer build -only="*docker*" -on-error=ask do-lalubuntu.pkr.hcl
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="*docker*" -on-error=ask do-lalubuntu.pkr.hcl
 
 # Cheat Sheet for lalu, dont mind me, early work :)
 /opt/lalubuntu/packer && . /opt/precious/secret.rc && PACKER_LOG=1 PACKER_LOG_PATH="pocean-$(date).log" packer build -only="*ocean*" -on-error=ask do-lalubuntu.pkr.hcl
@@ -168,6 +168,5 @@ https://github.com/LazyVim/LazyVim
 https://github.com/glitchedgitz/cook
 Fix half working poc cameractrlsgtk
 Disble ubuntu pro spammy messages
-Fix then strip LALU tag for php & apt-transport-https
 Lock hacker account, give one liner to set remote password
 ```

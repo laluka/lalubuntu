@@ -1,7 +1,7 @@
 ---
 # defaults file for gui-tools
 default_packages:
-  # - apt-transport-https # LALU
+  - apt-transport-https
   - trash-cli
   - autoconf
   - bat
@@ -117,7 +117,7 @@ mise_tools:
   - minikube
   - nodejs
   - pdm
-  # - php # LALU
+  - php
   - python
   - rust
   - terraform
