@@ -72,6 +72,10 @@ sudo docker run --rm -it --net=host --entrypoint zsh YOUR_BUILD_SHA -il
 # Build Digital Ocean
 export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/packer-docker-$(date +%s).log" packer build -only="*docker*" -on-error=ask do-lalubuntu.pkr.hcl
+
+# Cheat Sheet for lalu, dont mind me, early work :)
+/opt/lalubuntu/packer && . /opt/precious/secret.rc && PACKER_LOG=1 PACKER_LOG_PATH="pocean-$(date).log" packer build -only="*ocean*" -on-error=ask do-lalubuntu.pkr.hcl
+/opt/lalubuntu/packer && . /opt/precious/secret.rc && PACKER_LOG=1 PACKER_LOG_PATH="pocker-$(date).log" packer build -only="*docker*" -on-error=ask do-lalubuntu.pkr.hcl
 ```
 
 ## Base install
