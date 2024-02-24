@@ -58,6 +58,17 @@ bash -x install.sh
 lalupdate
 ```
 
+## Install Specific Roles Only
+
+Remember that `offensive-stuff` and `gui-tools` require `base-install`
+
+```bash
+ansible-playbook -vvv -i inventory.ini --ask-become main.yml --module-name include_role --args name=base-install
+ansible-playbook -vvv -i inventory.ini --ask-become main.yml --module-name include_role --args name=offensive-stuff
+ansible-playbook -vvv -i inventory.ini --ask-become main.yml --module-name include_role --args name=gui-tools
+ansible-playbook -vvv -i inventory.ini --ask-become main.yml --module-name include_role --args name=hardening
+```
+
 ## Packer - DRAFT WORK - NO SUPPORT FOR NOW
 
 ```bash
@@ -166,7 +177,6 @@ Some quick hardening will be done :
 ## TODO
 
 ```bash
-# Add daily runs github ci + packer
 https://github.com/adamritter/fastgron
 https://github.com/vi/websocat
 https://github.com/tmate-io/tmate
@@ -176,6 +186,7 @@ https://github.com/dynobo/normcap
 https://github.com/LazyVim/LazyVim
 https://github.com/glitchedgitz/cook
 Fix half working poc cameractrlsgtk
-Disble ubuntu pro spammy messages
-Lock hacker account, give one liner to set remote password
+packer: hacker account nologin
+packer: one liner to set remote password
+packer: add github actions
 ```

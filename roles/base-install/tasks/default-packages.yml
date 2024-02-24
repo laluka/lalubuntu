@@ -1,4 +1,11 @@
 ---
+- name: Disable Ubuntu Pro Esm Spammy Messages OMFG
+  replace:
+    path: /etc/apt/apt.conf.d/20apt-esm-hook.conf
+    regexp: '^([^#].*)$'
+    replace: '#\1'
+  become: true
+
 - name: Update apt repo/cache
   ansible.builtin.apt:
     update_cache: yes
