@@ -4,7 +4,6 @@
 - include_tasks: zsh-config-post-mise.yml # Configuring Zsh
 - include_tasks: setup-dir.yml # Setting up DATA dir
 - include_tasks: vim-default.yml # Configuring Vim as the default text editor
-- include_tasks: neovim.yml
 - include_tasks: docker-install.yml # Installing Docker
 - include_tasks: pipx-tools.yml #Installing pipx related tools
 - include_tasks: cargo-dl.yml # Downloading Cargo based toolings
