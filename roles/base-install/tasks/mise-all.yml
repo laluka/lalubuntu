@@ -32,7 +32,7 @@
 
 - name: Add mise activation to shell configuration files
   ansible.builtin.lineinfile:
-    path: '{{ ansible_user_id }}/.{{ item }}rc'
+    path: '/home/{{ ansible_user_id }}/.{{ item }}rc'
     state: present
     line: 'eval "$(~/.local/bin/mise activate {{ item }})"'
     insertafter: EOF
