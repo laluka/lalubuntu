@@ -1,6 +1,6 @@
 - name: Check if cameractrls is already installed
   ansible.builtin.stat:
-    path: '{{ ansible_user_id }}/.local/share/applications/hu.irl.cameractrls.desktop'
+    path: '/home/{{ ansible_user_id }}/.local/share/applications/hu.irl.cameractrls.desktop'
   register: cameractrls_installed
 
 - name: Install CameraCtrls

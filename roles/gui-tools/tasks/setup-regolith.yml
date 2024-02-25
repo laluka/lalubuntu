@@ -54,18 +54,18 @@
 
 - name: Ensure the ~/.config/regolith3/i3/config.d/ directory exists
   ansible.builtin.file:
-    path: '{{ ansible_user_id }}/.config/regolith3/i3/config.d/'
+    path: '/home/{{ ansible_user_id }}/.config/regolith3/i3/config.d/'
     state: directory
 
 - name: Append lines to the i3 config file
   ansible.builtin.blockinfile:
-    path: '{{ ansible_user_id }}/.config/regolith3/i3/config.d/config'
+    path: '/home/{{ ansible_user_id }}/.config/regolith3/i3/config.d/config'
     block: '{{ i3_config_block }}'
     create: yes
 
 - name: Append lines to the i3 Xresources file
   ansible.builtin.blockinfile:
-    path: '{{ ansible_user_id }}/.config/regolith3/Xresources'
+    path: '/home/{{ ansible_user_id }}/.config/regolith3/Xresources'
     block: '{{ i3_xresources_block }}'
     create: yes
 

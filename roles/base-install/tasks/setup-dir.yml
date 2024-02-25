@@ -6,7 +6,7 @@
     mode: '0755'
   become: true
 
-- name: Set ownership of /{{ default_directory }} directory to {{ ansible_user_id }}
+- name: Set ownership of /{{ default_directory }} directory to /home/{{ ansible_user_id }}
   ansible.builtin.file:
     path: '/{{ default_directory }}'
     owner: '{{ ansible_user_id }}'
@@ -16,7 +16,7 @@
 
 - name: Create {{ ansible_user_id }}/.ssh directory (if it doesn't exist)
   ansible.builtin.file:
-    path: '{{ ansible_user_id }}/.ssh'
+    path: '/home/{{ ansible_user_id }}/.ssh'
     state: directory
     mode: '0755'
 

@@ -22,7 +22,7 @@
 
 - name: Remove old rtx config from shell configuration files
   ansible.builtin.lineinfile:
-    path: '{{ ansible_user_id }}/.{{ item }}rc'
+    path: '/home/{{ ansible_user_id }}/.{{ item }}rc'
     state: absent
     regexp: 'eval .*rtx activate {{ item }}'
     backrefs: yes
