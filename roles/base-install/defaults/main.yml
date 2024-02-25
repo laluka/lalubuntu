@@ -155,7 +155,7 @@ zsh_plugins_to_disable:
 zsh_config_lines:
   - DISABLE_MAGIC_FUNCTIONS=true
 
-default_directory: 'DATA'
+data_directory: '/DATA'
 
 vimrc_content: |
   set mouse=""

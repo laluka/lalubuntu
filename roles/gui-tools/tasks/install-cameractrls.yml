@@ -1,6 +1,6 @@
 - name: Check if cameractrls is already installed
   ansible.builtin.stat:
-    path: '/home/{{ ansible_user_id }}/.local/share/applications/hu.irl.cameractrls.desktop'
+    path: '{{ ansible_env.HOME }}/.local/share/applications/hu.irl.cameractrls.desktop'
   register: cameractrls_installed
 
 - name: Install CameraCtrls
@@ -29,6 +29,6 @@
       become: true
 
     - name: Run cameractrls installer
-      ansible.builtin.command: 'desktop-file-install --dir="/home/{{ ansible_user_id }}/.local/share/applications" --set-key=Exec --set-value="$PWD/cameractrlsgtk4.py" --set-key=Path --set-value="$PWD" --set-key=Icon --set-value="$PWD/pkg/hu.irl.cameractrls.svg" pkg/hu.irl.cameractrls.desktop'
+      ansible.builtin.command: 'desktop-file-install --dir="{{ ansible_env.HOME }}/.local/share/applications" --set-key=Exec --set-value="$PWD/cameractrlsgtk4.py" --set-key=Path --set-value="$PWD" --set-key=Icon --set-value="$PWD/pkg/hu.irl.cameractrls.svg" pkg/hu.irl.cameractrls.desktop'
       args:
         chdir: /opt/cameractrls

@@ -1,7 +1,7 @@
 ---
-- name: Install mise only if /home/{{ ansible_user_id }}/.local/bin/mise does not exist
+- name: Install mise only if {{ ansible_env.HOME }}/.local/bin/mise does not exist
   ansible.builtin.stat:
-    path: '/home/{{ ansible_user_id }}/.local/bin/mise'
+    path: '{{ ansible_env.HOME }}/.local/bin/mise'
   register: mise_installed
 
 - name: Create directory /etc/apt/keyrings
@@ -22,7 +22,7 @@
 
 - name: Remove old rtx config from shell configuration files
   ansible.builtin.lineinfile:
-    path: '/home/{{ ansible_user_id }}/.{{ item }}rc'
+    path: '{{ ansible_env.HOME }}/.{{ item }}rc'
     state: absent
     regexp: 'eval .*rtx activate {{ item }}'
     backrefs: yes
@@ -32,7 +32,7 @@
 
 - name: Add mise activation to shell configuration files
   ansible.builtin.lineinfile:
-    path: '/home/{{ ansible_user_id }}/.{{ item }}rc'
+    path: '{{ ansible_env.HOME }}/.{{ item }}rc'
     state: present
     line: 'eval "$(~/.local/bin/mise activate {{ item }})"'
     insertafter: EOF
@@ -46,13 +46,13 @@
 
 - name: Install lazyvim only if ~/.config/nvim does not exist
   ansible.builtin.stat:
-    path: '/home/{{ ansible_user_id }}/.config/nvim'
+    path: '{{ ansible_env.HOME }}/.config/nvim'
   register: lazyvim_installed
 
 - name: Clone LazyVim from Git
   ansible.builtin.git:
     repo: https://github.com/LazyVim/starter
-    dest: '/home/{{ ansible_user_id }}/.config/nvim'
+    dest: '{{ ansible_env.HOME }}/.config/nvim'
     update: yes
     force: yes
   when: lazyvim_installed.stat.exists == False
