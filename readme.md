@@ -66,9 +66,11 @@ Remember that `offensive-stuff` and `gui-tools` require `base-install`.
 # Only shell goodies
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install
 # Offensive work, on a headless server
-ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install,offensive-stuff
+ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install
+ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags offensive-stuff
 # Smooth term & GUI for non-offensive folks
-ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install,gui-tools
+ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install
+ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags gui-tools
 # Do the security thingy
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags hardening
 ```
