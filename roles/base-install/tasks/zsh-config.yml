@@ -8,6 +8,8 @@
   ansible.builtin.git:
     repo: '{{ zsh_git_url }}'
     dest: '{{ ansible_user_id }}/.oh-my-zsh'
+    force: yes
+    update: yes
   become_user: '{{ ansible_user_id }}'
 
 - name: Check if ~/.zshrc exists
