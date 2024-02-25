@@ -69,5 +69,3 @@ git_wordlists:
     dest: payloads
 
 rockyou_dl_url: https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
-
-fastgron_url: https://github.com/adamritter/fastgron/releases/download/v0.7.7/fastgron-ubuntu

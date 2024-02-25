@@ -26,6 +26,13 @@
   loop: '{{ default_packages }}'
   become: true
 
+- name: Install Packages Cleanup
+  ansible.builtin.package:
+    name: '{{ item }}'
+    state: absent
+  loop: '{{ default_packages_gone }}'
+  become: true
+
 - name: Download fastgron
   ansible.builtin.get_url:
     url: '{{ fastgron_url }}'
