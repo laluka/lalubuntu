@@ -181,7 +181,6 @@ Some quick hardening will be done :
 ## TODO
 
 ```bash
-Fix half working poc cameractrlsgtk, try vbox
 packer: hacker account nologin
 packer: one liner to set remote password
 packer: add github actions

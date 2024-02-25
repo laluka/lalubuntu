@@ -14,9 +14,9 @@
     recurse: yes
   become: true
 
-- name: Create {{ ansible_env.HOME }}/.ssh directory (if it doesn't exist)
+- name: Create {{ ansible_user_id }}/.ssh directory (if it doesn't exist)
   ansible.builtin.file:
-    path: '{{ ansible_env.HOME }}/.ssh'
+    path: '{{ ansible_user_id }}/.ssh'
     state: directory
     mode: '0755'
 

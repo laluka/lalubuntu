@@ -1,10 +1,10 @@
 - name: Enable zsh plugins
-  ansible.builtin.shell: "zsh -c 'source {{ ansible_env.HOME }}/.zshrc && omz plugin enable {{ item }} || true'"
+  ansible.builtin.shell: "zsh -c 'source {{ ansible_user_id }}/.zshrc && omz plugin enable {{ item }} || true'"
   with_items: '{{ omz_plugins_to_enable }}'
 
 - name: Disable zsh plugins
-  ansible.builtin.shell: "zsh -c 'source {{ ansible_env.HOME }}/.zshrc && omz plugin disable {{ item }} || true'"
+  ansible.builtin.shell: "zsh -c 'source {{ ansible_user_id }}/.zshrc && omz plugin disable {{ item }} || true'"
   with_items: '{{ zsh_plugins_to_disable }}'
 
 - name: Fix wildcard in history
-  ansible.builtin.shell: "zsh -c 'source {{ ansible_env.HOME }}/.zshrc && set mark-modified-lines off'"
+  ansible.builtin.shell: "zsh -c 'source {{ ansible_user_id }}/.zshrc && set mark-modified-lines off'"

@@ -1,34 +1,32 @@
 - name: Check if cameractrls is already installed
   ansible.builtin.stat:
-    path: '{{ ansible_env.HOME }}/.local/share/applications/hu.irl.cameractrls.desktop'
+    path: '{{ ansible_user_id }}/.local/share/applications/hu.irl.cameractrls.desktops'
   register: cameractrls_installed
-  become: true
 
-- name: Install required packages for cameractrls
-  ansible.builtin.apt:
-    name: '{{ item }}'
-    state: present
-  loop: '{{ cameractrls_dependencies }}'
-  become: true
+- name: Install CameraCtrls
   when: not cameractrls_installed.stat.exists
+  block:
+    - name: Install required packages for cameractrls
+      ansible.builtin.apt:
+        name: '{{ item }}'
+        state: present
+      loop: '{{ cameractrls_dependencies }}'
+      become: true
 
-- name: Clone cameractrls repository
-  ansible.builtin.git:
-    repo: '{{ cameractrls_git_repo }}'
-    dest: /opt/cameractrls
-    force: yes
-  become: true
-  when: not cameractrls_installed.stat.exists
+    - name: Clone cameractrls repository
+      ansible.builtin.git:
+        repo: '{{ cameractrls_git_repo }}'
+        dest: /opt/cameractrls
+        force: yes
+      become: true
 
-- name: Change ownership of the directory
-  ansible.builtin.file:
-    path: '/opt/cameractrls'
-    owner: '{{ ansible_user_id }}'
-    group: '{{ ansible_user_id }}'
-    recurse: yes
-  become: true
-  when: not cameractrls_installed.stat.exists
+    - name: Change ownership of the directory
+      ansible.builtin.file:
+        path: '/opt/cameractrls'
+        owner: '{{ ansible_user_id }}'
+        group: '{{ ansible_user_id }}'
+        recurse: yes
+      become: true
 
-- name: Run cameractrls installer
-  ansible.builtin.command: '{{ install_cameractrls_block }}'
-  when: not cameractrls_installed.stat.exists
+    - name: Run cameractrls installer
+      ansible.builtin.command: 'desktop-file-install --dir="{{ ansible_user_id }}/.local/share/applications" --set-key=Exec --set-value="/opt/cameractrls/cameractrlsgtk.py" --set-key=Path --set-value="/opt/cameractrls" --set-key=Icon --set-value="/opt/cameractrls/pkg/hu.irl.cameractrls.svg" /opt/cameractrls/pkg/hu.irl.cameractrls.desktop'
