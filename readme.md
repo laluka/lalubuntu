@@ -65,11 +65,9 @@ Remember that `offensive-stuff` and `gui-tools` require `base-install`.
 ```bash
 # Only shell goodies
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install
-# Offensive work, on a headless server
-ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install
+# Offensive work on a headless server -> requires base-install
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags offensive-stuff
-# Smooth term & GUI for non-offensive folks
-ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install
+# Smooth term & GUI for non-offensive folks -> requires base-install
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags gui-tools
 # Do the security thingy
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags hardening
@@ -179,15 +177,15 @@ Some quick hardening will be done :
   - Updated `readme.md` with TODOs, Packer instructions, and additional tools to install
   - Fixed mise sometimes not being loaded & removed xrandr unused aliases
   - Implemented security measures and cleanup in Packer build process
-- 2024/02/25
+- 2024/02/26
   - Updated `readme.md` with section "Install Specific Roles Only" with previous tag addons
   - Removed `trash-cli` from `base-install` default packages and added latest install via pipx
   - Added `meld` and `tmate` to `base-install` default packages
   - Added `duf`, `neovim`, `websocat` to `mise_tools` in `base-install`
   - Added task to disable Ubuntu Pro ESM spammy messages in `base-install`
   - Added download and executable setting tasks for `fastgron` in `base-install`
-  - Included `neovim` install and config tasks in `base-install`
-  - Unified variables in various tasks from `ansible_env.HOME` to `ansible_user_id`
+  - Included `neovim` install and config tasks in `base-install` aliased on `v`
+  - Slightly reworked and unified variable use
   - Updated `gui-tools` tasks for `cameractrls` and `nomachine` with various fixes
   - Allow `nomachine` install to fail, they often make breaking changes to the install process
   - Updated `offensive-stuff` `go_packages` and `git_repositories` lists
