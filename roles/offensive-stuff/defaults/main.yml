@@ -1,15 +1,16 @@
 ---
 go_packages:
-  - github.com/tomnomnom/gron
+  - github.com/antonmedv/fx
   - github.com/ffuf/ffuf
+  - github.com/glitchedgitz/cook/v2/cmd/cook
   - github.com/jesseduffield/lazygit
   - github.com/lc/gau/v2/cmd/gau
-  - github.com/wader/fq
-  - github.com/antonmedv/fx
-  - github.com/xm1k3/cent
-  - github.com/ropnop/kerbrute
   - github.com/projectdiscovery/pdtm/cmd/pdtm
+  - github.com/ropnop/kerbrute
+  - github.com/tomnomnom/gron
+  - github.com/wader/fq
   - github.com/x90skysn3k/brutesprayx
+  - github.com/xm1k3/cent
 
 git_repositories:
   - repo: http://github.com/jpillora/chisel

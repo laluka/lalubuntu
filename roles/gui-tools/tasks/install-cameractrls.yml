@@ -2,33 +2,33 @@
   ansible.builtin.stat:
     path: '{{ ansible_env.HOME }}/.local/share/applications/hu.irl.cameractrls.desktop'
   register: cameractrls_installed
-  become: true
 
-- name: Install required packages for cameractrls
-  ansible.builtin.apt:
-    name: '{{ item }}'
-    state: present
-  loop: '{{ cameractrls_dependencies }}'
-  become: true
+- name: Install CameraCtrls
   when: not cameractrls_installed.stat.exists
+  block:
+    - name: Install required packages for cameractrls
+      ansible.builtin.apt:
+        name: '{{ item }}'
+        state: present
+      loop: '{{ cameractrls_dependencies }}'
+      become: true
 
-- name: Clone cameractrls repository
-  ansible.builtin.git:
-    repo: '{{ cameractrls_git_repo }}'
-    dest: /opt/cameractrls
-    force: yes
-  become: true
-  when: not cameractrls_installed.stat.exists
+    - name: Clone cameractrls repository
+      ansible.builtin.git:
+        repo: '{{ cameractrls_git_repo }}'
+        dest: /opt/cameractrls
+        force: yes
+      become: true
 
-- name: Change ownership of the directory
-  ansible.builtin.file:
-    path: '/opt/cameractrls'
-    owner: '{{ ansible_user_id }}'
-    group: '{{ ansible_user_id }}'
-    recurse: yes
-  become: true
-  when: not cameractrls_installed.stat.exists
+    - name: Change ownership of the directory
+      ansible.builtin.file:
+        path: '/opt/cameractrls'
+        owner: '{{ ansible_user_id }}'
+        group: '{{ ansible_user_id }}'
+        recurse: yes
+      become: true
 
-- name: Run cameractrls installer
-  ansible.builtin.command: '{{ install_cameractrls_block }}'
-  when: not cameractrls_installed.stat.exists
+    - name: Run cameractrls installer
+      ansible.builtin.command: 'desktop-file-install --dir="{{ ansible_env.HOME }}/.local/share/applications" --set-key=Exec --set-value="$PWD/cameractrlsgtk4.py" --set-key=Path --set-value="$PWD" --set-key=Icon --set-value="$PWD/pkg/hu.irl.cameractrls.svg" pkg/hu.irl.cameractrls.desktop'
+      args:
+        chdir: /opt/cameractrls

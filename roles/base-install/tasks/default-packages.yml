@@ -1,4 +1,11 @@
 ---
+- name: Disable Ubuntu Pro Esm Spammy Messages OMFG
+  replace:
+    path: /etc/apt/apt.conf.d/20apt-esm-hook.conf
+    regexp: '^([^#].*)$'
+    replace: '#\1'
+  become: true
+
 - name: Update apt repo/cache
   ansible.builtin.apt:
     update_cache: yes
@@ -17,4 +24,23 @@
     name: '{{ item }}'
     state: latest
   loop: '{{ default_packages }}'
+  become: true
+
+- name: Install Packages Cleanup
+  ansible.builtin.package:
+    name: '{{ item }}'
+    state: absent
+  loop: '{{ default_packages_gone }}'
+  become: true
+
+- name: Download fastgron
+  ansible.builtin.get_url:
+    url: '{{ fastgron_url }}'
+    dest: '/usr/local/bin/fastgron'
+  become: true
+
+- name: Make fastgron executable
+  ansible.builtin.file:
+    path: '/usr/local/bin/fastgron'
+    mode: '0755'
   become: true

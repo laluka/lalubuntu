@@ -1,12 +1,14 @@
 # Utils
 ## Directories
 alias dl='cd ~/Downloads'
-alias da="cd /DATA"
-alias tn="tmux new"
-alias ta="tmux attach"
-alias c="code ."
-alias life='cd /opt/lalulife' # Might be released some day :)
+alias da='cd /DATA'
+alias tn='tmux new'
+alias ta='tmux attach'
+alias c='code'
+alias temp='pushd $(mktemp -d)'
+alias v='nvim'
 alias lbt='cd /opt/lalubuntu'
+alias life='cd /opt/lalulife' # Might be released some day ;)
 alias lalupdate='bash /opt/lalubuntu/update.sh'
 
 # Tools Sysadmin

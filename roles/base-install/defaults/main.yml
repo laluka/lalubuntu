@@ -2,7 +2,6 @@
 # defaults file for gui-tools
 default_packages:
   - apt-transport-https
-  - trash-cli
   - autoconf
   - bat
   - binwalk
@@ -60,6 +59,7 @@ default_packages:
   - lsof
   - ltrace
   - make
+  - meld
   - net-tools
   - ngrep
   - nmap
@@ -76,6 +76,7 @@ default_packages:
   - software-properties-common
   - sshpass
   - tk-dev
+  - tmate
   - tmux
   - tor
   - traceroute
@@ -92,6 +93,9 @@ default_packages:
   - zlib1g-dev
   - zsh
 
+default_packages_gone:
+  - trash-cli
+
 zsh_git_url: 'https://github.com/robbyrussell/oh-my-zsh.git'
 zsh_completion_git_url: 'https://github.com/zsh-users/zsh-completions'
 zsh_autosuggestion_git_url: 'https://github.com/zsh-users/zsh-autosuggestions'
@@ -105,6 +109,7 @@ tmux_conf: |
 mise_tools:
   - awscli
   - direnv
+  - duf
   - glow
   - golang
   - helm
@@ -115,13 +120,14 @@ mise_tools:
   - kubectx
   - maven
   - minikube
+  - neovim
   - nodejs
   - pdm
   - php
   - python
   - rust
   - terraform
-  - duf
+  - websocat
 
 omz_plugins_to_enable:
   - aws
@@ -149,7 +155,7 @@ zsh_plugins_to_disable:
 zsh_config_lines:
   - DISABLE_MAGIC_FUNCTIONS=true
 
-default_directory: 'DATA'
+data_directory: '/DATA'
 
 vimrc_content: |
   set mouse=""
@@ -181,3 +187,5 @@ docker_components:
   - containerd.io
   - docker-buildx-plugin
   - docker-compose-plugin
+
+fastgron_url: https://github.com/adamritter/fastgron/releases/download/v0.7.7/fastgron-ubuntu

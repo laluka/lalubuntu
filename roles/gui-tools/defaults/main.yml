@@ -44,8 +44,8 @@ signal_repo_url: 'deb [arch=amd64 signed-by={{ signal_gpg_dest }}] https://updat
 cameractrls_dependencies:
   - libsdl2-2.0-0
   - libturbojpeg
+
 cameractrls_git_repo: https://github.com/soyersoyer/cameractrls.git
-install_cameractrls_block: "desktop-file-install --dir='{{ ansible_env.HOME }}/.local/share/applications' --set-key=Exec --set-value='/opt/cameractrls/cameractrlsgtk.py' --set-key=Path --set-value='/opt/cameractrls' --set-key=Icon --set-value='/opt/cameractrls/pkg/hu.irl.cameractrls.svg' /opt/cameractrls/pkg/hu.irl.cameractrls.desktop"
 
 regolith_key_url: 'https://regolith-desktop.org/regolith.key'
 regolith_gpg_dest: '/usr/share/keyrings/regolith-archive-keyring.gpg'

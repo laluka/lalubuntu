@@ -1,7 +1,7 @@
 ---
-- name: Install mise only if /home/{{ ansible_env.HOME }}/.local/bin/mise does not exist
+- name: Install mise only if {{ ansible_env.HOME }}/.local/bin/mise does not exist
   ansible.builtin.stat:
-    path: '/home/{{ ansible_env.HOME }}/.local/bin/mise'
+    path: '{{ ansible_env.HOME }}/.local/bin/mise'
   register: mise_installed
 
 - name: Create directory /etc/apt/keyrings
@@ -43,4 +43,16 @@
 - name: Install and mise-based tools (this will take lot of time to install)
   ansible.builtin.shell: zsh -c 'mise install {{ item }}@latest -y && mise global {{ item }}@latest'
   with_items: '{{ mise_tools }}'
-  when: not mise_installed.stat.exists
+
+- name: Install lazyvim only if ~/.config/nvim does not exist
+  ansible.builtin.stat:
+    path: '{{ ansible_env.HOME }}/.config/nvim'
+  register: lazyvim_installed
+
+- name: Clone LazyVim from Git
+  ansible.builtin.git:
+    repo: https://github.com/LazyVim/starter
+    dest: '{{ ansible_env.HOME }}/.config/nvim'
+    update: yes
+    force: yes
+  when: lazyvim_installed.stat.exists == False
