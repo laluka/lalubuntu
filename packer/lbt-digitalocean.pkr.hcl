@@ -53,14 +53,14 @@ build {
       "(id;date) | tee /.provisionned_by_packer",
       // "apt-get clean -y"
       // "apt-get -f install",
-      "echo 00; while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
-      "echo 01; rm -rf /var/lib/apt/lists/*",
-      "echo 02; apt-get update && sleep 3",
-      "echo 03; while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
-      "echo 04; apt-get upgrade -y",
-      "echo 05; while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
-      "echo 06; apt-get install -y curl wget git vim tmux sudo tzdata",
-      "echo 07; while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
+      "while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
+      "rm -rf /var/lib/apt/lists/*",
+      "apt-get update && sleep 3",
+      "while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
+      "apt-get upgrade -y",
+      "while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
+      "apt-get install -y curl wget git vim tmux sudo tzdata",
+      "while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
     ]
   }
   provisioner "file" {

@@ -2,3 +2,4 @@ lalubuntu.tar
 *.log
 *.pem
 .env
+*-manifest.json

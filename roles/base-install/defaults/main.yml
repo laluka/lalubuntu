@@ -3,7 +3,6 @@
 default_packages:
   - apt-transport-https
   - autoconf
-  - bat
   - binwalk
   - bison
   - build-essential
@@ -108,6 +107,7 @@ tmux_conf: |
 
 mise_tools:
   - awscli
+  - bat
   - direnv
   - duf
   - glow

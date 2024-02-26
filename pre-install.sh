@@ -4,8 +4,10 @@ IFS=$'\n\t'
 # http://redsymbol.net/articles/unofficial-bash-strict-mode/
 
 echo "[*] Installing linux basics"
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install -y pipx curl vim git wget
+sudo apt-get clean
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install -y pipx curl vim git wget tzdata sudo tmux
 
 echo "[*] Installing Pipx & Ansible"
 pipx install ansible-core --force

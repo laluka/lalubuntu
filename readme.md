@@ -77,20 +77,29 @@ ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags hardening
 
 ```bash
 # Assuming packer installed with mise
-cd /opt/lalubuntu/packer
-packer init do-lalubuntu.pkr.hcl
+mise plugin add packer
+mise install packer@latest
+mise use -g packer@latest
 packer --version # Packer v1.10.1
 
 # Build Docker
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocean-$(date).log" packer build -only="*ocean*" -on-error=ask do-lalubuntu.pkr.hcl
-sudo docker run --rm -it --net=host --entrypoint zsh YOUR_BUILD_SHA -il
-# Build Digital Ocean
-export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="*docker*" -on-error=ask do-lalubuntu.pkr.hcl
+cd /opt/lalubuntu/packer && packer init lbt-docker.pkr.hcl
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" lbt-docker.pkr.hcl
+# Usage: docker run --rm -it --entrypoint /bin/bash lalubuntu:pre-install
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-base-install.docker.lbt" lbt-docker.pkr.hcl
+sudo docker run --rm -it --net=host lalubuntu:base-install
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-offensive-stuff.docker.lbt" lbt-docker.pkr.hcl
+sudo docker run --rm -it --net=host lalubuntu:offensive-stuff
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-gui-tools.docker.lbt" lbt-docker.pkr.hcl
+# xhost +local:*
+xhost local:root # Allow host X11 to be used inside the container
+sudo docker run --rm -it -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ --net=host lalubuntu:gui-tools eog /opt/lalubuntu/screens/logo-lalubuntu.png
 
-# Cheat Sheet for lalu, dont mind me, early work :)
-/opt/lalubuntu/packer && . /opt/precious/secret.rc && PACKER_LOG=1 PACKER_LOG_PATH="pocean-$(date).log" packer build -only="*ocean*" -on-error=ask do-lalubuntu.pkr.hcl
-/opt/lalubuntu/packer && . /opt/precious/secret.rc && PACKER_LOG=1 PACKER_LOG_PATH="pocker-$(date).log" packer build -only="*docker*" -on-error=ask do-lalubuntu.pkr.hcl
+# TODO verify hacker has no password, give cli to change it, assess ssh & nomachine login
+
+# Build Digital Ocean
+# export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocean-$(date).log" packer build -on-error=ask -only="*ocean*" do-lalubuntu.pkr.hcl
 ```
 
 ## Base install
