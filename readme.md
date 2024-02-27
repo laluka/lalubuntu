@@ -85,19 +85,20 @@ packer --version # Packer v1.10.1
 # Build Docker
 cd /opt/lalubuntu/packer && packer init lbt-docker.pkr.hcl
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" lbt-docker.pkr.hcl
-# Usage: docker run --rm -it --entrypoint /bin/bash -u root lalubuntu:pre-install -il
-
+# docker run --rm -it --entrypoint /bin/bash -u root lalubuntu:pre-install -il
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-base-install.docker.lbt" lbt-docker.pkr.hcl
-# Usage: docker run --rm -it --entrypoint /bin/zsh -u hacker lalubuntu:pre-install -il
-
+# docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker lalubuntu:base-install -il
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-offensive-stuff.docker.lbt" lbt-docker.pkr.hcl
-sudo docker run --rm -it --net=host lalubuntu:offensive-stuff
+# docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker lalubuntu:offensive-stuff -il
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-gui-tools.docker.lbt" lbt-docker.pkr.hcl
-# xhost +local:*
-xhost local:root # Allow host X11 to be used inside the container
-sudo docker run --rm -it -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ --net=host lalubuntu:gui-tools eog /opt/lalubuntu/screens/logo-lalubuntu.png
+docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ --net=host lalubuntu:gui-tools -il
+
+# xhost '+local:*'
+# xhost local:root # Allow host X11 to be used inside the container
 
 # TODO verify hacker has no password, give cli to change it, assess ssh & nomachine login
+# TODO refacto add clean nopassw-enable && nopassw-disable scripts
+# TODO push dockerhub
 
 # Build Digital Ocean
 # export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
