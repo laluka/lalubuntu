@@ -85,9 +85,11 @@ packer --version # Packer v1.10.1
 # Build Docker
 cd /opt/lalubuntu/packer && packer init lbt-docker.pkr.hcl
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" lbt-docker.pkr.hcl
-# Usage: docker run --rm -it --entrypoint /bin/bash lalubuntu:pre-install
+# Usage: docker run --rm -it --entrypoint /bin/bash -u root lalubuntu:pre-install -il
+
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-base-install.docker.lbt" lbt-docker.pkr.hcl
-sudo docker run --rm -it --net=host lalubuntu:base-install
+# Usage: docker run --rm -it --entrypoint /bin/zsh -u hacker lalubuntu:pre-install -il
+
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-offensive-stuff.docker.lbt" lbt-docker.pkr.hcl
 sudo docker run --rm -it --net=host lalubuntu:offensive-stuff
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-gui-tools.docker.lbt" lbt-docker.pkr.hcl

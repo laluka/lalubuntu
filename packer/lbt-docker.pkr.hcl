@@ -12,9 +12,10 @@ source "docker" "lbt" {
   changes = [
     "LABEL version=1.0",
     "ONBUILD date",
-    "USER hacker",
-    "WORKDIR /home/hacker",
-    "ENTRYPOINT /bin/zsh",
+    "USER root",
+    "WORKDIR /root",
+    "ENTRYPOINT /bin/bash",
+    "CMD -c",
   ]
 }
 
@@ -63,7 +64,13 @@ build {
   name = "lbt-base-install"
 
   source "source.docker.lbt" {
-    image = "ubuntu:pre-install"
+    image = "lalubuntu:pre-install"
+    pull = false
+  }
+
+  provisioner "file" {
+    source      = "/opt/lalubuntu"
+    destination = "/opt/lalubuntu"
   }
 
   provisioner "shell" {
@@ -73,7 +80,6 @@ build {
     ]
     inline = [
       "cd /opt/lalubuntu",
-      "git pull || true", # Try to run on latest
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags base-install\"",
       "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
