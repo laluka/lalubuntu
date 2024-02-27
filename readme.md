@@ -81,9 +81,11 @@ mise plugin add packer
 mise install packer@latest
 mise use -g packer@latest
 packer --version # Packer v1.10.1
-
-# Build Docker
 cd /opt/lalubuntu/packer && packer init lbt-docker.pkr.hcl
+
+# Build Docker Layers
+export DOCK_USER=thelaluka
+export DOCK_PASS=LALU_SECRET_HIHI
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" lbt-docker.pkr.hcl
 # docker run --rm -it --entrypoint /bin/bash -u root lalubuntu:pre-install -il
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-base-install.docker.lbt" lbt-docker.pkr.hcl

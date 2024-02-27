@@ -14,9 +14,18 @@ source "docker" "lbt" {
     "ONBUILD date",
     "USER root",
     "WORKDIR /root",
-    "ENTRYPOINT /bin/bash",
+    "ENTRYPOINT [\"/bin/bash\", \"-c\"]",
     "CMD -c",
   ]
+}
+
+variable "dock_user" {
+  type    = string
+  default = "${env("DOCK_USER")}"
+}
+variable "dock_pass" {
+  type    = string
+  default = "${env("DOCK_PASS")}"
 }
 
 build {
@@ -49,9 +58,16 @@ build {
     ]
   }
 
-  post-processor "docker-tag" {
-    repository = "lalubuntu"
-    tag = ["pre-install"]
+  post-processors {
+    post-processor "docker-tag" {
+      repository = "thelaluka/lalubuntu"
+      tags = ["pre-install"]
+    }
+    post-processor "docker-push" {
+      login = true
+      login_username = "${var.dock_user}"
+      login_password = "${var.dock_pass}"
+    }
   }
 
   post-processor "manifest" {
@@ -87,8 +103,8 @@ build {
   }
 
   post-processor "docker-tag" {
-    repository = "lalubuntu"
-    tag = ["base-install"]
+    repository = "thelaluka/lalubuntu"
+    tags = ["base-install"]
   }
 
   post-processor "manifest" {
@@ -119,8 +135,8 @@ build {
   }
 
   post-processor "docker-tag" {
-    repository = "lalubuntu"
-    tag = ["offensive-stuff"]
+    repository = "thelaluka/lalubuntu"
+    tags = ["offensive-stuff"]
   }
 
   post-processor "manifest" {
@@ -151,8 +167,8 @@ build {
   }
 
   post-processor "docker-tag" {
-    repository = "lalubuntu"
-    tag = ["gui-tools", "latest"]
+    repository = "thelaluka/lalubuntu"
+    tags = ["gui-tools", "latest"]
   }
 
   post-processor "manifest" {
