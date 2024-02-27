@@ -61,17 +61,17 @@ build {
   post-processors {
     post-processor "docker-tag" {
       repository = "thelaluka/lalubuntu"
-      tags = ["pre-install"]
+      tags       = ["pre-install"]
     }
     post-processor "docker-push" {
-      login = true
+      login          = true
       login_username = "${var.dock_user}"
       login_password = "${var.dock_pass}"
     }
   }
 
   post-processor "manifest" {
-    output = "lbt-pre-install-manifest.json"
+    output     = "lbt-pre-install-manifest.json"
     strip_path = true
   }
 }
@@ -81,7 +81,7 @@ build {
 
   source "source.docker.lbt" {
     image = "lalubuntu:pre-install"
-    pull = false
+    pull  = false
   }
 
   provisioner "file" {
@@ -102,20 +102,20 @@ build {
     ]
   }
 
-post-processors {
-  post-processor "docker-tag" {
-    repository = "thelaluka/lalubuntu"
-    tags = ["base-install"]
-  }
+  post-processors {
+    post-processor "docker-tag" {
+      repository = "thelaluka/lalubuntu"
+      tags       = ["base-install"]
+    }
     post-processor "docker-push" {
-      login = true
+      login          = true
       login_username = "${var.dock_user}"
       login_password = "${var.dock_pass}"
     }
   }
 
   post-processor "manifest" {
-    output = "lbt-base-install-manifest.json"
+    output     = "lbt-base-install-manifest.json"
     strip_path = true
   }
 }
@@ -125,7 +125,7 @@ build {
 
   source "source.docker.lbt" {
     image = "lalubuntu:base-install"
-    pull = false
+    pull  = false
   }
 
   provisioner "shell" {
@@ -141,20 +141,20 @@ build {
     ]
   }
 
-post-processors {
-  post-processor "docker-tag" {
-    repository = "thelaluka/lalubuntu"
-    tags = ["offensive-stuff"]
-  }
+  post-processors {
+    post-processor "docker-tag" {
+      repository = "thelaluka/lalubuntu"
+      tags       = ["offensive-stuff"]
+    }
     post-processor "docker-push" {
-      login = true
+      login          = true
       login_username = "${var.dock_user}"
       login_password = "${var.dock_pass}"
     }
   }
 
   post-processor "manifest" {
-    output = "lbt-offensive-stuff-manifest.json"
+    output     = "lbt-offensive-stuff-manifest.json"
     strip_path = true
   }
 }
@@ -164,7 +164,7 @@ build {
 
   source "source.docker.lbt" {
     image = "lalubuntu:offensive-stuff"
-    pull = false
+    pull  = false
   }
 
   provisioner "shell" {
@@ -179,20 +179,20 @@ build {
       "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
     ]
   }
-post-processors {
-  post-processor "docker-tag" {
-    repository = "thelaluka/lalubuntu"
-    tags = ["gui-tools", "latest"]
-  }
+  post-processors {
+    post-processor "docker-tag" {
+      repository = "thelaluka/lalubuntu"
+      tags       = ["gui-tools", "latest"]
+    }
     post-processor "docker-push" {
-      login = true
+      login          = true
       login_username = "${var.dock_user}"
       login_password = "${var.dock_pass}"
     }
   }
 
   post-processor "manifest" {
-    output = "lbt-gui-tools-manifest.json"
+    output     = "lbt-gui-tools-manifest.json"
     strip_path = true
   }
 }
