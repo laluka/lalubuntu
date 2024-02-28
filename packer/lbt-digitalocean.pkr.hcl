@@ -39,8 +39,8 @@ build {
       "echo \"debconf debconf/frontend select Noninteractive\" | debconf-set-selections",
       "apt-get update",
       "apt-get install -y curl vim git wget tzdata sudo",
-      "git clone https://github.com/laluka/lalubuntu"
-      "mv lalubuntu /opt/lalubuntu"
+      "git clone https://github.com/laluka/lalubuntu",
+      "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
       "bash -x packer/create-user.sh",
       "chown -R hacker:hacker /opt/lalubuntu",

@@ -50,8 +50,8 @@ build {
       "(id;date) | tee /.provisionned_by_packer",
       "apt-get update",
       "apt-get install -y curl vim git wget tzdata sudo",
-      "git clone https://github.com/laluka/lalubuntu"
-      "mv lalubuntu /opt/lalubuntu"
+      "git clone https://github.com/laluka/lalubuntu",
+      "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
       "bash -x packer/create-user.sh",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
@@ -94,8 +94,8 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
-      "git clone https://github.com/laluka/lalubuntu"
-      "mv lalubuntu /opt/lalubuntu"
+      "git clone https://github.com/laluka/lalubuntu",
+      "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
       "cd /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
