@@ -4,10 +4,6 @@ packer {
       version = ">= 1.3.0"
       source  = "github.com/digitalocean/digitalocean"
     }
-    docker = {
-      source  = "github.com/hashicorp/docker"
-      version = ">= 1.0.9"
-    }
   }
 }
 
@@ -19,28 +15,16 @@ source "digitalocean" "src" {
   snapshot_name = "lalubuntu-22.04"
 }
 
-source "docker" "src" {
-  image = "ubuntu:22.04"
-  // export_path = "lalubuntu.tar"
-  commit = true
-  changes = [
-    "LABEL version=1.0",
-    "ONBUILD date",
-    "USER hacker",
-    "WORKDIR /home/hacker",
-    // "CMD /usr/bin/zsh -l",
-    // "ENTRYPOINT /usr/bin/zsh -l",
-  ]
-}
-
 build {
   name = "lbt"
 
-  source "source.docker.src" {
-    name = "lalubuntu"
-  }
   source "source.digitalocean.src" {
     name = "lalubuntu"
+  }
+
+  provisioner "file" {
+    source      = "/opt/lalubuntu"
+    destination = "/opt/lalubuntu"
   }
 
   provisioner "shell" {
@@ -51,39 +35,18 @@ build {
     inline = [
       "if command -v cloud-init; then cloud-init status --wait; fi",
       "(id;date) | tee /.provisionned_by_packer",
-      // "apt-get clean -y"
-      // "apt-get -f install",
-      "while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
-      "rm -rf /var/lib/apt/lists/*",
-      "apt-get update && sleep 3",
-      "while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
-      "apt-get upgrade -y",
-      "while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
-      "apt-get install -y curl wget git vim tmux sudo tzdata",
-      "while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
-    ]
-  }
-  provisioner "file" {
-    source      = "/opt/lalubuntu"
-    destination = "/opt/lalubuntu"
-  }
-  provisioner "shell" {
-    environment_vars = [
-      "DEBIAN_FRONTEND=noninteractive",
-      "TZ=Etc/UTC",
-    ]
-    inline = [
-      // "git clone https://github.com/laluka/lalubuntu",
-      // "mv lalubuntu /opt/lalubuntu",
+      "echo \"debconf debconf/frontend select Noninteractive\" | debconf-set-selections",
+      "apt-get update",
+      "apt-get install -y curl vim git wget tzdata sudo",
       "cd /opt/lalubuntu",
       "bash -x packer/create-user.sh",
-      "sudo -u hacker -- bash -x pre-install.sh",
-      "while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
-      "apt-get update",
-      "while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do echo Waiting for lock files. ; sleep 1; done",
-      "sudo -u hacker -- bash -l -c \"ansible-playbook -vvv -i inventory.ini main.yml --tags base-install\"",
-      // "ansible-playbook -vvv -i inventory.ini main.yml --tags offensive-stuff",
-      "sed -i \"/TMPHACK_INSTALL_ONLY/d\" /etc/sudoers", # Remove tmp hack for user rights
+      "chown -R hacker:hacker /opt/lalubuntu",
+      "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
+      "su hacker -c \"DEBIAN_FRONTEND=noninteractive bash -x pre-install.sh\"",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags base-install\"",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags offensive-stuff\"",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags gui-tools\"",
+      "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
     ]
   }
 }

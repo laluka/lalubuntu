@@ -8,6 +8,7 @@ alias ta='tmux attach'
 alias b='bat'
 alias v='nvim'
 alias c='code'
+alias p='python'
 alias temp='pushd $(mktemp -d)'
 alias lbt='cd /opt/lalubuntu'
 alias life='cd /opt/lalulife' # Might be released some day ;)

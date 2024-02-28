@@ -113,9 +113,19 @@ docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker -e DISPLAY -
 
 ```bash
 # Build Digital Ocean
-cd /opt/lalubuntu/packer && packer init lbt-TODO.pkr.hcl
+cd /opt/lalubuntu/packer && packer init lbt-digitalocean.pkr.hcl
 # export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-# PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocean-$(date).log" packer build -on-error=ask -only="*ocean*" do-lalubuntu.pkr.hcl
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocean-$(date).log" packer build lbt-digitalocean.pkr.hcl
+# Then visit https://cloud.digitalocean.com/images/snapshots/droplets & create your droplet from the last SnapShot! :)
+export DO_IP=X.X.X.X
+ssh "root@$DO_IP" systemctl start nxserver.service
+ssh "root@$DO_IP" passwd hacker # Set your password
+# Start NoMachine & Connect with hacker:127.0.0.1:4000
+# Remember to:
+#  - NoMachine -> Set resolution to 1920x1080
+#  - NoMachine -> Grab keyboard input (for i3 bindings)
+#  - Remote -> Via settings, Set resolution to 1920x1080
+# ~ Enjoyyyy ~
 ```
 
 ## Base install
