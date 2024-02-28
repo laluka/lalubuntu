@@ -69,11 +69,6 @@ build {
       login_password = "${var.dock_pass}"
     }
   }
-
-  post-processor "manifest" {
-    output     = "lbt-pre-install-manifest.json"
-    strip_path = true
-  }
 }
 
 build {
@@ -113,11 +108,6 @@ build {
       login_password = "${var.dock_pass}"
     }
   }
-
-  post-processor "manifest" {
-    output     = "lbt-base-install-manifest.json"
-    strip_path = true
-  }
 }
 
 build {
@@ -152,11 +142,6 @@ build {
       login_password = "${var.dock_pass}"
     }
   }
-
-  post-processor "manifest" {
-    output     = "lbt-offensive-stuff-manifest.json"
-    strip_path = true
-  }
 }
 
 build {
@@ -189,10 +174,5 @@ build {
       login_username = "${var.dock_user}"
       login_password = "${var.dock_pass}"
     }
-  }
-
-  post-processor "manifest" {
-    output     = "lbt-gui-tools-manifest.json"
-    strip_path = true
   }
 }
