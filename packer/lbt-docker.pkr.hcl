@@ -14,9 +14,18 @@ source "docker" "lbt" {
     "ONBUILD date",
     "USER root",
     "WORKDIR /root",
-    "ENTRYPOINT /bin/bash",
+    "ENTRYPOINT [\"/bin/bash\", \"-c\"]",
     "CMD -c",
   ]
+}
+
+variable "dock_user" {
+  type    = string
+  default = "${env("DOCK_USER")}"
+}
+variable "dock_pass" {
+  type    = string
+  default = "${env("DOCK_PASS")}"
 }
 
 build {
@@ -49,13 +58,20 @@ build {
     ]
   }
 
-  post-processor "docker-tag" {
-    repository = "lalubuntu"
-    tag = ["pre-install"]
+  post-processors {
+    post-processor "docker-tag" {
+      repository = "thelaluka/lalubuntu"
+      tags       = ["pre-install"]
+    }
+    post-processor "docker-push" {
+      login          = true
+      login_username = "${var.dock_user}"
+      login_password = "${var.dock_pass}"
+    }
   }
 
   post-processor "manifest" {
-    output = "lbt-pre-install-manifest.json"
+    output     = "lbt-pre-install-manifest.json"
     strip_path = true
   }
 }
@@ -65,7 +81,7 @@ build {
 
   source "source.docker.lbt" {
     image = "lalubuntu:pre-install"
-    pull = false
+    pull  = false
   }
 
   provisioner "file" {
@@ -86,45 +102,97 @@ build {
     ]
   }
 
-  post-processor "docker-tag" {
-    repository = "lalubuntu"
-    tag = ["base-install"]
+  post-processors {
+    post-processor "docker-tag" {
+      repository = "thelaluka/lalubuntu"
+      tags       = ["base-install"]
+    }
+    post-processor "docker-push" {
+      login          = true
+      login_username = "${var.dock_user}"
+      login_password = "${var.dock_pass}"
+    }
   }
 
   post-processor "manifest" {
-    output = "lbt-base-install-manifest.json"
+    output     = "lbt-base-install-manifest.json"
     strip_path = true
   }
 }
 
-# build {
-#   name = "lbt-offensive-stuff"
+build {
+  name = "lbt-offensive-stuff"
 
-#   source "source.docker.lbt" {
-#     image = "lalubuntu:base-install"
-#     pull = false
-#   }
+  source "source.docker.lbt" {
+    image = "lalubuntu:base-install"
+    pull  = false
+  }
 
-#   provisioner "shell" {
-#     environment_vars = [
-#       "DEBIAN_FRONTEND=noninteractive",
-#       "TZ=Etc/UTC",
-#     ]
-#     inline = [
-#       "cd /opt/lalubuntu",
-#       "echo \"$username ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
-#       "sudo -u hacker -- bash -xc \"ansible-playbook -vvv -i inventory.ini main.yml --tags offensive-stuff\"",
-#       "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
-#     ]
-#   }
+  provisioner "shell" {
+    environment_vars = [
+      "DEBIAN_FRONTEND=noninteractive",
+      "TZ=Etc/UTC",
+    ]
+    inline = [
+      "cd /opt/lalubuntu",
+      "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags offensive-stuff\"",
+      "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
+    ]
+  }
 
-#   post-processor "docker-tag" {
-#     repository = "lalubuntu"
-#     tag = ["offensive-stuff"]
-#   }
+  post-processors {
+    post-processor "docker-tag" {
+      repository = "thelaluka/lalubuntu"
+      tags       = ["offensive-stuff"]
+    }
+    post-processor "docker-push" {
+      login          = true
+      login_username = "${var.dock_user}"
+      login_password = "${var.dock_pass}"
+    }
+  }
 
-#   post-processor "manifest" {
-#     output = "lbt-offensive-stuff-manifest.json"
-#     strip_path = true
-#   }
-# }
+  post-processor "manifest" {
+    output     = "lbt-offensive-stuff-manifest.json"
+    strip_path = true
+  }
+}
+
+build {
+  name = "lbt-gui-tools"
+
+  source "source.docker.lbt" {
+    image = "lalubuntu:offensive-stuff"
+    pull  = false
+  }
+
+  provisioner "shell" {
+    environment_vars = [
+      "DEBIAN_FRONTEND=noninteractive",
+      "TZ=Etc/UTC",
+    ]
+    inline = [
+      "cd /opt/lalubuntu",
+      "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags gui-tools\"",
+      "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
+    ]
+  }
+  post-processors {
+    post-processor "docker-tag" {
+      repository = "thelaluka/lalubuntu"
+      tags       = ["gui-tools", "latest"]
+    }
+    post-processor "docker-push" {
+      login          = true
+      login_username = "${var.dock_user}"
+      login_password = "${var.dock_pass}"
+    }
+  }
+
+  post-processor "manifest" {
+    output     = "lbt-gui-tools-manifest.json"
+    strip_path = true
+  }
+}

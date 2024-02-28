@@ -73,33 +73,47 @@ ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags gui-tools
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags hardening
 ```
 
-## Packer - DRAFT WORK - NO SUPPORT FOR NOW
+## Packer - Requirements
 
 ```bash
-# Assuming packer installed with mise
+# Installing packer with mise-en-place
 mise plugin add packer
 mise install packer@latest
 mise use -g packer@latest
 packer --version # Packer v1.10.1
+```
 
-# Build Docker
+## Packer - Docker Images
+
+> I provide public images support only, if you want to build your own comment the "docker-push" packer post-processor!
+
+```bash
+# Build Docker Layers
+export DOCK_USER=thelaluka
+export DOCK_PASS=LALU_SECRET_HIHI
+env | grep -F DOCK
 cd /opt/lalubuntu/packer && packer init lbt-docker.pkr.hcl
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" lbt-docker.pkr.hcl
-# Usage: docker run --rm -it --entrypoint /bin/bash -u root lalubuntu:pre-install -il
-
+# docker run --rm -it --entrypoint /bin/bash -u root lalubuntu:pre-install -il
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-base-install.docker.lbt" lbt-docker.pkr.hcl
-# Usage: docker run --rm -it --entrypoint /bin/zsh -u hacker lalubuntu:pre-install -il
-
+# docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker lalubuntu:base-install -il
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-offensive-stuff.docker.lbt" lbt-docker.pkr.hcl
-sudo docker run --rm -it --net=host lalubuntu:offensive-stuff
+# docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker lalubuntu:offensive-stuff -il
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-gui-tools.docker.lbt" lbt-docker.pkr.hcl
-# xhost +local:*
-xhost local:root # Allow host X11 to be used inside the container
-sudo docker run --rm -it -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ --net=host lalubuntu:gui-tools eog /opt/lalubuntu/screens/logo-lalubuntu.png
 
-# TODO verify hacker has no password, give cli to change it, assess ssh & nomachine login
+# LOCAL SSH
+docker run --rm -it --entrypoint /bin/zsh -p 2222:22 -d lalubuntu:gui-tools -c 'echo "hacker:LeelooMultipass" | chpasswd && /etc/init.d/ssh start && zsh -il'
+ssh -p 2222 hacker@127.0.0.1 # LeelooMultipass
 
+# LOCAL SHELL & GUI apps
+docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ --net=host --privileged -d lalubuntu:gui-tools
+```
+
+## Packer - Digital Ocean
+
+```bash
 # Build Digital Ocean
+cd /opt/lalubuntu/packer && packer init lbt-TODO.pkr.hcl
 # export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 # PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocean-$(date).log" packer build -on-error=ask -only="*ocean*" do-lalubuntu.pkr.hcl
 ```
