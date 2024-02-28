@@ -1,5 +1,6 @@
 # Utils
 ## Directories
+alias sudo='sudo ' # Trick to have ALL aliases available with sudo <3
 alias dl='cd ~/Downloads'
 alias da='cd /DATA'
 alias tn='tmux new'
@@ -121,6 +122,7 @@ alias docker-stopall='docker stop $(docker ps -q)'
 alias docker-get-image-size='f(){ docker manifest inspect -v "$1" | jq -c "if type == \"array\" then .[] else . end" |  jq -r "[ ( .Descriptor.platform | [ .os, .architecture, .variant, .\"os.version\" ] | del(..|nulls) | join(\"/\") ), ( [ .SchemaV2Manifest.layers[].size ] | add ) ] | join(\" \")" | numfmt --to iec --format "%.2f" --field 2 | column -t ;  unset -f f; }; f'
 alias dockex='docker exec -it $(docker ps | grep -vF "CONTAINER ID" | fzf | cut -d" " -f1)'
 alias dockit='docker run --rm -it -v "$PWD":/host --net=host'
+alias dps='docker ps'
 alias wipe-docker-all='docker system prune -a -f --volumes'
 alias wipe-docker-image='docker rmi -f $(docker images -q)'
 alias wipe-docker-network='docker network rm $(docker network ls -q | tr "\n" " ")'
@@ -168,7 +170,7 @@ alias retdec='dockit blacktop/retdec'
 alias bettercap-wifi="bettercap -iface wlp0s20f3 -eval \"wifi.recon on;set wifi.show.sort clients desc;set ticker.commands 'clear; wifi.show';ticker on\""
 
 ## Sysadmin
-alias sysdig='sudo docker run --rm -i -t --privileged --net=host -v /var/run/docker.sock:/host/var/run/docker.sock -v /dev:/host/dev -v /proc:/host/proc:ro -v /boot:/host/boot:ro -v /src:/src -v /lib/modules:/host/lib/modules:ro -v /usr:/host/usr:ro -v /etc:/host/etc:ro  docker.io/sysdig/sysdig sysdig'
+alias sysdig='docker run --rm -it --privileged --net=host -v /var/run/docker.sock:/host/var/run/docker.sock -v /dev:/host/dev -v /proc:/host/proc:ro -v /boot:/host/boot:ro -v /src:/src -v /lib/modules:/host/lib/modules:ro -v /usr:/host/usr:ro -v /etc:/host/etc:ro -d --name sysdig docker.io/sysdig/sysdig'
 alias quick-ssh-srv='dockit -d thelaluka/welcome:quick-ssh'
 alias swagger-editor='dockit swaggerapi/swagger-editor'
 alias crypt-pad='mkdir datastore; docker run --rm -it -p 3000:3000 -v "$PWD/datastore:/cryptpad/datastore" arno0x0x/docker-cryptpad'
