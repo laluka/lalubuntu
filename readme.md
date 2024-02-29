@@ -91,11 +91,12 @@ packer --version # Packer v1.10.1
 
 ```bash
 # LOCAL SSH
-docker run --rm -it --entrypoint /bin/zsh -p 2222:22 -d lalubuntu:latest -c 'echo "hacker:LeelooMultipass" | chpasswd && /etc/init.d/ssh start && zsh -il'
+docker run --rm -it --name lbt --entrypoint /bin/zsh -p 2222:22 -d thelaluka/lalubuntu:latest -c 'echo "hacker:LeelooMultipass" | chpasswd && /etc/init.d/ssh start && zsh -il'
 ssh -p 2222 hacker@127.0.0.1 # LeelooMultipass
 
 # LOCAL SHELL & GUI apps
-docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ --net=host --privileged -d lalubuntu:gui-tools
+docker run --rm -it --name lbt --entrypoint /bin/zsh -u hacker -w /home/hacker -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ --net=host --privileged -d thelaluka/lalubuntu:latest
+docker exec -it lbt meld /etc/passwd /etc/group /etc/subuid # Simple 3-way visual diff
 ```
 
 ### Build You Own
