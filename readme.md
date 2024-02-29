@@ -89,9 +89,17 @@ packer --version # Packer v1.10.1
 
 ### Usage
 
+https://hub.docker.com/repository/docker/thelaluka/lalubuntu/general
+
+Available Tags:
+- pre-install
+- base-install
+- offensive-stuff
+- gui-tools	& latest
+
 ```bash
 # LOCAL SSH
-docker run --rm -it --name lbt --entrypoint /bin/zsh -p 2222:22 -d thelaluka/lalubuntu:latest -c 'echo "hacker:LeelooMultipass" | chpasswd && /etc/init.d/ssh start && zsh -il'
+docker run --rm -it --name lbt --entrypoint /bin/zsh -p 2222:22 -d thelaluka/lalubuntu:offensive-stuff -c 'echo "hacker:LeelooMultipass" | chpasswd && /etc/init.d/ssh start && zsh -il'
 ssh -p 2222 hacker@127.0.0.1 # LeelooMultipass
 
 # LOCAL SHELL & GUI apps
