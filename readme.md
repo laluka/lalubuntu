@@ -73,24 +73,68 @@ ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags gui-tools
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags hardening
 ```
 
-## Packer - DRAFT WORK - NO SUPPORT FOR NOW
+## Packer - Requirements
 
 ```bash
-# Assuming packer installed with mise
-cd /opt/lalubuntu/packer
-packer init do-lalubuntu.pkr.hcl
+# Installing packer with mise-en-place
+mise plugin add packer
+mise install packer@latest
+mise use -g packer@latest
 packer --version # Packer v1.10.1
+```
 
-# Build Docker
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocean-$(date).log" packer build -only="*ocean*" -on-error=ask do-lalubuntu.pkr.hcl
-sudo docker run --rm -it --net=host --entrypoint zsh YOUR_BUILD_SHA -il
+## Packer - Docker Images
+
+> I provide public images support only, if you want to build your own comment the "docker-push" packer post-processor!
+
+### Usage
+
+```bash
+# LOCAL SSH
+docker run --rm -it --entrypoint /bin/zsh -p 2222:22 -d lalubuntu:latest -c 'echo "hacker:LeelooMultipass" | chpasswd && /etc/init.d/ssh start && zsh -il'
+ssh -p 2222 hacker@127.0.0.1 # LeelooMultipass
+
+# LOCAL SHELL & GUI apps
+docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ --net=host --privileged -d lalubuntu:gui-tools
+```
+
+### Build You Own
+
+```bash
+# Build Docker Layers
+export DOCK_USER=thelaluka
+export DOCK_PASS=LALU_SECRET_HIHI
+env | grep -F DOCK
+cd /opt/lalubuntu/packer && packer init lbt-docker.pkr.hcl
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" lbt-docker.pkr.hcl
+# docker run --rm -it --entrypoint /bin/bash -u root lalubuntu:pre-install -il
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-base-install.docker.lbt" lbt-docker.pkr.hcl
+# docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker lalubuntu:base-install -il
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-offensive-stuff.docker.lbt" lbt-docker.pkr.hcl
+# docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker lalubuntu:offensive-stuff -il
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-gui-tools.docker.lbt" lbt-docker.pkr.hcl
+# Then refer to "Usage"
+```
+
+## Packer - Digital Ocean
+
+> This will use your account to build the image, snapshot it, and allow easy & fast deploy, single or fleet!
+
+```bash
 # Build Digital Ocean
-export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="*docker*" -on-error=ask do-lalubuntu.pkr.hcl
-
-# Cheat Sheet for lalu, dont mind me, early work :)
-/opt/lalubuntu/packer && . /opt/precious/secret.rc && PACKER_LOG=1 PACKER_LOG_PATH="pocean-$(date).log" packer build -only="*ocean*" -on-error=ask do-lalubuntu.pkr.hcl
-/opt/lalubuntu/packer && . /opt/precious/secret.rc && PACKER_LOG=1 PACKER_LOG_PATH="pocker-$(date).log" packer build -only="*docker*" -on-error=ask do-lalubuntu.pkr.hcl
+cd /opt/lalubuntu/packer && packer init lbt-digitalocean.pkr.hcl
+# export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocean-$(date).log" packer build lbt-digitalocean.pkr.hcl
+# Then visit https://cloud.digitalocean.com/images/snapshots/droplets & create your droplet from the last SnapShot! :)
+export DO_IP=X.X.X.X
+ssh "root@$DO_IP" systemctl start nxserver.service
+ssh "root@$DO_IP" passwd hacker # Set your password
+# Start NoMachine & Connect with hacker:127.0.0.1:4000
+# Remember to:
+#  - NoMachine -> Set resolution to 1920x1080
+#  - NoMachine -> Grab keyboard input (for i3 bindings)
+#  - Remote -> Via settings, Set resolution to 1920x1080
+# ~ Enjoyyyy ~
 ```
 
 ## Base install
@@ -157,26 +201,15 @@ Some quick hardening will be done :
 
 ## Changelog
 
-- 2024/01/06
-  - Renamed `rtx` to `mise-en-place`
-  - Added a changelog section to `readme.md`
-- 2024/01/12
-  - Added a new alias: `yt-dlp`
-  - Updated `readme.md` with `TODO` section
-  - Created `vscode-extensions.lst` for VS Code extensions
-  - Added auto completion for a few kube/terraform related tools
-  - Added gnome-tweaks, blueman, obs-studio from the official ppa
-  - Added lalutools pty4all, pypotomux, broneypote, bypass-url-parser
-  - Added bindsym for sound settings
-- 2024/02/24
-  - Created `.gitignore` with patterns for `lalubuntu.tar`, `*.log`, `*.pem`, `.env`
-  - Added `clean-crash` alias to remove files from `/var/crash`
-  - Refactored roles in `main.yml` with tags for organization (`base-install`, `offensive-stuff`, `gui-tools`, `hardening`)
-  - Added user creation script `create-user.sh` for user `hacker` with temp sudo privileges for install time
-  - Implemented Packer configuration `do-lalubuntu.pkr.hcl` for Docker Imge and DigitalOcean snapshot creation
-  - Updated `readme.md` with TODOs, Packer instructions, and additional tools to install
-  - Fixed mise sometimes not being loaded & removed xrandr unused aliases
-  - Implemented security measures and cleanup in Packer build process
+- 2024/02/28
+  - Enhanced aliases file with additional aliases: sudo-alias trick, b for bat, v for nvim, p for python, and dps for docker ps
+  - Modified sysdig alias in aliases for improved Docker container handling
+  - In packer/create-user.sh, removed password setting for user hacker and added hacker to sudo group
+  - Added new Packer configuration files lbt-digitalocean.pkr.hcl and lbt-docker.pkr.hcl for building DigitalOcean and Docker images
+  - Updated pre-install.sh script with apt-get clean and package installation changes
+  - Revised readme.md with detailed Packer usage instructions for Docker and DigitalOcean, including environment setup and build commands
+  - Modified roles/base-install/defaults/main.yml by removing bat from default_packages and adding it to mise_tools
+  - Updated roles/base-install/tasks/default-packages.yml to check for and disable Ubuntu Pro ESM spammy messages
 - 2024/02/26
   - Updated `readme.md` with section "Install Specific Roles Only" with previous tag addons
   - Removed `trash-cli` from `base-install` default packages and added latest install via pipx
@@ -189,11 +222,29 @@ Some quick hardening will be done :
   - Updated `gui-tools` tasks for `cameractrls` and `nomachine` with various fixes
   - Allow `nomachine` install to fail, they often make breaking changes to the install process
   - Updated `offensive-stuff` `go_packages` and `git_repositories` lists
+- 2024/02/24
+  - Created `.gitignore` with patterns for `lalubuntu.tar`, `*.log`, `*.pem`, `.env`
+  - Added `clean-crash` alias to remove files from `/var/crash`
+  - Refactored roles in `main.yml` with tags for organization (`base-install`, `offensive-stuff`, `gui-tools`, `hardening`)
+  - Added user creation script `create-user.sh` for user `hacker` with temp sudo privileges for install time
+  - Implemented Packer configuration `do-lalubuntu.pkr.hcl` for Docker Imge and DigitalOcean snapshot creation
+  - Updated `readme.md` with TODOs, Packer instructions, and additional tools to install
+  - Fixed mise sometimes not being loaded & removed xrandr unused aliases
+  - Implemented security measures and cleanup in Packer build process
+- 2024/01/12
+  - Added a new alias: `yt-dlp`
+  - Updated `readme.md` with `TODO` section
+  - Created `vscode-extensions.lst` for VS Code extensions
+  - Added auto completion for a few kube/terraform related tools
+  - Added gnome-tweaks, blueman, obs-studio from the official ppa
+  - Added lalutools pty4all, pypotomux, broneypote, bypass-url-parser
+  - Added bindsym for sound settings
+- 2024/01/06
+  - Renamed `rtx` to `mise-en-place`
+  - Added a changelog section to `readme.md`
 
 ## TODO
 
 ```bash
-packer: hacker account nologin
-packer: one liner to set remote password
-packer: add github actions
+# None for now :)
 ```

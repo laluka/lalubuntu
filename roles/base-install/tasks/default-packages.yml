@@ -1,10 +1,16 @@
 ---
+- name: Check if ESM apt hook configuration file exists
+  stat:
+    path: /etc/apt/apt.conf.d/20apt-esm-hook.conf
+  register: esm_hook_file
+
 - name: Disable Ubuntu Pro Esm Spammy Messages OMFG
   replace:
     path: /etc/apt/apt.conf.d/20apt-esm-hook.conf
     regexp: '^([^#].*)$'
     replace: '#\1'
   become: true
+  when: esm_hook_file.stat.exists
 
 - name: Update apt repo/cache
   ansible.builtin.apt:
