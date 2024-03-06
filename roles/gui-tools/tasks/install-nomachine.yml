@@ -10,10 +10,10 @@
   block:
     - name: Get NoMachine URL
       ansible.builtin.uri:
-        url: '{{ nomachine_download_url }}'
+        url: https://downloads.nomachine.com/download/?id=1
         return_content: yes
       register: nomachine_page
-      failed_when: nomachine_page.status != 200 or nomachine_page.content contains 'temporarily disabled whilst we update'
+      failed_when: nomachine_page.status != 200 or 'temporarily disabled whilst we update' in nomachine_page.content
       ignore_errors: true
 
     - name: Extract NoMachine URL
