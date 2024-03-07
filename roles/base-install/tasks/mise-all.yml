@@ -59,3 +59,10 @@
     update: yes
     force: yes
   when: lazyvim_installed.stat.exists == False
+
+- name: Disable mouse integration in Neovim
+  ansible.builtin.lineinfile:
+    path: '{{ ansible_env.HOME }}/.config/nvim/init.lua'
+    state: present
+    line: 'vim.opt.mouse = ""'
+    insertafter: EOF
