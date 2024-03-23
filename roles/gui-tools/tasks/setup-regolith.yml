@@ -67,6 +67,7 @@
   ansible.builtin.blockinfile:
     path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'
     block: '{{ i3_xresources_block }}'
+    marker: '! Ansible managed block'
     create: yes
 
 - name: Set GNOME interface to prefer dark color scheme
