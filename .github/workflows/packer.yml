@@ -38,7 +38,7 @@ jobs:
           cd packer
           # export PACKER_LOG=1
           # export PACKER_LOG_PATH=/dev/stdout
-          packer build -only=lbt-pre-install.docker.lbt lbt-docker.pkr.hcl
+          # packer build -only=lbt-pre-install.docker.lbt lbt-docker.pkr.hcl
 
       - name: Run `packer build docker base-install`
         id: base_install
