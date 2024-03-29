@@ -8,7 +8,6 @@ packer {
 }
 
 source "docker" "lbt" {
-  commit = true
   changes = [
     "LABEL version=1.0",
     "ONBUILD date",
