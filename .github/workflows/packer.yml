@@ -34,4 +34,4 @@ jobs:
 
       - name: Run `packer build`
         id: build
-        run: "cd packer && PACKER_LOG=1 PACKER_LOG_PATH=/dev/stdout packer build ./lbt-docker.pkr.hcl"
+        run: "cd packer && PACKER_LOG=1 PACKER_LOG_PATH=/dev/stdout packer build -parallel-builds=1 ./lbt-docker.pkr.hcl"
