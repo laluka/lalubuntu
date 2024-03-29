@@ -66,10 +66,6 @@ build {
       repository = "thelaluka/lalubuntu"
       tags       = ["pre-install"]
     }
-    post-processor "docker-import" {
-      repository = "thelaluka/lalubuntu"
-      tag = "pre-install"
-    }
     // post-processor "docker-push" {
       // login          = true
       // login_username = "${var.dock_user}"
