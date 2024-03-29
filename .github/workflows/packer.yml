@@ -2,6 +2,8 @@ name: packer
 
 on:
   push:
+    branches:
+      - '**'
 
 env:
   PRODUCT_VERSION: "latest"
@@ -22,14 +24,14 @@ jobs:
 
       - name: Run `packer init`
         id: init
-        run:
+        run: |
           shell: bash
           working-directory: ${{ github.workspace }}/packer
           command: packer init lbt-docker.pkr.hcl
 
       - name: Run `packer validate`
         id: validate
-        run:
+        run: |
           shell: bash
           working-directory: ${{ github.workspace }}/packer
           command: PACKER_LOG=1 PACKER_LOG_PATH=/dev/stdout packer build -only="lbt-pre-install.docker.lbt" lbt-docker.pkr.hcl
