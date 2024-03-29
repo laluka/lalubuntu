@@ -36,30 +36,30 @@ jobs:
         id: pre_install
         run: |
           cd packer
-          export PACKER_LOG=1
-          export PACKER_LOG_PATH=/dev/stdout
+          # export PACKER_LOG=1
+          # export PACKER_LOG_PATH=/dev/stdout
           packer build -only=lbt-pre-install.docker.lbt lbt-docker.pkr.hcl
 
       - name: Run `packer build docker base-install`
         id: base_install
         run: |
           cd packer
-          export PACKER_LOG=1
-          export PACKER_LOG_PATH=/dev/stdout
+          # export PACKER_LOG=1
+          # export PACKER_LOG_PATH=/dev/stdout
           packer build -only=lbt-base-install.docker.lbt lbt-docker.pkr.hcl
 
       - name: Run `packer build docker lbt-offensive-stuff`
         id: lbt_offensive_stuff
         run: |
           cd packer
-          export PACKER_LOG=1
-          export PACKER_LOG_PATH=/dev/stdout
+          # export PACKER_LOG=1
+          # export PACKER_LOG_PATH=/dev/stdout
           packer build -only=lbt-offensive-stuff.docker.lbt lbt-docker.pkr.hcl
 
       - name: Run `packer build docker lbt-gui-tools`
         id: lbt_gui_tools
         run: |
           cd packer
-          export PACKER_LOG=1
-          export PACKER_LOG_PATH=/dev/stdout
+          # export PACKER_LOG=1
+          # export PACKER_LOG_PATH=/dev/stdout
           packer build -only=lbt-gui-tools.docker.lbt lbt-docker.pkr.hcl
