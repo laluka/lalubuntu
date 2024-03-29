@@ -85,7 +85,7 @@ build {
 
   # DEV ONLY
   provisioner "file" {
-    source      = "/opt/lalubuntu"
+    source      = "."
     destination = "/opt/lalubuntu"
   }
 
