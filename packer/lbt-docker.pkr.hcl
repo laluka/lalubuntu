@@ -33,6 +33,7 @@ build {
 
   source "source.docker.lbt" {
     image = "ubuntu:22.04"
+    commit = true
   }
 
   # DEV ONLY
@@ -65,7 +66,6 @@ build {
     post-processor "docker-tag" {
       repository = "thelaluka/lalubuntu"
       tags       = ["pre-install"]
-      commit     = true
     }
     // post-processor "docker-push" {
       // login          = true
@@ -80,6 +80,7 @@ build {
 
   source "source.docker.lbt" {
     image = "lalubuntu:pre-install"
+    commit = true
     pull  = false
   }
 
@@ -109,7 +110,6 @@ build {
     post-processor "docker-tag" {
       repository = "thelaluka/lalubuntu"
       tags       = ["base-install"]
-      commit     = true
     }
     // post-processor "docker-push" {
       // login          = true
@@ -124,6 +124,7 @@ build {
 
   source "source.docker.lbt" {
     image = "lalubuntu:base-install"
+    commit = true
     pull  = false
   }
 
@@ -144,7 +145,6 @@ build {
     post-processor "docker-tag" {
       repository = "thelaluka/lalubuntu"
       tags       = ["offensive-stuff"]
-      commit     = true
     }
     // post-processor "docker-push" {
       // login          = true
@@ -159,6 +159,7 @@ build {
 
   source "source.docker.lbt" {
     image = "lalubuntu:offensive-stuff"
+    commit = true
     pull  = false
   }
 
@@ -178,7 +179,6 @@ build {
     post-processor "docker-tag" {
       repository = "thelaluka/lalubuntu"
       tags       = ["gui-tools", "latest"]
-      commit     = true
     }
     // post-processor "docker-push" {
       // login          = true
