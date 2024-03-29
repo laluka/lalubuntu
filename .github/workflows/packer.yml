@@ -32,8 +32,8 @@ jobs:
         id: validate
         run: "cd packer && packer validate ./lbt-docker.pkr.hcl"
 
-      - name: Run `packer build docker`
-        id: lbt_docker
+      - name: Run `packer build docker pre-install`
+        id: pre_install
         run: |
           cd packer
           export PACKER_LOG=1
@@ -42,8 +42,8 @@ jobs:
           packer build -only=lbt-pre-install.docker.lbt lbt-docker.pkr.hcl
           docker images -a
 
-      - name: Run `packer build docker`
-        id: lbt_docker
+      - name: Run `packer build docker base-install`
+        id: base_install
         run: |
           cd packer
           export PACKER_LOG=1
