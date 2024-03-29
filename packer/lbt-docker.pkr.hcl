@@ -78,8 +78,7 @@ build {
   name = "lbt-base-install"
 
   source "source.docker.lbt" {
-    image  = "thelaluka/lalubuntu"
-    tag    = "pre-install"
+    image  = "thelaluka/lalubuntu:pre-install"
     commit = true
     pull   = false
   }
