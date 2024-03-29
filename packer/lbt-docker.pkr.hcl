@@ -84,10 +84,10 @@ build {
   }
 
   # DEV ONLY
-  # provisioner "file" {
-  #   source      = "/opt/lalubuntu"
-  #   destination = "/opt/lalubuntu"
-  # }
+  provisioner "file" {
+    source      = "/opt/lalubuntu"
+    destination = "/opt/lalubuntu"
+  }
 
   provisioner "shell" {
     environment_vars = [
@@ -95,9 +95,8 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
-      "git clone https://github.com/laluka/lalubuntu",
-      "mv lalubuntu /opt/lalubuntu",
-      "cd /opt/lalubuntu",
+      // "git clone https://github.com/laluka/lalubuntu",
+      // "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags base-install\"",
