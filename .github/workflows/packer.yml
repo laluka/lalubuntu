@@ -4,7 +4,7 @@ on:
   push:
 
 env:
-  PRODUCT_VERSION: "1.8.6" # or: "latest"
+  PRODUCT_VERSION: "latest"
 
 jobs:
   packer:
@@ -34,16 +34,16 @@ jobs:
 
       - name: Run `packer build lbt-pre-install.docker.lbt`
         id: lbt_pre_install_docker
-        run: "cd packer && PACKER_LOG=1 PACKER_LOG_PATH=/dev/stdout packer build -only="lbt-pre-install.docker.lbt" lbt-docker.pkr.hcl"
+        run: "cd packer && PACKER_LOG=1 PACKER_LOG_PATH=/dev/stdout packer build -only=lbt-pre-install.docker.lbt lbt-docker.pkr.hcl"
 
       - name: Run `packer build lbt-base-install.docker.lbt`
         id: lbt_base_install_docker
-        run: "cd packer && PACKER_LOG=1 PACKER_LOG_PATH=/dev/stdout packer build -only="lbt-base-install.docker.lbt" lbt-docker.pkr.hcl"
+        run: "cd packer && PACKER_LOG=1 PACKER_LOG_PATH=/dev/stdout packer build -only=lbt-base-install.docker.lbt lbt-docker.pkr.hcl"
 
       - name: Run `packer build lbt-offensive-stuff.docker.lbt`
         id: lbt_offensive_stuff_docker
-        run: "cd packer && PACKER_LOG=1 PACKER_LOG_PATH=/dev/stdout packer build -only="lbt-offensive-stuff.docker.lbt" lbt-docker.pkr.hcl"
+        run: "cd packer && PACKER_LOG=1 PACKER_LOG_PATH=/dev/stdout packer build -only=lbt-offensive-stuff.docker.lbt lbt-docker.pkr.hcl"
 
       - name: Run `packer build lbt-gui-tools.docker.lbt`
         id: lbt_gui_tools_docker
-        run: "cd packer && PACKER_LOG=1 PACKER_LOG_PATH=/dev/stdout packer build -only="lbt-gui-tools.docker.lbt" lbt-docker.pkr.hcl"
+        run: "cd packer && PACKER_LOG=1 PACKER_LOG_PATH=/dev/stdout packer build -only=lbt-gui-tools.docker.lbt lbt-docker.pkr.hcl"
