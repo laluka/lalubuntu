@@ -78,7 +78,7 @@ build {
   name = "lbt-base-install"
 
   source "source.docker.lbt" {
-    image = "lalubuntu:pre-install"
+    image = "thelaluka/lalubuntu:pre-install"
     commit = true
     pull  = false
   }
@@ -122,7 +122,7 @@ build {
   name = "lbt-offensive-stuff"
 
   source "source.docker.lbt" {
-    image = "lalubuntu:base-install"
+    image = "thelaluka/lalubuntu:base-install"
     commit = true
     pull  = false
   }
@@ -157,7 +157,7 @@ build {
   name = "lbt-gui-tools"
 
   source "source.docker.lbt" {
-    image = "lalubuntu:offensive-stuff"
+    image = "thelaluka/lalubuntu:offensive-stuff"
     commit = true
     pull  = false
   }
