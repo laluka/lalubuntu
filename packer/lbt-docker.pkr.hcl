@@ -48,16 +48,16 @@ build {
     ]
     inline = [
       "(id;date) | tee /.provisionned_by_packer",
-      "apt-get update",
-      "apt-get install -y curl vim git wget tzdata sudo",
-      "git clone https://github.com/laluka/lalubuntu",
-      "mv lalubuntu /opt/lalubuntu",
-      "cd /opt/lalubuntu",
-      "bash -x packer/create-user.sh",
-      "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
-      "su hacker -c \"bash -x pre-install.sh\"",
-      "rm -rf /opt/lalubuntu",
-      "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
+      // "apt-get update",
+      // "apt-get install -y curl vim git wget tzdata sudo",
+      // "git clone https://github.com/laluka/lalubuntu",
+      // "mv lalubuntu /opt/lalubuntu",
+      // "cd /opt/lalubuntu",
+      // "bash -x packer/create-user.sh",
+      // "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
+      // "su hacker -c \"bash -x pre-install.sh\"",
+      // "rm -rf /opt/lalubuntu",
+      // "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
     ]
   }
 
@@ -66,10 +66,10 @@ build {
       repository = "thelaluka/lalubuntu"
       tags       = ["pre-install"]
     }
-    post-processor "docker-import" {
-      repository = "thelaluka/lalubuntu"
-      tag        = "pre-install"
-    }
+    // post-processor "docker-import" {
+      // repository = "thelaluka/lalubuntu"
+      // tag        = "pre-install"
+    // }
     // post-processor "docker-push" {
       // login          = true
       // login_username = "${var.dock_user}"
@@ -98,13 +98,13 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
-      "git clone https://github.com/laluka/lalubuntu",
-      "mv lalubuntu /opt/lalubuntu",
+      // "git clone https://github.com/laluka/lalubuntu",
+      // "mv lalubuntu /opt/lalubuntu",
+      // "cd /opt/lalubuntu",
       "cd /opt/lalubuntu",
-      "cd /opt/lalubuntu",
-      "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
-      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags base-install\"",
-      "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
+      // "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
+      // "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags base-install\"",
+      // "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
     ]
   }
 
@@ -113,10 +113,10 @@ build {
       repository = "thelaluka/lalubuntu"
       tags       = ["base-install"]
     }
-    post-processor "docker-import" {
-      repository = "thelaluka/lalubuntu"
-      tag        = "base-install"
-    }
+    // post-processor "docker-import" {
+      // repository = "thelaluka/lalubuntu"
+      // tag        = "base-install"
+    // }
     // post-processor "docker-push" {
       // login          = true
       // login_username = "${var.dock_user}"
@@ -151,10 +151,10 @@ build {
       repository = "thelaluka/lalubuntu"
       tags       = ["offensive-stuff"]
     }
-    post-processor "docker-import" {
-      repository = "thelaluka/lalubuntu"
-      tag        = "offensive-stuff"
-    }
+    // post-processor "docker-import" {
+      // repository = "thelaluka/lalubuntu"
+      // tag        = "offensive-stuff"
+    // }
     // post-processor "docker-push" {
       // login          = true
       // login_username = "${var.dock_user}"
@@ -188,10 +188,10 @@ build {
       repository = "thelaluka/lalubuntu"
       tags       = ["gui-tools", "latest"]
     }
-    post-processor "docker-import" {
-      repository = "thelaluka/lalubuntu"
-      tag        = "gui-tools"
-    }
+    // post-processor "docker-import" {
+      // repository = "thelaluka/lalubuntu"
+      // tag        = "gui-tools"
+    // }
     // post-processor "docker-push" {
       // login          = true
       // login_username = "${var.dock_user}"
