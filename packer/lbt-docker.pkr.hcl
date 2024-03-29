@@ -65,11 +65,8 @@ build {
     post-processor "docker-tag" {
       repository = "thelaluka/lalubuntu"
       tags       = ["pre-install"]
+      commit     = true
     }
-    // post-processor "docker-import" {
-      // repository = "thelaluka/lalubuntu"
-      // tag        = "pre-install"
-    // }
     // post-processor "docker-push" {
       // login          = true
       // login_username = "${var.dock_user}"
@@ -112,11 +109,8 @@ build {
     post-processor "docker-tag" {
       repository = "thelaluka/lalubuntu"
       tags       = ["base-install"]
+      commit     = true
     }
-    // post-processor "docker-import" {
-      // repository = "thelaluka/lalubuntu"
-      // tag        = "base-install"
-    // }
     // post-processor "docker-push" {
       // login          = true
       // login_username = "${var.dock_user}"
@@ -150,11 +144,8 @@ build {
     post-processor "docker-tag" {
       repository = "thelaluka/lalubuntu"
       tags       = ["offensive-stuff"]
+      commit     = true
     }
-    // post-processor "docker-import" {
-      // repository = "thelaluka/lalubuntu"
-      // tag        = "offensive-stuff"
-    // }
     // post-processor "docker-push" {
       // login          = true
       // login_username = "${var.dock_user}"
@@ -187,11 +178,8 @@ build {
     post-processor "docker-tag" {
       repository = "thelaluka/lalubuntu"
       tags       = ["gui-tools", "latest"]
+      commit     = true
     }
-    // post-processor "docker-import" {
-      // repository = "thelaluka/lalubuntu"
-      // tag        = "gui-tools"
-    // }
     // post-processor "docker-push" {
       // login          = true
       // login_username = "${var.dock_user}"
