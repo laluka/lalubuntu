@@ -99,7 +99,7 @@ build {
       // "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
-      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags base-install\"",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags base-install\"",
       "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
     ]
   }
@@ -134,7 +134,7 @@ build {
     inline = [
       "cd /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
-      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags offensive-stuff\"",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags offensive-stuff\"",
       "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
     ]
   }
@@ -169,7 +169,7 @@ build {
     inline = [
       "cd /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
-      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags gui-tools\"",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags gui-tools\"",
       "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
     ]
   }
