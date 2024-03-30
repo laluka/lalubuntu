@@ -11,16 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Run Packer
     steps:
-      - name: Maximize build space # https://github.com/marketplace/actions/maximize-build-disk-space
-        uses: easimon/maximize-build-space@master
-        with:
-          # root-reserve-mb: 35000
-          # swap-size-mb: 1024
-          remove-dotnet: 'true'
-          remove-android: 'true'
-          remove-haskell: 'true'
-          remove-codeql: 'true'
-          remove-docker-images: 'true'
+      - name: Romve useless stuff for docker size
+        id: size_cleanup
+        run: |
+          sudo docker system prune -a -f --volumes
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
 
       - name: Checkout
         uses: actions/checkout@v3
