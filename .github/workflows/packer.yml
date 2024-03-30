@@ -76,7 +76,7 @@ jobs:
       #   id: lbt_gui_tools
       #   run: |
       #     cd packer
-      df -h
+      #     df -h
       #     export PACKER_LOG=1
       #     export PACKER_LOG_PATH=/dev/stdout
       #     packer build -only=lbt-gui-tools.docker.lbt lbt-docker.pkr.hcl
