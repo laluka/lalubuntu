@@ -36,10 +36,10 @@ build {
   }
 
   # DEV ONLY
-  provisioner "file" {
-    source      = "/opt/lalubuntu"
-    destination = "/opt/lalubuntu"
-  }
+  // provisioner "file" {
+  //   source      = "/opt/lalubuntu"
+  //   destination = "/opt/lalubuntu"
+  // }
 
   provisioner "shell" {
     environment_vars = [
@@ -50,9 +50,10 @@ build {
       "(id;date) | tee /.provisionned_by_packer",
       "apt-get update",
       "apt-get install -y curl vim git wget tzdata sudo",
-      // "git clone https://github.com/laluka/lalubuntu",
-      // "mv lalubuntu /opt/lalubuntu",
+      "git clone https://github.com/laluka/lalubuntu",
+      "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
+      "git checkout lalu/rolling-1709719668", // LALU REMOVE ME
       "bash -x packer/create-user.sh",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "su hacker -c \"bash -x pre-install.sh\"",
@@ -84,10 +85,10 @@ build {
   }
 
   # DEV ONLY
-  provisioner "file" {
-    source      = ".."
-    destination = "/opt/lalubuntu"
-  }
+  // provisioner "file" {
+  //   source      = ".."
+  //   destination = "/opt/lalubuntu"
+  // }
 
   provisioner "shell" {
     environment_vars = [
@@ -95,9 +96,10 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
-      // "git clone https://github.com/laluka/lalubuntu",
-      // "mv lalubuntu /opt/lalubuntu",
+      "git clone https://github.com/laluka/lalubuntu",
+      "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
+      "git checkout lalu/rolling-1709719668", // LALU REMOVE ME
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags base-install\"",
       "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
