@@ -1,3 +1,6 @@
+- name: LALU DISK ISSUE
+  ansible.builtin.shell: df -h
+
 - name: Remove useless packages from the cache
   ansible.builtin.apt:
     autoclean: yes

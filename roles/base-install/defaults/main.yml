@@ -173,8 +173,12 @@ vimrc_content: |
   syntax on
 
 pipx_tools:
+  - bypass-url-parser
+  - dirsearch
   - pre-commit
+  - sqlmap
   - trash-cli
+  - wafw00f
   - yt-dlp
 
 cargo_tools:

@@ -47,7 +47,6 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
-      "df -h",
       "(id;date) | tee /.provisionned_by_packer",
       "apt-get update",
       "apt-get install -y curl vim git wget tzdata sudo",
@@ -97,7 +96,6 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
-      "df -h",
       "git clone https://github.com/laluka/lalubuntu",
       "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
@@ -136,7 +134,6 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
-      "df -h",
       "cd /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags offensive-stuff\"",
@@ -172,7 +169,6 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
-      "df -h",
       "cd /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags gui-tools\"",

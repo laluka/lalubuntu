@@ -1,4 +1,7 @@
 ---
+- name: LALU DISK ISSUE
+  ansible.builtin.shell: df -h
+
 - name: Clone tools from Git
   ansible.builtin.git:
     repo: '{{ item.repo }}'
@@ -6,6 +9,9 @@
     update: yes
   loop: '{{ git_repositories }}'
   become: true
+
+- name: LALU DISK ISSUE
+  ansible.builtin.shell: df -h
 
 - name: Change ownership of the directory
   ansible.builtin.file:
@@ -16,6 +22,9 @@
   loop: '{{ git_repositories }}'
   become: true
 
+- name: LALU DISK ISSUE
+  ansible.builtin.shell: df -h
+
 - name: Create a lists directory
   ansible.builtin.file:
     path: /opt/lists
@@ -23,6 +32,9 @@
     group: '{{ ansible_user_id }}'
     recurse: 'yes'
   become: true
+
+- name: LALU DISK ISSUE
+  ansible.builtin.shell: df -h
 
 - name: Set Git core.autocrlf to false globally, otherwise a few wordlists repos break
   ansible.builtin.shell: git config --global core.autocrlf false
@@ -34,6 +46,9 @@
     update: yes
     force: yes
   loop: '{{ git_wordlists }}'
+
+- name: LALU DISK ISSUE
+  ansible.builtin.shell: df -h
 
 - name: Download rockyou wordlist
   ansible.builtin.get_url:

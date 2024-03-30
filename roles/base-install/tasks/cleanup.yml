@@ -12,3 +12,6 @@
   ansible.builtin.apt:
     purge: yes
   become: true
+
+- name: LALU DISK ISSUE
+  ansible.builtin.shell: df -h
