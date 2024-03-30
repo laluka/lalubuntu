@@ -101,7 +101,8 @@ default_packages:
   - zsh
 
 default_packages_gone:
-  - trash-cli
+  - trash-cli # Repo is outdated, pipx install is latest
+  - regolith-rofication # For dunst notifications replacement
 
 zsh_git_url: 'https://github.com/robbyrussell/oh-my-zsh.git'
 zsh_completion_git_url: 'https://github.com/zsh-users/zsh-completions'
