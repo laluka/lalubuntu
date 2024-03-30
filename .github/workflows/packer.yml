@@ -29,7 +29,13 @@ jobs:
 
       - name: DEBUG
         id: debug
-        run: "find . ; echo $SHELL ; which packer"
+        run: |
+          find .
+          echo $SHELL
+          uname -a
+          df -h
+          docker system prune -a -f --volumes
+          df -h
 
       - name: Run `packer init`
         id: init
@@ -43,6 +49,7 @@ jobs:
         id: pre_install
         run: |
           cd packer
+          df -h
           export PACKER_LOG=1
           export PACKER_LOG_PATH=/dev/stdout
           packer build -only=lbt-pre-install.docker.lbt lbt-docker.pkr.hcl
@@ -51,6 +58,7 @@ jobs:
         id: base_install
         run: |
           cd packer
+          df -h
           export PACKER_LOG=1
           export PACKER_LOG_PATH=/dev/stdout
           packer build -only=lbt-base-install.docker.lbt lbt-docker.pkr.hcl
@@ -59,6 +67,7 @@ jobs:
         id: lbt_offensive_stuff
         run: |
           cd packer
+          df -h
           export PACKER_LOG=1
           export PACKER_LOG_PATH=/dev/stdout
           packer build -only=lbt-offensive-stuff.docker.lbt lbt-docker.pkr.hcl
@@ -67,6 +76,7 @@ jobs:
       #   id: lbt_gui_tools
       #   run: |
       #     cd packer
+      df -h
       #     export PACKER_LOG=1
       #     export PACKER_LOG_PATH=/dev/stdout
       #     packer build -only=lbt-gui-tools.docker.lbt lbt-docker.pkr.hcl
