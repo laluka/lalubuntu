@@ -40,7 +40,7 @@
     - bash
     - zsh
 
-- name: Install and mise-based tools (this will take lot of time to install)
+- name: Set mise settings to build python
   ansible.builtin.shell: zsh -c 'mise settings set python_compile 1'
 
 - name: Install and mise-based tools (this will take lot of time to install)
