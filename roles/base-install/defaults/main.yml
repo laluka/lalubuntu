@@ -132,7 +132,7 @@ mise_tools:
   - neovim
   - nodejs
   - pdm
-  # - php
+  - php
   - python
   - rust
   - terraform

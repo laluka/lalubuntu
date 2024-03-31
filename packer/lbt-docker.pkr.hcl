@@ -53,7 +53,7 @@ build {
       "git clone https://github.com/laluka/lalubuntu",
       "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
-      "git checkout lalu/rolling-1709719668", // LALU REMOVE ME
+      // "git checkout lalu/rolling-1709719668", // Dev Time Only
       "bash -x packer/create-user.sh",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "su hacker -c \"bash -x pre-install.sh\"",
@@ -99,7 +99,7 @@ build {
       "git clone https://github.com/laluka/lalubuntu",
       "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
-      "git checkout lalu/rolling-1709719668", // LALU REMOVE ME
+      // "git checkout lalu/rolling-1709719668", // Dev Time Only
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags base-install\"",
       "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights

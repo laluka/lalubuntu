@@ -1,7 +1,4 @@
 ---
-- name: LALU DISK ISSUE
-  ansible.builtin.shell: df -h
-
 - name: Check if ESM apt hook configuration file exists
   stat:
     path: /etc/apt/apt.conf.d/20apt-esm-hook.conf

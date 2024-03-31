@@ -1,7 +1,4 @@
 ---
-- name: LALU DISK ISSUE
-  ansible.builtin.shell: df -h
-
 - name: Install various Go packages
   ansible.builtin.shell: "mise exec -- go install '{{ item }}@latest'"
   loop: '{{ go_packages }}'
