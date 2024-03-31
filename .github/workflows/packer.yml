@@ -2,6 +2,8 @@ name: packer
 
 on:
   push:
+  schedule:
+    - cron:  '0 8 * * *'
 
 env:
   PRODUCT_VERSION: "latest"
@@ -28,20 +30,6 @@ jobs:
         id: setup
         with:
           version: ${{ env.PRODUCT_VERSION }}
-
-      # - name: DEBUG
-      #   id: debug
-      #   run: |
-      #     set -x
-      #     ls -lah
-      #     id
-      #     uname -a
-      #     df -h
-      #     sudo sed -i 's#ExecStart=/usr/bin/dockerd#ExecStart=/usr/bin/dockerd --storage-opt dm.basesize=20G#g' /usr/lib/systemd/system/docker.service
-      #     cat /usr/lib/systemd/system/docker.service | grep -iF storage
-      #     sudo systemctl restart docker
-      #     sleep 3
-      #     sudo systemctl status docker
 
       - name: Run `packer init`
         id: init
