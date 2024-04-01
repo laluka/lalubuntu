@@ -45,7 +45,7 @@ jobs:
         env:
           PACKER_LOG: "0"
         run: |
-          packer init ./packer/lbt-docker.pkr.hcl"
+          packer init ./packer/lbt-docker.pkr.hcl
 
       - name: Run `packer validate`
         id: validate
