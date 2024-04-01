@@ -40,12 +40,15 @@
     - bash
     - zsh
 
-- name: Install and mise-based tools (this will take lot of time to install)
+- name: Set mise settings to build python
   ansible.builtin.shell: zsh -c 'mise settings set python_compile 1'
 
 - name: Install and mise-based tools (this will take lot of time to install)
-  ansible.builtin.shell: zsh -c 'mise install {{ item }}@latest -y && mise global {{ item }}@latest'
+  ansible.builtin.shell: zsh -c 'mise install {{ item }}@latest -y && mise use -g {{ item }}@latest'
   with_items: '{{ mise_tools }}'
+
+- name: Install grumpy php that yells stuff yet works
+  ansible.builtin.shell: zsh -c 'mise install php@latest -y && mise use -g php@latest || true'
 
 - name: Install lazyvim only if ~/.config/nvim does not exist
   ansible.builtin.stat:
@@ -59,3 +62,10 @@
     update: yes
     force: yes
   when: lazyvim_installed.stat.exists == False
+
+- name: Disable mouse integration in Neovim
+  ansible.builtin.lineinfile:
+    path: '{{ ansible_env.HOME }}/.config/nvim/init.lua'
+    state: present
+    line: 'vim.opt.mouse = ""'
+    insertafter: EOF

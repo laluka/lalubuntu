@@ -8,7 +8,6 @@ packer {
 }
 
 source "docker" "lbt" {
-  commit = true
   changes = [
     "LABEL version=1.0",
     "ONBUILD date",
@@ -33,13 +32,14 @@ build {
 
   source "source.docker.lbt" {
     image = "ubuntu:22.04"
+    commit = true
   }
 
   # DEV ONLY
-  # provisioner "file" {
-  #   source      = "/opt/lalubuntu"
-  #   destination = "/opt/lalubuntu"
-  # }
+  provisioner "file" {
+    source      = "."
+    destination = "/opt/lalubuntu"
+  }
 
   provisioner "shell" {
     environment_vars = [
@@ -50,9 +50,11 @@ build {
       "(id;date) | tee /.provisionned_by_packer",
       "apt-get update",
       "apt-get install -y curl vim git wget tzdata sudo",
-      "git clone https://github.com/laluka/lalubuntu",
-      "mv lalubuntu /opt/lalubuntu",
+      // "git clone https://github.com/laluka/lalubuntu",
+      // "mv lalubuntu /opt/lalubuntu",
+      "git config --global --add safe.directory /opt/lalubuntu",
       "cd /opt/lalubuntu",
+      "git checkout lalu/rolling-1709719668", // Dev Time Only
       "bash -x packer/create-user.sh",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "su hacker -c \"bash -x pre-install.sh\"",
@@ -78,15 +80,16 @@ build {
   name = "lbt-base-install"
 
   source "source.docker.lbt" {
-    image = "lalubuntu:pre-install"
-    pull  = false
+    image  = "thelaluka/lalubuntu:pre-install"
+    commit = true
+    pull   = false
   }
 
   # DEV ONLY
-  # provisioner "file" {
-  #   source      = "/opt/lalubuntu"
-  #   destination = "/opt/lalubuntu"
-  # }
+  provisioner "file" {
+    source      = "."
+    destination = "/opt/lalubuntu"
+  }
 
   provisioner "shell" {
     environment_vars = [
@@ -94,12 +97,13 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
-      "git clone https://github.com/laluka/lalubuntu",
-      "mv lalubuntu /opt/lalubuntu",
+      // "git clone https://github.com/laluka/lalubuntu",
+      // "mv lalubuntu /opt/lalubuntu",
+      "git config --global --add safe.directory /opt/lalubuntu",
       "cd /opt/lalubuntu",
-      "cd /opt/lalubuntu",
+      "git checkout lalu/rolling-1709719668", // Dev Time Only
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
-      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags base-install\"",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags base-install\"",
       "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
     ]
   }
@@ -121,7 +125,8 @@ build {
   name = "lbt-offensive-stuff"
 
   source "source.docker.lbt" {
-    image = "lalubuntu:base-install"
+    image = "thelaluka/lalubuntu:base-install"
+    commit = true
     pull  = false
   }
 
@@ -133,7 +138,7 @@ build {
     inline = [
       "cd /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
-      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags offensive-stuff\"",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags offensive-stuff\"",
       "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
     ]
   }
@@ -155,7 +160,8 @@ build {
   name = "lbt-gui-tools"
 
   source "source.docker.lbt" {
-    image = "lalubuntu:offensive-stuff"
+    image = "thelaluka/lalubuntu:offensive-stuff"
+    commit = true
     pull  = false
   }
 
@@ -167,7 +173,7 @@ build {
     inline = [
       "cd /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
-      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags gui-tools\"",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags gui-tools\"",
       "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
     ]
   }

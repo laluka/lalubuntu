@@ -1,10 +1,10 @@
-# LaluBuntu
+# LaluBuntu - [![packer-docker-build](https://github.com/laluka/lalubuntu/actions/workflows/packer.yml/badge.svg?branch=master)](https://github.com/laluka/lalubuntu/actions/workflows/packer.yml)
 
 > Prompt (OpenAI): Create a logo with an Evoli-like pokemon for a linux distro named LaluBuntu, make it cute !
 
 <img src='screens/logo-lalubuntu.png' width='250'>
 
-> This ansible playbook will make your machine lovely to use.
+> This ansible playbook will make your machine lovely to use
 
 ## This playbook is only intended to be run in `Ubuntu 22.04`
 
@@ -60,7 +60,7 @@ lalupdate
 
 ## Install Specific Roles Only
 
-Remember that `offensive-stuff` and `gui-tools` require `base-install`.
+Remember that `offensive-stuff` and `gui-tools` require `base-install`
 
 ```bash
 # Only shell goodies
@@ -114,14 +114,17 @@ docker exec -it lbt meld /etc/passwd /etc/group /etc/subuid # Simple 3-way visua
 export DOCK_USER=thelaluka
 export DOCK_PASS=LALU_SECRET_HIHI
 env | grep -F DOCK
-cd /opt/lalubuntu/packer && packer init lbt-docker.pkr.hcl
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" lbt-docker.pkr.hcl
+packer init packer/lbt-docker.pkr.hcl
+# COMMENT OUT ALL THE DOCKER LOGIN/PUSH LINES
+grep 'post-processor "docker-push"'packer/lbt-docker.pkr.hcl
+# Then build :)
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" packer/lbt-docker.pkr.hcl
 # docker run --rm -it --entrypoint /bin/bash -u root lalubuntu:pre-install -il
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-base-install.docker.lbt" lbt-docker.pkr.hcl
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-base-install.docker.lbt" packer/lbt-docker.pkr.hcl
 # docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker lalubuntu:base-install -il
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-offensive-stuff.docker.lbt" lbt-docker.pkr.hcl
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-offensive-stuff.docker.lbt" packer/lbt-docker.pkr.hcl
 # docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker lalubuntu:offensive-stuff -il
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-gui-tools.docker.lbt" lbt-docker.pkr.hcl
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-gui-tools.docker.lbt" packer/lbt-docker.pkr.hcl
 # Then refer to "Usage"
 ```
 
@@ -146,9 +149,15 @@ ssh "root@$DO_IP" passwd hacker # Set your password
 # ~ Enjoyyyy ~
 ```
 
+- If you just want to try it quick at no cost
+  - Feel free tu use my referal link: https://m.do.co/c/8f065e035836
+    - You earn 200$ credit to be used within two months
+    - I (lalu) save 25$ on my next infra bill, which is nice!
+    - Thank you 🌹
+
 ## Base install
 
-Base-installs scripts will install all the needed sofware and packages.
+Base-installs scripts will install all the needed sofware and packages
 
 - This ansible script will first update and install a lot of needed packages. You can view all the packages in `default_packages` variable in `roles/base-install/defaults/main.yml` file
 - Then, it will install and configure zsh (file is `zsh-config`)
@@ -210,6 +219,19 @@ Some quick hardening will be done :
 
 ## Changelog
 
+- 2024/04/01
+  - Updated `.github/workflows/packer.yml` to add a new GitHub Actions workflow for Packer
+  - Modified aliases file: replaced `temp` alias with `tmp`, added new aliases `aptitall`, `dpkgi`, `dkill`, `paste`
+  - Added `trailofbits.weaudit` extension to `vscode-extensions.lst`
+  - Made multiple changes to `packer/lbt-docker.pkr.hcl`, for github-action daily builds
+  - Updated `pre-install.sh` with DNS settings to use Google's servers
+  - Enhanced `readme.md` with a badge for packer-docker-build and a referral link section
+  - Amended `roles/base-install/defaults/main.yml` with additional packages and general cleanup (size)
+  - Modified `roles/base-install/tasks/mise-all.yml` with new tasks and `zsh` commands for tool installations
+  - Updated `roles/gui-tools/defaults/main.yml` with new gui tools to install, such as `dunst`
+  - Altered `roles/gui-tools/tasks/install-nomachine.yml` to handle NoMachine URL extraction
+  - Adjusted `roles/gui-tools/tasks/setup-regolith.yml` with new Xresources configurations
+  - Updated `roles/offensive-stuff/defaults/main.yml` by modifying the lists for `go_packages`, `git_repositories`, and removing some entries
 - 2024/02/28
   - Enhanced aliases file with additional aliases: sudo-alias trick, b for bat, v for nvim, p for python, and dps for docker ps
   - Modified sysdig alias in aliases for improved Docker container handling

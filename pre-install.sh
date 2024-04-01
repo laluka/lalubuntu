@@ -3,6 +3,9 @@ set -euo pipefail
 IFS=$'\n\t'
 # http://redsymbol.net/articles/unofficial-bash-strict-mode/
 
+echo "[*] Setting DNS to google for stability"
+echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+
 echo "[*] Installing linux basics"
 sudo apt-get clean
 sudo apt-get update

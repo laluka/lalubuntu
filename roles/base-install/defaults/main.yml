@@ -19,6 +19,7 @@ default_packages:
   - fswebcam
   - gcc
   - gdb
+  - gettext
   - git
   - gnupg
   - hashid
@@ -32,14 +33,19 @@ default_packages:
   - kdenlive
   - libbz2-dev
   - libcurl4-openssl-dev
+  - libedit-dev
   - libffi-dev
   - libgd-dev
+  - libicu-dev
   - libimage-exiftool-perl
+  - libjpeg-dev
   - libleptonica-dev
   - liblzma-dev
+  - libmysqlclient-dev
   - libncursesw5-dev
   - libonig-dev
   - libpcap-dev
+  - libpng-dev
   - libpq-dev
   - libreadline-dev
   - libsqlite3-dev
@@ -63,7 +69,9 @@ default_packages:
   - ngrep
   - nmap
   - openssh-server
+  - openssl
   - parallel
+  - pkg-config
   - powerline
   - python3-dev
   - python3-pip
@@ -93,7 +101,8 @@ default_packages:
   - zsh
 
 default_packages_gone:
-  - trash-cli
+  - trash-cli # Repo is outdated, pipx install is latest
+  - regolith-rofication # For dunst notifications replacement
 
 zsh_git_url: 'https://github.com/robbyrussell/oh-my-zsh.git'
 zsh_completion_git_url: 'https://github.com/zsh-users/zsh-completions'
@@ -123,7 +132,6 @@ mise_tools:
   - neovim
   - nodejs
   - pdm
-  - php
   - python
   - rust
   - terraform
@@ -164,8 +172,12 @@ vimrc_content: |
   syntax on
 
 pipx_tools:
+  - bypass-url-parser
+  - dirsearch
   - pre-commit
+  - sqlmap
   - trash-cli
+  - wafw00f
   - yt-dlp
 
 cargo_tools:
