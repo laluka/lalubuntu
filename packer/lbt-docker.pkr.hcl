@@ -52,6 +52,7 @@ build {
       "apt-get install -y curl vim git wget tzdata sudo",
       // "git clone https://github.com/laluka/lalubuntu",
       // "mv lalubuntu /opt/lalubuntu",
+      "git config --global --add safe.directory /opt/lalubuntu",
       "cd /opt/lalubuntu",
       "git checkout lalu/rolling-1709719668", // Dev Time Only
       "bash -x packer/create-user.sh",
@@ -98,6 +99,7 @@ build {
     inline = [
       // "git clone https://github.com/laluka/lalubuntu",
       // "mv lalubuntu /opt/lalubuntu",
+      "git config --global --add safe.directory /opt/lalubuntu",
       "cd /opt/lalubuntu",
       "git checkout lalu/rolling-1709719668", // Dev Time Only
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
@@ -134,6 +136,7 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
+      "git config --global --add safe.directory /opt/lalubuntu",
       "cd /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags offensive-stuff\"",
@@ -169,6 +172,7 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
+      "git config --global --add safe.directory /opt/lalubuntu",
       "cd /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags gui-tools\"",
