@@ -15,6 +15,7 @@ jobs:
       PACKER_LOG: 1
       PACKER_LOG_PATH: /dev/stdout
       DOCK_USER: ${{ secrets.DOCK_USER }}
+      DOCK_PASS: ${{ secrets.DOCK_PASS }}
     runs-on: ubuntu-latest
     name: Run Packer
     steps:
