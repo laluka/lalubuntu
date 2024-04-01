@@ -10,6 +10,7 @@ env:
 
 jobs:
   packer:
+    environment: docker-login-push
     env:
       PACKER_LOG: 1
       PACKER_LOG_PATH: /dev/stdout
