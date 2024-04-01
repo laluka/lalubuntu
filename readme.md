@@ -1,4 +1,4 @@
-# LaluBuntu
+# LaluBuntu - [![packer-docker-build](https://github.com/laluka/lalubuntu/actions/workflows/packer.yml/badge.svg?branch=master)](https://github.com/laluka/lalubuntu/actions/workflows/packer.yml)
 
 > Prompt (OpenAI): Create a logo with an Evoli-like pokemon for a linux distro named LaluBuntu, make it cute !
 
@@ -145,6 +145,12 @@ ssh "root@$DO_IP" passwd hacker # Set your password
 #  - Remote -> Via settings, Set resolution to 1920x1080
 # ~ Enjoyyyy ~
 ```
+
+- If you just want to try it quick at no cost
+  - Feel free tu use my referal link: https://m.do.co/c/8f065e035836
+    - You earn 200$ credit to be used within two months
+    - I (lalu) save 25$ on my next infra bill, which is nice!
+    - Thank you 🌹
 
 ## Base install
 

@@ -136,7 +136,6 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
-      "git config --global --add safe.directory /opt/lalubuntu",
       "cd /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags offensive-stuff\"",
@@ -172,7 +171,6 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
-      "git config --global --add safe.directory /opt/lalubuntu",
       "cd /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "sudo -u hacker -- bash -xlc \"ansible-playbook -v -i inventory.ini main.yml --tags gui-tools\"",
