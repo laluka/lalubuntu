@@ -2,11 +2,10 @@ name: packer
 
 on:
   push:
+    branches:
+      - master
   schedule:
     - cron:  '30 7 * * *'
-
-env:
-  PRODUCT_VERSION: "latest"
 
 jobs:
   packer:
@@ -38,8 +37,7 @@ jobs:
         id: setup
         env:
           PACKER_LOG: "0"
-        with:
-          version: ${{ env.PRODUCT_VERSION }}
+          PRODUCT_VERSION: latest
 
       - name: Run `packer init`
         id: init
@@ -59,20 +57,20 @@ jobs:
           df -h
           packer build -only=lbt-pre-install.docker.lbt ./packer/lbt-docker.pkr.hcl
 
-      # - name: Run `packer build docker base-install`
-      #   id: base_install
-      #   run: |
-      #     df -h
-      #     packer build -only=lbt-base-install.docker.lbt ./packer/lbt-docker.pkr.hcl
+      - name: Run `packer build docker base-install`
+        id: base_install
+        run: |
+          df -h
+          packer build -only=lbt-base-install.docker.lbt ./packer/lbt-docker.pkr.hcl
 
-      # - name: Run `packer build docker lbt-offensive-stuff`
-      #   id: lbt_offensive_stuff
-      #   run: |
-      #     df -h
-      #     packer build -only=lbt-offensive-stuff.docker.lbt ./packer/lbt-docker.pkr.hcl
+      - name: Run `packer build docker lbt-offensive-stuff`
+        id: lbt_offensive_stuff
+        run: |
+          df -h
+          packer build -only=lbt-offensive-stuff.docker.lbt ./packer/lbt-docker.pkr.hcl
 
-      # - name: Run `packer build docker lbt-gui-tools`
-      #   id: lbt_gui_tools
-      #   run: |
-      #     df -h
-      #     packer build -only=lbt-gui-tools.docker.lbt ./packer/lbt-docker.pkr.hcl
+      - name: Run `packer build docker lbt-gui-tools`
+        id: lbt_gui_tools
+        run: |
+          df -h
+          packer build -only=lbt-gui-tools.docker.lbt ./packer/lbt-docker.pkr.hcl
