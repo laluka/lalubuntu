@@ -35,6 +35,8 @@ jobs:
       - name: Setup `packer`
         uses: hashicorp/setup-packer@main
         id: setup
+        env:
+          PACKER_LOG: "0"
         with:
           version: ${{ env.PRODUCT_VERSION }}
 
