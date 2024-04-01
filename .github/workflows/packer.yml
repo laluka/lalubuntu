@@ -16,14 +16,16 @@ jobs:
       - name: Romve useless stuff for docker size
         id: size_cleanup
         run: |
+          df -h
           sudo docker system prune -a -f --volumes
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /opt/ghc
           sudo rm -rf /opt/hostedtoolcache/CodeQL
+          df -h
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup `packer`
         uses: hashicorp/setup-packer@main
@@ -32,45 +34,43 @@ jobs:
           version: ${{ env.PRODUCT_VERSION }}
 
       - name: Run `packer init`
-        id: init
-        run: "cd packer && packer init ./lbt-docker.pkr.hcl"
+        id: init && packer init ./packer/lbt-docker.pkr.hcl"
 
       - name: Run `packer validate`
-        id: validate
-        run: "cd packer && packer validate ./lbt-docker.pkr.hcl"
+        id: validate && packer validate ./lbt-docker.pkr.hcl"
 
       - name: Run `packer build docker pre-install`
         id: pre_install
+        env:
+          PACKER_LOG: 1
+          PACKER_LOG_PATH: /dev/stdout
         run: |
-          cd packer
           df -h
-          export PACKER_LOG=1
-          export PACKER_LOG_PATH=/dev/stdout
-          packer build -only=lbt-pre-install.docker.lbt lbt-docker.pkr.hcl
+          packer build -only=lbt-pre-install.docker.lbt ./packer/lbt-docker.pkr.hcl
 
       - name: Run `packer build docker base-install`
         id: base_install
+        env:
+          PACKER_LOG: 1
+          PACKER_LOG_PATH: /dev/stdout
         run: |
-          cd packer
           df -h
-          export PACKER_LOG=1
-          export PACKER_LOG_PATH=/dev/stdout
-          packer build -only=lbt-base-install.docker.lbt lbt-docker.pkr.hcl
+          packer build -only=lbt-base-install.docker.lbt ./packer/lbt-docker.pkr.hcl
 
       - name: Run `packer build docker lbt-offensive-stuff`
         id: lbt_offensive_stuff
+        env:
+          PACKER_LOG: 1
+          PACKER_LOG_PATH: /dev/stdout
         run: |
-          cd packer
           df -h
-          export PACKER_LOG=1
-          export PACKER_LOG_PATH=/dev/stdout
-          packer build -only=lbt-offensive-stuff.docker.lbt lbt-docker.pkr.hcl
+          packer build -only=lbt-offensive-stuff.docker.lbt ./packer/lbt-docker.pkr.hcl
 
       - name: Run `packer build docker lbt-gui-tools`
         id: lbt_gui_tools
+        env:
+          PACKER_LOG: 1
+          PACKER_LOG_PATH: /dev/stdout
         run: |
-          cd packer
           df -h
-          export PACKER_LOG=1
-          export PACKER_LOG_PATH=/dev/stdout
-          packer build -only=lbt-gui-tools.docker.lbt lbt-docker.pkr.hcl
+          packer build -only=lbt-gui-tools.docker.lbt ./packer/lbt-docker.pkr.hcl
