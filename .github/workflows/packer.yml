@@ -1,8 +1,9 @@
 name: packer
 
 on:
+  push:
   schedule:
-    - cron:  '40 * * * *'
+    - cron:  '39 * * * *'
 
 env:
   PRODUCT_VERSION: "latest"
