@@ -34,10 +34,12 @@ jobs:
           version: ${{ env.PRODUCT_VERSION }}
 
       - name: Run `packer init`
-        id: init && packer init ./packer/lbt-docker.pkr.hcl"
+        id: init
+        run: "cd packer && packer init ./lbt-docker.pkr.hcl"
 
       - name: Run `packer validate`
-        id: validate && packer validate ./lbt-docker.pkr.hcl"
+        id: validate
+        run: "cd packer && packer validate ./lbt-docker.pkr.hcl"
 
       - name: Run `packer build docker pre-install`
         id: pre_install
