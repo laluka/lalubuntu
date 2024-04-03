@@ -62,7 +62,7 @@
     block: '{{ i3_config_block }}'
     create: yes
 
-- name: Remove old rtx config from shell configuration files
+- name: Get rid of duplicated blocks
   ansible.builtin.lineinfile:
     path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'
     state: absent
@@ -84,7 +84,7 @@
   ansible.builtin.blockinfile:
     path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'
     block: '{{ i3_xresources_block }}'
-    marker: '! Ansible managed block'
+    marker: "! {mark} ANSIBLE MANAGED BLOCK"
     create: yes
 
 - name: Set GNOME interface to prefer dark color scheme
