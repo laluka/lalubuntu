@@ -62,6 +62,24 @@
     block: '{{ i3_config_block }}'
     create: yes
 
+- name: Remove old rtx config from shell configuration files
+  ansible.builtin.lineinfile:
+    path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'
+    state: absent
+    line: '{{ item }}'
+    backrefs: yes
+  loop:
+    - "# BEGIN ANSIBLE MANAGED BLOCK"
+    - "gtk.font_name: Nerd Font Mono 10"
+    - "regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png"
+    - "regolith.wallpaper.options: stretched"
+    - "# END ANSIBLE MANAGED BLOCK"
+    - "! Ansible managed block"
+    - "gtk.font_name: Nerd Font Mono 10"
+    - "regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png"
+    - "regolith.wallpaper.options: stretched"
+    - "! Ansible managed block"
+
 - name: Append lines to the i3 Xresources file
   ansible.builtin.blockinfile:
     path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'
