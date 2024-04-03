@@ -9,11 +9,25 @@
     name: editor
     path: '/usr/bin/vim.basic'
 
+- name: Get rid of duplicated blocks
+  ansible.builtin.lineinfile:
+    path: '/etc/vim/vimrc.local'
+    state: absent
+    line: '{{ item }}'
+    backrefs: yes
+  become: true
+  loop:
+    - '" Ansible managed block'
+    - 'set mouse=""'
+    - 'set number'
+    - 'set paste'
+    - 'syntax on'
+
 - name: /etc/vim/vimrc.local configuration
   ansible.builtin.blockinfile:
     path: '/etc/vim/vimrc.local'
     block: '{{ vimrc_content }}'
-    marker: '" Ansible managed block'
+    marker: '"! {mark} ANSIBLE MANAGED BLOCK'
     mode: '0644'
     create: yes
   become: true
