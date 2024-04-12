@@ -189,6 +189,7 @@ cargo_tools:
   - spacer
   - viu
   - xsv
+  - --git https://github.com/asciinema/asciinema
 
 docker_gpg_dest: '/usr/share/keyrings/docker-archive-keyring.gpg'
 docker_key_url: 'https://download.docker.com/linux/ubuntu/gpg'
