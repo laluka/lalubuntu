@@ -219,19 +219,23 @@ Some quick hardening will be done :
 
 ## Changelog
 
+- 2024/04/18
+  - Added asciinema to cargo_tools for shell sessions recording
+  - Added okular (pdf edit tool) to GUI tools in roles/gui-tools/defaults/main.yml
+  - Updated wallpaper image, let's make the world a cutter place!
 - 2024/04/01
-  - Updated `.github/workflows/packer.yml` to add a new GitHub Actions workflow for Packer
-  - Modified aliases file: replaced `temp` alias with `tmp`, added new aliases `aptitall`, `dpkgi`, `dkill`, `paste`
-  - Added `trailofbits.weaudit` extension to `vscode-extensions.lst`
-  - Made multiple changes to `packer/lbt-docker.pkr.hcl`, for github-action daily builds
-  - Updated `pre-install.sh` with DNS settings to use Google's servers
-  - Enhanced `readme.md` with a badge for packer-docker-build and a referral link section
-  - Amended `roles/base-install/defaults/main.yml` with additional packages and general cleanup (size)
-  - Modified `roles/base-install/tasks/mise-all.yml` with new tasks and `zsh` commands for tool installations
-  - Updated `roles/gui-tools/defaults/main.yml` with new gui tools to install, such as `dunst`
-  - Altered `roles/gui-tools/tasks/install-nomachine.yml` to handle NoMachine URL extraction
-  - Adjusted `roles/gui-tools/tasks/setup-regolith.yml` with new Xresources configurations
-  - Updated `roles/offensive-stuff/defaults/main.yml` by modifying the lists for `go_packages`, `git_repositories`, and removing some entries
+  - Updated .github/workflows/packer.yml to add a new GitHub Actions workflow for Packer
+  - Modified aliases file: replaced temp alias with tmp, added new aliases aptitall, dpkgi, dkill, paste
+  - Added trailofbits.weaudit extension to vscode-extensions.lst
+  - Made multiple changes to packer/lbt-docker.pkr.hcl, for github-action daily builds
+  - Updated pre-install.sh with DNS settings to use Google's servers
+  - Enhanced readme.md with a badge for packer-docker-build and a referral link section
+  - Amended roles/base-install/defaults/main.yml with additional packages and general cleanup (size)
+  - Modified roles/base-install/tasks/mise-all.yml with new tasks and zsh commands for tool installations
+  - Updated roles/gui-tools/defaults/main.yml with new gui tools to install, such as dunst
+  - Altered roles/gui-tools/tasks/install-nomachine.yml to handle NoMachine URL extraction
+  - Adjusted roles/gui-tools/tasks/setup-regolith.yml with new Xresources configurations
+  - Updated roles/offensive-stuff/defaults/main.yml by modifying the lists for go_packages, git_repositories, and removing some entries
 - 2024/02/28
   - Enhanced aliases file with additional aliases: sudo-alias trick, b for bat, v for nvim, p for python, and dps for docker ps
   - Modified sysdig alias in aliases for improved Docker container handling
@@ -242,37 +246,37 @@ Some quick hardening will be done :
   - Modified roles/base-install/defaults/main.yml by removing bat from default_packages and adding it to mise_tools
   - Updated roles/base-install/tasks/default-packages.yml to check for and disable Ubuntu Pro ESM spammy messages
 - 2024/02/26
-  - Updated `readme.md` with section "Install Specific Roles Only" with previous tag addons
-  - Removed `trash-cli` from `base-install` default packages and added latest install via pipx
-  - Added `meld` and `tmate` to `base-install` default packages
-  - Added `duf`, `neovim`, `websocat` to `mise_tools` in `base-install`
-  - Added task to disable Ubuntu Pro ESM spammy messages in `base-install`
-  - Added download and executable setting tasks for `fastgron` in `base-install`
-  - Included `neovim` install and config tasks in `base-install` aliased on `v`
+  - Updated readme.md with section "Install Specific Roles Only" with previous tag addons
+  - Removed trash-cli from base-install default packages and added latest install via pipx
+  - Added meld and tmate to base-install default packages
+  - Added duf, neovim, websocat to mise_tools in base-install
+  - Added task to disable Ubuntu Pro ESM spammy messages in base-install
+  - Added download and executable setting tasks for fastgron in base-install
+  - Included neovim install and config tasks in base-install aliased on v
   - Slightly reworked and unified variable use
-  - Updated `gui-tools` tasks for `cameractrls` and `nomachine` with various fixes
-  - Allow `nomachine` install to fail, they often make breaking changes to the install process
-  - Updated `offensive-stuff` `go_packages` and `git_repositories` lists
+  - Updated gui-tools tasks for cameractrls and nomachine with various fixes
+  - Allow nomachine install to fail, they often make breaking changes to the install process
+  - Updated offensive-stuff go_packages and git_repositories lists
 - 2024/02/24
-  - Created `.gitignore` with patterns for `lalubuntu.tar`, `*.log`, `*.pem`, `.env`
-  - Added `clean-crash` alias to remove files from `/var/crash`
-  - Refactored roles in `main.yml` with tags for organization (`base-install`, `offensive-stuff`, `gui-tools`, `hardening`)
-  - Added user creation script `create-user.sh` for user `hacker` with temp sudo privileges for install time
-  - Implemented Packer configuration `do-lalubuntu.pkr.hcl` for Docker Imge and DigitalOcean snapshot creation
-  - Updated `readme.md` with TODOs, Packer instructions, and additional tools to install
+  - Created .gitignore with patterns for lalubuntu.tar, *.log, *.pem, .env
+  - Added clean-crash alias to remove files from /var/crash
+  - Refactored roles in main.yml with tags for organization (base-install, offensive-stuff, gui-tools, hardening)
+  - Added user creation script create-user.sh for user hacker with temp sudo privileges for install time
+  - Implemented Packer configuration do-lalubuntu.pkr.hcl for Docker Imge and DigitalOcean snapshot creation
+  - Updated readme.md with TODOs, Packer instructions, and additional tools to install
   - Fixed mise sometimes not being loaded & removed xrandr unused aliases
   - Implemented security measures and cleanup in Packer build process
 - 2024/01/12
-  - Added a new alias: `yt-dlp`
-  - Updated `readme.md` with `TODO` section
-  - Created `vscode-extensions.lst` for VS Code extensions
+  - Added a new alias: yt-dlp
+  - Updated readme.md with TODO section
+  - Created vscode-extensions.lst for VS Code extensions
   - Added auto completion for a few kube/terraform related tools
   - Added gnome-tweaks, blueman, obs-studio from the official ppa
   - Added lalutools pty4all, pypotomux, broneypote, bypass-url-parser
   - Added bindsym for sound settings
 - 2024/01/06
-  - Renamed `rtx` to `mise-en-place`
-  - Added a changelog section to `readme.md`
+  - Renamed rtx to mise-en-place
+  - Added a changelog section to readme.md
 
 ## TODO
 
