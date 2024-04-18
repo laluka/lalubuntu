@@ -22,6 +22,7 @@ gui_tools_to_install:
   - vlc
   - wireshark
   - dunst
+  - okular
 
 chrome_gpg_dest: '/etc/apt/trusted.gpg.d/chrome.gpg'
 chrome_deb_url: 'deb [arch=amd64 signed-by={{ chrome_gpg_dest }}] https://dl.google.com/linux/chrome/deb/ stable main'
