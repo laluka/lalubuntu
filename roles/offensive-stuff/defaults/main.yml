@@ -6,6 +6,7 @@ go_packages:
   - github.com/jesseduffield/lazygit
   - github.com/lc/gau/v2/cmd/gau
   - github.com/projectdiscovery/pdtm/cmd/pdtm
+  - github.com/sw33tLie/sns@latest
   - github.com/wader/fq
   - github.com/x90skysn3k/brutesprayx
   - github.com/xm1k3/cent
