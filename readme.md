@@ -219,6 +219,12 @@ Some quick hardening will be done :
 
 ## Changelog
 
+> Hey ChatGPT, complete here with my git diff output, keep the style, and be concise.
+
+- 2024/05/21
+  - Modified aliases file: added safety prompt to cp command using alias cp='cp -i'
+  - Updated pre-install.sh: temporarily hardcoded Ansible version to 2.13.12 to avoid bugs in latest 2.13.X with Python 3.8 
+  - Added new Go package github.com/sw33tLie/sns@latest to roles/offensive-stuff/defaults/main.yml for latest tools
 - 2024/04/18
   - Added asciinema to cargo_tools for shell sessions recording
   - Added okular (pdf edit tool) to GUI tools in roles/gui-tools/defaults/main.yml
@@ -277,9 +283,3 @@ Some quick hardening will be done :
 - 2024/01/06
   - Renamed rtx to mise-en-place
   - Added a changelog section to readme.md
-
-## TODO
-
-```bash
-# None for now :)
-```
