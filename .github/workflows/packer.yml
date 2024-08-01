@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - lalu/fix-packer-ci
   schedule:
     - cron:  '30 7 * * *'
 
