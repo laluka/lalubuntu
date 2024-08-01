@@ -12,7 +12,7 @@ jobs:
     environment: docker-login-push
     env:
       PACKER_LOG: 1
-      PACKER_LOG_PATH: /dev/stdout
+      PACKER_LOG_PATH: /tmp/packer.log
       DOCK_USER: ${{ secrets.DOCK_USER }}
       DOCK_PASS: ${{ secrets.DOCK_PASS }}
     runs-on: ubuntu-latest
