@@ -115,27 +115,27 @@ tmux_conf: |
       set-option -g status-bg colour231
 
 mise_tools:
-  - awscli
-  - bat
-  - direnv
-  - duf
-  - glow
-  - golang
-  - helm
-  - java
-  - jless
-  - k9s
-  - kubectl
-  - kubectx
-  - maven
-  - minikube
-  - neovim
-  - nodejs
-  - pdm
-  - python
-  - rust
-  - terraform
-  - websocat
+  - awscli@latest
+  - bat@latest
+  - direnv@latest
+  - duf@latest
+  - glow@1.5.1
+  - golang@latest
+  - helm@latest
+  - java@latest
+  - jless@latest
+  - k9s@latest
+  - kubectl@latest
+  - kubectx@latest
+  - maven@latest
+  - minikube@latest
+  - neovim@latest
+  - nodejs@latest
+  - pdm@latest
+  - python@latest
+  - rust@latest
+  - terraform@latest
+  - websocat@latest
 
 omz_plugins_to_enable:
   - aws
