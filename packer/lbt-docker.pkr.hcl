@@ -64,11 +64,11 @@ build {
       repository = "thelaluka/lalubuntu"
       tags       = ["pre-install"]
     }
-    // post-processor "docker-push" {
-    //   login          = true
-    //   login_username = "${var.dock_user}"
-    //   login_password = "${var.dock_pass}"
-    // }
+    post-processor "docker-push" {
+      login          = true
+      login_username = "${var.dock_user}"
+      login_password = "${var.dock_pass}"
+    }
   }
 }
 
@@ -105,11 +105,11 @@ build {
       repository = "thelaluka/lalubuntu"
       tags       = ["base-install"]
     }
-    // post-processor "docker-push" {
-    //   login          = true
-    //   login_username = "${var.dock_user}"
-    //   login_password = "${var.dock_pass}"
-    // }
+    post-processor "docker-push" {
+      login          = true
+      login_username = "${var.dock_user}"
+      login_password = "${var.dock_pass}"
+    }
   }
 }
 
@@ -140,11 +140,11 @@ build {
       repository = "thelaluka/lalubuntu"
       tags       = ["offensive-stuff"]
     }
-    // post-processor "docker-push" {
-    //   login          = true
-    //   login_username = "${var.dock_user}"
-    //   login_password = "${var.dock_pass}"
-    // }
+    post-processor "docker-push" {
+      login          = true
+      login_username = "${var.dock_user}"
+      login_password = "${var.dock_pass}"
+    }
   }
 }
 
@@ -174,10 +174,10 @@ build {
       repository = "thelaluka/lalubuntu"
       tags       = ["gui-tools", "latest"]
     }
-    // post-processor "docker-push" {
-    //   login          = true
-    //   login_username = "${var.dock_user}"
-    //   login_password = "${var.dock_pass}"
-    // }
+    post-processor "docker-push" {
+      login          = true
+      login_username = "${var.dock_user}"
+      login_password = "${var.dock_pass}"
+    }
   }
 }
