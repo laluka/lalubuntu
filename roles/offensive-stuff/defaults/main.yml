@@ -12,7 +12,7 @@ go_packages:
   - github.com/xm1k3/cent
 
 git_repositories:
-  - repo: http://github.com/jpillora/chisel
+  - repo: https://github.com/jpillora/chisel
     dest: chisel
   - repo: https://github.com/ambionics/phpggc
     dest: phpggc
