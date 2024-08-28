@@ -1,4 +1,11 @@
 ---
+- name: Try to solve github username weird new issue
+  ansible.builtin.shell: git config --global user.name hacker
+  become: true
+
+- name: Try to solve github username weird new issue
+  ansible.builtin.shell: git config --global user.name hacker
+
 - name: Clone tools from Git
   ansible.builtin.git:
     repo: '{{ item.repo }}'

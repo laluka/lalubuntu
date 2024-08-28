@@ -40,6 +40,9 @@
     - bash
     - zsh
 
+- name: Install mise usage-cli for help & completion
+  ansible.builtin.shell: zsh -c 'mise use -g usage'
+
 - name: Set mise settings to build python
   ansible.builtin.shell: zsh -c 'mise settings set python_compile 1'
 
@@ -49,6 +52,10 @@
 
 - name: Install grumpy php that yells stuff yet works
   ansible.builtin.shell: zsh -c 'mise install php@latest -y && mise use -g php@latest || true'
+
+- name: Install grumpy php that yells stuff yet works
+  ansible.builtin.shell: ln -sf /opt/lalubuntu/scripts-and-utils/pv /usr/local/bin/pv
+  become: yes
 
 - name: Install lazyvim only if ~/.config/nvim does not exist
   ansible.builtin.stat:
