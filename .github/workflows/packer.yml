@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - lalu/pv_wrapper
   schedule:
     - cron:  '30 7 * * *'
 
@@ -32,8 +31,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: lalu/pv_wrapper
 
       - name: Setup `packer`
         uses: hashicorp/setup-packer@main
