@@ -7,24 +7,11 @@
 
 - name: Install NoMachine if not already installed
   ignore_errors: true
+  when: not nomachine_installed.stat.exists
   block:
-    - name: Get NoMachine URL
-      ansible.builtin.uri:
-        url: https://downloads.nomachine.com/download/?id=1
-        return_content: yes
-      register: nomachine_page
-      failed_when: nomachine_page.status != 200 or 'temporarily disabled whilst we update' in nomachine_page.content
-      ignore_errors: true
-
-    - name: Extract NoMachine URL
-      ansible.builtin.set_fact:
-        nomachine_url: "{{ nomachine_page.content | regex_findall('https:\/\/download.nomachine.com\/download\/[0-9].[0-9][0-9]\/Linux\/nomachine_[0-9].[0-9][0-9].[0-9]_[0-9]_amd64.deb') | unique | first }}"
-      when:
-       - nomachine_url is not defined
-
     - name: Download nomachine
       ansible.builtin.get_url:
-        url: '{{ nomachine_url }}'
+        url: 'https://download.nomachine.com/download/8.13/Linux/nomachine_8.13.1_1_amd64.deb'
         dest: '/tmp/nomachine-setup.deb'
 
     - name: Install nomachine
