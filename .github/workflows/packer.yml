@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - lalu/pv_wrapper
   schedule:
     - cron:  '30 7 * * *'
 

@@ -105,6 +105,7 @@ ssh -p 2222 hacker@127.0.0.1 # LeelooMultipass
 # LOCAL SHELL & GUI apps
 docker run --rm -it --name lbt --entrypoint /bin/zsh -u hacker -w /home/hacker -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ --net=host --privileged -d thelaluka/lalubuntu:latest
 docker exec -it lbt meld /etc/passwd /etc/group /etc/subuid # Simple 3-way visual diff
+
 ```
 
 ### Build You Own

@@ -1,0 +1,16 @@
+#!/bin/bash
+set -uo pipefail
+IFS=$'\n\t'
+# export MISE_TRACE=1
+
+version="$(mise list python | grep -F python | awk "{ print \$2 }" | fzf)"
+if [ -z "${version}" ]; then
+  exit 1
+fi
+rm -rf .venv
+# mise activate
+mise use python@${version}
+grep -F '[env]' .mise.toml || echo -e '[env]' >> .mise.toml
+grep -F '_.python.venv = { path = ".venv", create = true }' .mise.toml || echo '_.python.venv = { path = ".venv", create = true }' >> .mise.toml
+mise trust 2>/dev/null
+bat -P .mise.toml

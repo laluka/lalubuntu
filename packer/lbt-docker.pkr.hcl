@@ -59,17 +59,17 @@ build {
     ]
   }
 
-  post-processors {
-    post-processor "docker-tag" {
-      repository = "thelaluka/lalubuntu"
-      tags       = ["pre-install"]
-    }
-    post-processor "docker-push" {
-      login          = true
-      login_username = "${var.dock_user}"
-      login_password = "${var.dock_pass}"
-    }
-  }
+  // post-processors {
+    // post-processor "docker-tag" {
+      // repository = "thelaluka/lalubuntu"
+      // tags       = ["pre-install"]
+    // }
+    // post-processor "docker-push" {
+      // login          = true
+      // login_username = "${var.dock_user}"
+      // login_password = "${var.dock_pass}"
+    // }
+  // }
 }
 
 build {
@@ -100,17 +100,17 @@ build {
     ]
   }
 
-  post-processors {
-    post-processor "docker-tag" {
-      repository = "thelaluka/lalubuntu"
-      tags       = ["base-install"]
-    }
-    post-processor "docker-push" {
-      login          = true
-      login_username = "${var.dock_user}"
-      login_password = "${var.dock_pass}"
-    }
-  }
+  // post-processors {
+    // post-processor "docker-tag" {
+      // repository = "thelaluka/lalubuntu"
+      // tags       = ["base-install"]
+    // }
+    // post-processor "docker-push" {
+      // login          = true
+      // login_username = "${var.dock_user}"
+      // login_password = "${var.dock_pass}"
+    // }
+  // }
 }
 
 build {
@@ -135,17 +135,17 @@ build {
     ]
   }
 
-  post-processors {
-    post-processor "docker-tag" {
-      repository = "thelaluka/lalubuntu"
-      tags       = ["offensive-stuff"]
-    }
-    post-processor "docker-push" {
-      login          = true
-      login_username = "${var.dock_user}"
-      login_password = "${var.dock_pass}"
-    }
-  }
+  // post-processors {
+    // post-processor "docker-tag" {
+      // repository = "thelaluka/lalubuntu"
+      // tags       = ["offensive-stuff"]
+    // }
+    // post-processor "docker-push" {
+      // login          = true
+      // login_username = "${var.dock_user}"
+      // login_password = "${var.dock_pass}"
+    // }
+  // }
 }
 
 build {
@@ -169,15 +169,15 @@ build {
       "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
     ]
   }
-  post-processors {
-    post-processor "docker-tag" {
-      repository = "thelaluka/lalubuntu"
-      tags       = ["gui-tools", "latest"]
-    }
-    post-processor "docker-push" {
-      login          = true
-      login_username = "${var.dock_user}"
-      login_password = "${var.dock_pass}"
-    }
-  }
+  // post-processors {
+    // post-processor "docker-tag" {
+      // repository = "thelaluka/lalubuntu"
+      // tags       = ["gui-tools", "latest"]
+    // }
+    // post-processor "docker-push" {
+      // login          = true
+      // login_username = "${var.dock_user}"
+      // login_password = "${var.dock_pass}"
+    // }
+  // }
 }
