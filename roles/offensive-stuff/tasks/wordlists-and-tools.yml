@@ -2,17 +2,12 @@
 - name: Clone tools from Git
   ansible.builtin.git:
     repo: '{{ item.repo }}'
-    dest: '/opt/{{ item.dest }}'
+    dest: '/tmp/{{ item.dest }}'
     update: yes
   loop: '{{ git_repositories }}'
-  become: true
 
-- name: Change ownership of the directory
-  ansible.builtin.file:
-    path: '/opt/{{ item.dest }}'
-    owner: '{{ ansible_user_id }}'
-    group: '{{ ansible_user_id }}'
-    recurse: yes
+- name: Clone tools from /tmp to /opt
+  ansible.builtin.shell: mv /tmp/{{ item.dest }} /opt/{{ item.dest }}
   loop: '{{ git_repositories }}'
   become: true
 
