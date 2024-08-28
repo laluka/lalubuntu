@@ -32,7 +32,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
-        ref: lalu/pv_wrapper
+        with:
+          ref: lalu/pv_wrapper
 
       - name: Setup `packer`
         uses: hashicorp/setup-packer@main
