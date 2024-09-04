@@ -91,7 +91,6 @@ default_packages:
   - ufw
   - unzip
   - vbindiff
-  - veracrypt
   - vim
   - wget
   - wl-clipboard

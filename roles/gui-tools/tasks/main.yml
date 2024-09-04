@@ -2,7 +2,7 @@
  - include_tasks: install-gui-tools.yml # Installing various GUI tools
  - include_tasks: install-obs.yml # Installing various OBS Studio
  - include_tasks: install-google-chrome.yml # Installing Google Chrome browser
-#  - include_tasks: install-veracrypt.yml # Installing VeraCrypt utility
+ - include_tasks: install-veracrypt.yml # Installing VeraCrypt utility
  - include_tasks: install-nomachine.yml # Installing NoMachine utility
  - include_tasks: install-discord.yml # Installing Discord
  - include_tasks: install-vscode.yml # Installing Visual Studio Code
