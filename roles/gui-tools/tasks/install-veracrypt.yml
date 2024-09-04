@@ -2,7 +2,7 @@
 - name: Check if Veracrypt is already installed
   ansible.builtin.stat:
     path: '/usr/bin/veracrypt'
-  register: veracrypt_installed
+  register: veracrypt_installed_osef
   become: true
 
 - name: Get Veracrypt URL
