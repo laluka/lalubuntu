@@ -31,7 +31,7 @@ chrome_key_server: 'keyserver.ubuntu.com'
 chrome_pub_key_url: 'https://dl-ssl.google.com/linux/linux_signing_key.pub'
 chrome_export_key_id: 'D38B4796'
 
-veracrypt_download_url: 'https://api.github.com/repos/veracrypt/veracrypt/releases/latest'
+veracrypt_download_url: 'https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.14/veracrypt-1.26.14-Ubuntu-20.04-amd64.deb'
 
 discord_download_url: 'https://discord.com/api/download?platform=linux&format=deb'
 
