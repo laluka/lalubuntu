@@ -161,6 +161,7 @@ zsh_plugins_to_disable:
   - ssh-agent
 
 zsh_config_lines:
+  - eval "$(register-python-argcomplete --no-defaults exegol)"
   - DISABLE_MAGIC_FUNCTIONS=true
 
 data_directory: '/DATA'
@@ -172,8 +173,10 @@ vimrc_content: |
   syntax on
 
 pipx_tools:
+  - argcomplete
   - bypass-url-parser
   - dirsearch
+  - exegol
   - pre-commit
   - sqlmap
   - trash-cli
