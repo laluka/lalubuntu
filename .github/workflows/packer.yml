@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - lalu/exegoallllllllll
   schedule:
     - cron:  '30 7 * * *'
 
