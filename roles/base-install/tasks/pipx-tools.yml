@@ -2,3 +2,13 @@
   community.general.pipx:
     name: '{{ item }}'
   loop: '{{ pipx_tools }}'
+
+- name: Add exegol autocompletion to shell configuration filesansible
+  ansible.builtin.lineinfile:
+    path: '{{ ansible_env.HOME }}/.{{ item }}rc'
+    state: present
+    line: 'eval "$(register-python-argcomplete --no-defaults exegol)"'
+    insertafter: EOF
+  loop:
+    - bash
+    - zsh
