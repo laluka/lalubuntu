@@ -172,8 +172,10 @@ vimrc_content: |
   syntax on
 
 pipx_tools:
+  - argcomplete
   - bypass-url-parser
   - dirsearch
+  - exegol
   - pre-commit
   - sqlmap
   - trash-cli
