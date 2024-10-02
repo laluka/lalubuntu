@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - lalu/poc-24.04
   schedule:
     - cron:  '30 7 * * *'
 
