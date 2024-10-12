@@ -115,7 +115,7 @@ tmux_conf: |
       set-option -g status-bg colour231
 
 mise_tools:
-  - glow@1.5.1
+  # - glow@1.5.1
   - java@openjdk-23.0.0
   - php@8.3.12
   - python@3.11.0
