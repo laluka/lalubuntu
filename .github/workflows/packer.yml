@@ -3,7 +3,7 @@ name: packer
 on:
   push:
     branches:
-      - master
+      - '**'
   schedule:
     - cron:  '30 7 * * *'
 
