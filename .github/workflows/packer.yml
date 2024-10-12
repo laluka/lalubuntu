@@ -15,6 +15,7 @@ jobs:
       PACKER_LOG_PATH: /tmp/packer.log
       DOCK_USER: ${{ secrets.DOCK_USER }}
       DOCK_PASS: ${{ secrets.DOCK_PASS }}
+      PACKER_DOCKER_FILE: ${{ branch == 'master' ? 'packer/lbt-docker-master.pkr.hcl' : 'packer/lbt-docker-branches.pkr.hcl' }} # Push for master
     runs-on: ubuntu-latest
     name: Run Packer
     steps:
@@ -55,22 +56,22 @@ jobs:
         id: pre_install
         run: |
           df -h
-          packer build -only=lbt-pre-install.docker.lbt ./packer/lbt-docker.pkr.hcl
+          echo packer build -only=lbt-pre-install.docker.lbt "$PACKER_DOCKER_FILE"
 
       - name: Run `packer build docker base-install`
         id: base_install
         run: |
           df -h
-          packer build -only=lbt-base-install.docker.lbt ./packer/lbt-docker.pkr.hcl
+          echo packer build -only=lbt-base-install.docker.lbt "$PACKER_DOCKER_FILE"
 
       - name: Run `packer build docker lbt-offensive-stuff`
         id: lbt_offensive_stuff
         run: |
           df -h
-          packer build -only=lbt-offensive-stuff.docker.lbt ./packer/lbt-docker.pkr.hcl
+          echo packer build -only=lbt-offensive-stuff.docker.lbt "$PACKER_DOCKER_FILE"
 
       - name: Run `packer build docker lbt-gui-tools`
         id: lbt_gui_tools
         run: |
           df -h
-          packer build -only=lbt-gui-tools.docker.lbt ./packer/lbt-docker.pkr.hcl
+          echo packer build -only=lbt-gui-tools.docker.lbt "$PACKER_DOCKER_FILE"

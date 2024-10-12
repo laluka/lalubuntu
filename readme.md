@@ -117,7 +117,7 @@ export DOCK_PASS=LALU_SECRET_HIHI
 env | grep -F DOCK
 packer init packer/lbt-docker.pkr.hcl
 # COMMENT OUT ALL THE DOCKER LOGIN/PUSH LINES
-grep 'post-processor "docker-push"'packer/lbt-docker.pkr.hcl
+grep 'post-processor "docker-push"'packer/lbt-docker.pkr.hcl # TODO remove this line
 # Then build :)
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" packer/lbt-docker.pkr.hcl
 # docker run --rm -it --entrypoint /bin/bash -u root lalubuntu:pre-install -il

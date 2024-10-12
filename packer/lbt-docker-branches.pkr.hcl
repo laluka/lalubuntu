@@ -18,19 +18,6 @@ source "docker" "lbt" {
   ]
 }
 
-variable "is_master_should_push" {
-  type    = bool
-  default = env("GITHUB_REF_NAME") == "master"
-}
-variable "dock_user" {
-  type    = string
-  default = "${env("DOCK_USER")}"
-}
-variable "dock_pass" {
-  type    = string
-  default = "${env("DOCK_PASS")}"
-}
-
 build {
   name = "lbt-pre-install"
 
@@ -68,15 +55,6 @@ build {
       repository = "thelaluka/lalubuntu"
       tags       = ["pre-install"]
     }
-    post-processor "docker-push" {
-      for_each = var.is_master_should_push ? [1] : []
-      content {
-        type           = "docker-push"
-        login          = true
-        login_username = var.dock_user
-        login_password = var.dock_pass
-      }
-    }
   }
 }
 
@@ -113,15 +91,6 @@ build {
       repository = "thelaluka/lalubuntu"
       tags       = ["base-install"]
     }
-    post-processor "docker-push" {
-      for_each = var.is_master_should_push ? [1] : []
-      content {
-        type           = "docker-push"
-        login          = true
-        login_username = var.dock_user
-        login_password = var.dock_pass
-      }
-    }
   }
 }
 
@@ -152,15 +121,6 @@ build {
       repository = "thelaluka/lalubuntu"
       tags       = ["offensive-stuff"]
     }
-    post-processor "docker-push" {
-      for_each = var.is_master_should_push ? [1] : []
-      content {
-        type           = "docker-push"
-        login          = true
-        login_username = var.dock_user
-        login_password = var.dock_pass
-      }
-    }
   }
 }
 
@@ -189,15 +149,6 @@ build {
     post-processor "docker-tag" {
       repository = "thelaluka/lalubuntu"
       tags       = ["gui-tools", "latest"]
-    }
-    post-processor "docker-push" {
-      for_each = var.is_master_should_push ? [1] : []
-      content {
-        type           = "docker-push"
-        login          = true
-        login_username = var.dock_user
-        login_password = var.dock_pass
-      }
     }
   }
 }
