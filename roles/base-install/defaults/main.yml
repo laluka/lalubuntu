@@ -117,7 +117,6 @@ tmux_conf: |
 mise_tools:
   - glow@latest
   - java@openjdk-23.0.0
-  - php@8.3.12
   - python@3.11.0
   - awscli@latest
   - bat@latest
@@ -137,6 +136,7 @@ mise_tools:
   - rust@latest
   - terraform@latest
   - websocat@latest
+  # - php@8.3.12
 
 omz_plugins_to_enable:
   - aws
