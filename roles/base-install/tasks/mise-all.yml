@@ -47,13 +47,13 @@
   ansible.builtin.shell: zsh -c 'mise settings set python_compile 1'
 
 - name: Install and mise-based tools (this will take lot of time to install)
-  ansible.builtin.shell: zsh -c 'mise install {{ item }}@latest -y && mise use -g {{ item }}@latest'
+  ansible.builtin.shell: zsh -c 'mise use -y -g "{{ item }}"'
   with_items: '{{ mise_tools }}'
 
-- name: Install grumpy php that yells stuff yet works
-  ansible.builtin.shell: zsh -c 'mise install php@latest -y && mise use -g php@latest || true'
+- name: Install grumpy php that errors out yet works (only in github action non interactive docker builds...)
+  ansible.builtin.shell: zsh -c 'mise use -y -g php@latest || true'
 
-- name: Install grumpy php that yells stuff yet works
+- name: Add python-version-picker convenient script
   ansible.builtin.shell: ln -sf /opt/lalubuntu/scripts-and-utils/pv /usr/local/bin/pv
   become: yes
 
