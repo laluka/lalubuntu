@@ -1,0 +1,22 @@
+---
+- name: Check if BurpSuite is already installed
+  ansible.builtin.stat:
+    path: '{{ ansible_env.HOME }}/BurpSuiteCommunity/BurpSuiteCommunity'
+  register: burpsuite_installed
+  become: true
+
+- name: Download BurpSuite
+  ansible.builtin.get_url:
+    url: 'https://portswigger-cdn.net/burp/releases/download?product=community&version=2024.8.4&type=Linux'
+    dest: '/tmp/burp-installer.sh'
+  when: not burpsuite_installed.stat.exists
+
+- name: Install BurpSuite
+  ansible.builtin.shell: "bash /tmp/burp-installer.sh -q"
+  when: not burpsuite_installed.stat.exists
+
+- name: Delete BurpSuite install files
+  ansible.builtin.file:
+    path: '/tmp/burp-installer.sh'
+    state: absent
+  when: not burpsuite_installed.stat.exists
