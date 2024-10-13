@@ -112,20 +112,15 @@ docker exec -it lbt meld /etc/passwd /etc/group /etc/subuid # Simple 3-way visua
 
 ```bash
 # Build Docker Layers
-export DOCK_USER=thelaluka
-export DOCK_PASS=LALU_SECRET_HIHI
-env | grep -F DOCK
-packer init packer/lbt-docker.pkr.hcl
-# COMMENT OUT ALL THE DOCKER LOGIN/PUSH LINES
-grep 'post-processor "docker-push"'packer/lbt-docker.pkr.hcl # TODO remove this line
-# Then build :)
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" packer/lbt-docker.pkr.hcl
-# docker run --rm -it --entrypoint /bin/bash -u root lalubuntu:pre-install -il
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-base-install.docker.lbt" packer/lbt-docker.pkr.hcl
-# docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker lalubuntu:base-install -il
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-offensive-stuff.docker.lbt" packer/lbt-docker.pkr.hcl
-# docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker lalubuntu:offensive-stuff -il
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-gui-tools.docker.lbt" packer/lbt-docker.pkr.hcl
+export PACKER_DOCKER_FILE="packer/lbt-docker-branches.pkr.hcl" # packer/lbt-docker-master.pkr.hcl
+packer init "$PACKER_DOCKER_FILE"
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" "$PACKER_DOCKER_FILE"
+# docker run --rm -it --entrypoint /bin/bash -u root thelaluka/lalubuntu:pre-install -il
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-base-install.docker.lbt" "$PACKER_DOCKER_FILE"
+# docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker thelaluka/lalubuntu:base-install -il
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-offensive-stuff.docker.lbt" "$PACKER_DOCKER_FILE"
+# docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker thelaluka/lalubuntu:offensive-stuff -il
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-gui-tools.docker.lbt" "$PACKER_DOCKER_FILE"
 # Then refer to "Usage"
 ```
 
