@@ -115,9 +115,10 @@ tmux_conf: |
       set-option -g status-bg colour231
 
 mise_tools:
-  - glow@latest
+  - php@8.3.12
+  - python@3.12.0
   - java@openjdk-23.0.0
-  - python@3.11.0
+  - glow@latest
   - awscli@latest
   - bat@latest
   - direnv@latest
@@ -136,7 +137,6 @@ mise_tools:
   - rust@latest
   - terraform@latest
   - websocat@latest
-  # - php@8.3.12
 
 omz_plugins_to_enable:
   - aws
