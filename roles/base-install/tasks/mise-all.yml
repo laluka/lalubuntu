@@ -40,9 +40,6 @@
     - bash
     - zsh
 
-- name: Install mise usage-cli for help & completion
-  ansible.builtin.shell: zsh -c 'mise use -g usage'
-
 - name: Set mise settings to build python
   ansible.builtin.shell: zsh -c 'mise settings set python_compile 1'
 

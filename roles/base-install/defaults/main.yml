@@ -116,6 +116,7 @@ tmux_conf: |
 
 mise_tools:
   - java@openjdk-23.0.0
+  - usage@latest
   - python@latest
   - glow@latest
   - awscli@latest
