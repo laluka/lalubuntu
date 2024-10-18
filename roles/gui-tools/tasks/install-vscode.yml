@@ -6,8 +6,9 @@
 
 - name: Download VsCode
   ansible.builtin.get_url:
-    url: '{{ vscode_deb_url }}'
+    url: 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
     dest: '/tmp/vscode-setup.deb'
+    http_agent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/83.0.4103.106 Chrome/83.0.4103.106 Safari/537.36'
   when: not vscode_installed.stat.exists
 
 - name: Install VsCode

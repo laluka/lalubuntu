@@ -35,8 +35,6 @@ veracrypt_download_url: 'https://github.com/veracrypt/VeraCrypt/releases/downloa
 
 discord_download_url: 'https://discord.com/api/download?platform=linux&format=deb'
 
-vscode_deb_url: 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
-
 signal_key_url: 'https://updates.signal.org/desktop/apt/keys.asc'
 signal_gpg_dest: '/usr/share/keyrings/signal-desktop-keyring.gpg'
 signal_repo_url: 'deb [arch=amd64 signed-by={{ signal_gpg_dest }}] https://updates.signal.org/desktop/apt xenial main'
