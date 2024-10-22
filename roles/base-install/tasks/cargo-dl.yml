@@ -1,4 +1,13 @@
 # No bash -i as it allows cargo to run jobs in the background in a weird way that breaks ansible
 - name: Install cargo-based tools (this will take lot of time to install)
   ansible.builtin.shell: mise exec -- cargo install {{ item }}
-  with_items: '{{ cargo_tools }}'
+  with_items:
+    - bottom
+    - du-dust
+    - exa
+    - git-delta
+    - htmlq
+    - spacer
+    - viu
+    - xsv
+    - --git https://github.com/asciinema/asciinema

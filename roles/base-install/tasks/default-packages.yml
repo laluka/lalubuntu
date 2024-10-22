@@ -29,19 +29,119 @@
   ansible.builtin.package:
     name: '{{ item }}'
     state: latest
-  loop: '{{ default_packages }}'
   become: true
+  with_items:
+    - apt-transport-https
+    - autoconf
+    - binwalk
+    - bison
+    - build-essential
+    - ca-certificates
+    - cloc
+    - cmake
+    - cmake-curses-gui
+    - curl
+    - dos2unix
+    - expect
+    - ffmpeg
+    - fonts-powerline
+    - foremost
+    - fswebcam
+    - gcc
+    - gdb
+    - gettext
+    - git
+    - gnupg
+    - hashid
+    - hexyl
+    - htop
+    - hwinfo
+    - imagemagick
+    - inotify-tools
+    - iproute2
+    - jq
+    - kdenlive
+    - libbz2-dev
+    - libcurl4-openssl-dev
+    - libedit-dev
+    - libffi-dev
+    - libgd-dev
+    - libicu-dev
+    - libimage-exiftool-perl
+    - libjpeg-dev
+    - libleptonica-dev
+    - liblzma-dev
+    - libmysqlclient-dev
+    - libncursesw5-dev
+    - libonig-dev
+    - libpcap-dev
+    - libpng-dev
+    - libpq-dev
+    - libreadline-dev
+    - libsqlite3-dev
+    - libssl-dev
+    - libtesseract-dev
+    - libxml2-dev
+    - libxml2-utils
+    - libxmlsec1-dev
+    - libyaml-dev
+    - libzip-dev
+    - linux-tools-common
+    - linux-tools-generic
+    - llvm
+    - locate
+    - lsb-release
+    - lsof
+    - ltrace
+    - make
+    - meld
+    - net-tools
+    - ngrep
+    - nmap
+    - openssh-server
+    - openssl
+    - parallel
+    - pkg-config
+    - powerline
+    - python3-dev
+    - python3-pip
+    - python3-venv
+    - re2c
+    - ripgrep
+    - rlwrap
+    - socat
+    - software-properties-common
+    - sshpass
+    - tk-dev
+    - tmate
+    - tmux
+    - tor
+    - traceroute
+    - tree
+    - ufw
+    - unzip
+    - vbindiff
+    - vim
+    - wget
+    - wl-clipboard
+    - xclip
+    - xz-utils
+    - zip
+    - zlib1g-dev
+    - zsh
 
 - name: Install Packages Cleanup
   ansible.builtin.package:
     name: '{{ item }}'
     state: absent
-  loop: '{{ default_packages_gone }}'
   become: true
+  with_items:
+    - trash-cli # Repo is outdated, pipx install is latest
+    - regolith-rofication # For dunst notifications replacement
 
 - name: Download fastgron
   ansible.builtin.get_url:
-    url: '{{ fastgron_url }}'
+    url: 'https://github.com/adamritter/fastgron/releases/download/v0.7.7/fastgron-ubuntu'
     dest: '/usr/local/bin/fastgron'
   become: true
 

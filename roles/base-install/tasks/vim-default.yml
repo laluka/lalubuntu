@@ -26,7 +26,11 @@
 - name: /etc/vim/vimrc.local configuration
   ansible.builtin.blockinfile:
     path: '/etc/vim/vimrc.local'
-    block: '{{ vimrc_content }}'
+    block: |
+      set mouse=""
+      set number
+      set paste
+      syntax on
     marker: '"! {mark} ANSIBLE MANAGED BLOCK'
     mode: '0644'
     create: yes

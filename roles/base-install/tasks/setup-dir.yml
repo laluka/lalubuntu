@@ -1,14 +1,14 @@
 ---
-- name: Create {{ data_directory }} directory (if it doesn't exist)
+- name: Create a Storage Dir (if it doesn't exist)
   ansible.builtin.file:
-    path: '{{ data_directory }}'
+    path: '/DATA'
     state: directory
     mode: '0755'
   become: true
 
-- name: Set ownership of {{ data_directory }} directory to {{ ansible_user_id }}
+- name: Set Storage Dir Ownership to {{ ansible_user_id }}
   ansible.builtin.file:
-    path: '{{ data_directory }}'
+    path: '/DATA'
     owner: '{{ ansible_user_id }}'
     group: '{{ ansible_user_id }}'
     recurse: yes

@@ -1,7 +1,16 @@
 - name: Install pipx packages
   community.general.pipx:
     name: '{{ item }}'
-  loop: '{{ pipx_tools }}'
+  with_items:
+    - argcomplete
+    - bypass-url-parser
+    - dirsearch
+    - exegol
+    - pre-commit
+    - sqlmap
+    - trash-cli
+    - wafw00f
+    - yt-dlp
 
 - name: Add exegol autocompletion to shell configuration filesansible
   ansible.builtin.lineinfile:

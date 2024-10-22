@@ -1,10 +1,29 @@
 - name: Enable zsh plugins
   ansible.builtin.shell: "zsh -c 'source ~/.zshrc && omz plugin enable {{ item }} || true'"
-  with_items: '{{ omz_plugins_to_enable }}'
+  with_items:
+    - aws
+    - colored-man-pages
+    - direnv
+    - docker
+    - extract
+    - fzf
+    - helm
+    - kubectl
+    - kubectx
+    - minikube
+    - mise
+    - npm
+    - terraform
+    - tmux
+    - zsh-autosuggestions
+    - zsh-completions
+    - zsh-syntax-highlighting
 
 - name: Disable zsh plugins
   ansible.builtin.shell: "zsh -c 'source ~/.zshrc && omz plugin disable {{ item }} || true'"
-  with_items: '{{ zsh_plugins_to_disable }}'
+  with_items:
+    - rtx
+    - ssh-agent
 
 - name: Fix wildcard in history
   ansible.builtin.shell: "zsh -c 'source ~/.zshrc && set mark-modified-lines off'"

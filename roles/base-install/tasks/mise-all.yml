@@ -45,7 +45,29 @@
 
 - name: Install and mise-based tools (this will take lot of time to install)
   ansible.builtin.shell: zsh -c 'mise install -y "{{ item }}" ; mise use -y -g "{{ item }}"'
-  with_items: '{{ mise_tools }}'
+  with_items:
+    - java@openjdk-23.0.0
+    - usage@latest
+    - python@latest
+    - glow@latest
+    - awscli@latest
+    - bat@latest
+    - direnv@latest
+    - duf@latest
+    - golang@latest
+    - helm@latest
+    - jless@latest
+    - k9s@latest
+    - kubectl@latest
+    - kubectx@latest
+    - maven@latest
+    - minikube@latest
+    - neovim@latest
+    - nodejs@latest
+    - pdm@latest
+    - rust@latest
+    - terraform@latest
+    - websocat@latest
 
 - name: Install grumpy php that errors out yet works (only in github action non interactive docker builds...)
   ansible.builtin.shell: zsh -c 'mise install -y "php@latest" ; mise use -y -g "php@latest" || true'
