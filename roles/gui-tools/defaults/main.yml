@@ -3,7 +3,7 @@
 gui_tools_to_install:
   - apt-transport-https
   - arandr
-  - bless
+  # - bless
   - blueman
   - cheese
   - filezilla
