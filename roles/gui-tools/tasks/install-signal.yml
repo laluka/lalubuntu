@@ -6,19 +6,19 @@
 
 - name: Download Signal GPG key
   ansible.builtin.get_url:
-    url : '{{ signal_key_url }}'
+    url : 'https://updates.signal.org/desktop/apt/keys.asc'
     dest: '/tmp/signal_gpg'
   when: not signal_installed.stat.exists
 
 - name: De-Armor Signal GPG key
-  ansible.builtin.shell: 'gpg --dearmor < /tmp/signal_gpg > {{ signal_gpg_dest }} && rm /tmp/signal_gpg'
+  ansible.builtin.shell: 'gpg --dearmor < /tmp/signal_gpg > /usr/share/keyrings/signal-desktop-keyring.gpg && rm /tmp/signal_gpg'
   become: true
   when: not signal_installed.stat.exists
 
 - name: Add Signal repository line to sources.list.d
   ansible.builtin.lineinfile:
     path: '/etc/apt/sources.list.d/signal-xenial.list'
-    line: '{{ signal_repo_url }}'
+    line: 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'
     create: yes
   become: true
   when: not signal_installed.stat.exists

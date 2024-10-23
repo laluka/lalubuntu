@@ -7,7 +7,7 @@
 
 - name: Download Discord
   ansible.builtin.get_url:
-    url: '{{ discord_download_url }}'
+    url: 'https://discord.com/api/download?platform=linux&format=deb'
     dest: '/tmp/discord-setup.deb'
   when: not discord_installed.stat.exists
 

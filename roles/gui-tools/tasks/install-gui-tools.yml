@@ -27,8 +27,33 @@
     state: latest
   environment:
     DEBIAN_FRONTEND: noninteractive
-  loop: '{{ gui_tools_to_install }}'
   become: true
+  with_items:
+    - apt-transport-https
+    - arandr
+    - blueman
+    - cheese
+    - dunst
+    - filezilla
+    - flameshot
+    - ghex
+    - gnome-tweaks
+    - gparted
+    - kompare
+    - libgtk-3-dev
+    - libreoffice
+    - libvirt-clients
+    - libvirt-daemon-system
+    - mplayer
+    - okular
+    - pavucontrol
+    - qbittorrent
+    - qemu-kvm
+    - torbrowser-launcher
+    - usb-creator-gtk
+    - virt-manager
+    - vlc
+    - wireshark
 
 - name: Clone dragon repository
   ansible.builtin.git:
