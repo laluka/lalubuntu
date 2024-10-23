@@ -3,26 +3,29 @@
 gui_tools_to_install:
   - apt-transport-https
   - arandr
-  # - bless
   - blueman
   - cheese
+  - dunst
   - filezilla
   - flameshot
+  - ghex
   - gnome-tweaks
   - gparted
   - kompare
   - libgtk-3-dev
   - libreoffice
+  - libvirt-clients
+  - libvirt-daemon-system
   - mplayer
+  - okular
   - pavucontrol
   - qbittorrent
-  - qemu
+  - qemu-kvm
   - torbrowser-launcher
   - usb-creator-gtk
+  - virt-manager
   - vlc
   - wireshark
-  - dunst
-  - okular
 
 chrome_gpg_dest: '/etc/apt/trusted.gpg.d/chrome.gpg'
 chrome_deb_url: 'deb [arch=amd64 signed-by={{ chrome_gpg_dest }}] https://dl.google.com/linux/chrome/deb/ stable main'
