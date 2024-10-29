@@ -34,7 +34,7 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
-      "if command -v cloud-init; then cloud-init status --wait; fi",
+      "if command -v cloud-init; then cloud-init status --wait; fi || true",
       "(id;date) | tee /.provisionned_by_packer",
       "echo \"debconf debconf/frontend select Noninteractive\" | debconf-set-selections",
       "apt-get update",
