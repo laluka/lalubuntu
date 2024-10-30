@@ -12,7 +12,7 @@ source "digitalocean" "src" {
   region        = "ams3"
   size          = "c2-4vcpu-8gb"
   ssh_username  = "root"
-  snapshot_name = "lalubuntu-22.04"
+  snapshot_name = "lalubuntu-24.04"
 }
 
 build {
@@ -23,10 +23,10 @@ build {
   }
 
   # DEV ONLY
-  # provisioner "file" {
-  #   source      = "/opt/lalubuntu"
-  #   destination = "/opt/lalubuntu"
-  # }
+  provisioner "file" {
+    source      = "/opt/lalubuntu"
+    destination = "/opt/lalubuntu"
+  }
 
   provisioner "shell" {
     environment_vars = [
@@ -39,8 +39,8 @@ build {
       "echo \"debconf debconf/frontend select Noninteractive\" | debconf-set-selections",
       "apt-get update",
       "apt-get install -y curl vim git wget tzdata sudo",
-      "git clone https://github.com/laluka/lalubuntu",
-      "mv lalubuntu /opt/lalubuntu",
+#      "git clone https://github.com/laluka/lalubuntu",
+#      "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
       "bash -x packer/create-user.sh",
       "chown -R hacker:hacker /opt/lalubuntu",

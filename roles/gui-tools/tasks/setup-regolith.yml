@@ -50,7 +50,7 @@
   with_items:
     - regolith-desktop
     - regolith-look-nord
-    - regolith-session-sway
+    - regolith-session-flashback
 
 - name: Install i3 packages
   ansible.builtin.package:
