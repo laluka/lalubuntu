@@ -24,6 +24,7 @@ alias la='f(){ exa -lla --group-directories-first "$@";  unset -f f; }; f'
 alias vff='f() { file=$(grep -rE . "$1" 2>/dev/null | fzf | cut -d: -f1); if [ -n "$file" ]; then v "$file"; fi; unset -f f; }; f'
 alias git="GIT_SSL_NO_VERIFY=true git"
 alias clean-crash='sudo /bin/rm -rf /var/crash/*'
+alias clean-go='sudo /bin/rm -rf ~/go/'
 alias gog='google-chrome'
 alias go-reshim='asdf reshim golang && export GOROOT="$(asdf where golang)/go/" && export GOPATH="$(asdf where golang)/packages/" && export GOMODCACHE="$(asdf where golang)/packages/pkg/mod/" && go env'
 alias carbo='docker run -ti fathyb/carbonyl'

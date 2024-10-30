@@ -1,9 +1,8 @@
 ---
 - name: Check if BurpSuite is already installed
   ansible.builtin.stat:
-    path: '{{ ansible_env.HOME }}/BurpSuiteCommunity/BurpSuiteCommunity'
+    path: '/opt/BurpSuiteCommunity'
   register: burpsuite_installed
-  become: true
 
 - name: Download BurpSuite
   ansible.builtin.get_url:
@@ -20,3 +19,10 @@
     path: '/tmp/burp-installer.sh'
     state: absent
   when: not burpsuite_installed.stat.exists
+
+- name: Move Burp Install to /opt
+  become: true
+  ansible.builtin.shell: |
+    set -x
+    mv '{{ ansible_env.HOME }}/BurpSuiteCommunity' /opt/
+    sed -i 's#{{ ansible_env.HOME }}#/opt#g' '{{ ansible_env.HOME }}/.gnome/apps/install'*BurpSuiteCommunity.desktop
