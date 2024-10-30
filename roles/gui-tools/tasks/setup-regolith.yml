@@ -1,10 +1,4 @@
 ---
-
-# wget -qO - https://regolith-desktop.org/regolith.key | gpg --dearmor | sudo tee /usr/share/keyrings/regolith-archive-keyring.gpg > /dev/null
-# echo deb "[arch=amd64 signed-by=/usr/share/keyrings/regolith-archive-keyring.gpg] https://regolith-desktop.org/release-3_2-ubuntu-noble-amd64 noble main" | sudo tee /etc/apt/sources.list.d/regolith.list
-# sudo apt update
-# sudo apt install regolith-desktop regolith-session-flashback regolith-look-lascaille
-
 - name: Install Regolith Certificates only if /etc/apt/sources.list.d/regolith.list does not exist
   ansible.builtin.stat:
     path: '/etc/apt/sources.list.d/regolith.list'
@@ -28,15 +22,6 @@
     create: yes
   become: true
   when: not regolith_installed.stat.exists
-
-# - name: Set lightdm as the default X display manager
-#   ansible.builtin.debconf:
-#     name: lightdm
-#     question: 'shared/default-x-display-manager'
-#     value: 'lightdm'
-#     vtype: 'select'
-#   become: true
-#   when: not regolith_installed.stat.exists
 
 - name: Update APT package cache and install Regolith Desktop
   ansible.builtin.package:
@@ -99,24 +84,6 @@
       bindsym $mod+s exec gnome-control-center sound
       bindsym $mod+Shift+w exec /usr/bin/python3 /opt/cameractrls/cameractrlsgtk4.py
       bindsym $mod+m exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && notify-send --icon=/dev/null --expire-time=500 "$(pactl get-source-mute @DEFAULT_SOURCE@)"
-
-# - name: Get rid of duplicated blocks
-#   ansible.builtin.lineinfile:
-#     path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'
-#     state: absent
-#     line: '{{ item }}'
-#     backrefs: yes
-#   loop:
-#     - "# BEGIN ANSIBLE MANAGED BLOCK"
-#     - "gtk.font_name: Nerd Font Mono 10"
-#     - "regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png"
-#     - "regolith.wallpaper.options: stretched"
-#     - "# END ANSIBLE MANAGED BLOCK"
-#     - "! Ansible managed block"
-#     - "gtk.font_name: Nerd Font Mono 10"
-#     - "regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png"
-#     - "regolith.wallpaper.options: stretched"
-#     - "! Ansible managed block"
 
 - name: Append lines to the i3 Xresources file
   ansible.builtin.blockinfile:

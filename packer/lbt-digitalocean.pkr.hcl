@@ -8,7 +8,7 @@ packer {
 }
 
 source "digitalocean" "src" {
-  image         = "ubuntu-22-04-x64"
+  image         = "ubuntu-24-04-x64"
   region        = "ams3"
   size          = "c2-4vcpu-8gb"
   ssh_username  = "root"
