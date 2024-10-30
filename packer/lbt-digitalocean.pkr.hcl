@@ -23,10 +23,10 @@ build {
   }
 
   # DEV ONLY
-  provisioner "file" {
-    source      = "/opt/lalubuntu"
-    destination = "/opt/lalubuntu"
-  }
+  # provisioner "file" {
+  #   source      = "/opt/lalubuntu"
+  #   destination = "/opt/lalubuntu"
+  # }
 
   provisioner "shell" {
     environment_vars = [
@@ -39,9 +39,10 @@ build {
       "echo \"debconf debconf/frontend select Noninteractive\" | debconf-set-selections",
       "apt-get update",
       "apt-get install -y curl vim git wget tzdata sudo",
-#      "git clone https://github.com/laluka/lalubuntu",
-#      "mv lalubuntu /opt/lalubuntu",
+      "git clone https://github.com/laluka/lalubuntu",
+      "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
+      "git checkout lalu/maj-24.04", # DEV ONLY
       "bash -x packer/create-user.sh",
       "chown -R hacker:hacker /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
