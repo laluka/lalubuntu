@@ -11,7 +11,7 @@
   block:
     - name: Download nomachine
       ansible.builtin.get_url:
-        url: 'https://download.nomachine.com/download/8.13/Linux/nomachine_8.13.1_1_amd64.deb'
+        url: 'https://download.nomachine.com/download/8.14/Linux/nomachine_8.14.2_1_amd64.deb'
         dest: '/tmp/nomachine-setup.deb'
 
     - name: Install nomachine
