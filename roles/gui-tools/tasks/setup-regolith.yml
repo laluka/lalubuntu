@@ -95,7 +95,8 @@
 #       regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png
 #       regolith.wallpaper.options: stretched
 
-- name: Set GNOME interface to prefer dark color scheme
+- name: Set GNOME Preferences
+  become: true
   ansible.builtin.shell: |
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark # dark colors
     gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true # enable tap-to-click
