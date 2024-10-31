@@ -85,18 +85,21 @@
       bindsym $mod+Shift+w exec /usr/bin/python3 /opt/cameractrls/cameractrlsgtk4.py
       bindsym $mod+m exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && notify-send --icon=/dev/null --expire-time=500 "$(pactl get-source-mute @DEFAULT_SOURCE@)"
 
-- name: Append lines to the i3 Xresources file
-  ansible.builtin.blockinfile:
-    path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'
-    marker: "! {mark} ANSIBLE MANAGED BLOCK"
-    create: yes
-    block: |
-      gtk.font_name: Nerd Font Mono 10
-      regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png
-      regolith.wallpaper.options: stretched
+# - name: Append lines to the i3 Xresources file
+#   ansible.builtin.blockinfile:
+#     path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'
+#     marker: "! {mark} ANSIBLE MANAGED BLOCK"
+#     create: yes
+#     block: |
+#       gtk.font_name: Nerd Font Mono 10
+#       regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png
+#       regolith.wallpaper.options: stretched
 
 - name: Set GNOME interface to prefer dark color scheme
-  ansible.builtin.shell: "gsettings set org.gnome.desktop.interface color-scheme prefer-dark"
-
-- name: Set click on touchpad enable
-  ansible.builtin.shell: "gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true"
+  ansible.builtin.shell: |
+    gsettings set org.gnome.desktop.interface color-scheme prefer-dark # dark colors
+    gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true # enable tap-to-click
+    gsettings set org.gnome.desktop.background picture-uri file:///opt/lalubuntu/screens/wallpaper.png
+    gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
+    gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'fr')]"
+    update-alternatives --set x-terminal-emulator /usr/bin/gnome-terminal.wrapper
