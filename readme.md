@@ -143,6 +143,36 @@ ssh "root@$DO_IP" passwd hacker # Set your password
 #  - NoMachine -> Grab keyboard input (for i3 bindings)
 #  - Remote -> Via settings, Set resolution to 1920x1080
 # ~ Enjoyyyy ~
+
+# xfreerdp
+## Server
+export IP=152.42.141.135
+ssh "root@$IP"
+echo "hacker:choubidouce" | chpasswd
+apt install -y xrdp
+systemctl status --no-pager xrdp
+cat > /etc/xrdp/startwm.sh << EOF
+#!/bin/sh
+# xrdp X session start script (c) 2015, 2017, 2021 mirabilos
+# published under The MirOS Licence
+
+# Rely on /etc/pam.d/xrdp-sesman using pam_env to load both
+# /etc/environment and /etc/default/locale to initialise the
+# locale and the user environment properly.
+
+if test -r /etc/profile; then
+	. /etc/profile
+fi
+
+if test -r ~/.profile; then
+	. ~/.profile
+fi
+
+test -x /usr/bin/regolith-session-x11 && exec /usr/bin/regolith-session-x11
+exec /bin/sh /usr/bin/regolith-session-x11
+EOF
+## Client
+xfreerdp -u:hacker -p:choubidouce -v:${IP} -dynamic-resolution +clipboard
 ```
 
 - If you just want to try it quick at no cost
