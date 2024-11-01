@@ -80,7 +80,7 @@
     dest: '{{ ansible_env.HOME }}/.config/nvim'
     update: yes
     force: yes
-  when: lazyvim_installed.stat.exists == False
+  when: not lazyvim_installed.stat.exists
 
 - name: Disable mouse integration in Neovim
   ansible.builtin.lineinfile:

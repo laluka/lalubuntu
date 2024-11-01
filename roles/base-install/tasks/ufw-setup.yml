@@ -6,6 +6,11 @@
     line: 'PermitRootLogin prohibit-password'
   become: true
 
+- name: Is In Docker
+  ansible.builtin.stat:
+    path: '/.dockerenv'
+  register: is_in_docker
+
 - name: Configure ufw defaults
   community.general.ufw:
     direction: "{{ item.direction }}"
@@ -14,6 +19,7 @@
     - { direction: 'incoming', policy: 'deny' }
     - { direction: 'outgoing', policy: 'allow' }
   become: true
+  when: not is_in_docker.stat.exists
 
 - name: Allow SSH connections
   community.general.ufw:
@@ -21,18 +27,22 @@
     port: 22
     proto: tcp
   become: true
+  when: not is_in_docker.stat.exists
 
 - name: Enable ufw logging
   community.general.ufw:
     logging: on
   become: true
+  when: not is_in_docker.stat.exists
 
 - name: Enable ufw
   community.general.ufw:
     state: enabled
   become: true
+  when: not is_in_docker.stat.exists
 
 - name: Restart ufw
   community.general.ufw:
     state: reloaded
   become: true
+  when: not is_in_docker.stat.exists
