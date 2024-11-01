@@ -23,3 +23,27 @@
     path: '/tmp/vscode-setup.deb'
     state: absent
   when: not vscode_installed.stat.exists
+
+- name: Set GNOME Preferences
+  ansible.builtin.shell: code --install-extension '{{ item }}'
+  with_items:
+    - bibhasdn.unique-lines
+    - davidanson.vscode-markdownlint
+    - esbenp.prettier-vscode
+    - mechatroner.rainbow-csv
+    - ms-vscode-remote.remote-ssh
+    - ms-vscode.remote-explorer
+    - usernamehw.errorlens
+    - trailofbits.weaudit
+    - eriklynd.json-tools
+    - github.copilot
+    - github.copilot-chat
+    - ms-azuretools.vscode-docker
+    - ms-python.debugpy
+    - ms-python.python
+    - ms-python.vscode-pylance
+    - ms-vscode-remote.remote-containers
+    - ms-vscode-remote.remote-ssh-edit
+    - ms-vsliveshare.vsliveshare
+    - yzane.markdown-pdf
+    - zobo.php-intellisense
