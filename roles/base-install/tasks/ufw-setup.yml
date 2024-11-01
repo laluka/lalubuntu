@@ -7,23 +7,32 @@
   become: true
 
 - name: Configure ufw defaults
-  community.general.ufw: direction={{ item.direction }} policy={{ item.policy }}
-  with_items:
+  community.general.ufw:
+    direction: "{{ item.direction }}"
+    policy: "{{ item.policy }}"
+  loop:
     - { direction: 'incoming', policy: 'deny' }
     - { direction: 'outgoing', policy: 'allow' }
   become: true
 
+- name: Allow SSH connections
+  community.general.ufw:
+    rule: allow
+    port: 22
+    proto: tcp
+  become: true
+
 - name: Enable ufw logging
-  community.general.ufw: 
+  community.general.ufw:
     logging: on
   become: true
 
 - name: Enable ufw
-  community.general.ufw: 
-    state: disabled
+  community.general.ufw:
+    state: enabled
   become: true
 
 - name: Restart ufw
-  community.general.ufw: 
+  community.general.ufw:
     state: reloaded
   become: true

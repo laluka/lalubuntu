@@ -20,16 +20,6 @@
 - name: Execute the installation script
   ansible.builtin.shell: /tmp/install.sh
 
-- name: Remove old rtx config from shell configuration files
-  ansible.builtin.lineinfile:
-    path: '{{ ansible_env.HOME }}/.{{ item }}rc'
-    state: absent
-    regexp: 'eval .*rtx activate {{ item }}'
-    backrefs: yes
-  loop:
-    - bash
-    - zsh
-
 - name: Add mise activation to shell configuration files
   ansible.builtin.lineinfile:
     path: '{{ ansible_env.HOME }}/.{{ item }}rc'

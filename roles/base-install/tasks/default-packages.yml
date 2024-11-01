@@ -150,3 +150,16 @@
     path: '/usr/local/bin/fastgron'
     mode: '0755'
   become: true
+
+- name: Disable Services to Reduce our Attack Surface
+  ansible.builtin.systemd:
+    name: '{{ item }}'
+    enabled: no
+    state: stopped
+  loop_control:
+    loop_var: item
+  become: true
+  ignore_errors: true
+  with_items:
+    - tor
+    - cups

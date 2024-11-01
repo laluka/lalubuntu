@@ -36,7 +36,6 @@ The ansible playbook `main.yml` applies 4 ansible roles which are:
 - roles/base-install
 - roles/offensive-stuff
 - roles/gui-tools
-- roles/hardening
 
 ## Pre-Install, Install, Update
 
@@ -69,8 +68,6 @@ ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags offensive-stuff
 # Smooth term & GUI for non-offensive folks -> requires base-install
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags gui-tools
-# Do the security thingy
-ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags hardening
 ```
 
 ## Packer - Requirements
@@ -186,18 +183,6 @@ Some GUI software such as vscode or office will be installed
 - Then, install signal (`install-signal`)
 - After, it will install and setup regolith because regolith is GOAT (`setup-regolith`)
 - To finish, some cleanup ! (`cleanup`)
-
-## Hardening
-
-Some quick hardening will be done :
-
-- First, some ufw (firewall) config `ufw-setup`
-- Then disabling some services (vars can be found `roles/hardening/defaults/main.yml`) `disable-service`
-- Install (vars can be found `roles/hardening/defaults/main.yml`) `install-secu-packages`
-- To finish, some cleanup ! (`cleanup`)
-
-> I rely on chrome for everything I can. I strongly recommend installing the extensions from `chrome-extensions.lst`
-
 ---
 
 ## Gotchas

@@ -69,10 +69,23 @@
     # - i3xrocks-tailscale
     # - i3xrocks-weather
 
+- name: Remove Picom as it breads NoMachine screen refresh
+  ansible.builtin.package:
+    name: picom
+    state: absent
+  become: true
+  when: not regolith_installed.stat.exists
+
+- name: Kill Picom after it's removed
+  become: true
+  ansible.builtin.shell: pkill picom
+  when: not regolith_installed.stat.exists
+
 - name: Ensure the ~/.config/regolith3/i3/config.d/ directory exists
   ansible.builtin.file:
     path: '{{ ansible_env.HOME }}/.config/regolith3/i3/config.d/'
     state: directory
+  when: not regolith_installed.stat.exists
 
 - name: Append lines to the i3 config file
   ansible.builtin.blockinfile:
@@ -84,16 +97,7 @@
       bindsym $mod+s exec gnome-control-center sound
       bindsym $mod+Shift+w exec /usr/bin/python3 /opt/cameractrls/cameractrlsgtk4.py
       bindsym $mod+m exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && notify-send --icon=/dev/null --expire-time=500 "$(pactl get-source-mute @DEFAULT_SOURCE@)"
-
-# - name: Append lines to the i3 Xresources file
-#   ansible.builtin.blockinfile:
-#     path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'
-#     marker: "! {mark} ANSIBLE MANAGED BLOCK"
-#     create: yes
-#     block: |
-#       gtk.font_name: Nerd Font Mono 10
-#       regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png
-#       regolith.wallpaper.options: stretched
+  when: not regolith_installed.stat.exists
 
 - name: Set GNOME Preferences
   become: true

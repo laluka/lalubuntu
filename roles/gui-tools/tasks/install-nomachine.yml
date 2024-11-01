@@ -24,3 +24,15 @@
       ansible.builtin.file:
         path: '/tmp/nomachine-setup.deb'
         state: absent
+
+- name: Stop and disable Nomachine
+  ansible.builtin.systemd:
+    name: '{{ item }}'
+    enabled: no
+    state: stopped
+  loop_control:
+    loop_var: item
+  become: true
+  ignore_errors: true
+  with_items:
+    - nxserver
