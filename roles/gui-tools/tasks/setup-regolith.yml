@@ -100,7 +100,6 @@
   when: not regolith_installed.stat.exists
 
 - name: Set GNOME Preferences
-  become: true
   ansible.builtin.shell: |
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark # dark colors
     gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true # enable tap-to-click
