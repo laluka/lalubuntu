@@ -7,4 +7,5 @@
 - include_tasks: docker-install.yml # Installing Docker
 - include_tasks: pipx-tools.yml #Installing pipx related tools
 - include_tasks: cargo-dl.yml # Downloading Cargo based toolings
+- include_tasks: ufw-setup.yml # Enable UFW keeping only ssh access on tcp 22
 - include_tasks: cleanup.yml # Cleaning up the system
