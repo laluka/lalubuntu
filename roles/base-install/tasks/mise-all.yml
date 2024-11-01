@@ -60,6 +60,9 @@
     - websocat@latest
 
 - name: Install grumpy php that errors out yet works (only in github action non interactive docker builds...)
+  ansible.builtin.shell: "mise exec -- go env -w 'GOPATH={{ ansible_env.HOME }}/.local/go'"
+
+- name: Install grumpy php that errors out yet works (only in github action non interactive docker builds...)
   ansible.builtin.shell: zsh -c 'mise install -y "php@latest" ; mise use -y -g "php@latest" || true'
 
 - name: Add python-version-picker convenient script
