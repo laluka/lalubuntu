@@ -120,6 +120,7 @@
     - tree
     - ufw
     - unzip
+    - neofetch
     - vbindiff
     - vim
     - wget
@@ -130,14 +131,27 @@
     - zlib1g-dev
     - zsh
 
-- name: Install Packages Cleanup
-  ansible.builtin.package:
-    name: '{{ item }}'
-    state: absent
-  become: true
-  with_items:
-    - trash-cli # Repo is outdated, pipx install is latest
-    - regolith-rofication # For dunst notifications replacement
+- name: Ensure neofetch image_backend is set to "chafa"
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.config/neofetch/config.conf"
+    regexp: '^image_backend='
+    line: 'image_backend="chafa"'
+    create: yes
+
+- name: Ensure neofetch image_source is set to the specified path
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.config/neofetch/config.conf"
+    regexp: '^image_source='
+    line: 'image_source="/opt/lalubuntu/screens/logo-lalubuntu-no-bg.png"'
+    create: yes
+
+# - name: Install Packages Cleanup
+#   ansible.builtin.package:
+#     name: '{{ item }}'
+#     state: absent
+#   become: true
+#   with_items:
+#     - regolith-rofication # For dunst notifications replacement
 
 - name: Download fastgron
   ansible.builtin.get_url:

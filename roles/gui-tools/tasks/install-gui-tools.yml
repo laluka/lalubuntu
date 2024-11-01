@@ -33,7 +33,7 @@
     - arandr
     - blueman
     - cheese
-    - dunst
+    # - dunst
     - filezilla
     - flameshot
     - ghex
