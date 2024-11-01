@@ -79,6 +79,7 @@
 - name: Kill Picom after it's removed
   become: true
   ansible.builtin.shell: pkill picom
+  allow_errors: yes
   when: not regolith_installed.stat.exists
 
 - name: Ensure the ~/.config/regolith3/i3/config.d/ directory exists
