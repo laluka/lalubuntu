@@ -1,5 +1,6 @@
 - name: Install pipx packages
   community.general.pipx:
+    executable: /usr/bin/pipx
     name: '{{ item }}'
   with_items:
     - argcomplete
