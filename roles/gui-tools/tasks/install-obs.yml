@@ -18,8 +18,8 @@
   when: not obs_installed.stat.exists
   become: true
 
-- name: Use the right terminal emulator
+- name: Add OBS repo keys
   ansible.builtin.shell: apt-key export F425E228 | gpg --dearmour -o /etc/apt/trusted.gpg.d/obs.gpg
   become: true
-  allow_failure: yes
+  ignore_errors: true
   when: not obs_installed.stat.exists
