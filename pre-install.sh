@@ -20,4 +20,4 @@ export PATH="$PATH:$HOME/.local/bin"
 echo "[*] Installing Ansible Galaxy Collections"
 ansible-galaxy collection install community.general
 echo "[*] All good, now run:"
-echo "bash -x install.sh"
+echo "bash install.sh"

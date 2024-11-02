@@ -13,4 +13,5 @@ fi
 echo "[*] Installing LaluBuntu. Go grab yourself a coffee, this will run for A WHILE. :D"
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml
 echo "[*] Done! Logout, then you MUST pick Regolith/X11 (bottom right of sessions screen) and Login!"
+echo "[*] Do take the time to visit chrome-extensions.lst for extra goodies once you're in regolith!"
 echo "[🌹] Enjoy your new LaluBuntu distro!"

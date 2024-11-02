@@ -13,7 +13,7 @@ alias p='python'
 alias tmp='pushd $(mktemp -d)'
 alias lbt='cd /opt/lalubuntu'
 alias life='cd /opt/lalulife' # Might be released some day ;)
-alias lalupdate='bash /opt/lalubuntu/update.sh'
+alias lbt-update='bash /opt/lalubuntu/update.sh'
 
 # Tools Sysadmin
 alias t='f(){ exa -Tll "$@";  unset -f f; }; f'
