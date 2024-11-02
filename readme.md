@@ -135,7 +135,7 @@ ssh "root@$DO_IP" passwd hacker # Set your password
 
 ---
 
-## Lalubuntu Actual Content
+## Lalubuntu Actual Content - TODO update
 
 - **Base-installs** scripts will install all the needed sofware and packages
   - This ansible script will first update and install a lot of needed packages. You can view all the packages in `default_packages` variable in `roles/base-install/defaults/main.yml` file
@@ -182,6 +182,8 @@ ssh "root@$DO_IP" passwd hacker # Set your password
 
 > Hey ChatGPT, complete here with my git diff output, keep the style, and be concise.
 
+- 2024/11/02
+  - TODO update
 - 2024/05/21
   - Modified aliases file: added safety prompt to cp command using alias cp='cp -i'
   - Updated pre-install.sh: temporarily hardcoded Ansible version to 2.13.12 to avoid bugs in latest 2.13.X with Python 3.8 
