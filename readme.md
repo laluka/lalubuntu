@@ -11,9 +11,9 @@
 
 See thiese videos to see how Lalubuntu will improve your daily linux & cyber life!
 
-[![Global Presentation](https://img.youtube.com/vi/sZQ6FVncuNA/0.jpg)](https://www.youtube.com/watch?v=sZQ6FVncuNA)
+[![Global Presentation](https://img.youtube.com/vi/sZQ6FVncuNA/0.jpg)](https://youtu.be/sZQ6FVncuNA)
 
-[![Lower The Friction](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://www.youtube.com/watch?v=xxOVNKNs24s)
+[![Lower The Friction](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://youtu.be/xxOVNKNs24s)
 
 ## Installation process for `Ubuntu 24.04` (current GOLD way)
 
