@@ -75,6 +75,13 @@
   become: true
   when: not regolith_installed.stat.exists
 
+- name: Replace regolith-rofication (auto removed) by dunst
+  ansible.builtin.package:
+    update_cache: yes
+    name: dunst
+    state: latest
+  become: true
+
 - name: Kill Picom after it's removed
   become: true
   ansible.builtin.shell: pkill picom
