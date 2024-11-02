@@ -15,7 +15,7 @@ See thiese videos to see how Lalubuntu will improve your daily linux & cyber lif
 
 [![Lower The Friction](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://youtu.be/xxOVNKNs24s)
 
-## Installation process for `Ubuntu 24.04` (current GOLD way)
+## Installation process for `Ubuntu 24.04`  - The current "GOLD path" 🌷
 
 ```bash
 # Pre-install
