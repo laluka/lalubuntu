@@ -6,7 +6,7 @@
 <img src='screens/logo-lalubuntu.png' width='250'>
 
 - This ansible playbook will make your machine lovely to use.
-- This is my -`@TheLaluka`- own config, shared with the help & motivation of `@Fransosiche` !
+- This is my -[@TheLaluka](https://x.com/TheLaluka)- own config, shared with the help & motivation of [@Fransosiche](https://x.com/Fransosiche) !
 - Welcome to my world, now is the right time to `Lower The Friction` between you and your machine!
 
 See thiese videos to see how Lalubuntu will improve your daily linux & cyber life!
