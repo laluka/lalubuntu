@@ -129,7 +129,7 @@ ssh "root@$DO_IP" passwd hacker # Set your password
 
 - If you just want to try it quick at no cost
   - Feel free tu use my referal link: https://m.do.co/c/8f065e035836
-    - You earn 250$ credit to be used within two months
+    - You earn 200$ credit to be used within two months
     - I (lalu) save 25$ on my next infra bill, which is nice!
     - Thank you 🌹
 

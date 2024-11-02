@@ -99,9 +99,9 @@
 - name: Set GNOME Preferences
   ansible.builtin.shell: |
     regolith-look set nord
+    echo "regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png" >> "{{ ansible_env.HOME }}/.config/regolith3/Xresources"
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark # dark colors
     gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true # enable tap-to-click
-    gsettings set org.gnome.desktop.background picture-uri file:///opt/lalubuntu/screens/wallpaper.png
     gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
     gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'fr')]"
 
