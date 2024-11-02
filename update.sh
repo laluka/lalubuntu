@@ -21,7 +21,7 @@ if [ "$LOCAL" != "$REMOTE" ]; then
         case $response in
             [Yy]* | "" )
                 git pull
-                bash -x install.sh
+                bash install.sh
                 echo "Lalubuntu has been updated."
                 break
                 ;;

@@ -117,13 +117,15 @@ cd /opt/lalubuntu/packer && packer init lbt-digitalocean.pkr.hcl
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocean-$(date).log" packer build lbt-digitalocean.pkr.hcl
 # Then visit https://cloud.digitalocean.com/images/snapshots/droplets & create your droplet from the last SnapShot! :)
 export DO_IP=X.X.X.X
-ssh "root@$DO_IP" systemctl start nxserver.service
-ssh "root@$DO_IP" passwd hacker # Set your password
-# Locally, start NoMachine & Connect with hacker / $DO_IP / 4000
+ssh "root@$DO_IP" systemctl start nxserver.service # Enable Nomachine
+ssh "root@$DO_IP" "echo hacker:YourCoolPasswordHere | chpasswd" # Set your password
+ssh -vNL 127.0.0.1:4000:127.0.0.1:4000 "root@$DO_IP" # Add port forwarding to use NoMachine without net exposure
+ssh "root@$DO_IP" systemctl restart nxserver.service # If you have "No Display" errors
+# Locally, start NoMachine and connect with hacker@127.0.0.1:4000
 # Remember to:
 #  - NoMachine -> Set resolution to 1920x1080
 #  - NoMachine -> Grab keyboard input (for i3 bindings)
-#  - OnRemote -> Via settings, Set resolution to 1920x1080
+#  - RemoteHost -> Via settings, Set resolution to 1920x1080
 # ~ Enjoyyyy ~
 ```
 
@@ -172,9 +174,8 @@ ssh "root@$DO_IP" passwd hacker # Set your password
   - In Regolith: `CMD+SPACE` then logout
 - If you're in a VM, remember to `enable 3D acceleration` which seems required for `24.04` and later
 
-<img src='screens/demo-switch-gnome-regolith.png' width='500'>
 
-<img src='screens/demo-gnome.png' width='500'>
+<img src='screens/demo-switch-gnome-regolith.png' width='500'>
 
 <img src='screens/demo-regolith.png' width='500'>
 

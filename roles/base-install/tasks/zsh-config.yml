@@ -60,7 +60,7 @@
 - name: Add line to shell configuration files
   ansible.builtin.lineinfile:
     path: '{{ item }}'
-    line: 'source /opt/lalubuntu/aliases'
+    line: 'source /opt/lalubuntu/utils/aliases'
     insertafter: EOF
   with_items:
     - ~/.zshrc

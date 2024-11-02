@@ -1,6 +1,5 @@
 # Utils
 ## Directories
-alias sudo='sudo ' # Trick to have ALL aliases available with sudo <3
 alias dl='cd ~/Downloads'
 alias da='cd /DATA'
 alias tn='tmux new'

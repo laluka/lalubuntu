@@ -66,7 +66,7 @@
   ansible.builtin.shell: zsh -c 'mise install -y "php@latest" ; mise use -y -g "php@latest" || true'
 
 - name: Add python-version-picker convenient script
-  ansible.builtin.shell: ln -sf /opt/lalubuntu/scripts-and-utils/pv /usr/local/bin/pv
+  ansible.builtin.shell: ln -sf /opt/lalubuntu/utils/pv /usr/local/bin/pv
   become: yes
 
 - name: Install lazyvim only if ~/.config/nvim does not exist
