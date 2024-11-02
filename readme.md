@@ -53,7 +53,7 @@ lbt-update
 - Around 10G of free space are required for a full install
 - I **strongly** recommend **50G** for your VM so it's not full 2 days of use
 
-[![LaluBuntu Setup](https://img.youtube.com/vi/59T4gQICirU/0.jpg)](https://www.youtube.com/watch?v=59T4gQICirU)
+[![LaluBuntu Setup](https://img.youtube.com/vi/59T4gQICirU/0.jpg)](https://youtu.be/59T4gQICirU)
 
 ---
 
