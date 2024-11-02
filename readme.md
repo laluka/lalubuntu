@@ -35,6 +35,8 @@ bash install.sh
 
 ## If you're migrating from Ubuntu `22.04` to `24.04`:
 
+> ⚠️ Seriously, don't do that... ⚠️
+
 - I would **strongly** suggest installing a clean `24.04 Ubuntu Desktop` from the official ISO 🙏
 - Then installing Lalubuntu from master 📖
 - You *can* try a `dist-upgrate` and running lalubuntu on master, but I've had really poor experiences with `dist-upgrate` in linux in general 🕱
