@@ -113,6 +113,5 @@
     gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'fr')]"
 
 - name: Use the right terminal emulator
-  ansible.builtin.shell: |
-    update-alternatives --set x-terminal-emulator /usr/bin/gnome-terminal.wrapper
+  ansible.builtin.shell: update-alternatives --set x-terminal-emulator /usr/bin/gnome-terminal.wrapper
   become: true
