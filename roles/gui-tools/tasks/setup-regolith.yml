@@ -105,7 +105,7 @@
     gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
     gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'fr')]"
 
-- name: Set GNOME Preferences
+- name: Use the right terminal emulator
   ansible.builtin.shell: |
     update-alternatives --set x-terminal-emulator /usr/bin/gnome-terminal.wrapper
   become: true
