@@ -1,6 +1,7 @@
 # LaluBuntu - [![packer-docker-build](https://github.com/laluka/lalubuntu/actions/workflows/packer.yml/badge.svg?branch=master)](https://github.com/laluka/lalubuntu/actions/workflows/packer.yml)
 
-> Prompt (OpenAI): Create a logo with an Evoli-like pokemon for a linux distro named LaluBuntu, make it cute !
+> OpenAI Prompt:\
+> Create a logo with an Evoli-like pokemon for a linux distro named LaluBuntu, make it cute!
 
 <img src='screens/logo-lalubuntu.png' width='250'>
 
