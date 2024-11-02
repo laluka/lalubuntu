@@ -135,7 +135,7 @@ ssh "root@$DO_IP" passwd hacker # Set your password
 
 ---
 
-## Lalubuntu Actual Content - TODO update
+## Lalubuntu Actual Content
 
 - **Base-installs** scripts will install all the needed sofware and packages
   - This ansible script will first update and install a lot of needed packages. You can view all the packages in `default_packages` variable in `roles/base-install/defaults/main.yml` file
@@ -250,12 +250,11 @@ echo -e "Now, generate changelogs for my latest linux distro changesis my git di
   - Refactored roles in main.yml with tags for organization (base-install, offensive-stuff, gui-tools, hardening)
   - Added user creation script create-user.sh for user hacker with temp sudo privileges for install time
   - Implemented Packer configuration do-lalubuntu.pkr.hcl for Docker Imge and DigitalOcean snapshot creation
-  - Updated readme.md with TODOs, Packer instructions, and additional tools to install
+  - Updated readme.md with Packer instructions, and additional tools to install
   - Fixed mise sometimes not being loaded & removed xrandr unused aliases
   - Implemented security measures and cleanup in Packer build process
 - 2024/01/12
   - Added a new alias: yt-dlp
-  - Updated readme.md with TODO section
   - Created vscode-extensions.lst for VS Code extensions
   - Added auto completion for a few kube/terraform related tools
   - Added gnome-tweaks, blueman, obs-studio from the official ppa

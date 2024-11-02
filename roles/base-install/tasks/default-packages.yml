@@ -145,7 +145,7 @@
     line: 'image_source="/opt/lalubuntu/screens/logo-lalubuntu-no-bg.png"'
     create: yes
 
-# - name: Install Packages Cleanup
+# - name: Install Packages Cleanup TODO check not required
 #   ansible.builtin.package:
 #     name: '{{ item }}'
 #     state: absent
