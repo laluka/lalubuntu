@@ -6,8 +6,8 @@
 <img src='screens/logo-lalubuntu.png' width='250'>
 
 - This ansible playbook will make your machine lovely to use.
-- This is my -[@TheLaluka](https://x.com/TheLaluka)- own config, shared with the help & motivation of [@Fransosiche](https://x.com/Fransosiche) !
-- Welcome to my world, now is the right time to `Lower The Friction` between you and your machine!
+- This is my ([@TheLaluka](https://x.com/TheLaluka)) own config, shared with the help & motivation of [@Fransosiche](https://x.com/Fransosiche)!
+- Welcome to my world, now is the right time to `Lower The Friction` between you and your machine 🥰
 
 See thiese videos to see how Lalubuntu will improve your daily linux & cyber life!
 
@@ -41,6 +41,15 @@ bash install.sh
 - Then installing Lalubuntu from master 📖
 - You *can* try a `dist-upgrate` and running lalubuntu on master, but I've had really poor experiences with `dist-upgrate` in linux in general 🕱
 - I will provide no help, the clean way is "Fresh Ubuntu 24.04 then install from master" 😇
+
+> For what it's worth, I tried it and it worked, at some costs!
+
+- Ubuntu update was really long
+- Had to run lbt-update from Gnome as regolith broke
+- Fix ~/.zrhrc by hand (fix aliases path and lines order)
+- A few more hiccups...
+
+You really should NOT go this way, and enjoy a nice and fresh install instead! 🍀
 
 ## If you're still on Ubuntu `22.04`:
 
