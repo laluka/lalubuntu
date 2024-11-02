@@ -178,12 +178,30 @@ ssh "root@$DO_IP" passwd hacker # Set your password
 
 <img src='screens/demo-regolith.png' width='500'>
 
+---
+
 ## Changelog
 
-> Hey ChatGPT, complete here with my git diff output, keep the style, and be concise.
+```bash
+echo "Hello ChatGPT. Learn from my past changelogs and answer OK when you're done learning their format." | cpy # + add the past changelogs
+echo -e "Now, generate changelogs for my latest linux distro changesis my git diff output: \n$(git diff origin/master)" | cpy
+```
 
 - 2024/11/02
-  - TODO update
+  - Renamed alias from lalupdate to lbt-update in aliases file.
+  - Added new alias clean-go to remove Go installation files in aliases file.
+  - Removed alias go-reshim from aliases file.
+  - Added new alias lbt-keyboard-layout for setting keyboard layout configurations in aliases file.
+  - Updated install.sh to include compatibility check for Ubuntu 24.04, with a warning message and exit condition if not met.
+  - Added an echo statement in install.sh for additional installation details post-setup.
+  - Removed the 'roles/hardening' role application from main.yml.
+  - Updated entries in chrome-extensions.lst to ensure accurate version control.
+  - Removed vscode-extensions.lst file, transitioning to manual management of VS Code extensions.
+  - Updated image references in packer/lbt-digitalocean.pkr.hcl to Ubuntu 24.04.
+  - Added a temporary checkout command in DigitalOcean Packer build for Ubuntu 24.04 compatibility in packer/lbt-digitalocean.pkr.hcl.
+  - Updated Docker Packer files to use Ubuntu 24.04 images in packer/lbt-docker-branches.pkr.hcl.
+  - Updated the execution command in pre-install.sh to streamline script usage.
+  - Revised readme.md to include new image guidelines and updated instructional content for new Ubuntu version.
 - 2024/05/21
   - Modified aliases file: added safety prompt to cp command using alias cp='cp -i'
   - Updated pre-install.sh: temporarily hardcoded Ansible version to 2.13.12 to avoid bugs in latest 2.13.X with Python 3.8 
