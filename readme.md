@@ -19,7 +19,7 @@ See thiese videos to see how Lalubuntu will improve your daily linux & cyber lif
 
 ```bash
 # Pre-install
-sudo apt install -y curl wget git vim tmux # Basics
+sudo apt update && sudo apt install -y curl wget git vim tmux
 git clone https://github.com/laluka/lalubuntu
 sudo mv lalubuntu /opt/lalubuntu
 cd /opt/lalubuntu
@@ -29,10 +29,9 @@ bash pre-install.sh
 bash install.sh
 # If anything fails, the install won't be complete (ansible StopOnFail intended behavior)
 # So you'll have to fix (or commment) the failing task and re-run install.sh!
-
-# Stay Up-To-Date
-lbt-update
 ```
+
+> Stay Up-To-Date by running frequently `lbt-update`! 💌
 
 ## If you're migrating from Ubuntu `22.04` to `24.04`:
 
