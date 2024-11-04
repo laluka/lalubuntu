@@ -28,22 +28,21 @@
   ansible.builtin.shell: code --install-extension '{{ item }}'
   with_items:
     - bibhasdn.unique-lines
-    - davidanson.vscode-markdownlint
-    - esbenp.prettier-vscode
-    - mechatroner.rainbow-csv
-    - ms-vscode-remote.remote-ssh
-    - ms-vscode.remote-explorer
-    - usernamehw.errorlens
-    - trailofbits.weaudit
     - eriklynd.json-tools
     - github.copilot
     - github.copilot-chat
+    - mechatroner.rainbow-csv
+    - mitchdenny.ecdc
     - ms-azuretools.vscode-docker
     - ms-python.debugpy
     - ms-python.python
     - ms-python.vscode-pylance
     - ms-vscode-remote.remote-containers
+    - ms-vscode-remote.remote-ssh
     - ms-vscode-remote.remote-ssh-edit
+    - ms-vscode.remote-explorer
     - ms-vsliveshare.vsliveshare
+    - trailofbits.weaudit
+    - usernamehw.errorlens
     - yzane.markdown-pdf
     - zobo.php-intellisense
