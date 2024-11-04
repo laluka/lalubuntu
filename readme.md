@@ -31,6 +31,8 @@ bash install.sh
 # So you'll have to fix (or commment) the failing task and re-run install.sh!
 ```
 
+Then [pick "Regolith X11"](#gotchas) from lightdm, see screen below
+
 > Stay Up-To-Date by running frequently `lbt-update`! 💌
 
 ## If you're migrating from Ubuntu `22.04` to `24.04`:
