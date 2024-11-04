@@ -1,7 +1,7 @@
 ---
 - name: Check if BurpSuite is already installed
   ansible.builtin.stat:
-    path: '/opt/BurpSuiteCommunity'
+    path: '/opt/lbtools/BurpSuiteCommunity'
   register: burpsuite_installed
 
 - name: Download BurpSuite
@@ -20,9 +20,12 @@
     state: absent
   when: not burpsuite_installed.stat.exists
 
-- name: Move Burp Install to /opt
-  become: true
+- name: Move Burp Install to /opt/lbtools
   ansible.builtin.shell: |
     set -x
-    mv '{{ ansible_env.HOME }}/BurpSuiteCommunity' /opt/
-    sed -i 's#{{ ansible_env.HOME }}#/opt#g' '{{ ansible_env.HOME }}/.gnome/apps/install'*BurpSuiteCommunity.desktop
+    mv '{{ ansible_env.HOME }}/BurpSuiteCommunity' /opt/lbtools/
+    sed -i 's#{{ ansible_env.HOME }}#/opt/lbtools#g' '{{ ansible_env.HOME }}/.local/share/applications/'*BurpSuiteCommunity.desktop
+
+- name: Allow katana / burp / obs headless browsers to work...
+  ansible.builtin.shell: "sysctl -w kernel.apparmor_restrict_unprivileged_userns=0"
+  become: true

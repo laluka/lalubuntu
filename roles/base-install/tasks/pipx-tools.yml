@@ -12,6 +12,7 @@
     - trash-cli
     - wafw00f
     - yt-dlp
+    - semgrep
 
 - name: Add exegol autocompletion to shell configuration filesansible
   ansible.builtin.lineinfile:
