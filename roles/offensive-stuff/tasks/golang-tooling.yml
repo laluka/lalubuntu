@@ -12,6 +12,7 @@
     - github.com/wader/fq
     - github.com/x90skysn3k/brutesprayx
     - github.com/xm1k3/cent
+    - github.com/tomnomnom/waybackurls
 
 - name: Run pdtm and install all tools
   ansible.builtin.shell: "zsh -c 'mise exec -- pdtm -install-all'"
