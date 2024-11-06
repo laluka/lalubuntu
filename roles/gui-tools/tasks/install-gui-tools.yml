@@ -56,12 +56,18 @@
     - wireshark
     - snapd
 
-- name: Install GUI Packages
+- name: Check if Snap is already installed
+  ansible.builtin.stat:
+    path: '/usr/bin/snap'
+  register: snap_installed
+
+- name: Install GUI Snap Packages
   community.general.snap:
     name:
       - emote
       - firefox
   become: true
+  when: snap_installed.stat.exists
 
 - name: Clone dragon repository
   ansible.builtin.git:

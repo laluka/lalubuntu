@@ -3,7 +3,6 @@
   ansible.builtin.stat:
     path: '/usr/NX/bin/nxserver.bin'
   register: nomachine_installed
-  become: true
 
 - name: Install NoMachine if not already installed
   ignore_errors: true

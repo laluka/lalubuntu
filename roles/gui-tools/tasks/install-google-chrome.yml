@@ -3,7 +3,6 @@
   ansible.builtin.stat:
     path: /usr/bin/google-chrome
   register: chrome_installed
-  become: true
 
 - name: Add Google Chrome repository
   ansible.builtin.lineinfile:

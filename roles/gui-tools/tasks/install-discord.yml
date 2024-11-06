@@ -3,7 +3,6 @@
   ansible.builtin.stat:
     path: '/usr/bin/discord'
   register: discord_installed
-  become: true
 
 - name: Download Discord
   ansible.builtin.get_url:

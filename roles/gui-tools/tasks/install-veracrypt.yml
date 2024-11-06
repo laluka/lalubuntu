@@ -3,7 +3,6 @@
   ansible.builtin.stat:
     path: '/usr/bin/veracrypt'
   register: veracrypt_installed
-  become: true
 
 - name: Download Veracrypt
   ansible.builtin.get_url:
