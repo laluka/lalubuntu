@@ -54,7 +54,6 @@
     - virt-manager
     - vlc
     - wireshark
-    - snapd
 
 - name: Check if Snap is already installed
   ansible.builtin.stat:
