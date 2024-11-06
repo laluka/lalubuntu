@@ -55,6 +55,13 @@
     - vlc
     - wireshark
 
+
+- name: Install GUI Packages
+  community.general.snap:
+    name:
+      - emote
+  become: true
+
 - name: Clone dragon repository
   ansible.builtin.git:
     repo: 'https://github.com/mwh/dragon.git'

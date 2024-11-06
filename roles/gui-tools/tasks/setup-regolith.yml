@@ -100,6 +100,7 @@
       bindsym $mod+p exec flameshot gui
       bindsym $mod+Ctrl+p exec flameshot full -p /tmp/
       bindsym $mod+s exec gnome-control-center sound
+      bindsym $mod+e exec emote
       bindsym $mod+Shift+w exec /usr/bin/python3 /opt/cameractrls/cameractrlsgtk4.py
       bindsym $mod+m exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && notify-send --icon=/dev/null --expire-time=500 "$(pactl get-source-mute @DEFAULT_SOURCE@)"
 
