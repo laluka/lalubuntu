@@ -54,12 +54,13 @@
     - virt-manager
     - vlc
     - wireshark
-
+    - snapd
 
 - name: Install GUI Packages
   community.general.snap:
     name:
       - emote
+      - firefox
   become: true
 
 - name: Clone dragon repository
