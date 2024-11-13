@@ -93,7 +93,7 @@ alias get-port-info='f(){ xdg-open "https://www.speedguide.net/port.php?port=$@"
 alias get-bookhacktricks='f(){ xdg-open "https://book.hacktricks.xyz/?q=$@" ;  unset -f f; }; f'
 alias recon-certspotter='f(){ xdg-open "https://api.certspotter.com/v1/issuances?domain=$1&include_subdomains=true&expand=dns_names&expand=issuer&expand=cert" ;  unset -f f; }; f'
 alias recon-virustotal='f(){ xdg-open "https://www.virustotal.com/gui/domain/$1" ;  unset -f f; }; f'
-alias recon-crtsh='f(){ curl -sk "https://crt.sh/?output=json&q=$1" | jq . ; unset -f f; }; f'
+alias recon-crtsh='f(){ curl -sk "https://crt.sh/json?q=$1" | jq . ; unset -f f; }; f'
 alias recon-wayback='f(){ curl -sk "https://web.archive.org/cdx/search/cdx?fl=original&collapse=urlkey&url=*.$1" ; unset -f f; }; f'
 alias capture-http='f(){ sudo unbuffer tcpdump -A -s 0 "tcp port $@ and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)" | tr "\\n" "\n" ; unset -f f; }; f'
 alias capture-creds="sudo tcpdump -i enp0s31f6 port http or port ftp or port smtp or port imap or port pop3 or port telnet -l -A | grep -iEB5 --line-buffered 'pass=|pwd=|log=|login=|user=|username=|pw=|passw=|passwd=|password=|pass:|user:|username:|password:|login:|pass |user |authorization:|token'"
