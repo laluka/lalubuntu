@@ -2,6 +2,8 @@
   community.general.pipx:
     executable: /usr/bin/pipx
     name: '{{ item }}'
+    inject_packages:
+      - setuptools # python 3.13 and above removed this often required dep
   with_items:
     - argcomplete
     - bypass-url-parser

@@ -29,7 +29,6 @@ alias carbo='docker run -ti fathyb/carbonyl'
 alias ipa='ip -br a | grep -vF DOWN | cut -d/ -f1'
 alias kill-click='sudo kill -9 $(get-pid-click)'
 alias cam-setup='guvcview'
-alias yt-dlp='pipx run yt-dlp'
 alias yt-dl-likes='yt-dlp --cookies www.youtube.com_cookies.txt -x --audio-format mp3  :ytfav' # https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc
 alias record-screen='f(){ ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0 -c:v libx264 -crf 0 -preset ultrafast "$1".mkv;  unset -f f; }; f'
 alias maxfullscreen='f(){ window_title=$(i3-msg -t get_tree | gron | grep -F "title = " | grep -ioP "\".*\"" | fzf); i3-msg "[title=$window_title] focus ; floating enable ; resize set 3842px 1082px; move position -1px -1px" ;  unset -f f; }; f'
@@ -111,6 +110,7 @@ alias dirmon='inotifywait -rm -e create -e moved_to -e modify -e access -e attri
 alias killit='sudo kill -KILL'
 alias favhash="python3 -c 'from mmh3 import hash as h;from codecs import encode as e;from sys import argv;favicon = e(open(argv[1], \"rb\").read(), \"base64\");print(f\"https://www.shodan.io/search?query=http.favicon.hash%3A{h(favicon)}\")'"
 alias fu='ffuf -mc all -t 2 -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"'
+alias jwt-tool='f(){ docker run -it --network host --rm -v "${PWD}:/tmp" -v "${HOME}/.jwt_tool:/root/.jwt_tool" ticarpi/jwt_tool $@ ;  unset -f f; }; f'
 
 # Tools Misc
 alias vgrep='f(){ grep -rnH "$1" "$2" | fzf --preview="bat --pager never --color always -H {2} -r {2}: -p {1}" --delimiter=: ;  unset -f f; }; f'

@@ -26,6 +26,13 @@
     mv '{{ ansible_env.HOME }}/BurpSuiteCommunity' /opt/lbtools/
     sed -i 's#{{ ansible_env.HOME }}#/opt/lbtools#g' '{{ ansible_env.HOME }}/.local/share/applications/'*BurpSuiteCommunity.desktop
 
-- name: Allow katana / burp / obs headless browsers to work...
-  ansible.builtin.shell: "sysctl -w kernel.apparmor_restrict_unprivileged_userns=0"
+- name: Allow katana / burp / obs headless browsers to work
+  ansible.builtin.lineinfile:
+  become: true
+    path: '/etc/sysctl.conf'
+    line: 'kernel.apparmor_restrict_unprivileged_userns=0'
+    insertafter: EOF
+
+- name: Apply new sysctl config
+  ansible.builtin.shell: "sysctl -p"
   become: true
