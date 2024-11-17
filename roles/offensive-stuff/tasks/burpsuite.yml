@@ -28,10 +28,10 @@
 
 - name: Allow katana / burp / obs headless browsers to work
   ansible.builtin.lineinfile:
-  become: true
     path: '/etc/sysctl.conf'
     line: 'kernel.apparmor_restrict_unprivileged_userns=0'
     insertafter: EOF
+  become: true
 
 - name: Apply new sysctl config
   ansible.builtin.shell: "sysctl -p"
