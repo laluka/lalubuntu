@@ -108,13 +108,14 @@
   ansible.builtin.shell: |
     regolith-look set nord
     echo "regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png" >> "{{ ansible_env.HOME }}/.config/regolith3/Xresources"
-    gsettings set org.gnome.desktop.interface color-scheme prefer-dark # dark colors
     gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true # enable tap-to-click
-    gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
     gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'fr')]"
-    gsettings set org.gnome.desktop.interface document-font-name 'Sans 10'
-    gsettings set org.gnome.desktop.interface font-name 'Ubuntu 10'
-    gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 11'
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    gsettings set org.gnome.desktop.interface document-font-name 'Sans 12'
+    gsettings set org.gnome.desktop.interface font-antialiasing 'grayscale'
+    gsettings set org.gnome.desktop.interface font-hinting 'slight'
+    gsettings set org.gnome.desktop.interface font-name 'Nerd Font Mono 10'
+    gsettings set org.gnome.desktop.interface font-rgba-order 'rgb'
 
 - name: Use the right terminal emulator
   ansible.builtin.shell: update-alternatives --set x-terminal-emulator /usr/bin/gnome-terminal.wrapper
