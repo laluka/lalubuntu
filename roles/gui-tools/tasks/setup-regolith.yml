@@ -115,6 +115,7 @@
     gsettings set org.gnome.desktop.interface font-hinting 'slight'
     gsettings set org.gnome.desktop.interface font-name 'Nerd Font Mono 10'
     gsettings set org.gnome.desktop.interface font-rgba-order 'rgb'
+  ignore_errors: true
 
 - name: Set background wallpaper
   ansible.builtin.lineinfile:
