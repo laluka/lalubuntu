@@ -26,7 +26,7 @@ cd /opt/lalubuntu
 bash pre-install.sh
 
 # Main Install
-bash install.sh
+bash install.sh 2>&1 | tee /tmp/lbt.log
 # If anything fails, the install won't be complete (ansible StopOnFail intended behavior)
 # So you'll have to fix (or commment) the failing task and re-run install.sh!
 ```
@@ -78,9 +78,9 @@ You really should NOT go this way, and enjoy a nice and fresh install instead! ð
 Remember that `gui-tools` and `offensive-stuff` both require `base-install`
 
 ```bash
-ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install
-ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags offensive-stuff
-ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags gui-tools
+ansible-playbook -vv -i inventory.ini --ask-become main.yml --tags base-install
+ansible-playbook -vv -i inventory.ini --ask-become main.yml --tags offensive-stuff
+ansible-playbook -vv -i inventory.ini --ask-become main.yml --tags gui-tools
 ```
 
 ## Docker Images

@@ -47,9 +47,9 @@ build {
       "chown -R hacker:hacker /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
       "su hacker -c \"DEBIAN_FRONTEND=noninteractive bash -x pre-install.sh\"",
-      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags base-install\"",
-      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags offensive-stuff\"",
-      "sudo -u hacker -- bash -xlc \"ansible-playbook -vvv -i inventory.ini main.yml --tags gui-tools\"",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -vv -i inventory.ini main.yml --tags base-install\"",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -vv -i inventory.ini main.yml --tags offensive-stuff\"",
+      "sudo -u hacker -- bash -xlc \"ansible-playbook -vv -i inventory.ini main.yml --tags gui-tools\"",
       "sed -i /TMPHACK_INSTALL_ONLY/d /etc/sudoers", # Remove tmp hack for user rights
     ]
   }
