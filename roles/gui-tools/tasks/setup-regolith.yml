@@ -6,29 +6,21 @@
 
 - name: Download Regolith key
   ansible.builtin.get_url:
-    url : '{{ regolith_key_url }}'
+    url : 'https://regolith-desktop.org/regolith.key'
     dest: '/tmp/rego_gpg'
   when: not regolith_installed.stat.exists
 
 - name: De-Armor Regolith GPG key
-  ansible.builtin.shell: 'gpg --dearmor < /tmp/rego_gpg > {{ regolith_gpg_dest }} && rm /tmp/rego_gpg'
+  ansible.builtin.shell: 'gpg --dearmor < /tmp/rego_gpg > /usr/share/keyrings/regolith-archive-keyring.gpg && rm /tmp/rego_gpg'
   become: true
   when: not regolith_installed.stat.exists
 
 - name: Add Regolith repository
   ansible.builtin.lineinfile:
     path: '/etc/apt/sources.list.d/regolith.list'
-    line: '{{ regolith_repo_url }}'
+    line: 'deb [arch=amd64 signed-by=/usr/share/keyrings/regolith-archive-keyring.gpg] https://regolith-desktop.org/release-3_2-ubuntu-noble-amd64 noble main'
     create: yes
-  become: true
-  when: not regolith_installed.stat.exists
-
-- name: Set lightdm as the default X display manager
-  ansible.builtin.debconf:
-    name: lightdm
-    question: 'shared/default-x-display-manager'
-    value: 'lightdm'
-    vtype: 'select'
+    state: present
   become: true
   when: not regolith_installed.stat.exists
 
@@ -39,17 +31,61 @@
     state: latest
   environment:
     DEBIAN_FRONTEND: noninteractive
-  loop: '{{ regolith_packages }}'
   become: true
-  when: not regolith_installed.stat.exists
+  with_items:
+    - regolith-desktop
+    - regolith-look-nord
+    - regolith-session-flashback
 
 - name: Install i3 packages
   ansible.builtin.package:
     name: '{{ item }}'
     state: latest
-  loop: '{{ i3_packages }}'
+  become: true
+  with_items:
+    - i3xrocks-battery
+    - i3xrocks-bluetooth
+    - i3xrocks-cpu-usage
+    - i3xrocks-disk-capacity
+    - i3xrocks-focused-window-name
+    - i3xrocks-info
+    - i3xrocks-memory
+    - i3xrocks-microphone
+    - i3xrocks-net-traffic
+    - i3xrocks-temp
+    - i3xrocks-time
+    - i3xrocks-updates
+    - i3xrocks-volume
+    - i3xrocks-wifi
+    # - i3xrocks-rofication
+    # - i3xrocks-app-launcher
+    # - i3xrocks-key-indicator
+    # - i3xrocks-keyboard-layout
+    # - i3xrocks-media-player
+    # - i3xrocks-next-workspace
+    # - i3xrocks-nm-vpn
+    # - i3xrocks-openvpn
+    # - i3xrocks-tailscale
+    # - i3xrocks-weather
+
+- name: Remove Picom as it breads NoMachine screen refresh
+  ansible.builtin.package:
+    name: picom
+    state: absent
   become: true
   when: not regolith_installed.stat.exists
+
+- name: Replace regolith-rofication (auto removed) by dunst
+  ansible.builtin.package:
+    update_cache: yes
+    name: dunst
+    state: latest
+  become: true
+
+- name: Kill Picom after it's removed
+  become: true
+  ansible.builtin.shell: pkill picom
+  ignore_errors: true
 
 - name: Ensure the ~/.config/regolith3/i3/config.d/ directory exists
   ansible.builtin.file:
@@ -59,36 +95,36 @@
 - name: Append lines to the i3 config file
   ansible.builtin.blockinfile:
     path: '{{ ansible_env.HOME }}/.config/regolith3/i3/config.d/config'
-    block: '{{ i3_config_block }}'
     create: yes
+    block: |
+      bindsym $mod+p exec flameshot gui
+      bindsym $mod+Ctrl+p exec flameshot full -p /tmp/
+      bindsym $mod+s exec gnome-control-center sound
+      bindsym $mod+e exec emote
+      bindsym $mod+Shift+w exec /usr/bin/python3 /opt/cameractrls/cameractrlsgtk4.py
+      bindsym $mod+m exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && notify-send --icon=/dev/null --expire-time=500 "$(pactl get-source-mute @DEFAULT_SOURCE@)"
 
-- name: Get rid of duplicated blocks
+- name: Set GNOME Preferences
+  ansible.builtin.shell: |
+    regolith-look set nord
+    gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true # enable tap-to-click
+    gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'fr')]"
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    gsettings set org.gnome.desktop.interface document-font-name 'Sans 12'
+    gsettings set org.gnome.desktop.interface font-antialiasing 'grayscale'
+    gsettings set org.gnome.desktop.interface font-hinting 'slight'
+    gsettings set org.gnome.desktop.interface font-name 'Nerd Font Mono 10'
+    gsettings set org.gnome.desktop.interface font-rgba-order 'rgb'
+  ignore_errors: true
+
+- name: Set background wallpaper
   ansible.builtin.lineinfile:
     path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'
-    state: absent
-    line: '{{ item }}'
-    backrefs: yes
-  loop:
-    - "# BEGIN ANSIBLE MANAGED BLOCK"
-    - "gtk.font_name: Nerd Font Mono 10"
-    - "regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png"
-    - "regolith.wallpaper.options: stretched"
-    - "# END ANSIBLE MANAGED BLOCK"
-    - "! Ansible managed block"
-    - "gtk.font_name: Nerd Font Mono 10"
-    - "regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png"
-    - "regolith.wallpaper.options: stretched"
-    - "! Ansible managed block"
-
-- name: Append lines to the i3 Xresources file
-  ansible.builtin.blockinfile:
-    path: '{{ ansible_env.HOME }}/.config/regolith3/Xresources'
-    block: '{{ i3_xresources_block }}'
-    marker: "! {mark} ANSIBLE MANAGED BLOCK"
+    state: present
+    line: 'regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png'
+    insertbefore: 'BOF'
     create: yes
 
-- name: Set GNOME interface to prefer dark color scheme
-  ansible.builtin.shell: "gsettings set org.gnome.desktop.interface color-scheme prefer-dark"
-
-- name: Set click on touchpad enable
-  ansible.builtin.shell: "gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true"
+- name: Use the right terminal emulator
+  ansible.builtin.shell: update-alternatives --set x-terminal-emulator /usr/bin/gnome-terminal.wrapper
+  become: true

@@ -3,11 +3,10 @@
   ansible.builtin.stat:
     path: '/usr/bin/veracrypt'
   register: veracrypt_installed
-  become: true
 
 - name: Download Veracrypt
   ansible.builtin.get_url:
-    url: '{{ veracrypt_download_url }}'
+    url: 'https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.14/veracrypt-1.26.14-Ubuntu-24.04-amd64.deb'
     dest: '/tmp/veracrypt-setup.deb'
   when: not veracrypt_installed.stat.exists
 

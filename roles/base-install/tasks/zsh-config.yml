@@ -6,7 +6,7 @@
 
 - name: Clone Oh My Zsh repository
   ansible.builtin.git:
-    repo: '{{ zsh_git_url }}'
+    repo: 'https://github.com/robbyrussell/oh-my-zsh.git'
     dest: '{{ ansible_env.HOME }}/.oh-my-zsh'
     force: yes
     update: yes
@@ -35,21 +35,22 @@
     insertbefore: 'source.*oh-my-zsh.sh'
     line: '{{ item }}'
     state: present
-  with_items: '{{ zsh_config_lines }}'
+  with_items:
+  - DISABLE_MAGIC_FUNCTIONS=true
 
 - name: Clone zsh plugins as git repositories
   ansible.builtin.git:
     repo: '{{ item.repo }}'
     dest: '{{ item.dest }}'
   loop:
-    - { repo: '{{ zsh_completion_git_url }}', dest: '{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-completions' }
-    - { repo: '{{ zsh_autosuggestion_git_url }}', dest: '{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-autosuggestions' }
-    - { repo: '{{ zsh_syntax_git_url }}', dest: '{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-syntax-highlighting' }
+    - { repo: 'https://github.com/zsh-users/zsh-completions', dest: '{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-completions' }
+    - { repo: 'https://github.com/zsh-users/zsh-autosuggestions', dest: '{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-autosuggestions' }
+    - { repo: 'https://github.com/zsh-users/zsh-syntax-highlighting', dest: '{{ ansible_env.HOME }}/.oh-my-zsh/plugins/zsh-syntax-highlighting' }
   when: not item.dest is exists
 
 - name: Clone fzf repository
   ansible.builtin.git:
-    repo: '{{ fzf_git_url }}'
+    repo: 'https://github.com/junegunn/fzf'
     dest: '{{ ansible_env.HOME }}/.fzf'
     depth: 1
 
@@ -59,7 +60,7 @@
 - name: Add line to shell configuration files
   ansible.builtin.lineinfile:
     path: '{{ item }}'
-    line: 'source /opt/lalubuntu/aliases'
+    line: 'source /opt/lalubuntu/utils/aliases'
     insertafter: EOF
   with_items:
     - ~/.zshrc
@@ -68,5 +69,8 @@
 - name: Tmux configuration
   ansible.builtin.blockinfile:
     path: '{{ ansible_env.HOME }}/.tmux.conf'
-    block: '{{ tmux_conf }}'
+    block: |
+      set-option -g mouse off
+      set-option -g history-limit 5000
+      set-option -g status-bg colour231
     create: yes

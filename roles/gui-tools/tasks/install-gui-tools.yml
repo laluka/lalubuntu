@@ -27,8 +27,46 @@
     state: latest
   environment:
     DEBIAN_FRONTEND: noninteractive
-  loop: '{{ gui_tools_to_install }}'
   become: true
+  with_items:
+    - apt-transport-https
+    - arandr
+    - blueman
+    - cheese
+    - filezilla
+    - flameshot
+    - fonts-tlwg-purisa-otf
+    - ghex
+    - gnome-tweaks
+    - gparted
+    - kompare
+    - libgtk-3-dev
+    - libreoffice
+    - libvirt-clients
+    - libvirt-daemon-system
+    - mplayer
+    - okular
+    - pavucontrol
+    - qbittorrent
+    - qemu-kvm
+    - torbrowser-launcher
+    - usb-creator-gtk
+    - virt-manager
+    - vlc
+    - wireshark
+
+- name: Check if Snap is already installed
+  ansible.builtin.stat:
+    path: '/usr/bin/snap'
+  register: snap_installed
+
+- name: Install GUI Snap Packages
+  community.general.snap:
+    name:
+      - emote
+      - firefox
+  become: true
+  when: snap_installed.stat.exists
 
 - name: Clone dragon repository
   ansible.builtin.git:

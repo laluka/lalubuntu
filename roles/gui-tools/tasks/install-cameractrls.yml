@@ -10,12 +10,14 @@
       ansible.builtin.apt:
         name: '{{ item }}'
         state: present
-      loop: '{{ cameractrls_dependencies }}'
       become: true
+      with_items:
+        - libsdl2-2.0-0
+        - libturbojpeg
 
     - name: Clone cameractrls repository
       ansible.builtin.git:
-        repo: '{{ cameractrls_git_repo }}'
+        repo: 'https://github.com/soyersoyer/cameractrls.git'
         dest: /opt/cameractrls
         force: yes
       become: true

@@ -9,7 +9,5 @@
       tags: 'offensive-stuff'
     - role: 'roles/gui-tools'
       tags: 'gui-tools'
-    - role: 'roles/hardening'
-      tags: 'hardening'
       users:
         - username: '{{ ansible_user_id }}'

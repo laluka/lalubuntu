@@ -8,11 +8,11 @@ packer {
 }
 
 source "digitalocean" "src" {
-  image         = "ubuntu-22-04-x64"
+  image         = "ubuntu-24-04-x64"
   region        = "ams3"
   size          = "c2-4vcpu-8gb"
   ssh_username  = "root"
-  snapshot_name = "lalubuntu-22.04"
+  snapshot_name = "lalubuntu-24.04"
 }
 
 build {
@@ -34,7 +34,7 @@ build {
       "TZ=Etc/UTC",
     ]
     inline = [
-      "if command -v cloud-init; then cloud-init status --wait; fi",
+      "if command -v cloud-init; then cloud-init status --wait; fi || true",
       "(id;date) | tee /.provisionned_by_packer",
       "echo \"debconf debconf/frontend select Noninteractive\" | debconf-set-selections",
       "apt-get update",
@@ -42,6 +42,7 @@ build {
       "git clone https://github.com/laluka/lalubuntu",
       "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
+      "git checkout lalu/maj-24.04", # DEV ONLY
       "bash -x packer/create-user.sh",
       "chown -R hacker:hacker /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",

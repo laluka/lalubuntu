@@ -1,7 +1,20 @@
 - name: Install pipx packages
   community.general.pipx:
+    executable: /usr/bin/pipx
     name: '{{ item }}'
-  loop: '{{ pipx_tools }}'
+    inject_packages:
+      - setuptools # python 3.13 and above removed this often required dep
+  with_items:
+    - argcomplete
+    - bypass-url-parser
+    - dirsearch
+    - exegol
+    - pre-commit
+    - sqlmap
+    - trash-cli
+    - wafw00f
+    - yt-dlp
+    - semgrep
 
 - name: Add exegol autocompletion to shell configuration filesansible
   ansible.builtin.lineinfile:

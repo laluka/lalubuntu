@@ -20,16 +20,6 @@
 - name: Execute the installation script
   ansible.builtin.shell: /tmp/install.sh
 
-- name: Remove old rtx config from shell configuration files
-  ansible.builtin.lineinfile:
-    path: '{{ ansible_env.HOME }}/.{{ item }}rc'
-    state: absent
-    regexp: 'eval .*rtx activate {{ item }}'
-    backrefs: yes
-  loop:
-    - bash
-    - zsh
-
 - name: Add mise activation to shell configuration files
   ansible.builtin.lineinfile:
     path: '{{ ansible_env.HOME }}/.{{ item }}rc'
@@ -45,13 +35,38 @@
 
 - name: Install and mise-based tools (this will take lot of time to install)
   ansible.builtin.shell: zsh -c 'mise install -y "{{ item }}" ; mise use -y -g "{{ item }}"'
-  with_items: '{{ mise_tools }}'
+  with_items:
+    - java@openjdk-23.0.0
+    - usage@latest
+    - python@latest
+    - glow@latest
+    - awscli@latest
+    - bat@latest
+    - direnv@latest
+    - duf@latest
+    - golang@latest
+    - helm@latest
+    - jless@latest
+    - k9s@latest
+    - kubectl@latest
+    - kubectx@latest
+    - maven@latest
+    - minikube@latest
+    - neovim@latest
+    - nodejs@latest
+    - pdm@latest
+    - rust@latest
+    - terraform@latest
+    - websocat@latest
+
+- name: Install grumpy php that errors out yet works (only in github action non interactive docker builds...)
+  ansible.builtin.shell: "mise exec -- go env -w 'GOPATH={{ ansible_env.HOME }}/.local/go'"
 
 - name: Install grumpy php that errors out yet works (only in github action non interactive docker builds...)
   ansible.builtin.shell: zsh -c 'mise install -y "php@latest" ; mise use -y -g "php@latest" || true'
 
 - name: Add python-version-picker convenient script
-  ansible.builtin.shell: ln -sf /opt/lalubuntu/scripts-and-utils/pv /usr/local/bin/pv
+  ansible.builtin.shell: ln -sf /opt/lalubuntu/utils/pv /usr/local/bin/pv
   become: yes
 
 - name: Install lazyvim only if ~/.config/nvim does not exist
@@ -65,7 +80,7 @@
     dest: '{{ ansible_env.HOME }}/.config/nvim'
     update: yes
     force: yes
-  when: lazyvim_installed.stat.exists == False
+  when: not lazyvim_installed.stat.exists
 
 - name: Disable mouse integration in Neovim
   ansible.builtin.lineinfile:

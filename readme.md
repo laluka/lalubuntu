@@ -1,119 +1,112 @@
 # LaluBuntu - [![packer-docker-build](https://github.com/laluka/lalubuntu/actions/workflows/packer.yml/badge.svg?branch=master)](https://github.com/laluka/lalubuntu/actions/workflows/packer.yml)
 
-> Prompt (OpenAI): Create a logo with an Evoli-like pokemon for a linux distro named LaluBuntu, make it cute !
+> OpenAI Image Prompt:\
+> Create a logo with an Evoli-like pokemon for a linux distro named LaluBuntu, make it cute!
 
 <img src='screens/logo-lalubuntu.png' width='250'>
 
-> This ansible playbook will make your machine lovely to use
+- This ansible playbook will make your machine lovely to use.
+- This is my ([@TheLaluka](https://x.com/TheLaluka)) own config, shared with the help & motivation of [@Fransosiche](https://x.com/Fransosiche)!
+- Welcome to my world, now is the right time to `Lower The Friction` between you and your machine 🥰
 
-## This playbook is only intended to be run in `Ubuntu 22.04`
+See thiese videos to see how Lalubuntu will improve your daily linux & cyber life!
 
-This is my - **@TheLaluka** - own config, shared with the help & motivation of **@Fransosiche** !
+[![Global Presentation](https://img.youtube.com/vi/sZQ6FVncuNA/0.jpg)](https://youtu.be/sZQ6FVncuNA)
 
-- Welcome to my world, `Lower The Friction` between you and your machine!
-- See this brief extract of what these scripts will allow you to do
-screens/logo-lalubuntu.png
+[![Lower The Friction](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://youtu.be/xxOVNKNs24s)
 
-[![Global Presentation](https://img.youtube.com/vi/sZQ6FVncuNA/0.jpg)](https://www.youtube.com/watch?v=sZQ6FVncuNA)
-
-You can watch a demonstration of what is offering labuntu by clicking the picture below :
-
-[![Lower The Friction](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://www.youtube.com/watch?v=xxOVNKNs24s)
-
-## This video is a quick how-to
-
-Note that:
-
-- Around 40GB of free space is needed for a full setup
-- The install time will be SIGNIFICANTLY longer for a first run
-
-[![LaluBuntu Setup](https://img.youtube.com/vi/59T4gQICirU/0.jpg)](https://www.youtube.com/watch?v=59T4gQICirU)
-
-## Sum-Up
-
-The ansible playbook `main.yml` applies 4 ansible roles which are:
-
-- roles/base-install
-- roles/offensive-stuff
-- roles/gui-tools
-- roles/hardening
-
-## Pre-Install, Install, Update
+## Installation process for `Ubuntu 24.04`  - The current "GOLD path" 🌷
 
 ```bash
 # Pre-install
-sudo apt install -y curl wget git vim tmux # Basics
+sudo apt update && sudo apt install -y curl wget git vim tmux
 git clone https://github.com/laluka/lalubuntu
-# If you plan to contribute, use: git@github.com:laluka/lalubuntu.git
 sudo mv lalubuntu /opt/lalubuntu
 cd /opt/lalubuntu
-bash -x pre-install.sh
+bash pre-install.sh
 
 # Main Install
-bash -x install.sh
+bash install.sh
 # If anything fails, the install won't be complete (ansible StopOnFail intended behavior)
 # So you'll have to fix (or commment) the failing task and re-run install.sh!
-
-# Stay Up-To-Date
-lalupdate
 ```
+
+Then [pick "Regolith X11"](#gotchas) from lightdm, see screen below
+
+> Stay Up-To-Date by running frequently `lbt-update`! 💌
+
+## If you're migrating from Ubuntu `22.04` to `24.04`:
+
+> ⚠️ Seriously, don't do that... ⚠️
+
+- I would **strongly** suggest installing a clean `24.04 Ubuntu Desktop` from the official ISO 🙏
+- Then installing Lalubuntu from master 📖
+- You *can* try a `dist-upgrate` and running lalubuntu on master, but I've had really poor experiences with `dist-upgrate` in linux in general 🕱
+- I will provide no help, the clean way is "Fresh Ubuntu 24.04 then install from master" 😇
+
+> For what it's worth, I tried it and it worked, at some costs!
+
+- Ubuntu update was really long
+- Had to run lbt-update from Gnome as regolith broke
+- Fix ~/.zrhrc by hand (fix aliases path and lines order)
+- A few more hiccups...
+
+You really should NOT go this way, and enjoy a nice and fresh install instead! 🍀
+
+## If you're still on Ubuntu `22.04`:
+
+- I won't provide any technical support 🙃
+- Run `git checkout 22.04` before installing 🔨
+- This branch/tag won't be maintained, but it SHOULD still work for some time 😇
+
+## Here is an install video for convenience
+
+- The install time will be SIGNIFICANTLY longer (1 hour) for a first run
+- Around 10G of free space are required for a full install
+- I **strongly** recommend **50G** for your VM so it's not full 2 days of use
+
+[![LaluBuntu Setup](https://img.youtube.com/vi/59T4gQICirU/0.jpg)](https://youtu.be/59T4gQICirU)
+
+---
 
 ## Install Specific Roles Only
 
-Remember that `offensive-stuff` and `gui-tools` require `base-install`
+- roles/base-install    // CLI Stuff only, make a nice generic purpose install
+- roles/offensive-stuff // CLI stuff still, mostly offensive tooling
+- roles/gui-tools       // GUI stuff, regolith, wallpaper, and GUI tools
+
+Remember that `gui-tools` and `offensive-stuff` both require `base-install`
 
 ```bash
-# Only shell goodies
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags base-install
-# Offensive work on a headless server -> requires base-install
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags offensive-stuff
-# Smooth term & GUI for non-offensive folks -> requires base-install
 ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags gui-tools
-# Do the security thingy
-ansible-playbook -vvv -i inventory.ini --ask-become main.yml --tags hardening
 ```
 
-## Packer - Requirements
-
-```bash
-# Installing packer with mise-en-place
-mise plugin add packer
-mise install packer@latest
-mise use -g packer@latest
-packer --version # Packer v1.10.1
-```
-
-## Packer - Docker Images
-
-> I provide public images support only, if you want to build your own comment the "docker-push" packer post-processor!
-
-### Usage
+## Docker Images
 
 https://hub.docker.com/repository/docker/thelaluka/lalubuntu/general
-
-Available Tags:
-- pre-install
-- base-install
-- offensive-stuff
-- gui-tools	& latest
+Available Tags are: `pre-install`, `base-install`, `offensive-stuff`, `gui-tools` == `latest`
 
 ```bash
 # LOCAL SSH
-docker run --rm -it --name lbt --entrypoint /bin/zsh -p 2222:22 -d thelaluka/lalubuntu:offensive-stuff -c 'echo "hacker:LeelooMultipass" | chpasswd && /etc/init.d/ssh start && zsh -il'
-ssh -p 2222 hacker@127.0.0.1 # LeelooMultipass
+docker run --rm -it --name lbt -p 2222:22 -d thelaluka/lalubuntu:offensive-stuff
+docker exec -it lbt 'echo hacker:YourCoolPasswordHere | chpasswd && /etc/init.d/ssh start'
+ssh -p 2222 hacker@127.0.0.1
 
 # LOCAL SHELL & GUI apps
-docker run --rm -it --name lbt --entrypoint /bin/zsh -u hacker -w /home/hacker -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ --net=host --privileged -d thelaluka/lalubuntu:latest
+docker run --rm -it --name lbt -u hacker -w /home/hacker -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ --net=host --privileged -d thelaluka/lalubuntu:latest
 docker exec -it lbt meld /etc/passwd /etc/group /etc/subuid # Simple 3-way visual diff
-
 ```
 
-### Build You Own
+## Docker Images - Custom Builds
 
 ```bash
+# Installing packer with mise-en-place
+mise use -g packer@latest
 # Build Docker Layers
-export PACKER_DOCKER_FILE="packer/lbt-docker-branches.pkr.hcl" # packer/lbt-docker-master.pkr.hcl
-packer init "$PACKER_DOCKER_FILE"
+export PACKER_DOCKER_FILE="packer/lbt-docker-branches.pkr.hcl"
+cd /opt/lalubuntu/packer && packer init "$PACKER_DOCKER_FILE"
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" "$PACKER_DOCKER_FILE"
 # docker run --rm -it --entrypoint /bin/bash -u root thelaluka/lalubuntu:pre-install -il
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-base-install.docker.lbt" "$PACKER_DOCKER_FILE"
@@ -129,19 +122,22 @@ PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-g
 > This will use your account to build the image, snapshot it, and allow easy & fast deploy, single or fleet!
 
 ```bash
-# Build Digital Ocean
+# Installing packer with mise-en-place
+mise use -g packer@latest
 cd /opt/lalubuntu/packer && packer init lbt-digitalocean.pkr.hcl
 # export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocean-$(date).log" packer build lbt-digitalocean.pkr.hcl
 # Then visit https://cloud.digitalocean.com/images/snapshots/droplets & create your droplet from the last SnapShot! :)
 export DO_IP=X.X.X.X
-ssh "root@$DO_IP" systemctl start nxserver.service
-ssh "root@$DO_IP" passwd hacker # Set your password
-# Start NoMachine & Connect with hacker:127.0.0.1:4000
+ssh "root@$DO_IP" systemctl start nxserver.service # Enable Nomachine
+ssh "root@$DO_IP" "echo hacker:YourCoolPasswordHere | chpasswd" # Set your password
+ssh -vNL 127.0.0.1:4000:127.0.0.1:4000 "root@$DO_IP" # Add port forwarding to use NoMachine without net exposure
+ssh "root@$DO_IP" systemctl restart nxserver.service # If you have "No Display" errors
+# Locally, start NoMachine and connect with hacker@127.0.0.1:4000
 # Remember to:
 #  - NoMachine -> Set resolution to 1920x1080
 #  - NoMachine -> Grab keyboard input (for i3 bindings)
-#  - Remote -> Via settings, Set resolution to 1920x1080
+#  - RemoteHost -> Via settings, Set resolution to 1920x1080
 # ~ Enjoyyyy ~
 ```
 
@@ -151,72 +147,74 @@ ssh "root@$DO_IP" passwd hacker # Set your password
     - I (lalu) save 25$ on my next infra bill, which is nice!
     - Thank you 🌹
 
-## Base install
+---
 
-Base-installs scripts will install all the needed sofware and packages
+## Lalubuntu Actual Content
 
-- This ansible script will first update and install a lot of needed packages. You can view all the packages in `default_packages` variable in `roles/base-install/defaults/main.yml` file
-- Then, it will install and configure zsh (file is `zsh-config`)
-- Then, the script will install mise (former RTX) and mise packages (`mise-all`)
-- After, finishing the configuration of zsh with mise-en-place (file is `zsh-config-post-mise`)
-- After that, it will setup a directory named DATA (`setup-dir`)(I used it as my work dir)
-- Then, some configuration of vim will be done (`vim-default`)
-- Docker and docker compose will be installed (`docker-install`)
-- Using fresh rust install, the script will install several tools using cargo (`cargo-dl`)
-- A lil' bit of cleanup will be made (`cleanup`)
-
-## Offensive Stuff
-
-Offensive stuff, as the name sounds like, will install all offensive tools (some upgrade could be made tho)
-
-- First, the script will install some tools using golang (`golang-tooling`)
-- After that, it will install some tools and wordlists from github (`wordlists-and-tools`)
-- A lil' bit of cleanup will be made (`cleanup`)
-
-## Gui tools
-
-Some GUI software such as vscode or office will be installed
-
-- First, it installs common GUI softwares `install-gui-tools` (wireshark, vlc, obs...) (you can find all the packages in `gui_tools_to_install` (`roles/gui-tools/defaults/main.yml`))
-- Then, it will installs google chrome (`install-google-chrome`)
-- Last but not least, it will download and install veracrypt (`install-veracrypt`)
-- Then, install nomachine (`install-nomachine`)
-- Then, install discord (`install-discord`)
-- Then, install vscode (`install-vscode`)
-- Then, install signal (`install-signal`)
-- After, it will install and setup regolith because regolith is GOAT (`setup-regolith`)
-- To finish, some cleanup ! (`cleanup`)
-
-## Hardening
-
-Some quick hardening will be done :
-
-- First, some ufw (firewall) config `ufw-setup`
-- Then disabling some services (vars can be found `roles/hardening/defaults/main.yml`) `disable-service`
-- Install (vars can be found `roles/hardening/defaults/main.yml`) `install-secu-packages`
-- To finish, some cleanup ! (`cleanup`)
-
-> I rely on chrome for everything I can. I strongly recommend installing the extensions from `chrome-extensions.lst`
+- **Base-installs** scripts will install all the needed sofware and packages
+  - This ansible script will first update and install a lot of needed packages. You can view all the packages in `default_packages` variable in `roles/base-install/defaults/main.yml` file
+  - Then, it will install and configure zsh (file is `zsh-config`)
+  - Then, the script will install mise (former RTX) and mise packages (`mise-all`)
+  - After, finishing the configuration of zsh with mise-en-place (file is `zsh-config-post-mise`)
+  - After that, it will setup a directory named DATA (`setup-dir`)(I used it as my work dir)
+  - Then, some configuration of vim will be done (`vim-default`)
+  - Docker and docker compose will be installed (`docker-install`)
+  - Using fresh rust install, the script will install several tools using cargo (`cargo-dl`)
+  - A lil' bit of cleanup will be made (`cleanup`)
+- **Offensive Stuff**, as the name sounds like, will install all offensive tools (some upgrade could be made tho)
+  - First, the script will install some tools using golang (`golang-tooling`)
+  - After that, it will install some tools and wordlists from github (`wordlists-and-tools`)
+  - A lil' bit of cleanup will be made (`cleanup`)
+- **GUI** softwares such as vscode or office will be installed
+  - First, it installs common GUI softwares `install-gui-tools` (wireshark, vlc, obs...) (you can find all the packages in `gui_tools_to_install` (`roles/gui-tools/defaults/main.yml`))
+  - Then, it will installs google chrome (`install-google-chrome`)
+  - Last but not least, it will download and install veracrypt (`install-veracrypt`)
+  - Then, install nomachine (`install-nomachine`)
+  - Then, install discord (`install-discord`)
+  - Then, install vscode (`install-vscode`)
+  - Then, install signal (`install-signal`)
+  - After, it will install and setup regolith because regolith is GOAT (`setup-regolith`)
+  - To finish, some cleanup ! (`cleanup`)
 
 ---
 
 ## Gotchas
 
-- If you are lost, use `Mod+Shift+?` to open the bindings help panel!
-- One can switch between Regolith and Gnome by logging out and picking the desired UI
-  - In Gnome: Top-Right corner, then logout
-  - In Regolith: CMD+SPACE, then logout
+- If you are lost in regolith, use `Mod+Shift+?` to open the bindings help panel!
+- One can switch between Regolith and Gnome by logging out and picking the desired GUI
+  - In Gnome: `Top-Right corner` then logout
+  - In Regolith: `CMD+SPACE` then logout
+- If you're in a VM, remember to `enable 3D acceleration` which seems required for `24.04` and later
+
 
 <img src='screens/demo-switch-gnome-regolith.png' width='500'>
 
-<img src='screens/demo-gnome.png' width='500'>
-
 <img src='screens/demo-regolith.png' width='500'>
+
+---
 
 ## Changelog
 
-> Hey ChatGPT, complete here with my git diff output, keep the style, and be concise.
+```bash
+echo "Hello ChatGPT. Learn from my past changelogs and answer OK when you're done learning their format." | cpy # + add the past changelogs
+echo -e "Now, generate changelogs for my latest linux distro changesis my git diff output: \n$(git diff origin/master)" | cpy
+```
 
+- 2024/11/02
+  - Renamed alias from lalupdate to lbt-update in aliases file.
+  - Added new alias clean-go to remove Go installation files in aliases file.
+  - Removed alias go-reshim from aliases file.
+  - Added new alias lbt-keyboard-layout for setting keyboard layout configurations in aliases file.
+  - Updated install.sh to include compatibility check for Ubuntu 24.04, with a warning message and exit condition if not met.
+  - Added an echo statement in install.sh for additional installation details post-setup.
+  - Removed the 'roles/hardening' role application from main.yml.
+  - Updated entries in chrome-extensions.lst to ensure accurate version control.
+  - Removed vscode-extensions.lst file, transitioning to manual management of VS Code extensions.
+  - Updated image references in packer/lbt-digitalocean.pkr.hcl to Ubuntu 24.04.
+  - Added a temporary checkout command in DigitalOcean Packer build for Ubuntu 24.04 compatibility in packer/lbt-digitalocean.pkr.hcl.
+  - Updated Docker Packer files to use Ubuntu 24.04 images in packer/lbt-docker-branches.pkr.hcl.
+  - Updated the execution command in pre-install.sh to streamline script usage.
+  - Revised readme.md to include new image guidelines and updated instructional content for new Ubuntu version.
 - 2024/05/21
   - Modified aliases file: added safety prompt to cp command using alias cp='cp -i'
   - Updated pre-install.sh: temporarily hardcoded Ansible version to 2.13.12 to avoid bugs in latest 2.13.X with Python 3.8 
@@ -265,12 +263,11 @@ Some quick hardening will be done :
   - Refactored roles in main.yml with tags for organization (base-install, offensive-stuff, gui-tools, hardening)
   - Added user creation script create-user.sh for user hacker with temp sudo privileges for install time
   - Implemented Packer configuration do-lalubuntu.pkr.hcl for Docker Imge and DigitalOcean snapshot creation
-  - Updated readme.md with TODOs, Packer instructions, and additional tools to install
+  - Updated readme.md with Packer instructions, and additional tools to install
   - Fixed mise sometimes not being loaded & removed xrandr unused aliases
   - Implemented security measures and cleanup in Packer build process
 - 2024/01/12
   - Added a new alias: yt-dlp
-  - Updated readme.md with TODO section
   - Created vscode-extensions.lst for VS Code extensions
   - Added auto completion for a few kube/terraform related tools
   - Added gnome-tweaks, blueman, obs-studio from the official ppa

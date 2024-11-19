@@ -3,7 +3,6 @@
   ansible.builtin.stat:
     path: '/usr/NX/bin/nxserver.bin'
   register: nomachine_installed
-  become: true
 
 - name: Install NoMachine if not already installed
   ignore_errors: true
@@ -11,7 +10,7 @@
   block:
     - name: Download nomachine
       ansible.builtin.get_url:
-        url: 'https://download.nomachine.com/download/8.13/Linux/nomachine_8.13.1_1_amd64.deb'
+        url: 'https://download.nomachine.com/download/8.14/Linux/nomachine_8.14.2_1_amd64.deb'
         dest: '/tmp/nomachine-setup.deb'
 
     - name: Install nomachine
@@ -24,3 +23,15 @@
       ansible.builtin.file:
         path: '/tmp/nomachine-setup.deb'
         state: absent
+
+- name: Stop and disable Nomachine
+  ansible.builtin.systemd:
+    name: '{{ item }}'
+    enabled: no
+    state: stopped
+  loop_control:
+    loop_var: item
+  become: true
+  ignore_errors: true
+  with_items:
+    - nxserver

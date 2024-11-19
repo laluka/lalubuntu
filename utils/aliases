@@ -1,6 +1,5 @@
 # Utils
 ## Directories
-alias sudo='sudo ' # Trick to have ALL aliases available with sudo <3
 alias dl='cd ~/Downloads'
 alias da='cd /DATA'
 alias tn='tmux new'
@@ -13,7 +12,7 @@ alias p='python'
 alias tmp='pushd $(mktemp -d)'
 alias lbt='cd /opt/lalubuntu'
 alias life='cd /opt/lalulife' # Might be released some day ;)
-alias lalupdate='bash /opt/lalubuntu/update.sh'
+alias lbt-update='bash /opt/lalubuntu/update.sh'
 
 # Tools Sysadmin
 alias t='f(){ exa -Tll "$@";  unset -f f; }; f'
@@ -24,13 +23,12 @@ alias la='f(){ exa -lla --group-directories-first "$@";  unset -f f; }; f'
 alias vff='f() { file=$(grep -rE . "$1" 2>/dev/null | fzf | cut -d: -f1); if [ -n "$file" ]; then v "$file"; fi; unset -f f; }; f'
 alias git="GIT_SSL_NO_VERIFY=true git"
 alias clean-crash='sudo /bin/rm -rf /var/crash/*'
+alias clean-go='sudo /bin/rm -rf ~/go/'
 alias gog='google-chrome'
-alias go-reshim='asdf reshim golang && export GOROOT="$(asdf where golang)/go/" && export GOPATH="$(asdf where golang)/packages/" && export GOMODCACHE="$(asdf where golang)/packages/pkg/mod/" && go env'
 alias carbo='docker run -ti fathyb/carbonyl'
 alias ipa='ip -br a | grep -vF DOWN | cut -d/ -f1'
 alias kill-click='sudo kill -9 $(get-pid-click)'
 alias cam-setup='guvcview'
-alias yt-dlp='pipx run yt-dlp'
 alias yt-dl-likes='yt-dlp --cookies www.youtube.com_cookies.txt -x --audio-format mp3  :ytfav' # https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc
 alias record-screen='f(){ ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0 -c:v libx264 -crf 0 -preset ultrafast "$1".mkv;  unset -f f; }; f'
 alias maxfullscreen='f(){ window_title=$(i3-msg -t get_tree | gron | grep -F "title = " | grep -ioP "\".*\"" | fzf); i3-msg "[title=$window_title] focus ; floating enable ; resize set 3842px 1082px; move position -1px -1px" ;  unset -f f; }; f'
@@ -65,6 +63,7 @@ alias dns-1='echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf'
 alias dns-127='echo "nameserver 127.0.0.1" | sudo tee /etc/resolv.conf'
 alias dns-8='echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf'
 alias dns-9='echo "nameserver 9.9.9.9" | sudo tee /etc/resolv.conf'
+alias lbt-keyboard-layout='f(){ gsettings set org.gnome.desktop.input-sources sources "[(\"xkb\", \"$1\")]" ;  unset -f f; }; f'
 alias encrypt='f(){ PASS=$(cat /dev/urandom | base64 | head -c 20) && echo "$PASS" | xclip -selection c && tar -zcvf "$1.tar.gz" "$1" && echo "$PASS" && mcrypt "$1.tar.gz" && echo "$1.tar.gz $PASS" | xclip -selection c;  unset -f f; }; f'
 alias get-badchars='echo -e "\"\x27<?>][]{}_)(*;/\x5c"'
 alias get-bytes='for i in {0..255}; do python2 -c "print hex($i)[2:].rjust(2, str(0))"; done'
@@ -94,7 +93,7 @@ alias get-port-info='f(){ xdg-open "https://www.speedguide.net/port.php?port=$@"
 alias get-bookhacktricks='f(){ xdg-open "https://book.hacktricks.xyz/?q=$@" ;  unset -f f; }; f'
 alias recon-certspotter='f(){ xdg-open "https://api.certspotter.com/v1/issuances?domain=$1&include_subdomains=true&expand=dns_names&expand=issuer&expand=cert" ;  unset -f f; }; f'
 alias recon-virustotal='f(){ xdg-open "https://www.virustotal.com/gui/domain/$1" ;  unset -f f; }; f'
-alias recon-crtsh='f(){ curl -sk "https://crt.sh/?output=json&q=$1" | jq . ; unset -f f; }; f'
+alias recon-crtsh='f(){ curl -sk "https://crt.sh/json?q=$1" | jq . ; unset -f f; }; f'
 alias recon-wayback='f(){ curl -sk "https://web.archive.org/cdx/search/cdx?fl=original&collapse=urlkey&url=*.$1" ; unset -f f; }; f'
 alias capture-http='f(){ sudo unbuffer tcpdump -A -s 0 "tcp port $@ and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)" | tr "\\n" "\n" ; unset -f f; }; f'
 alias capture-creds="sudo tcpdump -i enp0s31f6 port http or port ftp or port smtp or port imap or port pop3 or port telnet -l -A | grep -iEB5 --line-buffered 'pass=|pwd=|log=|login=|user=|username=|pw=|passw=|passwd=|password=|pass:|user:|username:|password:|login:|pass |user |authorization:|token'"
@@ -111,6 +110,7 @@ alias dirmon='inotifywait -rm -e create -e moved_to -e modify -e access -e attri
 alias killit='sudo kill -KILL'
 alias favhash="python3 -c 'from mmh3 import hash as h;from codecs import encode as e;from sys import argv;favicon = e(open(argv[1], \"rb\").read(), \"base64\");print(f\"https://www.shodan.io/search?query=http.favicon.hash%3A{h(favicon)}\")'"
 alias fu='ffuf -mc all -t 2 -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"'
+alias jwt-tool='f(){ docker run -it --network host --rm -v "${PWD}:/tmp" -v "${HOME}/.jwt_tool:/root/.jwt_tool" ticarpi/jwt_tool $@ ;  unset -f f; }; f'
 
 # Tools Misc
 alias vgrep='f(){ grep -rnH "$1" "$2" | fzf --preview="bat --pager never --color always -H {2} -r {2}: -p {1}" --delimiter=: ;  unset -f f; }; f'
@@ -128,6 +128,7 @@ alias docker-stopall='docker stop $(docker ps -q)'
 alias dkill='docker-norestart && docker-stopall'
 alias docker-get-image-size='f(){ docker manifest inspect -v "$1" | jq -c "if type == \"array\" then .[] else . end" |  jq -r "[ ( .Descriptor.platform | [ .os, .architecture, .variant, .\"os.version\" ] | del(..|nulls) | join(\"/\") ), ( [ .SchemaV2Manifest.layers[].size ] | add ) ] | join(\" \")" | numfmt --to iec --format "%.2f" --field 2 | column -t ;  unset -f f; }; f'
 alias dockex='docker exec -it $(docker ps | grep -vF "CONTAINER ID" | fzf | cut -d" " -f1)'
+alias dockns='sudo nsenter -a -t $(docker inspect -f "{{.State.Pid}}" $(docker ps | grep -vF "CONTAINER ID" | fzf | cut -d" " -f1))'
 alias dockit='docker run --rm -it -v "$PWD":/host -w /host --net=host'
 alias dps='docker ps'
 alias wipe-docker-all='docker system prune -a -f --volumes'
