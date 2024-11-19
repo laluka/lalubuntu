@@ -123,6 +123,7 @@
     state: present
     line: 'regolith.wallpaper.file: /opt/lalubuntu/screens/wallpaper.png'
     insertbefore: 'BOF'
+    create: yes
 
 - name: Use the right terminal emulator
   ansible.builtin.shell: update-alternatives --set x-terminal-emulator /usr/bin/gnome-terminal.wrapper
