@@ -133,11 +133,12 @@ ssh "root@$DO_IP" systemctl start nxserver.service # Enable Nomachine
 ssh "root@$DO_IP" "echo hacker:YourCoolPasswordHere | chpasswd" # Set your password
 ssh -vNL 127.0.0.1:4000:127.0.0.1:4000 "root@$DO_IP" # Add port forwarding to use NoMachine without net exposure
 ssh "root@$DO_IP" systemctl restart nxserver.service # If you have "No Display" errors
-# Locally, start NoMachine and connect with hacker@127.0.0.1:4000
+# Locally, start NoMachine and connect with:
+# hacker:YourCoolPasswordHere@127.0.0.1:4000
 # Remember to:
-#  - NoMachine -> Set resolution to 1920x1080
-#  - NoMachine -> Grab keyboard input (for i3 bindings)
-#  - RemoteHost -> Via settings, Set resolution to 1920x1080
+#  - NoMachine -> TopRight corner -> Input -> Grab Keyboard Input (for i3 bindings)
+#  - RemoteHost -> MOD+space (Settings) -> Set resolution to 1920x1080
+#  - RemoteHost -> Mod+enter (Shell) -> lbt-keyboard-layout fr
 # ~ Enjoyyyy ~
 ```
 
