@@ -35,7 +35,7 @@ Then [pick "Regolith X11"](#gotchas) from lightdm, see screen below
 
 > Stay Up-To-Date by running frequently `lbt-update`! 💌
 
-## If you're migrating from Ubuntu `22.04` to `24.04`:
+## If you're migrating from Ubuntu `22.04` to `24.04`
 
 > ⚠️ Seriously, don't do that... ⚠️
 
@@ -53,7 +53,7 @@ Then [pick "Regolith X11"](#gotchas) from lightdm, see screen below
 
 You really should NOT go this way, and enjoy a nice and fresh install instead! 🍀
 
-## If you're still on Ubuntu `22.04`:
+## If you're still on Ubuntu `22.04`
 
 - I won't provide any technical support 🙃
 - Run `git checkout 22.04` before installing 🔨
@@ -180,7 +180,7 @@ ssh "root@$DO_IP" systemctl restart nxserver.service # If you have "No Display" 
 
 ## Gotchas
 
-- If you are lost in regolith, use `Mod+Shift+?` to open the bindings help panel!
+- If you are [lost in regolith](https://regolith-desktop.com/docs/using-regolith/basics/), use `Mod+Shift+?` to open the bindings help panel!
 - One can switch between Regolith and Gnome by logging out and picking the desired GUI
   - In Gnome: `Top-Right corner` then logout
   - In Regolith: `CMD+SPACE` then logout
