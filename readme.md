@@ -132,7 +132,8 @@ export DO_IP=X.X.X.X
 ssh "root@$DO_IP" systemctl start nxserver.service # Enable Nomachine
 ssh "root@$DO_IP" "echo hacker:YourCoolPasswordHere | chpasswd" # Set your password
 ssh -vNL 127.0.0.1:4000:127.0.0.1:4000 "root@$DO_IP" # Add port forwarding to use NoMachine without net exposure
-ssh "root@$DO_IP" systemctl restart nxserver.service # If you have "No Display" errors
+# If you have "No Display" errors
+ssh "root@$DO_IP" systemctl restart nxserver.service
 # Locally, start NoMachine and connect with:
 # hacker:YourCoolPasswordHere@127.0.0.1:4000
 # Remember to:
