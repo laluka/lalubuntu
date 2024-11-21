@@ -43,8 +43,8 @@
 - name: Tweak burp desktop files
   ansible.builtin.replace:
     path: '{{ item.path }}'
-    regexp: '^Exec='
-    replace: 'Exec="/opt/lbtools/BurpSuiteCommunity/BurpSuiteCommunity" %U'
+    regexp: '{{ ansible_env.HOME }}'
+    replace: '/opt/lbtools'
   loop: '{{ burpsuite_files }}'
   when: burpsuite_files | length > 0
 
