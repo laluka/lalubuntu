@@ -106,15 +106,14 @@ docker exec -it lbt meld /etc/passwd /etc/group /etc/subuid # Simple 3-way visua
 # Installing packer with mise-en-place
 mise use -g packer@latest
 # Build Docker Layers
-export PACKER_DOCKER_FILE="packer/lbt-docker-branches.pkr.hcl"
-cd /opt/lalubuntu/packer && packer init "$PACKER_DOCKER_FILE"
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" "$PACKER_DOCKER_FILE"
+cd /opt/lalubuntu && packer init packer/lbt-docker-branches.pkr.hcl
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-pre-install.docker.lbt" packer/lbt-docker-branches.pkr.hcl
 # docker run --rm -it --entrypoint /bin/bash -u root thelaluka/lalubuntu:pre-install -il
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-base-install.docker.lbt" "$PACKER_DOCKER_FILE"
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-base-install.docker.lbt" packer/lbt-docker-branches.pkr.hcl
 # docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker thelaluka/lalubuntu:base-install -il
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-offensive-stuff.docker.lbt" "$PACKER_DOCKER_FILE"
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-offensive-stuff.docker.lbt" packer/lbt-docker-branches.pkr.hcl
 # docker run --rm -it --entrypoint /bin/zsh -u hacker -w /home/hacker thelaluka/lalubuntu:offensive-stuff -il
-PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-gui-tools.docker.lbt" "$PACKER_DOCKER_FILE"
+PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocker-$(date).log" packer build -only="lbt-gui-tools.docker.lbt" packer/lbt-docker-branches.pkr.hcl
 # Then refer to "Usage"
 ```
 
