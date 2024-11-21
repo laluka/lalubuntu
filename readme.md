@@ -91,7 +91,7 @@ Available Tags are: `pre-install`, `base-install`, `offensive-stuff`, `gui-tools
 ```bash
 # LOCAL SSH
 docker run --rm -it --name lbt -p 2222:22 -d thelaluka/lalubuntu:offensive-stuff
-docker exec -it lbt 'echo hacker:YourCoolPasswordHere | chpasswd && /etc/init.d/ssh start'
+docker exec -it lbt bash -c 'echo hacker:YourCoolPasswordHere | chpasswd && /etc/init.d/ssh start'
 ssh -p 2222 hacker@127.0.0.1
 
 # LOCAL SHELL & GUI apps
