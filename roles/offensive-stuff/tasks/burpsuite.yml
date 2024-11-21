@@ -22,7 +22,6 @@
 
 - name: Move Burp Install to /opt/lbtools
   ansible.builtin.shell: |
-    sleep 2
     mv "{{ ansible_env.HOME }}/BurpSuiteCommunity" "/opt/lbtools/BurpSuiteCommunity"
     sed -i "s#{{ ansible_env.HOME }}#/opt/lbtools#g" "{{ ansible_env.HOME }}/.local/share/applications/"*BurpSuiteCommunity.desktop
   when: not burpsuite_installed.stat.exists
