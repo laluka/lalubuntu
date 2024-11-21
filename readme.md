@@ -86,6 +86,7 @@ ansible-playbook -vv -i inventory.ini --ask-become main.yml --tags gui-tools
 ## Docker Images
 
 https://hub.docker.com/repository/docker/thelaluka/lalubuntu/general
+
 Available Tags are: `pre-install`, `base-install`, `offensive-stuff`, `gui-tools` == `latest`
 
 ```bash
