@@ -24,9 +24,29 @@
   command: mv "{{ ansible_env.HOME }}/BurpSuiteCommunity" /opt/lbtools/BurpSuiteCommunity
   when: not burpsuite_installed.stat.exists
 
+- name: Find all matching BurpSuiteCommunity desktop files in .local/share/applications
+  ansible.builtin.find:
+    paths: '{{ ansible_env.HOME }}/.local/share/applications/'
+    patterns: 'install4j_*BurpSuiteCommunity.desktop'
+  register: burpsuite_local_files
+
+- name: Find all matching BurpSuiteCommunity desktop files in .gnome/apps
+  ansible.builtin.find:
+    paths: '{{ ansible_env.HOME }}/.gnome/apps/'
+    patterns: 'install4j*BurpSuiteCommunity.desktop'
+  register: burpsuite_gnome_files
+
+- name: Combine results from both searches
+  set_fact:
+    burpsuite_files: "{{ burpsuite_local_files.files + burpsuite_gnome_files.files }}"
+
 - name: Tweak burp desktop files
-  command: sed -i "s#{{ ansible_env.HOME }}#/opt/lbtools#g" "{{ ansible_env.HOME }}/.local/share/applications/"*BurpSuiteCommunity.desktop
-  when: not burpsuite_installed.stat.exists
+  ansible.builtin.replace:
+    path: '{{ item.path }}'
+    regexp: '^Exec='
+    replace: 'Exec="/opt/lbtools/BurpSuiteCommunity/BurpSuiteCommunity" %U'
+  loop: '{{ burpsuite_files }}'
+  when: burpsuite_files | length > 0
 
 - name: Allow katana / burp / obs headless browsers to work
   ansible.builtin.lineinfile:
