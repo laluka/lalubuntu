@@ -31,6 +31,6 @@
       become: true
 
     - name: Run cameractrls installer
-      ansible.builtin.command: 'desktop-file-install --dir="{{ ansible_env.HOME }}/.local/share/applications" --set-key=Exec --set-value="/opt/cameractrls/cameractrlsgtk4.py" --set-key=Path --set-value="/opt/cameractrls" --set-key=Icon --set-value="/opt/cameractrls/pkg/hu.irl.cameractrls.svg" pkg/hu.irl.cameractrls.desktop'
-      args:
+      ansible.builtin.command:
+        cmd: 'desktop-file-install --dir="{{ ansible_env.HOME }}/.local/share/applications" --set-key=Exec --set-value="/opt/cameractrls/cameractrlsgtk4.py" --set-key=Path --set-value="/opt/cameractrls" --set-key=Icon --set-value="/opt/cameractrls/pkg/hu.irl.cameractrls.svg" pkg/hu.irl.cameractrls.desktop'
         chdir: /opt/cameractrls

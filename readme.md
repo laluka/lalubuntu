@@ -92,7 +92,7 @@ Available Tags are: `pre-install`, `base-install`, `offensive-stuff`, `gui-tools
 ```bash
 # LOCAL SSH
 docker run --rm -it --name lbt -p 2222:22 -d thelaluka/lalubuntu:offensive-stuff
-docker exec -it lbt bash -c 'echo hacker:YourCoolPasswordHere | chpasswd && /etc/init.d/ssh start'
+docker exec -it lbt bash -c 'echo hacker:offenskill | chpasswd && /etc/init.d/ssh start'
 ssh -p 2222 hacker@127.0.0.1
 
 # LOCAL SHELL & GUI apps
@@ -131,12 +131,12 @@ PACKER_LOG=1 PACKER_LOG_PATH="/tmp/pocean-$(date).log" packer build lbt-digitalo
 # Then visit https://cloud.digitalocean.com/images/snapshots/droplets & create your droplet from the last SnapShot! :)
 export DO_IP=X.X.X.X
 ssh "root@$DO_IP" systemctl start nxserver.service # Enable Nomachine
-ssh "root@$DO_IP" "echo hacker:YourCoolPasswordHere | chpasswd" # Set your password
+ssh "root@$DO_IP" "echo hacker:offenskill | chpasswd" # Set your password (here "offenskill")
 ssh -vNL 127.0.0.1:4000:127.0.0.1:4000 "root@$DO_IP" # Add port forwarding to use NoMachine without net exposure
 # If you have "No Display" errors
 ssh "root@$DO_IP" systemctl restart nxserver.service
 # Locally, start NoMachine and connect with:
-# hacker:YourCoolPasswordHere@127.0.0.1:4000
+# hacker:offenskill@127.0.0.1:4000
 # Remember to:
 #  - NoMachine -> TopRight corner -> Input -> Grab Keyboard Input (for i3 bindings)
 #  - RemoteHost -> MOD+space (Settings) -> Set resolution to 1920x1080

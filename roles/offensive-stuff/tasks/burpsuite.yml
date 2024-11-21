@@ -21,9 +21,11 @@
   when: not burpsuite_installed.stat.exists
 
 - name: Move Burp Install to /opt/lbtools
-  ansible.builtin.shell: |
-    mv "{{ ansible_env.HOME }}/BurpSuiteCommunity" "/opt/lbtools/BurpSuiteCommunity"
-    sed -i "s#{{ ansible_env.HOME }}#/opt/lbtools#g" "{{ ansible_env.HOME }}/.local/share/applications/"*BurpSuiteCommunity.desktop
+  command: mv "{{ ansible_env.HOME }}/BurpSuiteCommunity" /opt/lbtools/BurpSuiteCommunity
+  when: not burpsuite_installed.stat.exists
+
+- name: Tweak burp desktop files
+  command: sed -i "s#{{ ansible_env.HOME }}#/opt/lbtools#g" "{{ ansible_env.HOME }}/.local/share/applications/"*BurpSuiteCommunity.desktop
   when: not burpsuite_installed.stat.exists
 
 - name: Allow katana / burp / obs headless browsers to work
