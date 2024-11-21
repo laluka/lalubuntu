@@ -22,7 +22,7 @@
 
 
 - name: Move Burp Install to /opt/lbtools
-  command: zsh -c 'exa -Tll -L 2 .'
+  command: ls -lah *
   when: not burpsuite_installed.stat.exists
 
 - name: Move Burp Install to /opt/lbtools
