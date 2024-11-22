@@ -20,11 +20,6 @@
     state: absent
   when: not burpsuite_installed.stat.exists
 
-
-- name: Move Burp Install to /opt/lbtools
-  command: ls -lah *
-  when: not burpsuite_installed.stat.exists
-
 - name: Move Burp Install to /opt/lbtools
   command: mv "{{ ansible_env.HOME }}/BurpSuiteCommunity" /opt/lbtools/BurpSuiteCommunity
   when: not burpsuite_installed.stat.exists
