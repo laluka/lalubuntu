@@ -1,5 +1,5 @@
 ---
-# - include_tasks: golang-tooling.yml # Install Go programming language tools
+- include_tasks: golang-tooling.yml # Install Go programming language tools
+- include_tasks: wordlists-and-tools.yml # Install various lists and additional tools for github
 - include_tasks: burpsuite.yml # Install BurpSuite from Portswigger
-# - include_tasks: wordlists-and-tools.yml # Install various lists and additional tools for github
-# - include_tasks: cleanup.yml # Clean up the system after tool installations
+- include_tasks: cleanup.yml # Clean up the system after tool installations

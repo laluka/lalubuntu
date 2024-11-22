@@ -103,6 +103,11 @@ build {
     pull   = false
   }
 
+  provisioner "file" {
+    source      = "."
+    destination = "/opt/lalubuntu"
+  }
+
   provisioner "shell" {
     environment_vars = [
       "DEBIAN_FRONTEND=noninteractive",
@@ -131,6 +136,11 @@ build {
     image  = "thelaluka/lalubuntu:offensive-stuff"
     commit = true
     pull   = false
+  }
+
+  provisioner "file" {
+    source      = "."
+    destination = "/opt/lalubuntu"
   }
 
   provisioner "shell" {
