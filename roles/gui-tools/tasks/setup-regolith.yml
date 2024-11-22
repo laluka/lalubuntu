@@ -118,21 +118,24 @@
   ignore_errors: true
 
 - name: Hardcode bc of shitty 24.04 > RobotoMono
+  become: true
   ansible.builtin.replace:
     path: /usr/share/regolith-look/nord/root
-    regexp: '^#define gtk_font_name'
+    regexp: '^#define gtk_font_name.*'
     replace: '#define gtk_font_name RobotoMono Sans 10'
 
 - name: Hardcode bc of shitty 24.04 > gtk_document_font_name
+  become: true
   ansible.builtin.replace:
     path: /usr/share/regolith-look/nord/root
-    regexp: '^#define gtk_document_font_name'
+    regexp: '^#define gtk_document_font_name.*'
     replace: '#define gtk_document_font_name Sans 12'
 
 - name: Hardcode bc of shitty 24.04 > gtk_monospace_font_name
+  become: true
   ansible.builtin.replace:
     path: /usr/share/regolith-look/nord/root
-    regexp: '^#define gtk_monospace_font_name'
+    regexp: '^#define gtk_monospace_font_name.*'
     replace: '#define gtk_monospace_font_name RobotoMono Nerd Font 12'
 
 - name: Set background wallpaper
