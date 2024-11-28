@@ -10,7 +10,7 @@ fi
 rm -rf .venv
 # mise activate
 mise use python@${version}
-grep -F '[env]' .mise.toml || echo -e '[env]' >> .mise.toml
-grep -F '_.python.venv = { path = ".venv", create = true }' .mise.toml || echo '_.python.venv = { path = ".venv", create = true }' >> .mise.toml
+grep -F '[env]' mise.toml || echo -e '[env]' >>mise.toml
+grep -F '_.python.venv = { path = ".venv", create = true }' mise.toml || echo '_.python.venv = { path = ".venv", create = true }' >>mise.toml
 mise trust 2>/dev/null
-bat -P .mise.toml
+bat -P mise.toml
