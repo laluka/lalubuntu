@@ -1,59 +1,59 @@
 ---
-- name: Update apt repo/cache
-  ansible.builtin.apt:
-    update_cache: yes
-    force_apt_get: yes
-    cache_valid_time: 3600
-  become: true
+# - name: Update apt repo/cache
+#   ansible.builtin.apt:
+#     update_cache: yes
+#     force_apt_get: yes
+#     cache_valid_time: 3600
+#   become: true
 
-- name: Upgrade all packages
-  ansible.builtin.apt:
-    upgrade: yes
-    force_apt_get: yes
-  become: true
+# - name: Upgrade all packages
+#   ansible.builtin.apt:
+#     upgrade: yes
+#     force_apt_get: yes
+#   become: true
 
-- name: Set Wireshark to install non-interactively
-  ansible.builtin.debconf:
-    name: wireshark-common
-    question: 'wireshark-common/install-setuid'
-    vtype: boolean
-    value: true
-  become: true
+# - name: Set Wireshark to install non-interactively
+#   ansible.builtin.debconf:
+#     name: wireshark-common
+#     question: 'wireshark-common/install-setuid'
+#     vtype: boolean
+#     value: true
+#   become: true
 
-- name: Install GUI Packages
-  ansible.builtin.package:
-    update_cache: yes
-    name: '{{ item }}'
-    state: latest
-  environment:
-    DEBIAN_FRONTEND: noninteractive
-  become: true
-  with_items:
-    - apt-transport-https
-    - arandr
-    - blueman
-    - cheese
-    - filezilla
-    - flameshot
-    - fonts-tlwg-purisa-otf
-    - ghex
-    - gnome-tweaks
-    - gparted
-    - kompare
-    - libgtk-3-dev
-    - libreoffice
-    - libvirt-clients
-    - libvirt-daemon-system
-    - mplayer
-    - okular
-    - pavucontrol
-    - qbittorrent
-    - qemu-kvm
-    - torbrowser-launcher
-    - usb-creator-gtk
-    - virt-manager
-    - vlc
-    - wireshark
+# - name: Install GUI Packages
+#   ansible.builtin.package:
+#     update_cache: yes
+#     name: '{{ item }}'
+#     state: latest
+#   environment:
+#     DEBIAN_FRONTEND: noninteractive
+#   become: true
+#   with_items:
+#     - apt-transport-https
+#     - arandr
+#     - blueman
+#     - cheese
+#     - filezilla
+#     - flameshot
+#     - fonts-tlwg-purisa-otf
+#     - ghex
+#     - gnome-tweaks
+#     - gparted
+#     - kompare
+#     - libgtk-3-dev
+#     - libreoffice
+#     - libvirt-clients
+#     - libvirt-daemon-system
+#     - mplayer
+#     - okular
+#     - pavucontrol
+#     - qbittorrent
+#     - qemu-kvm
+#     - torbrowser-launcher
+#     - usb-creator-gtk
+#     - virt-manager
+#     - vlc
+#     - wireshark
 
 - name: Check if Snap is already installed
   ansible.builtin.stat:
@@ -71,7 +71,7 @@
 - name: Clone dragon repository
   ansible.builtin.git:
     repo: 'https://github.com/mwh/dragon.git'
-    dest: "/opt/dragon"
+    dest: "/tmp/dragon"
   become: true
 
 - name: Change ownership of /opt/dragon

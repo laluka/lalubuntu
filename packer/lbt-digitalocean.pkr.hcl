@@ -36,7 +36,7 @@ build {
       "git clone https://github.com/laluka/lalubuntu",
       "mv lalubuntu /opt/lalubuntu",
       "cd /opt/lalubuntu",
-      # "git checkout lalu/maj-24.04", # DEV ONLY
+      "git checkout lalu/debug-snap-digocean", # DEV ONLY
       "bash -x packer/create-user.sh",
       "chown -R hacker:hacker /opt/lalubuntu",
       "echo \"hacker ALL=(ALL) NOPASSWD: ALL # TMPHACK_INSTALL_ONLY\" | tee -a /etc/sudoers",
