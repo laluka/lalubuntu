@@ -97,6 +97,7 @@
     path: '{{ ansible_env.HOME }}/.config/regolith3/i3/config.d/config'
     create: yes
     block: |
+      exec --no-startup-id mate-polkit
       bindsym $mod+p exec flameshot gui
       bindsym $mod+Ctrl+p exec flameshot full -p /tmp/
       bindsym $mod+s exec gnome-control-center sound
