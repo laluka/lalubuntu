@@ -87,6 +87,19 @@
   ansible.builtin.shell: pkill picom
   ignore_errors: true
 
+- name: Ensure the ~/.config/xdg-desktop-portal/ directory exists
+  ansible.builtin.file:
+    path: '{{ ansible_env.HOME }}/.config/xdg-desktop-portal/'
+    state: directory
+
+- name: Append lines to force using gtk dark themes
+  ansible.builtin.blockinfile:
+    path: '{{ ansible_env.HOME }}/.config/xdg-desktop-portal/portals.conf'
+    create: yes
+    block: |
+      [preferred]
+      default=gtk;wlr
+
 - name: Ensure the ~/.config/regolith3/i3/config.d/ directory exists
   ansible.builtin.file:
     path: '{{ ansible_env.HOME }}/.config/regolith3/i3/config.d/'
