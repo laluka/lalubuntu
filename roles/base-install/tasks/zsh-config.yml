@@ -37,6 +37,7 @@
     state: present
   with_items:
   - DISABLE_MAGIC_FUNCTIONS=true
+  - ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=245'
 
 - name: Clone zsh plugins as git repositories
   ansible.builtin.git:
