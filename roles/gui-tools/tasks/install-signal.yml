@@ -30,4 +30,5 @@
       - signal-desktop
     state: latest
   become: true
+  ignore_errors: true
   when: not signal_installed.stat.exists
