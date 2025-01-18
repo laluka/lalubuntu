@@ -6,7 +6,7 @@
  - include_tasks: install-nomachine.yml # Installing NoMachine utility
  - include_tasks: install-discord.yml # Installing Discord
  - include_tasks: install-vscode.yml # Installing Visual Studio Code
- - include_tasks: install-signal.yml # Installing Signal messaging app
+#  - include_tasks: install-signal.yml # Installing Signal messaging app # signal ppa broken for now
  - include_tasks: install-cameractrls.yml # Installing cameractrls app
  - include_tasks: setup-regolith.yml # Setting up Regolith desktop environment
  - include_tasks: cleanup.yml # Cleaning up the system after installations
