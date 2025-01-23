@@ -9,11 +9,17 @@
 - This is my ([@TheLaluka](https://x.com/TheLaluka)) own config, shared with the help & motivation of [@Fransosiche](https://x.com/Fransosiche)!
 - Welcome to my world, now is the right time to `Lower The Friction` between you and your machine 🥰
 
-See thiese videos to see how Lalubuntu will improve your daily linux & cyber life!
+Watch these **videos** to see how Lalubuntu will improve your daily linux & cyber life!
+
+![|500](https://www.gstatic.com/youtube/img/branding/youtubelogo/svg/youtubelogo.svg)
+
+> Here is a **BIG YOUTUBE LOGO** since no one realizes there are video guides and examples to self-onboard.. 🙃
 
 [![Global Presentation](https://img.youtube.com/vi/sZQ6FVncuNA/0.jpg)](https://youtu.be/sZQ6FVncuNA)
 
 [![Lower The Friction](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://youtu.be/xxOVNKNs24s)
+
+[![Frozenk - Talk Lalubuntu avec Laluka](https://img.youtube.com/vi/xSmuPUJd9hg/0.jpg)](https://youtu.be/xSmuPUJd9hg)
 
 ## Installation process for `Ubuntu 24.04`  - The current "GOLD path" 🌷
 
