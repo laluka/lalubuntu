@@ -15,11 +15,12 @@ Watch these **videos** to see how Lalubuntu will improve your daily linux & cybe
 
 > Here is a **BIG YOUTUBE LOGO** since no one realizes there are video guides and examples to self-onboard.. 🙃
 
-[![Global Presentation](https://img.youtube.com/vi/sZQ6FVncuNA/0.jpg)](https://youtu.be/sZQ6FVncuNA)
-
-[![Lower The Friction](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://youtu.be/xxOVNKNs24s)
-
-[![Frozenk - Talk Lalubuntu avec Laluka](https://img.youtube.com/vi/xSmuPUJd9hg/0.jpg)](https://youtu.be/xSmuPUJd9hg)
+- Global Distro Presentation by [@Fransosiche](https://x.com/Fransosiche) - 14mn
+  - [![](https://img.youtube.com/vi/sZQ6FVncuNA/0.jpg)](https://youtu.be/sZQ6FVncuNA)
+- HackTheBox Meetup - Lower The Friction by [@TheLaluka](https://x.com/TheLaluka - 22mn
+  - [![](https://img.youtube.com/vi/xxOVNKNs24s/0.jpg)](https://youtu.be/xxOVNKNs24s)
+- Frozenk - Talk Lalubuntu avec [@TheLaluka](https://x.com/TheLaluka - 1h talk 55mn Q&A
+  - [![](https://img.youtube.com/vi/xSmuPUJd9hg/0.jpg)](https://youtu.be/xSmuPUJd9hg)
 
 ## Installation process for `Ubuntu 24.04`  - The current "GOLD path" 🌷
 
