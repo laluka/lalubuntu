@@ -11,7 +11,7 @@
 
 Watch these **videos** to see how Lalubuntu will improve your daily linux & cyber life!
 
-![|500](https://www.gstatic.com/youtube/img/branding/youtubelogo/svg/youtubelogo.svg)
+![](https://www.gstatic.com/youtube/img/branding/youtubelogo/svg/youtubelogo.svg|width=10)
 
 > Here is a **BIG YOUTUBE LOGO** since no one realizes there are video guides and examples to self-onboard.. 🙃
 
