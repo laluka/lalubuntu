@@ -30,14 +30,14 @@
     - bash
     - zsh
 
+- name: Trust mise now complaining
+  ansible.builtin.shell: zsh -c 'mise trust'
+
 - name: Set mise settings to build python
   ansible.builtin.shell: zsh -c 'mise settings set python_compile 1'
 
 - name: Set mise settings to build python
   ansible.builtin.shell: zsh -c 'mise settings set experimental true' # Tmp mise issue detected on 11/21/2024
-
-- name: Trust mise now complaining
-  ansible.builtin.shell: zsh -c 'mise trust'
 
 - name: Trust mise now complaining
   ansible.builtin.shell: zsh -c 'mise plugins add neovim'
