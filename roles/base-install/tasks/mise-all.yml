@@ -39,6 +39,9 @@
 - name: Trust mise now complaining
   ansible.builtin.shell: zsh -c 'mise trust'
 
+- name: Trust mise now complaining
+  ansible.builtin.shell: zsh -c 'mise plugins add neovim'
+
 - name: Install and mise-based tools (this will take lot of time to install)
   ansible.builtin.shell: zsh -c 'mise use -g "{{ item }}"'
   with_items:
