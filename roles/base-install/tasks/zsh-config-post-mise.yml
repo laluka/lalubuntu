@@ -3,7 +3,6 @@
   with_items:
     - aws
     - colored-man-pages
-    - direnv
     - docker
     - extract
     - fzf
