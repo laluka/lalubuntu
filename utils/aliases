@@ -153,7 +153,6 @@ alias recon-wappa='dockit wappalyzer/cli -r -D 2 -P -a "User-Agent: Mozilla/5.0 
 ## Fuzz & Crawl
 alias supptruder="dockit elsicarius/supptruder"
 alias secator="docker run -it --rm --net=host -v ~/.secator:/root/.secator freelabz/secator"
-alias acunetix='docker run --rm -it -p 3443:3443 -d ogranc/awvs_scanner:14.6.211220100; echo "Remember to run /home/acunetix/.acunetix/change_credentials.sh"'
 alias htcap-crawl='f(){ OUT=$(echo "$1" | tr "/" "_"); dockit htcap htcap crawl -m aggressive -s domain -U "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/83.0.4103.106 Chrome/83.0.4103.106 Safari/537.36" "$1" "/host/$OUT.db" ; dockit htcap htcap scan native "/host/$OUT.db"; dockit htcap htcap util report "/host/$OUT.db" "/host/$OUT.html" ; unset -f f; }; f'
 alias rustscan='dockit rustscan/rustscan'
 alias oneforall='dockit tardis07/oneforall'
