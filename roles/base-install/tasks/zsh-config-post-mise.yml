@@ -23,6 +23,7 @@
   with_items:
     - rtx
     - ssh-agent
+    - direnv
 
 - name: Fix wildcard in history
   ansible.builtin.shell: "zsh -c 'source ~/.zshrc && set mark-modified-lines off'"
