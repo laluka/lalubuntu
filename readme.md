@@ -1,5 +1,25 @@
 # LaluBuntu - [![packer-docker-build](https://github.com/laluka/lalubuntu/actions/workflows/packer.yml/badge.svg?branch=master)](https://github.com/laluka/lalubuntu/actions/workflows/packer.yml)
 
+---
+
+Hello dear Lalubuntu user/adopter/forker,
+
+As Ubuntu became increasingly bloated with useless, outdated, and broken elements, I decided to switch from Ubuntu to ArchLinux.\
+The maintenance work is now much simpler and quicker for me, as it eliminates the constant struggle with Ubuntu's complications.\
+The installation time has been cut by a third, and the look and feel are now faster, cleaner, more fluid, customizable, and stable.
+
+- You get it: Today, the 28th of March 2025, `Lalubuntu is now officially deprecated` 🪦
+- I now maintain [SkillArch](https://github.com/laluka/SkillArch) and would be happy to welcome you there 💞
+- The transition is smooth: most of the bindings and aliases are either identical or improved 😎
+- I will continue maintaining Lalubuntu until July 2025 (end of Q2 2025), with bug detection through daily CI runs 🏗️
+- There are just so many benefits to this rework that I would rather archive Lalubuntu for good 🚧
+- If you still want this project to thrive, new contributors are always welcome! 😉
+
+> Many thanks for your daily support and feedbacks on this project 💟\
+> I hope to see you soon on SkillArch, where you'll feel right at home in no time! 🏡
+
+---
+
 > OpenAI Image Prompt:\
 > Create a logo with an Evoli-like pokemon for a linux distro named LaluBuntu, make it cute!
 
