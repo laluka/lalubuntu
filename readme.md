@@ -20,10 +20,10 @@ The installation time has been cut by a third, and the look and feel are now fas
 
 ---
 
+<img src='screens/logo-lalubuntu.png' width='250'>
+
 > OpenAI Image Prompt:\
 > Create a logo with an Evoli-like pokemon for a linux distro named LaluBuntu, make it cute!
-
-<img src='screens/logo-lalubuntu.png' width='250'>
 
 - This ansible playbook will make your machine lovely to use.
 - This is my ([@TheLaluka](https://x.com/TheLaluka)) own config, shared with the help & motivation of [@Fransosiche](https://x.com/Fransosiche)!
