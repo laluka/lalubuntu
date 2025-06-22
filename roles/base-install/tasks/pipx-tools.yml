@@ -1,9 +1,5 @@
 - name: Install pipx packages
-  community.general.pipx:
-    executable: /usr/bin/pipx
-    name: '{{ item }}'
-    inject_packages:
-      - setuptools # python 3.13 and above removed this often required dep
+  ansible.builtin.shell: pipx install {{ item }} && pipx inject {{ item }} setuptools
   with_items:
     - argcomplete
     - bypass-url-parser
@@ -16,7 +12,7 @@
     - yt-dlp
     - semgrep
 
-- name: Add exegol autocompletion to shell configuration filesansible
+- name: Add exegol autocompletion to shell configuration files
   ansible.builtin.lineinfile:
     path: '{{ ansible_env.HOME }}/.{{ item }}rc'
     state: present
